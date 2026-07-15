@@ -1,74 +1,539 @@
-const About = () => {
+import SectionBackground from "../components/SectionBackground";
+import {
+  FaMapMarkerAlt,
+  FaBuilding,
+  FaInfoCircle,
+} from "react-icons/fa";
+
+const About = ({ theme }) => {
+  const dark = theme === "dark";
+
   return (
-    <section className="mx-auto my-6 max-w-7xl px-6 sm:px-8 lg:px-12">
-      <div className="overflow-hidden rounded-[32px] border border-slate-200 bg-white/95 p-6 shadow-[0_30px_60px_rgba(15,23,42,0.08)] transition-colors duration-300 sm:p-8 lg:p-10">
-        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
-          <div>
-            <p className="inline-flex rounded-full bg-sky-100 px-4 py-1 text-sm font-semibold uppercase tracking-[0.35em] text-sky-700 shadow-sm">
-              About Capital Bull Wave
-            </p>
-            <h1 className="about-heading mt-6 max-w-3xl text-2xl font-black tracking-tight text-slate-950 sm:text-2xl lg:text-3xl">
-              Delhi-based market research, trading guidance, and investor education for modern stock market traders.
-            </h1>
-            <p className="mt-5 max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
-              Capital Bull Wave operates from Netaji Subhash Place and Malviya Nagar, delivering research-led strategies, risk-managed trading support, and investor training for retail traders across India.
-            </p>
+    <SectionBackground dark={dark}>
+      <section className="mx-auto my-6 max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        <div
+          className={`overflow-hidden rounded-[32px] transition-all duration-300 p-6 sm:p-8 lg:p-10
+          ${
+            dark
+              ? "bg-slate-900/95 border border-slate-800 shadow-2xl"
+              : "bg-white/95 border border-sky-100 shadow-[0_30px_60px_rgba(15,23,42,0.08)]"
+          }`}
+        >
+
+          {/* Hero */}
+          <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+
+            <div>
+
+              <p
+                className={`inline-flex rounded-full px-4 py-2 text-xs sm:text-sm font-semibold uppercase tracking-[0.30em]
+                ${
+                  dark
+                    ? "bg-sky-500/20 text-sky-300"
+                    : "bg-sky-100 text-sky-700"
+                }`}
+              >
+                About Capital Bull Wave
+              </p>
+
+              <h1
+                className={`mt-6 max-w-3xl text-3xl sm:text-3xl lg:text-3xl font-black leading-tight
+                ${
+                  dark ? "text-white" : "text-slate-900"
+                }`}
+              >
+                Delhi-based Market Research, Trading Guidance &
+                Investor Education for Modern Stock Market Traders.
+              </h1>
+
+              <p
+                className={`mt-6 max-w-2xl text-base sm:text-lg leading-8
+                ${
+                  dark ? "text-slate-300" : "text-slate-600"
+                }`}
+              >
+                Capital Bull Wave operates from Netaji Subhash Place
+                and Malviya Nagar, delivering research-driven
+                strategies, risk-managed trading support, and
+                investor education for retail traders across India.
+              </p>
+
+            </div>
+
+            {/* Quick Facts */}
+
+            <div
+              className={`rounded-[28px] p-6 sm:p-8 transition-all duration-300
+              ${
+                dark
+                  ? "bg-slate-800 border border-slate-700"
+                  : "bg-slate-50 border border-slate-200"
+              }`}
+            >
+
+              <h2
+                className={`text-2xl font-bold
+                ${
+                  dark ? "text-sky-400" : "text-blue-700"
+                }`}
+              >
+                Quick Facts
+              </h2>
+
+              <div
+                className={`mt-6 space-y-5 text-sm leading-7
+                ${
+                  dark ? "text-slate-300" : "text-slate-600"
+                }`}
+              >
+
+                <div>
+                  <p className={dark ? "text-white font-semibold" : "text-slate-900 font-semibold"}>
+                    Offices
+                  </p>
+
+                  <p>
+                    Netaji Subhash Place (Aggarwal Millennium Tower 2)
+                  </p>
+                </div>
+
+                <div>
+                  <p className={dark ? "text-white font-semibold" : "text-slate-900 font-semibold"}>
+                    Services
+                  </p>
+
+                  <p>
+                    Market Research, Trading Guidance,
+                    Risk Management & Investor Education.
+                  </p>
+                </div>
+
+                <div>
+                  <p className={dark ? "text-white font-semibold" : "text-slate-900 font-semibold"}>
+                    Focus
+                  </p>
+
+                  <p>
+                    Equity Research, Intraday Support,
+                    Swing Trading & Building Trader Confidence.
+                  </p>
+                </div>
+
+              </div>
+
+            </div>
+
           </div>
 
-          <div className="rounded-[28px] border border-slate-200 bg-slate-50 p-6 shadow-sm sm:p-8 lg:p-10">
-            <h2 className="text-xl font-semibold text-blue-600">Quick facts</h2>
-            <div className="mt-5 space-y-4 text-sm leading-7 text-slate-600">
-              <p><strong className="text-slate-900">Offices:</strong> Netaji Subhash Place (Aggarwal Millenium Tower 2) </p>
-              <p><strong className="text-slate-900">Services:</strong> Market research, trading guidance, risk management, and investor education.</p>
-              <p><strong className="text-slate-900">Focus:</strong> Stock market research, equity/intraday support, and building trader confidence.</p>
-            </div>
-          </div>
-        </div>
+          {/* Main Content Grid */}
+          <div className="mt-12 grid gap-8 lg:grid-cols-2">
+            {/* Core Business Dealings */}
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-2">
-          <div className="space-y-6 border border-blue-200 rounded-[28px]  p-8 shadow-sm transition-colors duration-300">
-            <h2 className="text-2xl underline font-semibold text-blue-700">Core business dealings</h2>
-            <div className="space-y-4 text-slate-700 leading-7">
-              <p className="font-semibold text-blue-400">Market Research</p>
-              <p>Professional stock market analysis, trend identification, and support/resistance mapping tailored for Indian markets.</p>
-              <p className="font-semibold text-blue-400" >Trading Guidance</p>
-              <p>Structured equity delivery and intraday trading plans with active support for retail investors.</p>
-              <p className="font-semibold text-blue-400">Risk Management</p>
-              <p>Capital protection strategies and smart risk planning designed to preserve trader capital.</p>
-              <p className="font-semibold text-blue-400" >Investor Education</p>
-              <p>Training programs and community-led learning for beginners wanting to understand share market fundamentals.</p>
-            </div>
-          </div>
+<div
+  className={`rounded-[28px] p-6 sm:p-8 transition-all duration-300
+  ${
+    dark
+      ? "bg-slate-800 border border-slate-700"
+      : "bg-white border border-sky-100 shadow-lg"
+  }`}
+>
+  <h2
+    className={`text-2xl font-bold mb-8 ${
+      dark ? "text-sky-400" : "text-blue-700"
+    }`}
+  >
+    Core Business Dealings
+  </h2>
 
-          <div className="space-y-6 rounded-[28px] bg-white p-8 shadow-sm transition-colors duration-300">
-            <h2 className="text-2xl font-semibold underline text-blue-700">Locations & distinction</h2>
-            <div className="space-y-4 text-slate-700 leading-7">
-              <p><strong className="text-blue-500">Netaji Subhash Place (NSP):</strong> Office No. 671 (6th Floor) and Office No. 1275 (12th Floor) at Aggarwal Millenium Tower 2.</p>
-              <p className="text-blue-400 font-semibold">Important distinction</p>
-              <p>Do not confuse this local Delhi advisory platform with Bullwaves, an unrelated international Forex/CFD brokerage regulated offshore in the Seychelles.</p>
-            </div>
-          </div>
-        </div>
+  <div className="space-y-6">
 
-        <div className="mt-12 rounded-[28px] bg-slate-950/5 p-8 text-slate-700 transition-colors duration-300 sm:p-10">
-          <div className="grid gap-6 lg:grid-cols-3">
-            <div className="space-y-2 rounded-[24px] bg-white p-6 shadow-sm transition duration-300 hover:bg-sky-100 hover:shadow-lg">
-              <p className="text-sm uppercase tracking-[0.24em] text-sky-600">Research</p>
-              <p className="font-semibold text-slate-900">In-depth market intelligence</p>
-            </div>
-            <div className="space-y-2 rounded-[24px] bg-white p-6 shadow-sm transition duration-300 hover:bg-sky-100 hover:shadow-lg">
-              <p className="text-sm uppercase tracking-[0.24em] text-sky-600">Guidance</p>
-              <p className="font-semibold text-slate-900">Structured trading support</p>
-            </div>
-            <div className="space-y-2 rounded-[24px] bg-white p-6 shadow-sm transition duration-300 hover:bg-sky-100 hover:shadow-lg">
-              <p className="text-sm uppercase tracking-[0.24em] text-sky-600">Education</p>
-              <p className="font-semibold text-slate-900">Beginner-friendly learning</p>
-            </div>
-          </div>
-        </div>
+    <div
+      className={`rounded-2xl p-5 transition-all duration-300 ${
+        dark ? "bg-slate-900" : "bg-sky-50"
+      }`}
+    >
+      <h3 className="font-semibold text-lg text-sky-600">
+        Market Research
+      </h3>
+
+      <p
+        className={`mt-2 leading-7 ${
+          dark ? "text-slate-300" : "text-slate-600"
+        }`}
+      >
+        Professional stock market analysis, trend identification,
+        technical studies, and support/resistance mapping tailored
+        specifically for Indian equity markets.
+      </p>
+    </div>
+
+    <div
+      className={`rounded-2xl p-5 transition-all duration-300 ${
+        dark ? "bg-slate-900" : "bg-sky-50"
+      }`}
+    >
+      <h3 className="font-semibold text-lg text-sky-600">
+        Trading Guidance
+      </h3>
+
+      <p
+        className={`mt-2 leading-7 ${
+          dark ? "text-slate-300" : "text-slate-600"
+        }`}
+      >
+        Structured equity delivery, swing trading and intraday
+        trading plans with practical guidance for retail traders.
+      </p>
+    </div>
+
+    <div
+      className={`rounded-2xl p-5 transition-all duration-300 ${
+        dark ? "bg-slate-900" : "bg-sky-50"
+      }`}
+    >
+      <h3 className="font-semibold text-lg text-sky-600">
+        Risk Management
+      </h3>
+
+      <p
+        className={`mt-2 leading-7 ${
+          dark ? "text-slate-300" : "text-slate-600"
+        }`}
+      >
+        Capital protection strategies, disciplined position sizing,
+        and practical risk planning designed to preserve long-term
+        trader capital.
+      </p>
+    </div>
+
+    <div
+      className={`rounded-2xl p-5 transition-all duration-300 ${
+        dark ? "bg-slate-900" : "bg-sky-50"
+      }`}
+    >
+      <h3 className="font-semibold text-lg text-sky-600">
+        Investor Education
+      </h3>
+
+      <p
+        className={`mt-2 leading-7 ${
+          dark ? "text-slate-300" : "text-slate-600"
+        }`}
+      >
+        Beginner-friendly training programs and community learning
+        sessions to build confidence and long-term investing skills.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+{/* Locations & Distinction */}
+
+<div
+  className={`rounded-[28px] p-6 sm:p-8 transition-all duration-300
+  ${
+    dark
+      ? "bg-slate-800 border border-slate-700"
+      : "bg-white border border-sky-100 shadow-lg"
+  }`}
+>
+  <h2
+    className={`text-2xl font-bold mb-8 ${
+      dark ? "text-sky-400" : "text-blue-700"
+    }`}
+  >
+    Locations & Distinction
+  </h2>
+
+  <div className="space-y-6">
+
+    {/* Office */}
+
+    <div className="flex items-start gap-4">
+
+      <div
+        className={`rounded-xl p-3 ${
+          dark ? "bg-sky-500/20" : "bg-sky-100"
+        }`}
+      >
+        <FaMapMarkerAlt
+          className={`text-xl ${
+            dark ? "text-sky-400" : "text-sky-600"
+          }`}
+        />
       </div>
-    </section>
-  )
-}
 
-export default About
+      <div>
+
+        <h3
+          className={`font-semibold text-lg ${
+            dark ? "text-white" : "text-slate-900"
+          }`}
+        >
+          Netaji Subhash Place (NSP)
+        </h3>
+
+        <p
+          className={`mt-2 leading-7 ${
+            dark ? "text-slate-300" : "text-slate-600"
+          }`}
+        >
+          Office No. <strong>671 (6th Floor)</strong> and
+          <strong> 1275 (12th Floor)</strong> located at
+          <strong> Aggarwal Millennium Tower 2</strong>,
+          Pitampura, North West Delhi.
+        </p>
+
+      </div>
+
+    </div>
+
+    {/* Accessibility */}
+
+    <div className="flex items-start gap-4">
+
+      <div
+        className={`rounded-xl p-3 ${
+          dark ? "bg-sky-500/20" : "bg-sky-100"
+        }`}
+      >
+        <FaBuilding
+          className={`text-xl ${
+            dark ? "text-sky-400" : "text-sky-600"
+          }`}
+        />
+      </div>
+
+      <div>
+
+        <h3
+          className={`font-semibold text-lg ${
+            dark ? "text-white" : "text-slate-900"
+          }`}
+        >
+          Easy Accessibility
+        </h3>
+
+        <p
+          className={`mt-2 leading-7 ${
+            dark ? "text-slate-300" : "text-slate-600"
+          }`}
+        >
+          Conveniently located near
+          <strong> Netaji Subhash Place Metro Station</strong>,
+          making it easy for clients and visitors to reach us.
+        </p>
+
+      </div>
+
+    </div>
+
+    {/* Notice */}
+
+    <div
+      className={`rounded-2xl border p-5
+      ${
+        dark
+          ? "bg-amber-900/20 border-amber-700/40"
+          : "bg-amber-50 border-amber-200"
+      }`}
+    >
+
+      <div className="flex items-start gap-3">
+
+        <FaInfoCircle className="text-amber-500 mt-1 flex-shrink-0" />
+
+        <div>
+
+          <h3 className="font-semibold text-amber-600">
+            Important Distinction
+          </h3>
+
+          <p
+            className={`mt-3 leading-7 ${
+              dark ? "text-slate-300" : "text-slate-700"
+            }`}
+          >
+            <strong>Capital BullWave</strong> is a Delhi-based
+            market research and trading advisory platform operating
+            from Aggarwal Millennium Tower 2.
+          </p>
+
+          
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+          </div>
+
+          {/* Bottom Highlights */}
+
+          <div
+            className={`mt-12 rounded-[28px] p-6 sm:p-8 lg:p-10 transition-all duration-300
+            ${
+              dark
+                ? "bg-slate-800 border border-slate-700"
+                : "bg-slate-50 border border-sky-100"
+            }`}
+          >
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+
+              {/* Research */}
+
+              <div
+                className={`group rounded-[24px] p-6 transition-all duration-300 hover:-translate-y-2
+                ${
+                  dark
+                    ? "bg-slate-900 border border-slate-700 hover:border-sky-500"
+                    : "bg-white border border-sky-100 shadow-sm hover:shadow-xl"
+                }`}
+              >
+                <div
+                  className={`inline-flex rounded-xl p-3 mb-4
+                  ${
+                    dark
+                      ? "bg-sky-500/20"
+                      : "bg-sky-100"
+                  }`}
+                >
+                  <FaMapMarkerAlt
+                    className={`text-xl ${
+                      dark ? "text-sky-400" : "text-sky-600"
+                    }`}
+                  />
+                </div>
+
+                <p className="text-xs uppercase tracking-[0.30em] text-sky-500 font-semibold">
+                  Research
+                </p>
+
+                <h3
+                  className={`mt-3 text-lg font-bold ${
+                    dark ? "text-white" : "text-slate-900"
+                  }`}
+                >
+                  In-depth Market Intelligence
+                </h3>
+
+                <p
+                  className={`mt-3 leading-7 ${
+                    dark ? "text-slate-300" : "text-slate-600"
+                  }`}
+                >
+                  Comprehensive market analysis and technical research
+                  to support better investment decisions.
+                </p>
+              </div>
+
+              {/* Guidance */}
+
+              <div
+                className={`group rounded-[24px] p-6 transition-all duration-300 hover:-translate-y-2
+                ${
+                  dark
+                    ? "bg-slate-900 border border-slate-700 hover:border-sky-500"
+                    : "bg-white border border-sky-100 shadow-sm hover:shadow-xl"
+                }`}
+              >
+                <div
+                  className={`inline-flex rounded-xl p-3 mb-4
+                  ${
+                    dark
+                      ? "bg-sky-500/20"
+                      : "bg-sky-100"
+                  }`}
+                >
+                  <FaBuilding
+                    className={`text-xl ${
+                      dark ? "text-sky-400" : "text-sky-600"
+                    }`}
+                  />
+                </div>
+
+                <p className="text-xs uppercase tracking-[0.30em] text-sky-500 font-semibold">
+                  Guidance
+                </p>
+
+                <h3
+                  className={`mt-3 text-lg font-bold ${
+                    dark ? "text-white" : "text-slate-900"
+                  }`}
+                >
+                  Structured Trading Support
+                </h3>
+
+                <p
+                  className={`mt-3 leading-7 ${
+                    dark ? "text-slate-300" : "text-slate-600"
+                  }`}
+                >
+                  Practical guidance for equity, swing and intraday
+                  traders with a disciplined trading approach.
+                </p>
+              </div>
+
+              {/* Education */}
+
+              <div
+                className={`group rounded-[24px] p-6 transition-all duration-300 hover:-translate-y-2
+                ${
+                  dark
+                    ? "bg-slate-900 border border-slate-700 hover:border-sky-500"
+                    : "bg-white border border-sky-100 shadow-sm hover:shadow-xl"
+                }`}
+              >
+                <div
+                  className={`inline-flex rounded-xl p-3 mb-4
+                  ${
+                    dark
+                      ? "bg-sky-500/20"
+                      : "bg-sky-100"
+                  }`}
+                >
+                  <FaInfoCircle
+                    className={`text-xl ${
+                      dark ? "text-sky-400" : "text-sky-600"
+                    }`}
+                  />
+                </div>
+
+                <p className="text-xs uppercase tracking-[0.30em] text-sky-500 font-semibold">
+                  Education
+                </p>
+
+                <h3
+                  className={`mt-3 text-lg font-bold ${
+                    dark ? "text-white" : "text-slate-900"
+                  }`}
+                >
+                  Beginner-Friendly Learning
+                </h3>
+
+                <p
+                  className={`mt-3 leading-7 ${
+                    dark ? "text-slate-300" : "text-slate-600"
+                  }`}
+                >
+                  Learn market fundamentals, trading psychology and
+                  risk management through structured educational
+                  programs.
+                </p>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </SectionBackground>
+  );
+};
+
+export default About;
