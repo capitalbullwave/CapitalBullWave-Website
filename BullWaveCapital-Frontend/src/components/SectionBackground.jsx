@@ -88,7 +88,7 @@ const SectionBackground = ({
                 cx="2"
                 cy="2"
                 r="1.2"
-                fill={dark ? "#38bdf8" : "#addaf1"}
+                fill={dark ? "#194a5f" : "#ddf4ff"}
               />
             </pattern>
           </defs>

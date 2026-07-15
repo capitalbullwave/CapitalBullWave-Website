@@ -1,9 +1,11 @@
 
 import SectionBackground from "../components/SectionBackground";
 
-const Market = () => {
+const Market = ({ theme }) => {
+  const dark = theme === "dark";
+
   return (
-    <SectionBackground dark={false}>
+    <SectionBackground dark={dark}>
       <section className="mx-auto my-12 max-w-7xl px-6 sm:px-8 lg:px-12">
         <div className="overflow-hidden rounded-[32px]  bg-white/95 p-6 shadow-[0_30px_60px_rgba(15,23,42,0.08)] transition-colors duration-300 sm:p-8 lg:p-10">
           <div className="mb-12 text-center">
@@ -76,20 +78,41 @@ const Market = () => {
           </div>
 
           <div className="mt-12 grid gap-6 lg:grid-cols-3">
-            <div className="rounded-[24px] dark:bg-slate-800 p-6 shadow-sm transition duration-300 bg-sky-50">
+            <div
+              className={`rounded-[24px] p-6 shadow-sm transition-all duration-300
+              ${
+                dark
+                  ? "bg-slate-800 border border-slate-700"
+                  : "bg-sky-50 border border-sky-100"
+              }`}
+            >
               <p className="text-sm uppercase tracking-[0.24em] text-sky-600">Equity Cash</p>
-              <h3 className="mt-3 text-lg font-semibold text-slate-900">Cash Segment</h3>
-              <p className="mt-3 text-slate-600 leading-7">Intraday, swing, and delivery plans for Indian share trading on NSE/BSE.</p>
+              <h3 className={`mt-3 text-lg font-semibold ${ dark ? "text-white" : "text-slate-900"}`}>Cash Segment</h3>
+              <p className={`mt-3 leading-7 ${dark ? "text-slate-300" : "text-slate-600"}`}>Intraday, swing, and delivery plans for Indian share trading on NSE/BSE.</p>
             </div>
-            <div className="rounded-[24px] dark:bg-slate-800  p-6 shadow-sm transition duration-300 bg-sky-50">
+            <div
+              className={`rounded-[24px] p-6 shadow-sm transition-all duration-300
+              ${
+                dark
+                  ? "bg-slate-800 border border-slate-700"
+                  : "bg-sky-50 border border-sky-100"
+              }`}
+            >
               <p className="text-sm uppercase tracking-[0.24em] text-sky-600">Equity Derivatives</p>
-              <h3 className="mt-3 text-lg font-semibold text-slate-900">Futures & Options</h3>
-              <p className="mt-3 text-slate-600 leading-7">Index analysis and F&O support for Nifty 50, Bank Nifty, and high-leverage market setups.</p>
+              <h3 className={`mt-3 text-lg font-semibold ${ dark ? "text-white" : "text-slate-900"}`}>Futures & Options</h3>
+              <p className={`mt-3 leading-7 ${dark ? "text-slate-300" : "text-slate-600"}`}>Index analysis and F&O support for Nifty 50, Bank Nifty, and high-leverage market setups.</p>
             </div>
-            <div className="rounded-[24px] dark:bg-slate-800  p-6 shadow-sm transition duration-300 bg-sky-50">
+            <div
+              className={`rounded-[24px] p-6 shadow-sm transition-all duration-300
+              ${
+                dark
+                  ? "bg-slate-800 border border-slate-700"
+                  : "bg-sky-50 border border-sky-100"
+              }`}
+            >
               <p className="text-sm uppercase tracking-[0.24em] text-sky-600">Commodity Derivatives</p>
-              <h3 className="mt-3 text-lg font-semibold text-slate-900">MCX Coverage</h3>
-              <p className="mt-3 text-slate-600 leading-7">Gold, Silver, and crude oil trend support and technical guidance for commodity participants.</p>
+              <h3 className={`mt-3 text-lg font-semibold ${ dark ? "text-white" : "text-slate-900"}`}>MCX Coverage</h3>
+              <p className={`mt-3 leading-7 ${dark ? "text-slate-300" : "text-slate-600"}`}>Gold, Silver, and crude oil trend support and technical guidance for commodity participants.</p>
             </div>
           </div>
         </div>
