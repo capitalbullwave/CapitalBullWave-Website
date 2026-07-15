@@ -1,0 +1,323 @@
+/* ==========================================
+   APP SHELL
+========================================== */
+
+.app-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top right,
+      rgba(37, 99, 235, 0.08),
+      transparent 35%),
+
+    radial-gradient(circle at bottom left,
+      rgba(96, 165, 250, 0.08),
+      transparent 30%),
+
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #f8fafc 100%
+    );
+
+  color: #0f172a;
+}
+
+/* ==========================================
+   PAGE CONTAINER
+========================================== */
+
+.page-content {
+  width: min(1320px, calc(100% - 2rem));
+  margin-inline: auto;
+
+  padding-top: 2rem;
+  padding-bottom: 5rem;
+}
+
+/* ==========================================
+   GENERIC SECTION
+========================================== */
+
+.section {
+  padding: 6rem 0;
+}
+
+.section-sm {
+  padding: 4rem 0;
+}
+
+.section-lg {
+  padding: 8rem 0;
+}
+
+/* ==========================================
+   SECTION TITLE
+========================================== */
+
+.section-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
+  color: #0f172a;
+  margin-bottom: 1rem;
+}
+
+.section-title span {
+  background: linear-gradient(
+    90deg,
+    #2563eb,
+    #3b82f6,
+    #60a5fa
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.section-subtitle {
+  max-width: 700px;
+  margin: auto;
+
+  color: #64748b;
+
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+/* ==========================================
+   CARD
+========================================== */
+
+.card {
+  background: rgba(255, 255, 255, 0.75);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 24px;
+
+  padding: 2rem;
+
+  transition: .35s ease;
+
+  box-shadow:
+    0 10px 30px rgba(15,23,42,.04),
+    0 5px 18px rgba(37,99,235,.04);
+}
+
+.card:hover {
+
+  transform: translateY(-8px);
+
+  border-color: #bfdbfe;
+
+  box-shadow:
+    0 25px 45px rgba(15,23,42,.08),
+    0 15px 30px rgba(37,99,235,.10);
+
+}
+
+/* ==========================================
+   PRIMARY BUTTON
+========================================== */
+
+.btn-primary {
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: .65rem;
+
+  padding: .95rem 1.8rem;
+
+  border-radius: 999px;
+
+  background: linear-gradient(
+      135deg,
+      #2563eb,
+      #3b82f6,
+      #60a5fa
+  );
+
+  color: white;
+
+  font-weight: 600;
+
+  transition: .35s;
+}
+
+.btn-primary:hover {
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 15px 30px rgba(37,99,235,.25);
+
+}
+
+/* ==========================================
+   SECONDARY BUTTON
+========================================== */
+
+.btn-secondary {
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: .65rem;
+
+  padding: .95rem 1.8rem;
+
+  border-radius: 999px;
+
+  background: white;
+
+  border: 1px solid #dbeafe;
+
+  color: #2563eb;
+
+  font-weight: 600;
+
+  transition: .35s;
+
+  box-shadow:
+    0 8px 20px rgba(15,23,42,.04);
+}
+
+.btn-secondary:hover {
+
+  background: #eff6ff;
+
+  border-color: #60a5fa;
+
+  transform: translateY(-3px);
+
+}
+
+/* ==========================================
+   BADGE
+========================================== */
+
+.badge {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: .6rem;
+
+  padding: .55rem 1rem;
+
+  border-radius: 999px;
+
+  background: #eff6ff;
+
+  border: 1px solid #bfdbfe;
+
+  color: #2563eb;
+
+  font-weight: 600;
+
+  letter-spacing: .08em;
+
+  text-transform: uppercase;
+
+  font-size: .75rem;
+
+}
+
+/* ==========================================
+   DIVIDER
+========================================== */
+
+.divider {
+
+  width: 100%;
+  height: 1px;
+
+  margin: 4rem 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #bfdbfe,
+      transparent
+    );
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width:1024px){
+
+  .section{
+
+    padding:5rem 0;
+
+  }
+
+}
+
+@media (max-width:768px){
+
+  .page-content{
+
+    width:min(100% - 1.5rem);
+
+    padding-bottom:4rem;
+
+  }
+
+  .section{
+
+    padding:4rem 0;
+
+  }
+
+  .section-lg{
+
+    padding:5rem 0;
+
+  }
+
+  .card{
+
+    border-radius:20px;
+
+    padding:1.5rem;
+
+  }
+
+  .section-title{
+
+    font-size:2rem;
+
+  }
+
+  .section-subtitle{
+
+    font-size:.95rem;
+
+  }
+
+}
+
+@media (max-width:480px){
+
+  .btn-primary,
+  .btn-secondary{
+
+    width:100%;
+
+  }
+
+}
