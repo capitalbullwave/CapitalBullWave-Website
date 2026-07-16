@@ -47,7 +47,7 @@ const HomeService = () => {
           return (
             <article
               key={service.title}
-              className="group overflow-hidden rounded-[28px] border border-slate-200 bg-white p-8 shadow-[0_18px_50px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-1 hover:border-blue-500 hover:shadow-[0_0_0_24px_rgba(59,130,246,0.14)] focus-within:border-blue-500 active:border-blue-500"
+              className="group overflow-hidden rounded-[28px] border border-slate-200 bg-white p-8 shadow-[0_18px_50px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-1 hover:border-blue-500  focus-within:border-blue-500 active:border-blue-500"
             >
               <div className="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-3xl bg-blue-600 text-white shadow-lg shadow-sky-200/40">
                 <Icon className="h-7 w-7" />
