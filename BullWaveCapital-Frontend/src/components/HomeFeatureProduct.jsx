@@ -1,3 +1,4 @@
+import { useRef, useState, useEffect } from "react";
 import {
   FaChartLine,
   FaShieldAlt,
@@ -11,7 +12,7 @@ const plans = [
     title: "Core / Starter Plan",
     price: "₹999 - ₹3,999 / month",
     description:
-      "Entry-level guidance for short-term and swing traders, focused on fundamentally strong equity opportunities.",
+      "Entry-level guidance for swing traders, focused on fundamentally  equity opportunities.",
     details: [
       "12–15 equity recommendations every month",
       "Momentum-based stock selection",
@@ -70,6 +71,163 @@ const features = [
   },
 ];
 
+
+const FeatureSection = ({ theme = "light" }) => {
+  const isDark = theme === "dark";
+  const sectionRef = useRef(null);
+  const [progress, setProgress] = useState(0);
+  const [active, setActive] = useState(0);
+
+  // Scroll progress loader
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const current =
+        window.scrollY -
+        sectionRef.current.offsetTop +
+        window.innerHeight * 0.3;
+
+      const value = Math.max(0, Math.min((current / rect.height) * 100, 100));
+      setProgress(value);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+    // Scroll progress loader
+    useEffect(() => {
+      const handleScroll = () => {
+        if (!sectionRef.current) return;
+
+        const rect = sectionRef.current.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+
+        // Total distance the section travels through the viewport
+        const total = rect.height + viewportHeight;
+
+        // How far the section has moved through the viewport
+        const current = viewportHeight - rect.top;
+
+        const percentage = Math.min(
+          Math.max((current / total) * 100, 0),
+          100
+        );
+
+        setProgress(percentage);
+      };
+
+      window.addEventListener("scroll", handleScroll, { passive: true });
+      window.addEventListener("resize", handleScroll);
+
+      handleScroll();
+
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+        window.removeEventListener("resize", handleScroll);
+      };
+    }, []);
+
+      const line = isDark ? "#38bdf8" : "#2563EB";
+      const text = isDark ? "text-slate-200" : "text-slate-700";
+      const card = isDark ? "bg-slate-900 border-slate-700" : "bg-white border-slate-200";
+
+      return (
+        <div
+          ref={sectionRef}
+          className={`mt-8 rounded-[24px] border p-6 sm:p-8 lg:p-10 transition-all duration-500 ${
+            isDark
+              ? "border-slate-700 bg-slate-950 shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
+              : "border-slate-200 bg-slate-50 shadow-md"
+          }`}
+        >
+          <div className="relative flex flex-col lg:grid lg:grid-cols-[60px_1fr] gap-6">
+        {/* Timeline */}
+        <div className="relative flex justify-center lg:justify-start min-h-full">
+          {/* Background Line */}
+          <div
+            className={`absolute left-1/2 lg:left-0 top-0 h-full w-[4px] -translate-x-1/2 lg:translate-x-0 rounded-full ${
+              isDark
+                ? "bg-gradient-to-b from-slate-700 to-slate-800"
+                : "bg-gradient-to-b from-slate-200 to-slate-300"
+            }`}
+          />
+          {/* Progress Line */}
+          <div
+            className="absolute left-1/2 lg:left-0 top-0 w-[4px] -translate-x-1/2 lg:translate-x-0 rounded-full transition-all duration-300"
+            style={{
+              background: `linear-gradient(to bottom,#2563eb,#38bdf8)`,
+              height: `${progress}%`,
+            }}
+          />
+          {/* Loader Circle aligned on line */}
+          <div
+            className="absolute z-20 transition-all duration-300"
+            style={{
+              top: `calc(${progress}% - 16px)`,
+              left: "6%",
+              transform: "translateX(-50%)",
+            }}
+          >
+            {/* Outer Glow */}
+            <div className="absolute inset-0 h-8 w-8 rounded-full bg-blue-400/40 blur-md animate-pulse"></div>
+
+              {/* Circle */}
+              <div
+                className={`relative flex h-8 w-8 items-center justify-center rounded-full border-4 ${
+                  isDark
+                    ? "border-blue-400 bg-slate-900"
+                              : "border-blue-600 bg-white"
+                          } shadow-xl`}
+                        >
+                          <div className="h-3 w-3 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400"></div>
+                        </div>
+                      </div>
+
+                    </div>
+
+                {/* Feature Cards */}
+                <div className="space-y-6 sm:space-y-8">
+                  {features.map((feature, index) => {
+                    const Icon = feature.icon;
+                    const activeCard = active >= index;
+                    return (
+                      <article
+                        key={feature.title}
+                        data-index={index}
+                        className={`feature-card relative rounded-2xl border p-5 transition-all duration-500 ${
+                          activeCard
+                            ? "scale-[1.01] shadow-[0_10px_30px_rgba(37,99,235,.15)]"
+                            : "shadow-sm"
+                        } ${card}`}
+                      >
+                        <div
+                          className={`flex h-12 w-12 items-center justify-center rounded-xl ${
+                            isDark ? "bg-blue-500 text-white" : "bg-blue-600 text-white"
+                          }`}
+                        >
+                          <Icon className="text-lg" />
+                        </div>
+                        <h3
+                          className={`mt-4 text-lg sm:text-xl font-semibold ${
+                            isDark ? "text-white" : "text-slate-900"
+                          }`}
+                        >
+                          {feature.title}
+                        </h3>
+                        <p className={`mt-2 text-sm leading-6 ${text}`}>{feature.description}</p>
+                      </article>
+                    );
+                  })}
+                </div>
+              </div>
+    </div>
+  );
+};
+
+
 const HomeFeatureProduct = ({ theme }) => {
   const isDark = theme === "dark";
 
@@ -118,7 +276,6 @@ const HomeFeatureProduct = ({ theme }) => {
       </div>
 
       {/* Pricing Cards */}
-
       <div className="mt-16 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
         {plans.map((plan) => (
           <article
@@ -127,15 +284,14 @@ const HomeFeatureProduct = ({ theme }) => {
             ${
               plan.featured
                 ? isDark
-                  ? "border-blue-500/70 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-950"
-                  : "border-blue-500 bg-gradient-to-br from-blue-50 via-white to-sky-50"
+                  ? "border-blue-500/70 bg-slate-900 text-white"
+                  : "border-blue-500 bg-sky-600 text-white"
                 : isDark
-                  ? "border-slate-700 bg-slate-900"
-                  : "border-slate-200 bg-white"
+                  ? "border-slate-700 bg-slate-900 text-white"
+                  : "border-slate-200 bg-sky-400 text-white"
             }`}
           >
             {/* Glow Effect */}
-
             <div
               className={`absolute -top-20 -right-20 h-56 w-56 rounded-full blur-[90px] -z-10
               ${
@@ -146,7 +302,6 @@ const HomeFeatureProduct = ({ theme }) => {
             />
 
             {/* Badge */}
-
             {plan.featured && (
               <span
                 className="absolute right-6 top-2 rounded-full bg-gradient-to-r
@@ -158,164 +313,81 @@ const HomeFeatureProduct = ({ theme }) => {
             )}
 
             {/* Header */}
-
             <div className="relative z-10">
-
-              <p
-                className={`text-sm font-bold uppercase tracking-[0.28em]
-                ${
-                  isDark
-                    ? "text-blue-300"
-                    : "text-blue-600"
-                }`}
-              >
+              <p className="text-sm font-bold uppercase tracking-[0.28em] text-white">
                 {plan.title}
               </p>
 
-              <h3
-                className={`mt-4 text-3xl font-bold leading-tight
-                  ${
-                    plan.featured
-                      ? isDark
-                        ? "text-white"
-                        : "text-slate-900"
-                      : isDark
-                        ? "text-white"
-                        : "text-slate-900"
-                  }`}
-              >
+              <h3 className="mt-4 text-3xl font-bold leading-tight text-white">
                 {plan.price}
               </h3>
 
-              <p
-                className={`mt-5 leading-8
-                  ${
-                    plan.featured
-                      ? isDark
-                        ? "text-slate-300"
-                        : "text-slate-600"
-                      : isDark
-                        ? "text-slate-300"
-                        : "text-slate-600"
-                  }`}
-              >
+              <p className="mt-5 leading-8 text-white">
                 {plan.description}
               </p>
             </div>
 
             {/* Divider */}
-
             <div
               className={`my-8 h-px
               ${
                 plan.featured
-                  ? isDark
-                    ? "bg-blue-500/30"
-                    : "bg-blue-200"
-                  : isDark
-                    ? "bg-slate-700"
-                    : "bg-slate-200"
+                  ? "bg-blue-200"
+                  : "bg-blue-300"
               }`}
             />
 
             {/* Features */}
-
             <ul className="space-y-5">
               {plan.details.map((item) => (
                 <li
                   key={item}
-                  className={`flex items-start gap-4 ${
-                    isDark ? "text-slate-200" : "text-slate-700"
-                  }`}
+                  className="flex items-start gap-4 text-white"
                 >
                   <span className="mt-2 flex h-3 w-3 flex-shrink-0 rounded-full bg-blue-600"></span>
-
                   <span className="leading-7">{item}</span>
                 </li>
               ))}
             </ul>
 
+            {/* Contact Option */}
+            <div className="mt-8 flex justify-between items-center">
+              <span className="text-sm font-semibold opacity-70 text-white">
+                Capital BullWave
+              </span>
+              <Link
+                to="/contact"
+                className={`flex items-center gap-2 rounded-full px-5 py-2 text-sm font-semibold transition hover:scale-105 ${
+                  isDark
+                    ? "bg-blue-600 text-white hover:bg-blue-500"
+                    : "bg-blue-900 text-white hover:bg-blue-700"
+                }`}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 1118 0z"
+                  />
+                </svg>
+                Contact
+              </Link>
+            </div>
           </article>
         ))}
       </div>
 
       {/* Features Section Starts Here */}
 
-      <div
-        className={`mt-20 rounded-[32px] border p-8 sm:p-10 lg:p-12 transition-all duration-500
-          ${
-            isDark
-              ? "border-slate-700 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 shadow-[0_20px_60px_rgba(0,0,0,0.45)]"
-              : "border-slate-200 bg-gradient-to-br from-slate-50 via-white to-slate-100 shadow-xl"
-          }`}
-      >
-        <div className="grid gap-7 lg:grid-cols-2">          {features.map((feature) => {
-            const Icon = feature.icon;
+      <FeatureSection />
 
-            return (
-              <div
-                key={feature.title}
-                className={`group rounded-3xl border p-7 transition-all duration-500 hover:-translate-y-2
-                ${
-                  isDark
-                    ? "border-slate-700 bg-slate-900 hover:border-blue-500 hover:shadow-[0_20px_60px_rgba(37,99,235,0.2)]"
-                    : "border-slate-200 bg-white hover:border-blue-400 hover:shadow-[0_20px_60px_rgba(37,99,235,0.18)]"
-                }`}
-              >
-                {/* Icon */}
-
-                <div
-                  className={`flex h-14 w-14 items-center justify-center rounded-2xl transition-all duration-300 group-hover:scale-110
-                  ${
-                    isDark
-                      ? "bg-blue-500 text-white"
-                      : "bg-blue-600 text-white"
-                  }`}
-                >
-                  <Icon className="text-xl" />
-                </div>
-
-                {/* Title */}
-
-                <h3
-                  className={`mt-6 text-2xl font-bold transition-colors duration-300
-                  ${
-                    isDark
-                      ? "text-white group-hover:text-blue-300"
-                      : "text-slate-900 group-hover:text-blue-700"
-                  }`}
-                >
-                  {feature.title}
-                </h3>
-
-                {/* Description */}
-
-                <p
-                  className={`mt-4 leading-8
-                  ${
-                    isDark
-                      ? "text-slate-300"
-                      : "text-slate-600"
-                  }`}
-                >
-                  {feature.description}
-                </p>
-
-                {/* Bottom Line */}
-
-                <div
-                  className={`mt-6 h-1 w-12 rounded-full transition-all duration-500 group-hover:w-24
-                  ${
-                    isDark
-                      ? "bg-blue-500"
-                      : "bg-blue-600"
-                  }`}
-                />
-              </div>
-            );
-          })}
-        </div>
-      </div>
           {/* Bottom CTA */}
 
       <div
