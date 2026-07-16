@@ -13,7 +13,6 @@ export const companyData = {
           location: "Netaji Subhash Place",
           building: "Aggarwal Millennium Tower 2",
           offices: [
-            "Office No. 671 (6th Floor)",
             "Office No. 1275 (12th Floor)",
           ],
         },

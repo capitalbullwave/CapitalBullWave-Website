@@ -1,4 +1,4 @@
-import SectionBackground from "../components/SectionBackground";
+//import SectionBackground from "../components/SectionBackground";
 import {
   FaMapMarkerAlt,
   FaBuilding,
@@ -9,17 +9,97 @@ const About = ({ theme }) => {
   const dark = theme === "dark";
 
   return (
-    <SectionBackground dark={dark}>
       <section className="mx-auto my-6 max-w-7xl px-4 sm:px-6 lg:px-8">
 
         <div
-          className={`overflow-hidden rounded-[32px] transition-all duration-300 p-6 sm:p-8 lg:p-10
+          className={`relative overflow-hidden rounded-[32px] transition-all duration-300 p-6 sm:p-8 lg:p-10
           ${
             dark
               ? "bg-slate-900/95 border border-slate-800 shadow-2xl"
               : "bg-white/95 border border-sky-100 shadow-[0_30px_60px_rgba(15,23,42,0.08)]"
           }`}
         >
+
+          {/* Background effect: base wash + chart-grid texture + soft glow + market-pulse line */}
+          <div className="pointer-events-none absolute inset-0 select-none" aria-hidden="true">
+
+            {/* Base gradient wash */}
+            <div
+              className={`absolute inset-0 ${
+                dark
+                  ? "bg-gradient-to-br from-slate-900 via-slate-900 to-sky-950/40"
+                  : "bg-gradient-to-br from-sky-100 via-blue-50 to-indigo-100/70"
+              }`}
+            />
+
+            {/* Graph-paper dot grid, echoes chart gridlines */}
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage: `radial-gradient(circle, ${
+                  dark ? "rgba(56,189,248,0.16)" : "rgba(3,105,161,0.28)"
+                } 1.5px, transparent 1.5px)`,
+                backgroundSize: "26px 26px",
+                opacity: dark ? 0.35 : 0.65,
+              }}
+            />
+
+            {/* Soft ambient glow */}
+            <div
+              className={`absolute -top-24 -right-16 h-72 w-72 rounded-full blur-3xl ${
+                dark ? "bg-sky-500/10" : "bg-sky-400/40"
+              }`}
+            />
+            <div
+              className={`absolute -bottom-28 -left-20 h-80 w-80 rounded-full blur-3xl ${
+                dark ? "bg-blue-600/10" : "bg-indigo-300/45"
+              }`}
+            />
+
+            {/* Thin top accent bar, a common professional/fintech dashboard cue */}
+            <div
+              className={`absolute inset-x-0 top-0 h-1.5 ${
+                dark
+                  ? "bg-gradient-to-r from-sky-500/40 via-sky-400/70 to-blue-500/40"
+                  : "bg-gradient-to-r from-sky-400/70 via-blue-600/90 to-indigo-500/70"
+              }`}
+            />
+
+            {/* Signature element: a gently drifting market-pulse line */}
+            <svg
+              className="cbw-pulse-line absolute inset-x-0 top-1/2 h-24 w-full -translate-y-1/2 sm:h-32"
+              viewBox="0 0 1200 120"
+              preserveAspectRatio="none"
+              fill="none"
+              style={{ opacity: dark ? 0.28 : 0.4 }}
+            >
+              <polyline
+                points="0,80 60,80 90,40 130,95 170,55 210,70 250,20 300,85 350,60 400,90 450,30 500,75 560,45 620,95 680,50 740,75 800,25 860,90 920,55 980,80 1040,35 1100,70 1160,50 1200,80"
+                stroke={dark ? "#38bdf8" : "#0369a1"}
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+
+          <style>{`
+            @keyframes cbwPulseFloat {
+              0%, 100% { transform: translateY(-3px); }
+              50% { transform: translateY(3px); }
+            }
+            .cbw-pulse-line {
+              animation: cbwPulseFloat 7s ease-in-out infinite;
+            }
+            @media (prefers-reduced-motion: reduce) {
+              .cbw-pulse-line {
+                animation: none;
+              }
+            }
+          `}</style>
+
+          {/* Foreground content sits above the background effect */}
+          <div className="relative z-10">
 
           {/* Hero */}
           <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
@@ -280,8 +360,7 @@ const About = ({ theme }) => {
             dark ? "text-slate-300" : "text-slate-600"
           }`}
         >
-          Office No. <strong>671 (6th Floor)</strong> and
-          <strong> 1275 (12th Floor)</strong> located at
+          Office No. <strong> 1275 (12th Floor)</strong> located at
           <strong> Aggarwal Millennium Tower 2</strong>,
           Pitampura, North West Delhi.
         </p>
@@ -530,9 +609,10 @@ const About = ({ theme }) => {
             </div>
           </div>
 
+          </div>
+
         </div>
       </section>
-    </SectionBackground>
   );
 };
 

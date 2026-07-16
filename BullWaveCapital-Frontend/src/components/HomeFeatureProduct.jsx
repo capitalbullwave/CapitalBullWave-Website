@@ -344,7 +344,7 @@ const HomeFeatureProduct = ({ theme }) => {
                   key={item}
                   className="flex items-start gap-4 text-white"
                 >
-                  <span className="mt-2 flex h-3 w-3 flex-shrink-0 rounded-full bg-blue-600"></span>
+                  <span className="mt-2 flex h-3 w-3 flex-shrink-0 rounded-full bg-blue-200"></span>
                   <span className="leading-7">{item}</span>
                 </li>
               ))}

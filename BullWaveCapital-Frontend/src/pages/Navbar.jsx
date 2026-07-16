@@ -42,9 +42,9 @@ export default function Navbar({ theme, toggleTheme }) {
 
         <Link
           to="/"
-          className="flex items-center gap-3 flex-shrink-0"
+          className="flex items-center gap-3 sm:gap-4 flex-shrink-0"
         >
-          {/* Logo */}
+          {/* Logo mark (unchanged) */}
           <div className="flex h-11 w-11 sm:h-12 sm:w-12 lg:h-14 lg:w-14 items-center justify-center overflow-hidden rounded-full border border-blue-200 bg-white shadow-md transition-all duration-300 hover:shadow-lg">
             <img
               src={logo}
@@ -53,32 +53,53 @@ export default function Navbar({ theme, toggleTheme }) {
             />
           </div>
 
+          {/* Divider between mark and wordmark, a common finance-brand cue */}
+          <div
+            className={`hidden sm:block h-7 lg:h-8 w-px ${
+              isDark ? "bg-slate-700" : "bg-slate-300"
+            }`}
+          />
+
           {/* Company Name */}
           <div className="flex flex-col justify-center leading-tight">
 
-            <div className="flex items-baseline gap-1 whitespace-nowrap">
+            <div className="flex items-baseline gap-1.5 whitespace-nowrap">
 
               <span
-                className={`text-[15px] sm:text-[17px] lg:text-[18px] font-bold uppercase ${
-                  isDark ? "text-white" : "text-slate-800"
+                className={`text-[16px] sm:text-[18px] lg:text-[20px] font-semibold tracking-tight ${
+                  isDark ? "text-white" : "text-slate-900"
                 }`}
               >
-                CAPITAL
+                Capital
               </span>
 
-              <span className="text-[15px] sm:text-[17px] lg:text-[18px] font-extrabold uppercase bg-gradient-to-r from-blue-700 via-sky-500 to-cyan-500 bg-clip-text text-transparent">
-                BULLWAVE
+              <span
+                className={`text-[16px] sm:text-[18px] lg:text-[20px] font-bold tracking-tight ${
+                  isDark ? "text-sky-400" : "text-blue-700"
+                }`}
+              >
+                BullWave
               </span>
 
             </div>
 
-            <span
-              className={`text-[9px] sm:text-[10px] uppercase tracking-[0.22em] ${
-                isDark ? "text-slate-400" : "text-slate-500"
-              }`}
-            >
-              PRIVATE LIMITED
-            </span>
+            <div className="mt-1 flex items-center gap-1.5">
+
+              <span
+                className={`h-[3px] w-[3px] rounded-full ${
+                  isDark ? "bg-sky-500" : "bg-blue-600"
+                }`}
+              />
+
+              <span
+                className={`text-[8.5px] sm:text-[9.5px] font-medium uppercase tracking-[0.28em] ${
+                  isDark ? "text-slate-400" : "text-slate-500"
+                }`}
+              >
+                Private Limited
+              </span>
+
+            </div>
 
           </div>
 
@@ -258,4 +279,3 @@ export default function Navbar({ theme, toggleTheme }) {
     </nav>
   );
 }
-
