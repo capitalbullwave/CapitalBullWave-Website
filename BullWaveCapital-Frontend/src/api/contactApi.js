@@ -3,7 +3,7 @@ import API_URL from "./api";
 
 export const sendContact = async (formData) => {
   const { data } = await axios.post(
-    `${API_URL}/contact`,
+    `${API_URL}/api/contact`,
     formData,
     {
       headers: {
