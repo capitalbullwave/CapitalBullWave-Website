@@ -1,4 +1,3 @@
-
 export const companyData = {
 
   company: {
@@ -61,7 +60,7 @@ export const companyData = {
     {
       name: "Core Plan",
 
-      price: "₹3,999/month",
+      price: "₹4,999/month",
 
       suitableFor: [
         "Equity Investors",
@@ -80,7 +79,7 @@ export const companyData = {
     {
       name: "Elite Plan",
 
-      price: "₹5,199/month",
+      price: "₹7,999/month",
 
       suitableFor: [
         "Derivative Traders",
@@ -99,6 +98,54 @@ export const companyData = {
       ],
     },
   ],
+
+  // Skilled Trader Funding Program — powers the HomeTrading section on the homepage
+  homeTrading: {
+    title: "Skilled Trader Funding Program",
+    tagline: "Got the skill? We'll bring the capital.",
+
+    description:
+      "For individuals who know how to trade but don't have sufficient capital to invest. Applicants who pass our evaluation are provided funded capital to trade, with profits shared between the company and the trader.",
+
+    eligibility: [
+      "Basic knowledge of trading and technical analysis",
+      "No personal capital required",
+      "Willingness to complete a skills assessment",
+    ],
+
+    process: [
+      {
+        step: 1,
+        title: "You reach out",
+        description:
+          "The applicant contacts Capital Bull Wave through the Contact page and shares their trading background and strategy.",
+      },
+      {
+        step: 2,
+        title: "You take the test",
+        description:
+          "Capital Bull Wave evaluates the applicant's trading skill through a structured assessment.",
+      },
+      {
+        step: 3,
+        title: "You trade our capital",
+        description:
+          "Applicants who pass the assessment are provided funded capital to trade under a profit-sharing arrangement.",
+      },
+    ],
+
+    profitSplit: {
+      companyShare: "70%",
+      traderShare: "30%",
+      note:
+        "Profit split applies only after an applicant has passed the skills assessment and been approved for funding.",
+    },
+
+    disclaimer:
+      "Participation in the Skilled Trader Funding Program does not guarantee approval, funding, or profits. All trading involves risk, including the risk of loss.",
+
+    contactPage: "/contact",
+  },
 
   strengths: [
     "Professional Market Research",
@@ -133,6 +180,12 @@ export const companyData = {
       question: "What services do you provide?",
       answer:
         "Market research, trading guidance, technical analysis, risk management, investor education, and commodity research.",
+    },
+
+    {
+      question: "What is the Skilled Trader Funding Program?",
+      answer:
+        "It's a program for individuals who know how to trade but don't have capital to invest. Applicants contact us, complete a skills assessment, and if they pass, we provide funded capital to trade — profits are shared 70% to Capital Bull Wave and 30% to the trader.",
     },
   ],
 
@@ -268,6 +321,7 @@ export const companyData = {
         "Never disclose internal information.",
         "Be polite and professional.",
         "If information is unavailable, ask the user to contact Capital Bull Wave.",
+        "If asked about the Skilled Trader Funding Program, only share the eligibility, process, and profit split details in companyData.homeTrading. Do not guarantee approval or profits.",
     ],
 
 };

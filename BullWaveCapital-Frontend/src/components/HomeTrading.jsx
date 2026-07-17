@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import { PhoneCall, ClipboardCheck, TrendingUp, ArrowRight } from "lucide-react";
 
 /**
- * TradingProgramSection
- * Place this component directly below your Hero section.
+ * HomeTrading
+ * Place directly below <Hero /> on the Home page.
+ * Theme is controlled via the `theme` prop ("light" | "dark") passed down
+ * from the page, not Tailwind's `dark:` class strategy.
  *
  * Requires:
  *  - react-router-dom (for the /contact redirect)
  *  - lucide-react (icons)
- *  - Tailwind dark mode strategy set to "class" in tailwind.config.js
- *      module.exports = { darkMode: "class", ... }
  */
 const steps = [
   {
@@ -33,42 +33,50 @@ const steps = [
   },
 ];
 
-export default function HomeTrading() {
+const HomeTrading = ({ theme }) => {
+  const isDark = theme === "dark";
+
   return (
     <section
-      className="
+      className={`
         relative w-full overflow-hidden
-        bg-white dark:bg-slate-950
+        rounded-t-[2.5rem] sm:rounded-t-[3.5rem]
         py-16 sm:py-20 lg:py-28
-        transition-colors duration-300
-      "
+        transition-colors duration-300 mt-4 border border-blue-400 rounded-xl 
+        ${isDark ? "bg-slate-950" : "bg-white"}
+      `}
     >
       {/* Ambient sky-blue glow accents */}
       <div
         aria-hidden="true"
-        className="
+        className={`
           pointer-events-none absolute -top-24 -left-24 h-72 w-72 sm:h-96 sm:w-96
-          rounded-full bg-sky-300/30 dark:bg-sky-500/10 blur-3xl
-        "
+          rounded-full blur-3xl
+          ${isDark ? "bg-sky-500/10" : "bg-sky-300/50"}
+        `}
       />
       <div
         aria-hidden="true"
-        className="
+        className={`
           pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 sm:h-96 sm:w-96
-          rounded-full bg-sky-400/20 dark:bg-sky-400/10 blur-3xl
-        "
+          rounded-full blur-3xl
+          ${isDark ? "bg-sky-400/10" : "bg-sky-100/70"}
+        `}
       />
 
       <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Eyebrow */}
         <div className="flex justify-center">
           <span
-            className="
-              inline-flex items-center gap-2 rounded-full
-              border border-sky-200 bg-sky-50 px-4 py-1.5
-              text-xs sm:text-sm font-medium text-sky-700
-              dark:border-sky-800 dark:bg-sky-900/30 dark:text-sky-300
-            "
+            className={`
+              inline-flex items-center gap-2 rounded-full border px-4 py-1.5
+              text-xs sm:text-sm font-medium
+              ${
+                isDark
+                  ? "border-sky-800 bg-sky-900/30 text-sky-300"
+                  : "border-sky-200 bg-sky-50 text-sky-700"
+              }
+            `}
           >
             Skilled Trader Funding Program
           </span>
@@ -76,30 +84,36 @@ export default function HomeTrading() {
 
         {/* Heading */}
         <h2
-          className="
+          className={`
             mt-5 text-center font-bold tracking-tight
-            text-slate-900 dark:text-white
-            text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem]
-            leading-tight
-          "
+            text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] leading-tight
+            ${isDark ? "text-white" : "text-slate-900"}
+          `}
         >
           Got the skill?{" "}
-          <span className="text-sky-600 dark:text-sky-400">
+          <span className={isDark ? "text-sky-400" : "text-sky-600"}>
             We'll bring the capital.
           </span>
         </h2>
 
+        <div
+          aria-hidden="true"
+          className={`
+            pointer-events-none absolute top-24 left-24 h-72 w-72 sm:h-96 sm:w-96
+            rounded-full blur-3xl
+            ${isDark ? "bg-sky-500/10" : "bg-sky-300/50"}
+          `}
+        />
+
         <p
-          className="
-            mx-auto mt-4 max-w-2xl text-center
-            text-sm sm:text-base
-            text-slate-600 dark:text-slate-400
-            leading-relaxed
-          "
+          className={`
+            mx-auto mt-4 max-w-2xl text-center text-sm sm:text-base leading-relaxed
+            ${isDark ? "text-slate-400" : "text-slate-600"}
+          `}
         >
           Know how to trade but don't have money to invest? Contact us and take
           our assessment. Pass it, and we'll fund your account — you keep{" "}
-          <span className="font-semibold text-slate-800 dark:text-slate-200">
+          <span className={`font-semibold ${isDark ? "text-slate-200" : "text-slate-800"}`}>
             30%
           </span>{" "}
           of the profit, no capital risk on your end.
@@ -108,37 +122,37 @@ export default function HomeTrading() {
         {/* Profit split highlight */}
         <div className="mt-8 flex justify-center">
           <div
-            className="
-              flex w-full max-w-md items-stretch overflow-hidden rounded-2xl
-              border border-slate-200 dark:border-slate-800
-              shadow-sm
-            "
+            className={`
+              flex w-full max-w-md items-stretch overflow-hidden rounded-3xl border shadow-sm
+              ${isDark ? "border-slate-800" : "border-sky-100"}
+            `}
           >
             <div
-              className="
-                flex flex-1 flex-col items-center justify-center gap-1
-                bg-sky-600 dark:bg-sky-500
-                px-4 py-5 sm:py-6
-              "
+              className={`
+                flex flex-1 flex-col items-center justify-center gap-1 px-4 py-5 sm:py-6
+                ${isDark ? "bg-sky-500" : "bg-sky-600"}
+              `}
             >
-              <span className="text-2xl sm:text-3xl font-bold text-white">
-                70%
-              </span>
+              <span className="text-2xl sm:text-3xl font-bold text-white">70%</span>
               <span className="text-[11px] sm:text-xs font-medium uppercase tracking-wide text-sky-100">
                 Our share
               </span>
             </div>
+
             <div
-              className="
-                flex flex-1 flex-col items-center justify-center gap-1
-                bg-sky-100 dark:bg-slate-800
-                px-4 py-5 sm:py-6
-              "
+              className={`
+                flex flex-1 flex-col items-center justify-center gap-1 px-4 py-5 sm:py-6
+                ${isDark ? "bg-slate-800" : "bg-sky-50"}
+              `}
             >
-              <span className="text-2xl sm:text-3xl font-bold text-sky-700 dark:text-sky-300">
+              <span className={`text-2xl sm:text-3xl font-bold ${isDark ? "text-sky-300" : "text-sky-700"}`}>
                 30%
               </span>
-              <span className="text-[11px] sm:text-xs font-medium uppercase tracking-wide text-sky-700/70 dark:text-slate-400">
+              <span
+                className={`text-[11px] sm:text-xs font-medium uppercase tracking-wide ${
+                  isDark ? "text-slate-400" : "text-sky-700/70"
+                }`}
+              >
                 Trader's share
               </span>
             </div>
@@ -153,39 +167,40 @@ export default function HomeTrading() {
               {idx < steps.length - 1 && (
                 <div
                   aria-hidden="true"
-                  className="
+                  className={`
                     hidden md:block absolute top-8 left-[calc(50%+2.5rem)]
                     h-px w-[calc(100%-5rem)]
-                    bg-gradient-to-r from-sky-300 to-sky-100
-                    dark:from-sky-700 dark:to-slate-800
-                  "
+                    ${isDark ? "bg-gradient-to-r from-sky-700 to-slate-800" : "bg-gradient-to-r from-sky-300 to-sky-100"}
+                  `}
                 />
               )}
 
               <div
-                className="
-                  relative z-10 flex h-16 w-16 items-center justify-center rounded-2xl
-                  bg-sky-600 dark:bg-sky-500
-                  shadow-lg shadow-sky-600/20 dark:shadow-sky-500/10
-                "
+                className={`
+                  relative z-10 flex h-16 w-16 items-center justify-center rounded-3xl shadow-lg
+                  ${isDark ? "bg-sky-500 shadow-sky-500/10" : "bg-sky-600 shadow-sky-600/20"}
+                `}
               >
                 <Icon className="h-7 w-7 text-white" strokeWidth={1.75} />
                 <span
-                  className="
+                  className={`
                     absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center
-                    rounded-full bg-white dark:bg-slate-900
-                    border border-sky-200 dark:border-sky-700
-                    text-[10px] font-bold text-sky-700 dark:text-sky-300
-                  "
+                    rounded-full border text-[10px] font-bold
+                    ${
+                      isDark
+                        ? "bg-slate-900 border-sky-700 text-sky-300"
+                        : "bg-white border-sky-200 text-sky-700"
+                    }
+                  `}
                 >
                   {id}
                 </span>
               </div>
 
-              <h3 className="mt-5 text-base sm:text-lg font-semibold text-slate-900 dark:text-white">
+              <h3 className={`mt-5 text-base sm:text-lg font-semibold ${isDark ? "text-white" : "text-slate-900"}`}>
                 {title}
               </h3>
-              <p className="mt-2 max-w-xs text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+              <p className={`mt-2 max-w-xs text-sm leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600"}`}>
                 {desc}
               </p>
             </div>
@@ -196,20 +211,18 @@ export default function HomeTrading() {
         <div className="mt-12 sm:mt-16 flex flex-col items-center gap-3">
           <Link
             to="/contact"
-            className="
-              group inline-flex items-center justify-center gap-2
-              rounded-full bg-sky-600 dark:bg-sky-500
-              px-6 sm:px-8 py-3 sm:py-3.5
+            className={`
+              group inline-flex w-full sm:w-auto items-center justify-center gap-2
+              rounded-full px-6 sm:px-8 py-3 sm:py-3.5
               text-sm sm:text-base font-semibold text-white
-              shadow-md shadow-sky-600/25 dark:shadow-sky-500/20
-              transition-all duration-200
-              hover:bg-sky-700 dark:hover:bg-sky-400
-              hover:shadow-lg hover:shadow-sky-600/30
+              shadow-md transition-all duration-200 active:scale-[0.98]
               focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2
-              dark:focus-visible:ring-offset-slate-950
-              active:scale-[0.98]
-              w-full sm:w-auto
-            "
+              ${
+                isDark
+                  ? "bg-sky-500 shadow-sky-500/20 hover:bg-sky-400 focus-visible:ring-offset-slate-950"
+                  : "bg-sky-600 shadow-sky-600/25 hover:bg-sky-700 focus-visible:ring-offset-white"
+              }
+            `}
           >
             Contact Us
             <ArrowRight
@@ -217,11 +230,13 @@ export default function HomeTrading() {
               strokeWidth={2}
             />
           </Link>
-          <span className="text-xs text-slate-500 dark:text-slate-500">
+          <span className={`text-md semibold ${isDark ? "text-slate-500" : "text-slate-500"}`}>
             No trading experience? This program isn't for you — yet.
           </span>
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default HomeTrading;
