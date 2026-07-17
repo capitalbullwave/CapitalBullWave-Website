@@ -1,5 +1,5 @@
 
-import SectionWave from "./SectionWave";
+import SectionWave from "./Sectionwave";
 
 const choices = [
  
