@@ -15,9 +15,24 @@ const app = express();
    Middleware
 ============================ */
 
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://capitalbullwave.com",
+  "https://www.capitalbullwave.com",
+];
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: function (origin, callback) {
+      // Allow requests without an Origin header (e.g. Postman)
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error("Not allowed by CORS"));
+    },
     credentials: true,
   })
 );
