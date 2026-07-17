@@ -22,7 +22,7 @@ const contactDetails = [
   {
     title: "Corporate Address",
     value:
-      "Aggarwal Millennium Tower 2, Office No. 671 (6th Floor) & Office No. 1275 (12th Floor), Netaji Subhash Place, Pitampura, New Delhi - 110034",
+      "Aggarwal Millennium Tower 2, Office No. Office No. 1275 (12th Floor), Netaji Subhash Place, Pitampura, New Delhi - 110034",
     icon: FaBuilding,
   },
 
@@ -356,11 +356,7 @@ export default function Contact({ theme }) {
 
                     <p className={`${text} mt-3 leading-7`}>
                       Aggarwal Millennium Tower 2,
-                      Office No. 671 (6th Floor)
-                      <br />
-                      Office No. 1275 (12th Floor),
-                      <br />
-                      Pitampura,
+                      Office No. 1275 (12th Floor), Pitampura,
                       <br />
                       New Delhi - 110034
                     </p>
@@ -574,7 +570,7 @@ export default function Contact({ theme }) {
                   {/* Right Side */}
                   <div className="flex flex-wrap items-center gap-3">
                     <a
-                      href="#"
+                      href="https://www.apple.com/app-store/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="transition-transform duration-300 hover:scale-105"
@@ -587,7 +583,7 @@ export default function Contact({ theme }) {
                     </a>
 
                     <a
-                      href="#"
+                      href="https://play.google.com/store"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="transition-transform duration-300 hover:scale-105"

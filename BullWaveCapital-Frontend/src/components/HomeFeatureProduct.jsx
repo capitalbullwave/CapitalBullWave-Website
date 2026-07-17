@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 const plans = [
   {
     title: "Core / Starter Plan",
-    price: "₹999 - ₹3,999 / month",
+    price: "₹4,999 / month",
     description:
       "Entry-level guidance for swing traders, focused on fundamentally  equity opportunities.",
     details: [
@@ -21,7 +21,7 @@ const plans = [
   },
   {
     title: "Elite Plan / Pro Trader",
-    price: "₹5,199 - ₹5,999 / month",
+    price: "₹9,999 / month",
     description:
       "Designed for active traders with advanced Futures & Options guidance covering Nifty and Bank Nifty.",
     details: [
@@ -33,7 +33,7 @@ const plans = [
   },
   {
     title: "Elite Investor Plan",
-    price: "₹9,999 / month",
+    price: "₹7,999 / month",
     description:
       "Premium advisory for long-term investors including portfolio reviews and exclusive research reports.",
     details: [

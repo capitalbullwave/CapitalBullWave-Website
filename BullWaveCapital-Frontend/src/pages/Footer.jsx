@@ -9,6 +9,7 @@ import {
 import RideLogo from "../assets/bullwaverides-logo.jpeg";
 import PlayStore from "../assets/playstore-icon.png";
 import AppStore from "../assets/appstore-icon.png";
+import ClubLogo from "../assets/bullwaveClub.jpeg";
 
 const Footer = ({ theme }) => {
   const dark = theme === "dark";
@@ -271,13 +272,37 @@ const Footer = ({ theme }) => {
               <div>
 
                 <h3
-                  className={`text-xl font-bold ${heading}`}
+                  className={`text-lg font-bold ${heading}`}
                 >
                   BullWave Rides
                 </h3>
 
                 <p className={`text-sm ${text}`}>
                   Book rides instantly across the city.
+                </p>
+
+              </div>
+
+            </div>
+
+            <div className="flex items-center gap-3 mb-5">
+
+              <img
+                src={ClubLogo}
+                alt="BullWave Rides"
+                className="h-14 w-14 rounded-2xl shadow-lg"
+              />
+
+              <div>
+
+                <h3
+                  className={`text-lg font-bold ${heading}`}
+                >
+                  BullWave Club
+                </h3>
+
+                <p className={`text-sm ${text}`}>
+                  Enjoy and have fun
                 </p>
 
               </div>

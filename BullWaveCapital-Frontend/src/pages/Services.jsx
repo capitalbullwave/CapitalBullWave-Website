@@ -23,7 +23,7 @@ export default function Services() {
             <article className="rounded-[28px] border border-slate-200 bg-slate-50 p-8 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-sky-400 hover:border-2 shadow-xl">
               <h2 className="text-2xl font-semibold  text-blue-700">Core Plan</h2>
               <p className="mt-4 text-slate-600 leading-7">
-                ₹3,999 / month for equity cash investors. This plan is built for share market buyers and swing traders only.
+                ₹4,999 / month for equity cash investors. This plan is built for share market buyers and swing traders only.
               </p>
               <ul className="mt-6 space-y-3 text-slate-600">
                 <li><strong className="text-blue-500">Equity cash segment</strong> only, with no derivatives exposure.</li>
@@ -37,7 +37,7 @@ export default function Services() {
             <article className="rounded-[28px] border border-slate-200 bg-white p-8 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-sky-400 hover:border-2 shadow-xl">
               <h2 className="text-2xl font-semibold  text-blue-700">Elite Plan</h2>
               <p className="mt-4 text-slate-600 leading-7">
-                ₹5,199 / month for active derivatives and index traders, including all Core Plan benefits plus advanced F&O insights.
+                ₹9,999 / month for active derivatives and index traders, including all Core Plan benefits plus advanced F&O insights.
               </p>
               <ul className="mt-6 space-y-3 text-slate-600">
                 <li>All 12–15 monthly cash equity recommendations.</li>
