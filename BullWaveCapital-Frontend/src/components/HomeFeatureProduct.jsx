@@ -82,147 +82,118 @@ const FeatureSection = ({ theme = "light" }) => {
   useEffect(() => {
     const handleScroll = () => {
       if (!sectionRef.current) return;
-      const rect = sectionRef.current.getBoundingClientRect();
-      const current =
-        window.scrollY -
-        sectionRef.current.offsetTop +
-        window.innerHeight * 0.3;
 
-      const value = Math.max(0, Math.min((current / rect.height) * 100, 100));
-      setProgress(value);
+      const rect = sectionRef.current.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+
+      // Total distance the section travels through the viewport
+      const total = rect.height + viewportHeight;
+
+      // How far the section has moved through the viewport
+      const current = viewportHeight - rect.top;
+
+      const percentage = Math.min(Math.max((current / total) * 100, 0), 100);
+      setProgress(percentage);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
+
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
+    };
   }, []);
 
-    // Scroll progress loader
-    useEffect(() => {
-      const handleScroll = () => {
-        if (!sectionRef.current) return;
+  const text = isDark ? "text-slate-200" : "text-slate-700";
+  const card = isDark ? "bg-slate-900 border-slate-700" : "bg-white border-slate-200";
 
-        const rect = sectionRef.current.getBoundingClientRect();
-        const viewportHeight = window.innerHeight;
+  // Clamp so the circle never overlaps the section's top/bottom border
+  const circleTop = Math.min(Math.max(progress, 4), 96);
 
-        // Total distance the section travels through the viewport
-        const total = rect.height + viewportHeight;
-
-        // How far the section has moved through the viewport
-        const current = viewportHeight - rect.top;
-
-        const percentage = Math.min(
-          Math.max((current / total) * 100, 0),
-          100
-        );
-
-        setProgress(percentage);
-      };
-
-      window.addEventListener("scroll", handleScroll, { passive: true });
-      window.addEventListener("resize", handleScroll);
-
-      handleScroll();
-
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-        window.removeEventListener("resize", handleScroll);
-      };
-    }, []);
-
-      const line = isDark ? "#38bdf8" : "#2563EB";
-      const text = isDark ? "text-slate-200" : "text-slate-700";
-      const card = isDark ? "bg-slate-900 border-slate-700" : "bg-white border-slate-200";
-
-      return (
+  return (
+    <div
+      ref={sectionRef}
+      className={`mt-8 rounded-2xl sm:rounded-[24px] border p-4 sm:p-8 lg:p-10 transition-all duration-500 ${
+        isDark
+          ? " border bg-slate-950 shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
+          : " border border-blue-300 bg-slate-50 shadow-md"
+      }`}
+    >
+      <div className="relative pt-5 sm:pt-6">
+        {/* Background Line — spans the full height of the card stack, on both mobile and desktop */}
         <div
-          ref={sectionRef}
-          className={`mt-8 rounded-[24px] border p-6 sm:p-8 lg:p-10 transition-all duration-500 ${
+          className={`absolute left-4 lg:left-[30px] top-5 sm:top-6 bottom-0 w-[4px] rounded-full ${
             isDark
-              ? "border-slate-700 bg-slate-950 shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
-              : "border-slate-200 bg-slate-50 shadow-md"
+              ? "bg-gradient-to-b from-slate-700 to-slate-800"
+              : "bg-gradient-to-b from-slate-200 to-slate-300"
           }`}
+        />
+        {/* Progress Line */}
+        <div
+          className="absolute left-4 lg:left-[30px] top-5 sm:top-6 w-[4px] rounded-full transition-all duration-300"
+          style={{
+            background: `linear-gradient(to bottom,#2563eb,#38bdf8)`,
+            height: `${progress}%`,
+          }}
+        />
+        {/* Loader Circle aligned on line */}
+        <div
+          className="absolute z-20 left-4 lg:left-[30px] -translate-x-1/2 transition-all duration-300"
+          style={{
+            top: `calc(${circleTop}% - 16px)`,
+          }}
         >
-          <div className="relative flex flex-col lg:grid lg:grid-cols-[60px_1fr] gap-6">
-        {/* Timeline */}
-        <div className="relative flex justify-center lg:justify-start min-h-full">
-          {/* Background Line */}
+          {/* Outer Glow */}
+          <div className="absolute inset-0 h-8 w-8 rounded-full bg-blue-400/40 blur-md animate-pulse"></div>
+
+          {/* Circle */}
           <div
-            className={`absolute left-1/2 lg:left-0 top-0 h-full w-[4px] -translate-x-1/2 lg:translate-x-0 rounded-full ${
-              isDark
-                ? "bg-gradient-to-b from-slate-700 to-slate-800"
-                : "bg-gradient-to-b from-slate-200 to-slate-300"
-            }`}
-          />
-          {/* Progress Line */}
-          <div
-            className="absolute left-1/2 lg:left-0 top-0 w-[4px] -translate-x-1/2 lg:translate-x-0 rounded-full transition-all duration-300"
-            style={{
-              background: `linear-gradient(to bottom,#2563eb,#38bdf8)`,
-              height: `${progress}%`,
-            }}
-          />
-          {/* Loader Circle aligned on line */}
-          <div
-            className="absolute z-20 transition-all duration-300"
-            style={{
-              top: `calc(${progress}% - 16px)`,
-              left: "6%",
-              transform: "translateX(-50%)",
-            }}
+            className={`relative flex h-8 w-8 items-center justify-center rounded-full border-4 ${
+              isDark ? "border-blue-400 bg-slate-900" : "border-blue-600 bg-white"
+            } shadow-xl`}
           >
-            {/* Outer Glow */}
-            <div className="absolute inset-0 h-8 w-8 rounded-full bg-blue-400/40 blur-md animate-pulse"></div>
+            <div className="h-3 w-3 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400"></div>
+          </div>
+        </div>
 
-              {/* Circle */}
-              <div
-                className={`relative flex h-8 w-8 items-center justify-center rounded-full border-4 ${
-                  isDark
-                    ? "border-blue-400 bg-slate-900"
-                              : "border-blue-600 bg-white"
-                          } shadow-xl`}
-                        >
-                          <div className="h-3 w-3 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400"></div>
-                        </div>
-                      </div>
-
-                    </div>
-
-                {/* Feature Cards */}
-                <div className="space-y-6 sm:space-y-8">
-                  {features.map((feature, index) => {
-                    const Icon = feature.icon;
-                    const activeCard = active >= index;
-                    return (
-                      <article
-                        key={feature.title}
-                        data-index={index}
-                        className={`feature-card relative rounded-2xl border p-5 transition-all duration-500 ${
-                          activeCard
-                            ? "scale-[1.01] shadow-[0_10px_30px_rgba(37,99,235,.15)]"
-                            : "shadow-sm"
-                        } ${card}`}
-                      >
-                        <div
-                          className={`flex h-12 w-12 items-center justify-center rounded-xl ${
-                            isDark ? "bg-blue-500 text-white" : "bg-blue-600 text-white"
-                          }`}
-                        >
-                          <Icon className="text-lg" />
-                        </div>
-                        <h3
-                          className={`mt-4 text-lg sm:text-xl font-semibold ${
-                            isDark ? "text-white" : "text-slate-900"
-                          }`}
-                        >
-                          {feature.title}
-                        </h3>
-                        <p className={`mt-2 text-sm leading-6 ${text}`}>{feature.description}</p>
-                      </article>
-                    );
-                  })}
+        {/* Feature Cards — offset from the line with left padding on all screen sizes */}
+        <div className="space-y-5 sm:space-y-8 w-full pl-10 sm:pl-12 lg:pl-16">
+          {features.map((feature, index) => {
+            const Icon = feature.icon;
+            const activeCard = active >= index;
+            return (
+              <article
+                key={feature.title}
+                data-index={index}
+                className={`feature-card relative rounded-2xl border p-4 sm:p-5 transition-all duration-500 ${
+                  activeCard
+                    ? "scale-[1.01] shadow-[0_10px_30px_rgba(37,99,235,.15)]"
+                    : "shadow-sm"
+                } ${card}`}
+              >
+                <div
+                  className={`flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl ${
+                    isDark ? "bg-blue-500 text-white" : "bg-blue-600 text-white"
+                  }`}
+                >
+                  <Icon className="text-base sm:text-lg" />
                 </div>
-              </div>
+                <h3
+                  className={`mt-4 text-base sm:text-lg lg:text-xl font-semibold break-words ${
+                    isDark ? "text-white" : "text-slate-900"
+                  }`}
+                >
+                  {feature.title}
+                </h3>
+                <p className={`mt-2 text-sm leading-6 ${text}`}>{feature.description}</p>
+              </article>
+            );
+          })}
+        </div>
+      </div>
     </div>
   );
 };
@@ -233,7 +204,7 @@ const HomeFeatureProduct = ({ theme }) => {
 
   return (
     <section
-      className={`mx-auto max-w-7xl px-6 py-20 sm:px-8 lg:px-12 transition-colors duration-300 ${
+      className={`mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 md:px-8 lg:px-12 lg:py-20 transition-colors duration-300 ${
         isDark ? "bg-slate-950" : "bg-white"
       }`}
     >
@@ -242,7 +213,7 @@ const HomeFeatureProduct = ({ theme }) => {
       <div className="mx-auto max-w-4xl text-center">
 
         <span
-          className={`inline-flex rounded-full px-5 py-2 text-xs font-bold uppercase tracking-[0.35em]
+          className={`inline-flex rounded-full px-4 py-1.5 sm:px-5 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.35em]
           ${
             isDark
               ? "bg-blue-600/20 text-blue-300"
@@ -253,7 +224,7 @@ const HomeFeatureProduct = ({ theme }) => {
         </span>
 
         <h2
-          className={`mt-6 text-3xl font-bold leading-tight sm:text-5xl ${
+          className={`mt-5 sm:mt-6 text-2xl sm:text-3xl font-bold leading-tight lg:text-5xl px-2 sm:px-0 ${
             isDark ? "text-white" : "text-slate-900"
           }`}
         >
@@ -264,7 +235,7 @@ const HomeFeatureProduct = ({ theme }) => {
         </h2>
 
         <p
-          className={`mx-auto mt-6 max-w-3xl text-lg leading-8 ${
+          className={`mx-auto mt-5 sm:mt-6 max-w-3xl text-sm sm:text-lg leading-6 sm:leading-8 px-2 sm:px-0 ${
             isDark ? "text-slate-300" : "text-slate-600"
           }`}
         >
@@ -276,11 +247,11 @@ const HomeFeatureProduct = ({ theme }) => {
       </div>
 
       {/* Pricing Cards */}
-      <div className="mt-16 grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-10 sm:mt-16 grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 xl:grid-cols-3">
         {plans.map((plan) => (
           <article
             key={plan.title}
-            className={`group relative isolate overflow-hidden rounded-3xl border p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl
+            className={`group relative isolate overflow-hidden rounded-2xl sm:rounded-3xl border p-6 sm:p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl
             ${
               plan.featured
                 ? isDark
@@ -304,8 +275,9 @@ const HomeFeatureProduct = ({ theme }) => {
             {/* Badge */}
             {plan.featured && (
               <span
-                className="absolute right-6 top-2 rounded-full bg-gradient-to-r
-                from-blue-600 to-indigo-600 px-4 py-1 text-[10px]
+                className="absolute right-4 top-2 sm:right-6 rounded-full bg-gradient-to-r
+                from-blue-600 to-indigo-600 px-3 py-1 sm:px-4
+                text-[9px] sm:text-[10px]
                 font-bold uppercase tracking-wider text-white shadow-xl"
               >
                 Most Popular
@@ -314,22 +286,22 @@ const HomeFeatureProduct = ({ theme }) => {
 
             {/* Header */}
             <div className="relative z-10">
-              <p className="text-sm font-bold uppercase tracking-[0.28em] text-white">
+              <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.18em] sm:tracking-[0.28em] text-white break-words pr-16 sm:pr-0">
                 {plan.title}
               </p>
 
-              <h3 className="mt-4 text-3xl font-bold leading-tight text-white">
+              <h3 className="mt-4 text-2xl sm:text-3xl font-bold leading-tight text-white">
                 {plan.price}
               </h3>
 
-              <p className="mt-5 leading-8 text-white">
+              <p className="mt-4 sm:mt-5 text-sm sm:text-base leading-6 sm:leading-8 text-white">
                 {plan.description}
               </p>
             </div>
 
             {/* Divider */}
             <div
-              className={`my-8 h-px
+              className={`my-6 sm:my-8 h-px
               ${
                 plan.featured
                   ? "bg-blue-200"
@@ -338,26 +310,26 @@ const HomeFeatureProduct = ({ theme }) => {
             />
 
             {/* Features */}
-            <ul className="space-y-5">
+            <ul className="space-y-4 sm:space-y-5">
               {plan.details.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-4 text-white"
+                  className="flex items-start gap-3 sm:gap-4 text-white"
                 >
-                  <span className="mt-2 flex h-3 w-3 flex-shrink-0 rounded-full bg-blue-200"></span>
-                  <span className="leading-7">{item}</span>
+                  <span className="mt-2 flex h-2.5 w-2.5 sm:h-3 sm:w-3 flex-shrink-0 rounded-full bg-blue-200"></span>
+                  <span className="text-sm sm:text-base leading-6 sm:leading-7">{item}</span>
                 </li>
               ))}
             </ul>
 
             {/* Contact Option */}
-            <div className="mt-8 flex justify-between items-center">
-              <span className="text-sm font-semibold opacity-70 text-white">
+            <div className="mt-6 sm:mt-8 flex flex-wrap justify-between items-center gap-3">
+              <span className="text-xs sm:text-sm font-semibold opacity-70 text-white">
                 Capital BullWave
               </span>
               <Link
                 to="/contact"
-                className={`flex items-center gap-2 rounded-full px-5 py-2 text-sm font-semibold transition hover:scale-105 ${
+                className={`flex items-center gap-2 rounded-full px-4 py-2 sm:px-5 text-xs sm:text-sm font-semibold transition hover:scale-105 ${
                   isDark
                     ? "bg-blue-600 text-white hover:bg-blue-500"
                     : "bg-blue-900 text-white hover:bg-blue-700"
@@ -391,24 +363,24 @@ const HomeFeatureProduct = ({ theme }) => {
           {/* Bottom CTA */}
 
       <div
-        className={`mt-16 rounded-3xl overflow-hidden px-8 py-10 text-center transition-all duration-300
+        className={`mt-10 sm:mt-16 rounded-2xl sm:rounded-3xl overflow-hidden px-5 py-8 sm:px-8 sm:py-10 text-center transition-all duration-300
         ${
           isDark
             ? "bg-gradient-to-r from-slate-800 via-blue-700 to-slate-950"
             : "bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600"
         }`}
       >
-        <h3 className="text-3xl font-bold text-white">
+        <h3 className="text-xl sm:text-3xl font-bold text-white px-2 sm:px-0">
           Ready to Trade with Confidence?
         </h3>
 
-        <p className="mx-auto mt-4 max-w-2xl text-blue-100 leading-8">
+        <p className="mx-auto mt-4 max-w-2xl text-sm sm:text-base text-blue-100 leading-6 sm:leading-8 px-2 sm:px-0">
           Join Bull Wave Capital and receive research-driven market insights,
           professional trading guidance, and portfolio strategies designed to
           help you make informed investment decisions.
         </p>
 
-        <div className="mt-8 flex w-full flex-col gap-4 sm:flex-row sm:justify-center">
+        <div className="mt-6 sm:mt-8 flex w-full flex-col gap-4 sm:flex-row sm:justify-center">
           <Link
             to="/markets"
             className="w-full rounded-xl bg-white px-8 py-3 text-center font-semibold text-blue-700 transition duration-300 hover:scale-105 hover:bg-slate-100 hover:shadow-xl sm:w-auto"
