@@ -5,13 +5,13 @@ const TermsCondition = ({ theme }) => {
 
   return (
     <section
-      className={`w-full py-12 sm:py-16 transition-all duration-300 ${
+      className={`w-full py-8 sm:py-16 transition-all duration-300 ${
         isDark ? "bg-slate-950" : "bg-slate-50"
       }`}
     >
-      <div className="mx-auto max-w-5xl px-5 sm:px-8 lg:px-10">
+      <div className="mx-auto max-w-5xl px-3 sm:px-8 lg:px-10">
         <div
-          className={`overflow-hidden rounded-3xl border shadow-xl transition-all duration-300 ${
+          className={`overflow-hidden rounded-2xl sm:rounded-3xl border shadow-xl transition-all duration-300 ${
             isDark
               ? "bg-slate-900 border-slate-700"
               : "bg-white border-slate-200"
@@ -20,12 +20,12 @@ const TermsCondition = ({ theme }) => {
           {/* Header */}
 
           <header
-            className={`border-b px-6 py-8 sm:px-8 ${
+            className={`border-b px-4 py-6 sm:px-8 sm:py-8 ${
               isDark ? "border-slate-700" : "border-slate-200"
             }`}
           >
             <span
-              className={`inline-flex rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-[0.25em] ${
+              className={`inline-flex rounded-full px-3 py-1 sm:px-4 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.15em] sm:tracking-[0.25em] ${
                 isDark
                   ? "bg-indigo-900/40 text-indigo-300"
                   : "bg-indigo-100 text-indigo-700"
@@ -35,7 +35,7 @@ const TermsCondition = ({ theme }) => {
             </span>
 
             <h1
-              className={`mt-5 text-3xl font-bold sm:text-4xl ${
+              className={`mt-4 sm:mt-5 text-xl font-bold sm:text-3xl lg:text-4xl ${
                 isDark ? "text-white" : "text-slate-900"
               }`}
             >
@@ -43,7 +43,7 @@ const TermsCondition = ({ theme }) => {
             </h1>
 
             <p
-              className={`mt-3 text-sm ${
+              className={`mt-2 sm:mt-3 text-xs sm:text-sm ${
                 isDark ? "text-slate-400" : "text-slate-600"
               }`}
             >
@@ -54,7 +54,7 @@ const TermsCondition = ({ theme }) => {
           {/* Content */}
 
           <article
-            className={`space-y-8 px-6 py-8 leading-8 sm:px-8 ${
+            className={`space-y-6 sm:space-y-8 px-4 py-6 text-sm sm:text-base leading-6 sm:leading-8 sm:px-8 sm:py-8 ${
               isDark ? "text-slate-300" : "text-slate-700"
             }`}
           >
@@ -62,17 +62,17 @@ const TermsCondition = ({ theme }) => {
 
             <section>
               <h2
-                className={`mb-5 text-2xl font-bold ${
+                className={`mb-3 sm:mb-5 text-lg sm:text-2xl font-bold ${
                   isDark ? "text-blue-300" : "text-blue-600"
                 }`}
               >
                 1. Onshore Legal Framework (Bullwave Capital — India)
               </h2>
 
-              <div className="space-y-6">
+              <div className="space-y-4 sm:space-y-6">
                 <div>
                   <h3
-                    className={`mb-2 text-lg font-semibold ${
+                    className={`mb-1.5 sm:mb-2 text-sm sm:text-lg font-semibold ${
                       isDark ? "text-white" : "text-blue-400"
                     }`}
                   >
@@ -91,7 +91,7 @@ const TermsCondition = ({ theme }) => {
 
                 <div>
                   <h3
-                    className={`mb-2 text-lg font-semibold ${
+                    className={`mb-1.5 sm:mb-2 text-sm sm:text-lg font-semibold ${
                       isDark ? "text-white" : "text-blue-400"
                     }`}
                   >
@@ -110,7 +110,7 @@ const TermsCondition = ({ theme }) => {
 
                 <div>
                   <h3
-                    className={`mb-2 text-lg font-semibold ${
+                    className={`mb-1.5 sm:mb-2 text-sm sm:text-lg font-semibold ${
                       isDark ? "text-white" : "text-blue-400"
                     }`}
                   >
@@ -128,7 +128,7 @@ const TermsCondition = ({ theme }) => {
 
                 <div>
                   <h3
-                    className={`mb-2 text-lg font-semibold ${
+                    className={`mb-1.5 sm:mb-2 text-sm sm:text-lg font-semibold ${
                       isDark ? "text-white" : "text-blue-400"
                     }`}
                   >
@@ -153,7 +153,7 @@ const TermsCondition = ({ theme }) => {
 
             <section>
               <h2
-                className={`mb-5 text-2xl font-bold ${
+                className={`mb-3 sm:mb-5 text-lg sm:text-2xl font-bold ${
                   isDark ? "text-blue-300" : "text-blue-600"
                 }`}
               >
@@ -171,10 +171,10 @@ const TermsCondition = ({ theme }) => {
                 govern onshore advisory services.
               </p>
 
-              <div className="mt-6 space-y-6">
+              <div className="mt-4 sm:mt-6 space-y-4 sm:space-y-6">
                 <div>
                   <h3
-                    className={`mb-2 text-lg font-semibold ${
+                    className={`mb-1.5 sm:mb-2 text-sm sm:text-lg font-semibold ${
                       isDark ? "text-white" : "text-blue-400"
                     }`}
                   >
@@ -193,7 +193,7 @@ const TermsCondition = ({ theme }) => {
 
                 <div>
                   <h3
-                    className={`mb-2 text-lg font-semibold ${
+                    className={`mb-1.5 sm:mb-2 text-sm sm:text-lg font-semibold ${
                       isDark ? "text-white" : "text-blue-400"
                     }`}
                   >
@@ -212,7 +212,7 @@ const TermsCondition = ({ theme }) => {
 
                 <div>
                   <h3
-                    className={`mb-2 text-lg font-semibold ${
+                    className={`mb-1.5 sm:mb-2 text-sm sm:text-lg font-semibold ${
                       isDark ? "text-white" : "text-blue-400"
                     }`}
                   >
@@ -229,9 +229,9 @@ const TermsCondition = ({ theme }) => {
                     trading.
                   </p>
                 </div>
-				                <div>
+                        <div>
                   <h3
-                    className={`mb-2 text-lg font-semibold ${
+                    className={`mb-1.5 sm:mb-2 text-sm sm:text-lg font-semibold ${
                       isDark ? "text-white" : "text-blue-400"
                     }`}
                   >
@@ -251,7 +251,7 @@ const TermsCondition = ({ theme }) => {
 
                 <div>
                   <h3
-                    className={`mb-2 text-lg font-semibold ${
+                    className={`mb-1.5 sm:mb-2 text-sm sm:text-lg font-semibold ${
                       isDark ? "text-white" : "text-blue-400"
                     }`}
                   >
@@ -275,7 +275,7 @@ const TermsCondition = ({ theme }) => {
 
             <section>
               <h2
-                className={`mb-5 text-2xl font-bold ${
+                className={`mb-3 sm:mb-5 text-lg sm:text-2xl font-bold ${
                   isDark ? "text-blue-300" : "text-blue-600"
                 }`}
               >
@@ -296,7 +296,7 @@ const TermsCondition = ({ theme }) => {
 
             <section>
               <h2
-                className={`mb-5 text-2xl font-bold ${
+                className={`mb-3 sm:mb-5 text-lg sm:text-2xl font-bold ${
                   isDark ? "text-white" : "text-blue-400"
                 }`}
               >
@@ -309,17 +309,17 @@ const TermsCondition = ({ theme }) => {
               </p>
 
               <div
-                className={`mt-5 rounded-2xl border p-5 ${
+                className={`mt-4 sm:mt-5 rounded-xl sm:rounded-2xl border p-4 sm:p-5 ${
                   isDark
                     ? "border-slate-700 bg-slate-800"
                     : "border-slate-200 bg-slate-50"
                 }`}
               >
-                <p className="mb-3">
+                <p className="mb-2 sm:mb-3">
                   <strong>Email:</strong>{" "}
                   <a
                     href="mailto:admin@capitalbullwave.com"
-                    className={`inline-block border-b-2 pb-0.5 font-medium transition-colors ${
+                    className={`inline-block break-all border-b-2 pb-0.5 font-medium transition-colors ${
                       isDark
                         ? "border-sky-400 text-sky-400 hover:border-sky-300 hover:text-sky-300"
                         : "border-blue-700 text-blue-700 hover:border-blue-900 hover:text-blue-900"
@@ -338,7 +338,7 @@ const TermsCondition = ({ theme }) => {
             {/* Disclaimer */}
 
             <div
-              className={`rounded-2xl border p-5 text-sm leading-7 ${
+              className={`rounded-xl sm:rounded-2xl border p-4 sm:p-5 text-xs sm:text-sm leading-5 sm:leading-7 ${
                 isDark
                   ? "border-slate-700 bg-slate-800 text-slate-400"
                   : "border-indigo-100 bg-indigo-50 text-slate-600"
