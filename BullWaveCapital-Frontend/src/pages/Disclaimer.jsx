@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 
 const Disclaimer = ({ theme }) => {
   const isDark = theme === "dark";
@@ -9,6 +10,19 @@ const Disclaimer = ({ theme }) => {
         isDark ? "bg-slate-950" : "bg-slate-50"
       }`}
     >
+
+      <Helmet>
+        <title>Disclaimer | Capital BullWave - Risk Disclosures</title>
+        <meta
+          name="description"
+          content="Important risk disclosures and disclaimers regarding Capital BullWave's advisory services and market research. Investments carry risk; no returns are guaranteed."
+        />
+        <link rel="canonical" href="https://www.capitalbullwave.com/disclaimer" />
+        <meta property="og:title" content="Disclaimer | Capital BullWave" />
+        <meta property="og:url" content="https://www.capitalbullwave.com/disclaimer" />
+        <meta property="og:type" content="website" />
+      </Helmet>
+
       <div className="mx-auto max-w-5xl px-3 sm:px-8 lg:px-10">
         <div
           className={`overflow-hidden rounded-2xl sm:rounded-3xl border shadow-xl transition-all duration-300 ${

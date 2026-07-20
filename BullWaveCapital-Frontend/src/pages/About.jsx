@@ -4,12 +4,30 @@ import {
   FaBuilding,
   FaInfoCircle,
 } from "react-icons/fa";
+import { Helmet } from "react-helmet-async";
 
 const About = ({ theme }) => {
   const dark = theme === "dark";
 
   return (
       <section className="mx-auto my-6 max-w-7xl px-4 sm:px-6 lg:px-8">
+
+        <Helmet>
+          <title>About Us | Capital BullWave - Market Research & Trading Advisory Delhi</title>
+          <meta
+            name="description"
+            content="Capital BullWave is a Delhi-based market research and trading advisory platform offering equity research, trading guidance, risk management and investor education from Netaji Subhash Place."
+          />
+          <link rel="canonical" href="https://www.capitalbullwave.com/about" />
+          <meta property="og:title" content="About Capital BullWave | Market Research Delhi" />
+          <meta
+            property="og:description"
+            content="Delhi-based market research, trading guidance and investor education for modern stock market traders."
+          />
+          <meta property="og:url" content="https://www.capitalbullwave.com/about" />
+          <meta property="og:type" content="website" />
+        </Helmet>
+
 
         <div
           className={`relative overflow-hidden rounded-2xl sm:rounded-[32px] transition-all duration-300 p-5 sm:p-8 lg:p-10

@@ -1,11 +1,29 @@
 import React from "react";
-
+import { Helmet } from "react-helmet-async";
 import SectionBackground from "../components/SectionBackground";
 
 export default function Services() {
   return (
     <SectionBackground dark={false}>
       <section className="mx-auto my-6 sm:my-8 max-w-7xl px-4 sm:px-8 lg:px-12">
+
+        <Helmet>
+          <title>Services | Capital BullWave - Equity Research & Trading Plans Delhi</title>
+          <meta
+            name="description"
+            content="Explore Capital BullWave's Core and Elite subscription plans offering equity research, swing trading setups, F&O insights and independent market analysis for Indian traders."
+          />
+          <link rel="canonical" href="https://www.capitalbullwave.com/services" />
+          <meta property="og:title" content="Capital BullWave Services | Trading Plans & Research" />
+          <meta
+            property="og:description"
+            content="Independent research, equity recommendations, and market analysis for Indian traders."
+          />
+          <meta property="og:url" content="https://www.capitalbullwave.com/services" />
+          <meta property="og:type" content="website" />
+        </Helmet>
+
+
         <div className="overflow-hidden rounded-2xl sm:rounded-[32px] bg-white/95 p-5 transition-colors duration-300 sm:p-8 lg:p-10">
           <div className="mb-10 sm:mb-12 text-center">
             <p className="inline-flex rounded-full bg-sky-100 px-3 py-1.5 sm:px-4 sm:py-1 text-[10px] sm:text-sm font-semibold uppercase tracking-[0.2em] sm:tracking-[0.35em] text-sky-700 shadow-sm">

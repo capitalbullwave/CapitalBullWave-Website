@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import SectionBackground from "../components/SectionBackground";
 
 const Market = ({ theme }) => {
@@ -6,6 +7,23 @@ const Market = ({ theme }) => {
   return (
     <SectionBackground dark={dark}>
       <section className="mx-auto my-8 sm:my-12 max-w-7xl px-4 sm:px-8 lg:px-12">
+
+        <Helmet>
+          <title>Markets | Capital BullWave - NSE, BSE, F&O & MCX Research Delhi</title>
+          <meta
+            name="description"
+            content="Capital BullWave provides professional market coverage for NSE, BSE equity, F&O derivatives and MCX commodities including Gold, Silver and Crude Oil analysis."
+          />
+          <link rel="canonical" href="https://www.capitalbullwave.com/markets" />
+          <meta property="og:title" content="Capital BullWave Markets | Equity, F&O & Commodity Research" />
+          <meta
+            property="og:description"
+            content="Professional coverage for NSE, BSE, F&O, and MCX markets."
+          />
+          <meta property="og:url" content="https://www.capitalbullwave.com/markets" />
+          <meta property="og:type" content="website" />
+        </Helmet>
+
         <div className="overflow-hidden rounded-2xl sm:rounded-[32px] bg-white/95 p-5 shadow-[0_30px_60px_rgba(15,23,42,0.08)] transition-colors duration-300 sm:p-8 lg:p-10">
           <div className="mb-10 sm:mb-12 text-center">
             <p className="inline-flex rounded-full bg-sky-100 px-3 py-1.5 sm:px-4 sm:py-1 text-[10px] sm:text-sm font-semibold uppercase tracking-[0.2em] sm:tracking-[0.35em] text-sky-700 shadow-sm">

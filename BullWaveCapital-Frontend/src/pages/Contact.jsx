@@ -17,6 +17,7 @@ import toast from "react-hot-toast";
 import RideLogo from "../assets/bullwaverides-logo.jpeg"; // update path if required
 import AppStoreBadge from "../assets/appstore-icon.png";
 import PlayStoreBadge from "../assets/playstore-icon.png";
+import { Helmet } from "react-helmet-async";
 
 const contactDetails = [
   {
@@ -130,6 +131,23 @@ export default function Contact({ theme }) {
           : "bg-gradient-to-br from-slate-50 via-white to-blue-50 border-slate-200"
       }`}
     >
+
+      <Helmet>
+        <title>Contact Us | Capital BullWave - Delhi Office, Netaji Subhash Place</title>
+        <meta
+          name="description"
+          content="Contact Capital BullWave at our Netaji Subhash Place office in Delhi. Call +91 8796565234 or email admin@capitalbullwave.com for investment guidance and market research support."
+        />
+        <link rel="canonical" href="https://www.capitalbullwave.com/contact" />
+        <meta property="og:title" content="Contact Capital BullWave | Delhi Office" />
+        <meta
+          property="og:description"
+          content="Reach our Delhi office for market research, trading guidance and investment support."
+        />
+        <meta property="og:url" content="https://www.capitalbullwave.com/contact" />
+        <meta property="og:type" content="website" />
+      </Helmet>
+
       {/* ---------------- HERO ---------------- */}
 
       <section

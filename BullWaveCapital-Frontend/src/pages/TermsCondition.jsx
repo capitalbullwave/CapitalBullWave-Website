@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 
 const TermsCondition = ({ theme }) => {
   const isDark = theme === "dark";
@@ -9,6 +10,19 @@ const TermsCondition = ({ theme }) => {
         isDark ? "bg-slate-950" : "bg-slate-50"
       }`}
     >
+
+      <Helmet>
+        <title>Terms & Conditions | Capital BullWave</title>
+        <meta
+          name="description"
+          content="Read the Terms & Conditions governing Capital BullWave's advisory, research and subscription services, including eligibility, fees, and jurisdiction."
+        />
+        <link rel="canonical" href="https://www.capitalbullwave.com/terms" />
+        <meta property="og:title" content="Terms & Conditions | Capital BullWave" />
+        <meta property="og:url" content="https://www.capitalbullwave.com/terms" />
+        <meta property="og:type" content="website" />
+      </Helmet>
+
       <div className="mx-auto max-w-5xl px-3 sm:px-8 lg:px-10">
         <div
           className={`overflow-hidden rounded-2xl sm:rounded-3xl border shadow-xl transition-all duration-300 ${

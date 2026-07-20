@@ -1,5 +1,7 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
+
 import {
   FaHome,
   FaInfoCircle,
@@ -33,6 +35,19 @@ export default function SiteMap({ theme }) {
         isDark ? "bg-slate-950" : "bg-slate-50"
       }`}
     >
+
+       <Helmet>
+        <title>Site Map | Capital BullWave</title>
+        <meta
+          name="description"
+          content="Browse all pages of the Capital BullWave website including Home, About, Services, Markets, Contact, Privacy Policy, Terms and Disclaimer."
+        />
+        <link rel="canonical" href="https://www.capitalbullwave.com/site-map" />
+        <meta property="og:title" content="Site Map | Capital BullWave" />
+        <meta property="og:url" content="https://www.capitalbullwave.com/site-map" />
+        <meta property="og:type" content="website" />
+      </Helmet>
+
       <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-10">
         <div
           className={`rounded-2xl border shadow-lg transition-all duration-300 ${

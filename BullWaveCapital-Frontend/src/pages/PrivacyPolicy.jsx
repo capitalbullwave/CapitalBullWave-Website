@@ -1,3 +1,6 @@
+
+import { Helmet } from "react-helmet-async";
+
 const PrivacyPolicy = ({ theme }) => {
   const isDark = theme === "dark";
 
@@ -7,6 +10,19 @@ const PrivacyPolicy = ({ theme }) => {
         isDark ? "bg-slate-950" : "bg-slate-50"
       }`}
     >
+
+      <Helmet>
+        <title>Privacy Policy | Capital BullWave</title>
+        <meta
+          name="description"
+          content="Read Capital BullWave's Privacy Policy to understand how we collect, use, store and protect your personal information in compliance with applicable Indian regulations."
+        />
+        <link rel="canonical" href="https://www.capitalbullwave.com/privacy-policy" />
+        <meta property="og:title" content="Privacy Policy | Capital BullWave" />
+        <meta property="og:url" content="https://www.capitalbullwave.com/privacy-policy" />
+        <meta property="og:type" content="website" />
+      </Helmet>
+
       <div className="mx-auto max-w-5xl px-3 sm:px-8 lg:px-10">
         <div
           className={`rounded-2xl sm:rounded-3xl border shadow-lg transition-all duration-300 ${
