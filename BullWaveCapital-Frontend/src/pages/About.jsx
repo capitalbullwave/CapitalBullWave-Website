@@ -114,7 +114,7 @@ const About = ({ theme }) => {
           }
         `}</style>
 
-        <div className="relative z-10 p-5 sm:p-7 lg:p-9">
+        <div className="relative z-10 p-4 sm:p-5 lg:p-6">
           <div className="grid gap-8 sm:gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
             <RevealOnScroll className="min-w-0">
               <p

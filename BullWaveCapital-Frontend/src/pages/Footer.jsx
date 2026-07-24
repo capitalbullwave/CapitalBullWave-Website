@@ -91,7 +91,7 @@ const Footer = ({ theme }) => {
 
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6 py-6 lg:px-10">
+      <div className="relative mx-auto max-w-[1600px] px-3 py-6 sm:px-4 md:px-5 lg:px-6">
 
          <div className="grid gap-8 md:grid-cols-[1.5fr_0.8fr_0.8fr] md:grid-rows-[auto_auto]">
 

@@ -75,7 +75,7 @@ export default function HomeFAQS({ theme }) {
   return (
     <section
       id="faq"
-      className={`w-full scroll-mt-28 py-16 sm:py-20 lg:py-24 ${
+      className={`w-full scroll-mt-24 py-12 sm:py-16 lg:py-20 ${
         dark ? "text-white" : "text-slate-900"
       }`}
     >

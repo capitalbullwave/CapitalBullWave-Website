@@ -192,7 +192,7 @@ const HomeFeatureProduct = ({ theme }) => {
   const isDark = theme === "dark";
 
   return (
-    <section className="w-full py-16 sm:py-20 lg:py-24 transition-colors duration-300">
+    <section className="w-full py-12 sm:py-16 lg:py-20 transition-colors duration-300">
       <div className="mx-auto max-w-4xl text-center">
         <span
           className={`inline-flex rounded-full px-4 py-1.5 text-[11px] sm:text-xs font-bold uppercase tracking-[0.28em]

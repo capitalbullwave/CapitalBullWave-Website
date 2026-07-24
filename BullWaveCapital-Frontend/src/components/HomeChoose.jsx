@@ -32,7 +32,7 @@ const HomeChoose = ({ theme }) => {
 
   return (
     <SectionWave theme={theme}>
-      <section className="w-full py-16 sm:py-20 lg:py-24 transition-colors duration-300">
+      <section className="w-full py-12 sm:py-16 lg:py-20 transition-colors duration-300">
         <div className="mx-auto max-w-4xl text-center">
           <p
             className={`inline-flex rounded-full px-4 py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.28em]

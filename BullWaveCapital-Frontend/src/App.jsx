@@ -74,8 +74,8 @@ function App() {
 
         <ScrollToTop />
 
-        {/* Main Content */}
-        <main className="mx-auto min-h-screen w-full max-w-7xl px-4 pt-24 pb-10 sm:px-6 sm:pb-12 lg:px-8">
+        {/* Main Content — wide layout, minimal side gutters (funding-style) */}
+        <main className="mx-auto min-h-screen w-full max-w-[1600px] px-3 pt-20 pb-8 sm:px-4 sm:pt-24 sm:pb-10 md:px-5 lg:px-6">
           <Routes>
             <Route path="/" element={<Home theme={theme} />} />
             <Route path="/about" element={<About theme={theme} />} />

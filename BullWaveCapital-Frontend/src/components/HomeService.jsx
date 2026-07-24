@@ -28,7 +28,7 @@ const HomeService = ({ theme = "light" }) => {
   const isDark = theme === "dark";
 
   return (
-    <section className="w-full py-16 sm:py-20 lg:py-24">
+    <section className="w-full py-12 sm:py-16 lg:py-20">
       <div className="mx-auto max-w-4xl text-center">
         <p
           className={`inline-flex rounded-full px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.28em]

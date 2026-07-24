@@ -1,6 +1,6 @@
 const SectionWave = ({ children, theme = "light" }) => {
   const isDark = theme === "dark";
-  const edgeFill = isDark ? "#020617" : "#f0f9ff";
+  const edgeFill = isDark ? "#020617" : "#ffffff";
 
   return (
     <section className="relative overflow-hidden rounded-2xl sm:rounded-3xl">

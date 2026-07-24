@@ -45,14 +45,14 @@ body,
 #root {
   margin: 0;
   min-height: 100%;
-  background: #f0f9ff;
+  background: #ffffff;
 }
 
 body {
   min-height: 100vh;
   overflow-x: hidden;
   color: #0f172a;
-  background: #f0f9ff;
+  background: #ffffff;
 }
 
 /* ==========================================
@@ -281,8 +281,8 @@ img {
 
 .page-shell {
   width: 100%;
-  padding-top: 0.5rem;
-  padding-bottom: 1rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.5rem;
 }
 
 .premium-card {
@@ -429,9 +429,10 @@ button {
 
 .theme-light {
   background:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(186, 230, 253, 0.55), transparent),
-    linear-gradient(180deg, #ffffff 0%, #f0f9ff 45%, #e0f2fe 100%);
-  color: #0f172a;
+    radial-gradient(ellipse 90% 55% at 75% 0%, rgba(125, 211, 252, 0.45), transparent 55%),
+    radial-gradient(ellipse 70% 45% at 15% 15%, rgba(186, 230, 253, 0.4), transparent 50%),
+    linear-gradient(180deg, #ffffff 0%, #f8fcff 40%, #eef8ff 100%);
+  color: #0b1220;
 }
 
 .theme-dark {
@@ -537,9 +538,10 @@ button {
 
 .theme-light {
   background:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(186, 230, 253, 0.55), transparent),
-    linear-gradient(180deg, #ffffff 0%, #f0f9ff 45%, #e0f2fe 100%);
-  color: #0f172a;
+    radial-gradient(ellipse 90% 55% at 75% 0%, rgba(125, 211, 252, 0.45), transparent 55%),
+    radial-gradient(ellipse 70% 45% at 15% 15%, rgba(186, 230, 253, 0.4), transparent 50%),
+    linear-gradient(180deg, #ffffff 0%, #f8fcff 40%, #eef8ff 100%);
+  color: #0b1220;
 }
 
 .theme-dark .bg-white {
@@ -660,7 +662,7 @@ button {
 }
 
 .theme-light .hero-section .hero-contact-btn {
-  color: #0369a1 !important;
+  color: #075985 !important;
 }
 
 .theme-dark .hero-section .hero-contact-btn {

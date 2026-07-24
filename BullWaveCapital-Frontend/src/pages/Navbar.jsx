@@ -36,7 +36,7 @@ export default function Navbar({ theme, toggleTheme }) {
     >
       <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-sky-300 via-sky-500 to-sky-600" />
 
-      <div className="mx-auto flex h-20 max-w-[1450px] items-center justify-between px-4 sm:px-6 lg:px-10">
+      <div className="mx-auto flex h-16 sm:h-18 lg:h-20 max-w-[1600px] items-center justify-between px-3 sm:px-4 md:px-5 lg:px-6">
 
           {/* ========================= LOGO ========================= */}
 
@@ -87,7 +87,7 @@ export default function Navbar({ theme, toggleTheme }) {
 
               <span
                 className={`h-[3px] w-[3px] rounded-full ${
-                  isDark ? "bg-sky-500" : "bg-blue-600"
+                  isDark ? "bg-sky-500" : "bg-sky-500"
                 }`}
               />
 
@@ -132,15 +132,15 @@ export default function Navbar({ theme, toggleTheme }) {
                     <Icon
                       className={`text-[13px] transition-all duration-300 ${
                         isActive
-                          ? "text-blue-600"
-                          : "group-hover:text-blue-500"
+                          ? "text-sky-600"
+                          : "group-hover:text-sky-500"
                       }`}
                     />
 
                     <span>{item.name}</span>
 
                     <span
-                      className={`absolute left-0 -bottom-[6px] h-[2px] rounded-full bg-blue-600 transition-all duration-300 ${
+                      className={`absolute left-0 -bottom-[6px] h-[2px] rounded-full bg-sky-500 transition-all duration-300 ${
                         isActive
                           ? "w-full"
                           : "w-0 group-hover:w-full"

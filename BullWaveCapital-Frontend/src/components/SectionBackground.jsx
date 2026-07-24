@@ -36,7 +36,7 @@ const SectionBackground = ({ children, className = "", dark = false }) => {
         }`}
       />
 
-      <div className="relative z-10 p-5 sm:p-7 lg:p-9">{children}</div>
+      <div className="relative z-10 p-4 sm:p-5 lg:p-6">{children}</div>
     </div>
   );
 };

@@ -30,7 +30,7 @@ const HomeTrading = ({ theme }) => {
     <section
       className={`
         relative w-full overflow-hidden
-        py-16 sm:py-20 lg:py-24
+        py-12 sm:py-16 lg:py-20
         transition-colors duration-300
       `}
     >

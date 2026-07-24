@@ -68,10 +68,10 @@ export default function Hero({ theme = "light" }) {
   return (
     <section
       className={`
-        hero-section relative min-h-[78vh] sm:min-h-[85vh]
-        overflow-hidden rounded-2xl sm:rounded-3xl
+        hero-section relative min-h-[72vh] sm:min-h-[82vh]
+        overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl
         transition-colors duration-300
-        ${isDark ? "bg-slate-950" : "bg-sky-50"}
+        ${isDark ? "bg-slate-950" : "bg-white"}
       `}
     >
       {/* Full-bleed background slideshow — both themes */}
@@ -108,7 +108,7 @@ export default function Hero({ theme = "light" }) {
         </>
       )}
 
-      <div className="relative z-20 flex h-full min-h-[78vh] sm:min-h-[85vh] items-center px-4 py-14 sm:px-6 sm:py-16 lg:px-10 lg:py-20">
+      <div className="relative z-20 flex h-full min-h-[72vh] sm:min-h-[82vh] items-center px-1 py-12 sm:px-2 sm:py-14 lg:px-3 lg:py-16">
         <div className="grid w-full items-center gap-10 lg:grid-cols-2 lg:gap-14">
           <div
             className={`flex flex-col items-center text-center lg:items-start lg:text-left animate-slide-in-left ${
@@ -157,11 +157,11 @@ export default function Hero({ theme = "light" }) {
             <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:gap-4">
               <Link
                 to="/services"
-                className={`inline-flex items-center justify-center rounded-xl px-8 py-3.5 font-semibold !text-white shadow-lg transition hover:-translate-y-0.5
+                className={`inline-flex items-center justify-center rounded-full px-8 py-3.5 font-semibold !text-white shadow-lg transition hover:-translate-y-0.5
                 ${
                   isDark
                     ? "bg-sky-500 shadow-sky-500/25 hover:bg-sky-400"
-                    : "bg-sky-600 shadow-sky-600/25 hover:bg-sky-500"
+                    : "bg-slate-900 shadow-slate-900/20 hover:bg-slate-800"
                 }`}
               >
                 Explore Services
@@ -169,11 +169,11 @@ export default function Hero({ theme = "light" }) {
 
               <Link
                 to="/contact"
-                className={`hero-contact-btn inline-flex items-center justify-center rounded-xl px-8 py-3.5 font-semibold transition hover:-translate-y-0.5
+                className={`hero-contact-btn inline-flex items-center justify-center rounded-full px-8 py-3.5 font-semibold transition hover:-translate-y-0.5
                 ${
                   isDark
                     ? "bg-white/10 !text-white ring-1 ring-white/20 hover:bg-white/15"
-                    : "bg-white !text-sky-700 ring-1 ring-sky-200 shadow-sm hover:bg-sky-50"
+                    : "bg-sky-100 !text-sky-800 ring-1 ring-sky-200 hover:bg-sky-200/70"
                 }`}
               >
                 Contact Us
