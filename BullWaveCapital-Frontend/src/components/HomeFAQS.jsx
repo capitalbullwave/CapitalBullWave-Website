@@ -1,65 +1,64 @@
 import { useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
-// import { useTheme } from "../context/ThemeContext";
 
 const faqSections = [
   {
-    title: "Account & Trading Setup",
+    title: "Research & Advisory",
     items: [
       {
-        question: "What trading platform is supported?",
+        question: "What services does Capital BullWave provide?",
         answer:
-          "The service integrates directly with MetaTrader 5 (MT5) for trade execution and position management.",
+          "We provide stock market research, investment guidance, and financial advisory services focused on Indian equities, swing trading ideas, and long-term portfolio planning.",
       },
       {
-        question: "What are the primary account tiers available?",
+        question: "Who are your advisory plans designed for?",
         answer:
-          "Supported account tiers are Classic (from $100 minimum deposit), VIP (from $3,000), and ECN (from $5,000).",
+          "Our plans serve equity swing traders, active F&O participants focused on Nifty and Bank Nifty, and long-term investors seeking portfolio reviews and research reports.",
       },
       {
-        question: "Does it provide Copy Trading features?",
+        question: "Do you manage client trading accounts?",
         answer:
-          "Yes. The platform supports automated social and copy-trading strategies for mirroring experienced traders.",
+          "No. Capital BullWave provides research and advisory support. Clients retain full control of their brokerage accounts and execute trades independently.",
       },
     ],
   },
   {
-    title: "Fees & Charges",
+    title: "Plans & Engagement",
     items: [
       {
-        question: "What are the typical trading spreads?",
+        question: "How do subscription plans work?",
         answer:
-          "Spreads vary by account type, starting from 1.6 pips on Classic accounts and reducing to 0.1 pips on ECN accounts.",
+          "Clients choose a monthly advisory plan based on their goals. Each plan includes structured recommendations, market updates, and guidance aligned with that tier.",
       },
       {
-        question: "Are there any inactivity penalties?",
+        question: "What is the difference between Core and Elite plans?",
         answer:
-          "Yes. A non-refundable $10 monthly inactivity fee applies if an account remains fully dormant for 30 consecutive days.",
+          "The Core plan focuses on equity swing and positional ideas. Elite plans add advanced F&O guidance, daily market direction updates, or premium portfolio consultation depending on the tier.",
       },
       {
-        question: "Are there fees on withdrawals?",
+        question: "How do I get started?",
         answer:
-          "A fixed 10 EUR fee applies to bank wire withdrawals of 100 EUR or less.",
+          "Contact our Delhi office through the website contact form, email, or phone. Our team will help you select the plan that best matches your experience and risk profile.",
       },
     ],
   },
   {
-    title: "Deposits & Fund Management",
+    title: "Risk & Office",
     items: [
       {
-        question: "What payment methods are supported?",
+        question: "Does market research guarantee returns?",
         answer:
-          "Deposits can be made through credit/debit cards, international bank wires, SEPA transfers, and selected e-wallets.",
+          "No. All investments carry market risk. Our research and advisory frameworks are designed to support informed decisions, not to promise or guarantee profits.",
       },
       {
-        question: "How long do deposit settlements take?",
+        question: "Where is Capital BullWave located?",
         answer:
-          "Card and e-wallet deposits settle in about 10 minutes, while international bank wires take 2 to 5 business days.",
+          "Our head office is at Aggarwal Millennium Tower 2, Office No. 1275 (12th Floor), Netaji Subhash Place, Pitampura, New Delhi - 110034.",
       },
       {
-        question: "Are client funds kept safe?",
+        question: "How can I reach support?",
         answer:
-          "Client funds are held in segregated bank accounts to keep investment capital separate from corporate funds.",
+          "You can reach us at admin@capitalbullwave.com or +91 8796565234 during business hours for plan queries, research clarifications, and general support.",
       },
     ],
   },
@@ -67,7 +66,6 @@ const faqSections = [
 
 export default function HomeFAQS({ theme }) {
   const dark = theme === "dark";
-
   const [activeItem, setActiveItem] = useState("");
 
   const toggleItem = (key) => {
@@ -76,79 +74,79 @@ export default function HomeFAQS({ theme }) {
 
   return (
     <section
-      className={`mx-auto w-full max-w-7xl px-4 py-14 sm:px-6 md:px-8 lg:px-10 ${
+      id="faq"
+      className={`w-full scroll-mt-28 py-16 sm:py-20 lg:py-24 ${
         dark ? "text-white" : "text-slate-900"
       }`}
     >
       <div className="mx-auto mb-12 max-w-4xl text-center">
         <span
-          className={`inline-flex rounded-full px-4 py-2 text-xs font-bold uppercase tracking-[0.35em] ${
+          className={`inline-flex rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-[0.28em]
+          ${
             dark
-              ? "bg-blue-900/40 text-blue-300"
-              : "bg-blue-100 text-blue-700"
+              ? "bg-sky-500/15 text-sky-300"
+              : "bg-sky-50 text-sky-700 ring-1 ring-sky-100"
           }`}
         >
           FAQ
         </span>
 
         <h2
-          className={`mt-5 text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl ${
+          className={`mt-5 text-2xl font-bold leading-tight sm:text-3xl lg:text-4xl ${
             dark ? "text-white" : "text-slate-900"
           }`}
         >
-          Account, fees, and fund management questions answered clearly.
+          Research, plans, and advisory questions answered clearly.
         </h2>
 
         <p
-          className={`mx-auto mt-5 max-w-3xl text-base leading-8 sm:text-lg ${
-            dark ? "text-slate-300" : "text-slate-600"
+          className={`mx-auto mt-4 max-w-3xl text-base leading-7 sm:text-lg ${
+            dark ? "text-slate-400" : "text-slate-600"
           }`}
         >
-          Browse the most important details about trading setup, charges,
-          deposits, and capital protection practices.
+          Browse the most important details about our Delhi-based research
+          advisory, subscription plans, and how we support informed investing.
         </p>
       </div>
 
-      <div className="space-y-8">
-      {faqSections.map((section) => (
-        <div
-          key={section.title}
-          className={`overflow-hidden rounded-3xl border p-5 sm:p-8 transition-all duration-300 ${
-            dark
-              ? "border-slate-700 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 shadow-[0_25px_60px_rgba(0,0,0,0.45)]"
-              : "border-sky-200 bg-gradient-to-br from-sky-50 via-sky-100 to-blue-50 shadow-[0_20px_45px_rgba(59,130,246,0.12)]"
-          }`}
-        >
+      <div className="space-y-6 sm:space-y-8">
+        {faqSections.map((section) => (
+          <div
+            key={section.title}
+            className={`rounded-2xl p-5 sm:p-7
+            ${
+              dark
+                ? "bg-slate-900 ring-1 ring-slate-800"
+                : "bg-white ring-1 ring-sky-100 shadow-sm shadow-sky-100/80"
+            }`}
+          >
             <h3
-              className={`mb-6 text-xl font-bold sm:text-2xl ${
+              className={`mb-4 text-lg font-bold sm:text-xl ${
                 dark ? "text-white" : "text-slate-900"
               }`}
             >
               {section.title}
             </h3>
 
-            <div className="space-y-4">
+            <div
+              className={`divide-y ${
+                dark ? "divide-slate-800" : "divide-sky-100"
+              }`}
+            >
               {section.items.map((item, index) => {
                 const key = `${section.title}-${index}`;
                 const open = activeItem === key;
 
                 return (
                   <button
-                      key={key}
-                      onClick={() => toggleItem(key)}
-                      className={`group w-full rounded-2xl border p-5 transition-all duration-300 ${
-                        open
-                          ? dark
-                            ? "border-blue-500 bg-gradient-to-r from-blue-950/60 to-slate-900"
-                            : "border-blue-500 bg-white shadow-md"
-                          : dark
-                          ? "border-slate-700 bg-slate-800 hover:border-blue-500 hover:bg-slate-750"
-                          : "border-sky-200 bg-white hover:border-blue-400 hover:bg-sky-50"
-                      }`}
-                    >
+                    key={key}
+                    type="button"
+                    onClick={() => toggleItem(key)}
+                    className="group w-full py-4 text-left transition-colors"
+                  >
                     <div className="flex items-center justify-between gap-4">
                       <h4
-                        className={`text-left text-base font-semibold sm:text-lg ${
+                        className={`text-base font-semibold sm:text-lg ${
                           dark ? "text-slate-100" : "text-slate-900"
                         }`}
                       >
@@ -156,24 +154,30 @@ export default function HomeFAQS({ theme }) {
                       </h4>
 
                       <FaChevronDown
-                        className={`h-5 w-5 transition-all duration-300 ${
-                          open ? "rotate-180 text-blue-500" : ""
+                        className={`h-4 w-4 shrink-0 transition-transform duration-300 ${
+                          open ? "rotate-180 text-sky-500" : ""
                         } ${dark ? "text-slate-400" : "text-slate-500"}`}
                       />
                     </div>
 
                     <div
-                      className={`overflow-hidden transition-all duration-300 ${
-                        open ? "mt-4 max-h-40" : "max-h-0"
+                      className={`grid transition-all duration-350 ease-out ${
+                        open
+                          ? "mt-3 grid-rows-[1fr] opacity-100"
+                          : "grid-rows-[0fr] opacity-0"
                       }`}
                     >
-                     <p
-                        className={`pt-4 text-sm leading-7 sm:text-base ${
-                          dark ? "text-slate-300" : "text-slate-600"
-                        }`}
-                      >
-                        {item.answer}
-                      </p>
+                      <div className="overflow-hidden">
+                        {open && (
+                          <p
+                            className={`faq-answer-enter pt-1 text-sm leading-7 sm:text-base ${
+                              dark ? "text-slate-400" : "text-slate-600"
+                            }`}
+                          >
+                            {item.answer}
+                          </p>
+                        )}
+                      </div>
                     </div>
                   </button>
                 );
@@ -185,4 +189,3 @@ export default function HomeFAQS({ theme }) {
     </section>
   );
 }
-

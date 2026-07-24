@@ -31,10 +31,10 @@ export default function Navbar({ theme, toggleTheme }) {
       ${
         isDark
           ? "bg-slate-950/95 border-slate-800"
-          : "bg-white/95 border-slate-200"
+          : "bg-white/90 border-sky-100"
       }`}
     >
-      <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-sky-400 via-blue-600 to-indigo-600" />
+      <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-sky-300 via-sky-500 to-sky-600" />
 
       <div className="mx-auto flex h-20 max-w-[1450px] items-center justify-between px-4 sm:px-6 lg:px-10">
 

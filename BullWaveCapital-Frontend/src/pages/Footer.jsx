@@ -1,4 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { scrollToId } from "../components/ScrollToTop";
 
 import {
   FaFacebookF,
@@ -21,17 +22,17 @@ const Footer = ({ theme }) => {
     e.preventDefault();
 
     if (location.pathname === "/") {
-      const section = document.getElementById("faq");
-
-      if (section) {
-        section.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
+      if (!scrollToId("faq")) {
+        // Element may still be mounting — fall back to hash navigation
+        navigate("/#faq", { replace: true });
+        window.setTimeout(() => scrollToId("faq"), 120);
+      } else if (location.hash !== "#faq") {
+        navigate("/#faq", { replace: true });
       }
-    } else {
-      navigate("/#faq");
+      return;
     }
+
+    navigate("/#faq");
   };
 
   const social = [

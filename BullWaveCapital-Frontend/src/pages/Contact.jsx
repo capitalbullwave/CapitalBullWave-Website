@@ -128,7 +128,7 @@ export default function Contact({ theme }) {
       className={`relative overflow-hidden border-b transition-all duration-300 ${
         isDark
           ? "bg-slate-950 border-slate-800"
-          : "bg-gradient-to-br from-slate-50 via-white to-blue-50 border-slate-200"
+          : "bg-gradient-to-br from-white via-sky-50 to-sky-100/70 border-sky-100"
       }`}
     >
 
@@ -154,7 +154,7 @@ export default function Contact({ theme }) {
         className={`relative overflow-hidden border-b ${
           isDark
             ? "border-slate-800 bg-[#020817]"
-            : "border-slate-200 bg-gradient-to-br from-blue-50 via-white to-cyan-50"
+            : "border-sky-100 bg-gradient-to-br from-sky-50 via-white to-sky-100/60"
         }`}
       >
         <div className={`absolute inset-0 ${isDark ? "opacity-30" : "opacity-70"}`}>
@@ -171,7 +171,7 @@ export default function Contact({ theme }) {
           />
         </div>
 
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-16 lg:py-24">
+        <div className="relative mx-auto py-10 sm:py-14 lg:py-16">
 
           <div className="text-center">
 
@@ -230,7 +230,7 @@ export default function Contact({ theme }) {
 
       {/* ------------ MAIN SECTION STARTS ------------ */}
 
-      <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 py-8 sm:py-16">
+      <div className="mx-auto py-8 sm:py-12 lg:py-14">
 
         <div className={wrapper}>
 
@@ -632,7 +632,7 @@ export default function Contact({ theme }) {
             isDark ? "border-slate-800" : "border-slate-200"
           }`}
         >
-          <div className="px-4 py-10 sm:px-8 sm:py-14 lg:px-10">
+          <div className="py-8 sm:py-12">
 
             <div className="text-center">
 
@@ -684,7 +684,7 @@ export default function Contact({ theme }) {
             isDark ? "border-slate-800" : "border-slate-200"
           }`}
         >
-          <div className="px-4 py-10 sm:px-8 sm:py-16 lg:px-10">
+          <div className="py-8 sm:py-12">
 
             <div className="text-center">
 
@@ -749,7 +749,7 @@ export default function Contact({ theme }) {
 
   {/* ================= CALL TO ACTION ================= */}
 
-        <div className="px-3 pb-10 sm:px-8 sm:pb-16 lg:px-10">
+        <div className="pb-8 sm:pb-12">
 
           <div
             className={`overflow-hidden rounded-2xl sm:rounded-[32px] px-5 py-8 sm:px-8 sm:py-12 text-center ${

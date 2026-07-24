@@ -5,14 +5,14 @@ import {
   FaClipboardList,
   FaRocket,
 } from "react-icons/fa";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const plans = [
   {
     title: "Core / Starter Plan",
     price: "₹4,999 / month",
     description:
-      "Entry-level guidance for swing traders, focused on fundamentally  equity opportunities.",
+      "Entry-level guidance for swing traders, focused on fundamentally sound equity opportunities.",
     details: [
       "12–15 equity recommendations every month",
       "Momentum-based stock selection",
@@ -71,34 +71,36 @@ const features = [
   },
 ];
 
-
 const FeatureSection = ({ theme = "light" }) => {
   const isDark = theme === "dark";
   const sectionRef = useRef(null);
   const [progress, setProgress] = useState(0);
   const [active, setActive] = useState(0);
 
-  // Scroll progress loader
   useEffect(() => {
     const handleScroll = () => {
       if (!sectionRef.current) return;
 
       const rect = sectionRef.current.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
-
-      // Total distance the section travels through the viewport
       const total = rect.height + viewportHeight;
-
-      // How far the section has moved through the viewport
       const current = viewportHeight - rect.top;
-
       const percentage = Math.min(Math.max((current / total) * 100, 0), 100);
       setProgress(percentage);
+
+      const cards = sectionRef.current.querySelectorAll("[data-index]");
+      let nextActive = 0;
+      cards.forEach((card, index) => {
+        const cardRect = card.getBoundingClientRect();
+        if (cardRect.top < viewportHeight * 0.65) {
+          nextActive = index;
+        }
+      });
+      setActive(nextActive);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleScroll);
-
     handleScroll();
 
     return () => {
@@ -107,60 +109,41 @@ const FeatureSection = ({ theme = "light" }) => {
     };
   }, []);
 
-  const text = isDark ? "text-slate-200" : "text-slate-700";
-  const card = isDark ? "bg-slate-900 border-slate-700" : "bg-white border-slate-200";
-
-  // Clamp so the circle never overlaps the section's top/bottom border
   const circleTop = Math.min(Math.max(progress, 4), 96);
 
   return (
     <div
       ref={sectionRef}
-      className={`mt-8 rounded-2xl sm:rounded-[24px] border p-4 sm:p-8 lg:p-10 transition-all duration-500 ${
+      className={`mt-12 sm:mt-16 rounded-2xl sm:rounded-3xl p-5 sm:p-8 lg:p-10
+      ${
         isDark
-          ? " border bg-slate-950 shadow-[0_10px_30px_rgba(0,0,0,0.35)]"
-          : " border border-blue-300 bg-slate-50 shadow-md"
+          ? "bg-slate-900/80 ring-1 ring-slate-800"
+          : "bg-sky-50/70 ring-1 ring-sky-100"
       }`}
     >
-      <div className="relative pt-5 sm:pt-6">
-        {/* Background Line — spans the full height of the card stack, on both mobile and desktop */}
+      <div className="relative">
         <div
-          className={`absolute left-4 lg:left-[30px] top-5 sm:top-6 bottom-0 w-[4px] rounded-full ${
-            isDark
-              ? "bg-gradient-to-b from-slate-700 to-slate-800"
-              : "bg-gradient-to-b from-slate-200 to-slate-300"
+          className={`absolute left-4 lg:left-[30px] top-0 bottom-0 w-[3px] rounded-full ${
+            isDark ? "bg-slate-800" : "bg-sky-200"
           }`}
         />
-        {/* Progress Line */}
         <div
-          className="absolute left-4 lg:left-[30px] top-5 sm:top-6 w-[4px] rounded-full transition-all duration-300"
+          className="absolute left-4 lg:left-[30px] top-0 w-[3px] rounded-full transition-all duration-300"
           style={{
-            background: `linear-gradient(to bottom,#2563eb,#38bdf8)`,
+            background: "linear-gradient(to bottom,#0ea5e9,#38bdf8)",
             height: `${progress}%`,
           }}
         />
-        {/* Loader Circle aligned on line */}
         <div
           className="absolute z-20 left-4 lg:left-[30px] -translate-x-1/2 transition-all duration-300"
-          style={{
-            top: `calc(${circleTop}% - 16px)`,
-          }}
+          style={{ top: `calc(${circleTop}% - 12px)` }}
         >
-          {/* Outer Glow */}
-          <div className="absolute inset-0 h-8 w-8 rounded-full bg-blue-400/40 blur-md animate-pulse"></div>
-
-          {/* Circle */}
-          <div
-            className={`relative flex h-8 w-8 items-center justify-center rounded-full border-4 ${
-              isDark ? "border-blue-400 bg-slate-900" : "border-blue-600 bg-white"
-            } shadow-xl`}
-          >
-            <div className="h-3 w-3 rounded-full bg-gradient-to-br from-blue-500 to-cyan-400"></div>
+          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-sky-500">
+            <div className="h-2 w-2 rounded-full bg-white" />
           </div>
         </div>
 
-        {/* Feature Cards — offset from the line with left padding on all screen sizes */}
-        <div className="space-y-5 sm:space-y-8 w-full pl-10 sm:pl-12 lg:pl-16">
+        <div className="space-y-5 sm:space-y-6 w-full pl-12 sm:pl-14 lg:pl-16">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             const activeCard = active >= index;
@@ -168,27 +151,34 @@ const FeatureSection = ({ theme = "light" }) => {
               <article
                 key={feature.title}
                 data-index={index}
-                className={`feature-card relative rounded-2xl border p-4 sm:p-5 transition-all duration-500 ${
+                className={`relative rounded-xl p-4 sm:p-5 transition-all duration-500
+                ${
                   activeCard
-                    ? "scale-[1.01] shadow-[0_10px_30px_rgba(37,99,235,.15)]"
-                    : "shadow-sm"
-                } ${card}`}
+                    ? isDark
+                      ? "bg-slate-800/90 ring-1 ring-sky-500/30 opacity-100"
+                      : "bg-white ring-1 ring-sky-100 shadow-sm opacity-100"
+                    : isDark
+                      ? "bg-slate-900/40 opacity-50"
+                      : "bg-white/50 opacity-55"
+                }`}
               >
-                <div
-                  className={`flex h-11 w-11 sm:h-12 sm:w-12 items-center justify-center rounded-xl ${
-                    isDark ? "bg-blue-500 text-white" : "bg-blue-600 text-white"
-                  }`}
-                >
-                  <Icon className="text-base sm:text-lg" />
+                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-sky-500 text-white">
+                  <Icon className="text-sm" />
                 </div>
                 <h3
-                  className={`mt-4 text-base sm:text-lg lg:text-xl font-semibold break-words ${
+                  className={`mt-3 text-base sm:text-lg font-semibold ${
                     isDark ? "text-white" : "text-slate-900"
                   }`}
                 >
                   {feature.title}
                 </h3>
-                <p className={`mt-2 text-sm leading-6 ${text}`}>{feature.description}</p>
+                <p
+                  className={`mt-2 text-sm leading-6 ${
+                    isDark ? "text-slate-400" : "text-slate-600"
+                  }`}
+                >
+                  {feature.description}
+                </p>
               </article>
             );
           })}
@@ -198,157 +188,165 @@ const FeatureSection = ({ theme = "light" }) => {
   );
 };
 
-
 const HomeFeatureProduct = ({ theme }) => {
   const isDark = theme === "dark";
 
   return (
-    <section
-      className={`mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 md:px-8 lg:px-12 lg:py-20 transition-colors duration-300 ${
-        isDark ? "bg-slate-950" : "bg-white"
-      }`}
-    >
-      {/* Heading */}
-
+    <section className="w-full py-16 sm:py-20 lg:py-24 transition-colors duration-300">
       <div className="mx-auto max-w-4xl text-center">
-
         <span
-          className={`inline-flex rounded-full px-4 py-1.5 sm:px-5 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.35em]
+          className={`inline-flex rounded-full px-4 py-1.5 text-[11px] sm:text-xs font-bold uppercase tracking-[0.28em]
           ${
             isDark
-              ? "bg-blue-600/20 text-blue-300"
-              : "bg-blue-50 text-blue-700"
+              ? "bg-sky-500/15 text-sky-300"
+              : "bg-sky-50 text-sky-700 ring-1 ring-sky-100"
           }`}
         >
           Featured Plans
         </span>
 
         <h2
-          className={`mt-5 sm:mt-6 text-2xl sm:text-3xl font-bold leading-tight lg:text-5xl px-2 sm:px-0 ${
+          className={`mt-5 text-2xl sm:text-3xl font-bold leading-tight lg:text-4xl ${
             isDark ? "text-white" : "text-slate-900"
           }`}
         >
           Structured advisory plans for
-          <span className="block mt-2 text-blue-600">
+          <span className={`block mt-2 ${isDark ? "text-sky-400" : "text-sky-600"}`}>
             Smarter Trading & Investing
           </span>
         </h2>
 
         <p
-          className={`mx-auto mt-5 sm:mt-6 max-w-3xl text-sm sm:text-lg leading-6 sm:leading-8 px-2 sm:px-0 ${
-            isDark ? "text-slate-300" : "text-slate-600"
+          className={`mx-auto mt-5 max-w-3xl text-sm sm:text-base leading-7 ${
+            isDark ? "text-slate-400" : "text-slate-600"
           }`}
         >
-          Bull Wave Capital provides professionally curated subscription
-          plans designed for equity investors, F&O traders and long-term
-          wealth creation through disciplined market research.
+          Bull Wave Capital provides professionally curated subscription plans
+          designed for equity investors, F&O traders and long-term wealth
+          creation through disciplined market research.
         </p>
-
       </div>
 
-      {/* Pricing Cards */}
-      <div className="mt-10 sm:mt-16 grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-12 grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 xl:grid-cols-3">
         {plans.map((plan) => (
           <article
             key={plan.title}
-            className={`group relative isolate overflow-hidden rounded-2xl sm:rounded-3xl border p-6 sm:p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl
+            className={`group relative min-w-0 rounded-2xl p-6 sm:p-8 transition duration-300 hover:-translate-y-1 plan-card-anim
+            ${plan.featured ? "featured-plan-card" : ""}
             ${
               plan.featured
                 ? isDark
-                  ? "border-blue-500/70 bg-slate-900 text-white"
-                  : "border-blue-500 bg-sky-600 text-white"
+                  ? "bg-sky-500 text-white shadow-lg shadow-sky-500/20 ring-1 ring-sky-400"
+                  : "bg-gradient-to-br from-sky-500 to-sky-600 text-white shadow-lg shadow-sky-500/25"
                 : isDark
-                  ? "border-slate-700 bg-slate-900 text-white"
-                  : "border-slate-200 bg-sky-400 text-white"
+                  ? "bg-slate-900 ring-1 ring-slate-800 text-white"
+                  : "bg-white ring-1 ring-sky-100 shadow-sm shadow-sky-100/80 text-slate-900"
             }`}
           >
-            {/* Glow Effect */}
-            <div
-              className={`absolute -top-20 -right-20 h-56 w-56 rounded-full blur-[90px] -z-10
-              ${
-                plan.featured
-                  ? "bg-blue-500/20"
-                  : "bg-blue-500/10 opacity-0 group-hover:opacity-100"
-              }`}
-            />
-
-            {/* Badge */}
             {plan.featured && (
               <span
-                className="absolute right-4 top-2 sm:right-6 rounded-full bg-gradient-to-r
-                from-blue-600 to-indigo-600 px-3 py-1 sm:px-4
-                text-[9px] sm:text-[10px]
-                font-bold uppercase tracking-wider text-white shadow-xl"
+                className={`mb-3 inline-block rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-wider
+                ${
+                  isDark
+                    ? "bg-slate-950/30 text-white"
+                    : "bg-white/25 text-white ring-1 ring-white/30"
+                }`}
               >
                 Most Popular
               </span>
             )}
 
-            {/* Header */}
-            <div className="relative z-10">
-              <p className="text-xs sm:text-sm font-bold uppercase tracking-[0.18em] sm:tracking-[0.28em] text-white break-words pr-16 sm:pr-0">
-                {plan.title}
-              </p>
-
-              <h3 className="mt-4 text-2xl sm:text-3xl font-bold leading-tight text-white">
-                {plan.price}
-              </h3>
-
-              <p className="mt-4 sm:mt-5 text-sm sm:text-base leading-6 sm:leading-8 text-white">
-                {plan.description}
-              </p>
-            </div>
-
-            {/* Divider */}
-            <div
-              className={`my-6 sm:my-8 h-px
+            <p
+              className={`text-xs font-bold uppercase tracking-[0.2em]
               ${
                 plan.featured
-                  ? "bg-blue-200"
-                  : "bg-blue-300"
+                  ? "text-sky-100"
+                  : isDark
+                    ? "text-slate-400"
+                    : "text-slate-500"
+              }`}
+            >
+              {plan.title}
+            </p>
+
+            <h3
+              className={`mt-3 text-2xl sm:text-3xl font-bold leading-tight
+              ${
+                plan.featured
+                  ? "text-white"
+                  : isDark
+                    ? "text-white"
+                    : "text-slate-900"
+              }`}
+            >
+              {plan.price}
+            </h3>
+
+            <p
+              className={`mt-4 text-sm leading-7
+              ${
+                plan.featured
+                  ? "text-sky-50"
+                  : isDark
+                    ? "text-slate-400"
+                    : "text-slate-600"
+              }`}
+            >
+              {plan.description}
+            </p>
+
+            <div
+              className={`my-6 h-px
+              ${
+                plan.featured
+                  ? "bg-white/25"
+                  : isDark
+                    ? "bg-slate-800"
+                    : "bg-sky-100"
               }`}
             />
 
-            {/* Features */}
-            <ul className="space-y-4 sm:space-y-5">
+            <ul className="space-y-3">
               {plan.details.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-3 sm:gap-4 text-white"
+                  className={`flex items-start gap-3 text-sm leading-6
+                  ${
+                    plan.featured
+                      ? "text-white"
+                      : isDark
+                        ? "text-slate-300"
+                        : "text-slate-700"
+                  }`}
                 >
-                  <span className="mt-2 flex h-2.5 w-2.5 sm:h-3 sm:w-3 flex-shrink-0 rounded-full bg-blue-200"></span>
-                  <span className="text-sm sm:text-base leading-6 sm:leading-7">{item}</span>
+                  <span
+                    className={`mt-2 flex h-1.5 w-1.5 flex-shrink-0 rounded-full
+                    ${
+                      plan.featured
+                        ? "bg-white"
+                        : isDark
+                          ? "bg-sky-400"
+                          : "bg-sky-500"
+                    }`}
+                  />
+                  <span>{item}</span>
                 </li>
               ))}
             </ul>
 
-            {/* Contact Option */}
-            <div className="mt-6 sm:mt-8 flex flex-wrap justify-between items-center gap-3">
-              <span className="text-xs sm:text-sm font-semibold opacity-70 text-white">
-                Capital BullWave
-              </span>
+            <div className="mt-8">
               <Link
                 to="/contact"
-                className={`flex items-center gap-2 rounded-full px-4 py-2 sm:px-5 text-xs sm:text-sm font-semibold transition hover:scale-105 ${
-                  isDark
-                    ? "bg-blue-600 text-white hover:bg-blue-500"
-                    : "bg-blue-900 text-white hover:bg-blue-700"
+                className={`plan-cta ${
+                  plan.featured
+                    ? isDark
+                      ? "plan-cta--featured-dark"
+                      : "plan-cta--featured-light"
+                    : isDark
+                      ? "plan-cta--standard-dark"
+                      : "plan-cta--standard-light"
                 }`}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 10c0 6-9 12-9 12S3 16 3 10a9 9 0 1118 0z"
-                  />
-                </svg>
                 Contact
               </Link>
             </div>
@@ -356,52 +354,42 @@ const HomeFeatureProduct = ({ theme }) => {
         ))}
       </div>
 
-      {/* Features Section Starts Here */}
-
-      <FeatureSection />
-
-          {/* Bottom CTA */}
+      <FeatureSection theme={theme} />
 
       <div
-        className={`mt-10 sm:mt-16 rounded-2xl sm:rounded-3xl overflow-hidden px-5 py-8 sm:px-8 sm:py-10 text-center transition-all duration-300
+        className={`mt-12 sm:mt-16 rounded-2xl sm:rounded-3xl px-5 py-10 sm:px-8 sm:py-12 text-center
         ${
           isDark
-            ? "bg-gradient-to-r from-slate-800 via-blue-700 to-slate-950"
-            : "bg-gradient-to-r from-blue-600 via-indigo-600 to-sky-600"
+            ? "bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 ring-1 ring-slate-700"
+            : "bg-gradient-to-r from-sky-500 via-sky-600 to-sky-500 shadow-lg shadow-sky-500/20"
         }`}
       >
-        <h3 className="text-xl sm:text-3xl font-bold text-white px-2 sm:px-0">
+        <h3 className="text-xl sm:text-3xl font-bold text-white px-2">
           Ready to Trade with Confidence?
         </h3>
 
-        <p className="mx-auto mt-4 max-w-2xl text-sm sm:text-base text-blue-100 leading-6 sm:leading-8 px-2 sm:px-0">
+        <p className="mx-auto mt-4 max-w-2xl text-sm sm:text-base text-sky-50 leading-7 px-2">
           Join Bull Wave Capital and receive research-driven market insights,
           professional trading guidance, and portfolio strategies designed to
           help you make informed investment decisions.
         </p>
 
-        <div className="mt-6 sm:mt-8 flex w-full flex-col gap-4 sm:flex-row sm:justify-center">
+        <div className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4">
           <Link
             to="/markets"
-            className="w-full rounded-xl bg-white px-8 py-3 text-center font-semibold text-blue-700 transition duration-300 hover:scale-105 hover:bg-slate-100 hover:shadow-xl sm:w-auto"
+            className="w-full rounded-xl bg-white px-8 py-3 text-center font-semibold !text-sky-700 transition hover:bg-sky-50 sm:w-auto"
           >
             Explore Market
           </Link>
 
           <Link
             to="/contact"
-            className={`w-full rounded-xl border-2 px-8 py-3 text-center font-semibold transition-all duration-300 hover:scale-105 sm:w-auto
-            ${
-              isDark
-                ? "border-white text-white hover:bg-white hover:!text-blue-900"
-                : "border-white/90 bg-white/10 text-white hover:bg-white hover:!text-blue-700"
-            }`}
+            className="w-full rounded-xl bg-white/15 px-8 py-3 text-center font-semibold !text-white ring-1 ring-white/30 transition hover:bg-white/25 sm:w-auto"
           >
             Contact Us
           </Link>
         </div>
       </div>
-
     </section>
   );
 };

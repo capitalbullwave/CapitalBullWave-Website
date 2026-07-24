@@ -155,7 +155,7 @@ const TermsCondition = ({ theme }) => {
                     complaints arising under or in connection with these
                     terms shall be subject to the exclusive jurisdiction
                     of courts located in Delhi or Gujarat, as applicable.
-                    Bullwave Capital operates offices in Delhi and Surat
+                    Bullwave Capital operates office in Delhi 
                     and may choose the appropriate forum consistent with
                     these jurisdictions.
                   </p>
@@ -344,7 +344,7 @@ const TermsCondition = ({ theme }) => {
                 </p>
 
                 <p>
-                  <strong>Offices:</strong> Delhi and Surat
+                  <strong>Office:</strong> Delhi
                 </p>
               </div>
             </section>

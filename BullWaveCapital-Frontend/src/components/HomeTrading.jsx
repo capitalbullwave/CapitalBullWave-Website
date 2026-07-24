@@ -2,16 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { PhoneCall, ClipboardCheck, TrendingUp, ArrowRight } from "lucide-react";
 
-/**
- * HomeTrading
- * Place directly below <Hero /> on the Home page.
- * Theme is controlled via the `theme` prop ("light" | "dark") passed down
- * from the page, not Tailwind's `dark:` class strategy.
- *
- * Requires:
- *  - react-router-dom (for the /contact redirect)
- *  - lucide-react (icons)
- */
 const steps = [
   {
     id: "01",
@@ -40,53 +30,34 @@ const HomeTrading = ({ theme }) => {
     <section
       className={`
         relative w-full overflow-hidden
-        rounded-t-[2.5rem] sm:rounded-t-[3.5rem]
-        py-16 sm:py-20 lg:py-28
-        transition-colors duration-300 mt-4 border border-blue-400 rounded-xl 
-        ${isDark ? "bg-slate-950" : "bg-white"}
+        py-16 sm:py-20 lg:py-24
+        transition-colors duration-300
       `}
     >
-      {/* Ambient sky-blue glow accents */}
       <div
         aria-hidden="true"
-        className={`
-          pointer-events-none absolute -top-24 -left-24 h-72 w-72 sm:h-96 sm:w-96
-          rounded-full blur-3xl
-          ${isDark ? "bg-sky-500/10" : "bg-sky-300/50"}
-        `}
-      />
-      <div
-        aria-hidden="true"
-        className={`
-          pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 sm:h-96 sm:w-96
-          rounded-full blur-3xl
-          ${isDark ? "bg-sky-400/10" : "bg-sky-100/70"}
-        `}
+        className={`pointer-events-none absolute -top-20 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full blur-3xl
+        ${isDark ? "bg-sky-500/10" : "bg-sky-200/60"}`}
       />
 
-      <div className="relative mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        {/* Eyebrow */}
+      <div className="relative w-full">
         <div className="flex justify-center">
           <span
-            className={`
-              inline-flex items-center gap-2 rounded-full border px-4 py-1.5
-              text-xs sm:text-sm font-medium
-              ${
-                isDark
-                  ? "border-sky-800 bg-sky-900/30 text-sky-300"
-                  : "border-sky-200 bg-sky-50 text-sky-700"
-              }
-            `}
+            className={`inline-flex items-center rounded-full px-4 py-1.5 text-xs sm:text-sm font-semibold
+            ${
+              isDark
+                ? "bg-sky-500/15 text-sky-300"
+                : "bg-sky-50 text-sky-700 ring-1 ring-sky-100"
+            }`}
           >
             Skilled Trader Funding Program
           </span>
         </div>
 
-        {/* Heading */}
         <h2
           className={`
             mt-5 text-center font-bold tracking-tight
-            text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] leading-tight
+            text-2xl sm:text-3xl md:text-4xl leading-tight
             ${isDark ? "text-white" : "text-slate-900"}
           `}
         >
@@ -96,15 +67,6 @@ const HomeTrading = ({ theme }) => {
           </span>
         </h2>
 
-        <div
-          aria-hidden="true"
-          className={`
-            pointer-events-none absolute top-24 left-24 h-72 w-72 sm:h-96 sm:w-96
-            rounded-full blur-3xl
-            ${isDark ? "bg-sky-500/10" : "bg-sky-300/50"}
-          `}
-        />
-
         <p
           className={`
             mx-auto mt-4 max-w-2xl text-center text-sm sm:text-base leading-relaxed
@@ -113,24 +75,23 @@ const HomeTrading = ({ theme }) => {
         >
           Know how to trade but don't have money to invest? Contact us and take
           our assessment. Pass it, and we'll fund your account — you keep{" "}
-          <span className={`font-semibold ${isDark ? "text-slate-200" : "text-slate-800"}`}>
+          <span
+            className={`font-semibold ${isDark ? "text-slate-200" : "text-slate-800"}`}
+          >
             30%
           </span>{" "}
           of the profit, no capital risk on your end.
         </p>
 
-        {/* Profit split highlight */}
-        <div className="mt-8 flex justify-center">
+        <div className="mt-10 flex justify-center">
           <div
-            className={`
-              flex w-full max-w-md items-stretch overflow-hidden rounded-3xl border shadow-sm
-              ${isDark ? "border-slate-800" : "border-sky-100"}
-            `}
+            className={`flex w-full max-w-md items-stretch overflow-hidden rounded-2xl shadow-sm
+            ${isDark ? "ring-1 ring-slate-700" : "ring-1 ring-sky-100"}`}
           >
             <div
               className={`
                 flex flex-1 flex-col items-center justify-center gap-1 px-4 py-5 sm:py-6
-                ${isDark ? "bg-sky-500" : "bg-sky-600"}
+                ${isDark ? "bg-sky-500" : "bg-sky-500"}
               `}
             >
               <span className="text-2xl sm:text-3xl font-bold text-white">70%</span>
@@ -138,19 +99,22 @@ const HomeTrading = ({ theme }) => {
                 Our share
               </span>
             </div>
-
             <div
               className={`
                 flex flex-1 flex-col items-center justify-center gap-1 px-4 py-5 sm:py-6
-                ${isDark ? "bg-slate-800" : "bg-sky-50"}
+                ${isDark ? "bg-slate-800" : "bg-white"}
               `}
             >
-              <span className={`text-2xl sm:text-3xl font-bold ${isDark ? "text-sky-300" : "text-sky-700"}`}>
+              <span
+                className={`text-2xl sm:text-3xl font-bold ${
+                  isDark ? "text-sky-300" : "text-sky-600"
+                }`}
+              >
                 30%
               </span>
               <span
                 className={`text-[11px] sm:text-xs font-medium uppercase tracking-wide ${
-                  isDark ? "text-slate-400" : "text-sky-700/70"
+                  isDark ? "text-slate-400" : "text-slate-500"
                 }`}
               >
                 Trader's share
@@ -159,37 +123,43 @@ const HomeTrading = ({ theme }) => {
           </div>
         </div>
 
-        {/* Steps */}
         <div className="mt-12 sm:mt-16 grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-3">
           {steps.map(({ id, icon: Icon, title, desc }, idx) => (
-            <div key={id} className="relative flex flex-col items-center text-center">
-              {/* Connector line (desktop only) */}
+            <div
+              key={id}
+              className={`relative flex flex-col items-center text-center rounded-2xl p-6 sm:p-8 transition
+              ${
+                isDark
+                  ? "bg-slate-900/80 ring-1 ring-slate-800"
+                  : "bg-white ring-1 ring-sky-100 shadow-sm shadow-sky-100/80"
+              }`}
+            >
               {idx < steps.length - 1 && (
                 <div
                   aria-hidden="true"
                   className={`
-                    hidden md:block absolute top-8 left-[calc(50%+2.5rem)]
-                    h-px w-[calc(100%-5rem)]
-                    ${isDark ? "bg-gradient-to-r from-sky-700 to-slate-800" : "bg-gradient-to-r from-sky-300 to-sky-100"}
+                    hidden md:block absolute top-[3.25rem] left-[calc(50%+2.75rem)]
+                    h-px w-[calc(100%-3.5rem)] z-0
+                    ${isDark ? "bg-slate-700" : "bg-sky-100"}
                   `}
                 />
               )}
 
               <div
                 className={`
-                  relative z-10 flex h-16 w-16 items-center justify-center rounded-3xl shadow-lg
-                  ${isDark ? "bg-sky-500 shadow-sky-500/10" : "bg-sky-600 shadow-sky-600/20"}
+                  relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl
+                  ${isDark ? "bg-sky-500" : "bg-sky-500"}
                 `}
               >
-                <Icon className="h-7 w-7 text-white" strokeWidth={1.75} />
+                <Icon className="h-6 w-6 text-white" strokeWidth={1.75} />
                 <span
                   className={`
                     absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center
-                    rounded-full border text-[10px] font-bold
+                    rounded-full text-[10px] font-bold
                     ${
                       isDark
-                        ? "bg-slate-900 border-sky-700 text-sky-300"
-                        : "bg-white border-sky-200 text-sky-700"
+                        ? "bg-slate-950 text-sky-300 ring-1 ring-slate-700"
+                        : "bg-white text-sky-700 ring-1 ring-sky-100 shadow-sm"
                     }
                   `}
                 >
@@ -197,30 +167,37 @@ const HomeTrading = ({ theme }) => {
                 </span>
               </div>
 
-              <h3 className={`mt-5 text-base sm:text-lg font-semibold ${isDark ? "text-white" : "text-slate-900"}`}>
+              <h3
+                className={`mt-5 text-base sm:text-lg font-semibold ${
+                  isDark ? "text-white" : "text-slate-900"
+                }`}
+              >
                 {title}
               </h3>
-              <p className={`mt-2 max-w-xs text-sm leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+              <p
+                className={`mt-2 max-w-xs text-sm leading-relaxed ${
+                  isDark ? "text-slate-400" : "text-slate-600"
+                }`}
+              >
                 {desc}
               </p>
             </div>
           ))}
         </div>
 
-        {/* CTA */}
         <div className="mt-12 sm:mt-16 flex flex-col items-center gap-3">
           <Link
             to="/contact"
             className={`
               group inline-flex w-full sm:w-auto items-center justify-center gap-2
-              rounded-full px-6 sm:px-8 py-3 sm:py-3.5
+              rounded-xl px-6 sm:px-8 py-3 sm:py-3.5
               text-sm sm:text-base font-semibold text-white
-              shadow-md transition-all duration-200 active:scale-[0.98]
+              transition-all duration-200 active:scale-[0.98]
               focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2
               ${
                 isDark
-                  ? "bg-sky-500 shadow-sky-500/20 hover:bg-sky-400 focus-visible:ring-offset-slate-950"
-                  : "bg-sky-600 shadow-sky-600/25 hover:bg-sky-700 focus-visible:ring-offset-white"
+                  ? "bg-sky-500 hover:bg-sky-400 focus-visible:ring-offset-slate-950 shadow-lg shadow-sky-500/20"
+                  : "bg-sky-600 hover:bg-sky-500 focus-visible:ring-offset-white shadow-lg shadow-sky-600/20"
               }
             `}
           >
@@ -230,7 +207,11 @@ const HomeTrading = ({ theme }) => {
               strokeWidth={2}
             />
           </Link>
-          <span className={`text-md semibold ${isDark ? "text-slate-500" : "text-slate-500"}`}>
+          <span
+            className={`text-sm font-semibold ${
+              isDark ? "text-slate-500" : "text-slate-500"
+            }`}
+          >
             No trading experience? This program isn't for you — yet.
           </span>
         </div>
