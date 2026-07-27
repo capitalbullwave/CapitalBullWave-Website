@@ -425,16 +425,86 @@ img {
   }
 }
 
-/* Why Choose — premium card motion */
+/* Why Choose — scroll reveals + motion */
+.home-choose-reveal,
+.home-choose-card,
+.home-choose-benefit {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s ease;
+  transition-delay: var(--choose-delay, 0ms);
+}
+
+.home-choose-reveal--delay-1 {
+  transition-delay: 80ms;
+}
+.home-choose-reveal--delay-4 {
+  transition-delay: 220ms;
+}
+.home-choose-reveal--delay-5 {
+  transition-delay: 280ms;
+}
+
+.home-choose.is-visible .home-choose-reveal,
+.home-choose.is-visible .home-choose-card,
+.home-choose.is-visible .home-choose-benefit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.home-choose-visual__img {
+  transition: transform 0.8s ease;
+}
+
 .home-choose-card {
   transition:
-    transform 0.35s ease,
-    box-shadow 0.35s ease;
+    opacity 0.55s ease,
+    transform 0.55s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .home-choose-card:hover {
-    transform: translateY(-4px);
+  .home-choose.is-visible .home-choose-card:hover {
+    transform: translateY(-3px);
+  }
+
+  .theme-light .home-choose.is-visible .home-choose-card:hover {
+    box-shadow: 0 14px 32px rgba(14, 165, 233, 0.12);
+  }
+
+  .home-choose-reveal:hover .home-choose-visual__img {
+    transform: scale(1.03);
+  }
+}
+
+
+/* Services showcase mosaic */
+.home-service-showcase article {
+  animation: showcaseRise 0.7s ease both;
+}
+
+.home-service-showcase__img {
+  transition: transform 6s ease;
+  transform: scale(1.02);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .home-service-showcase article:hover .home-service-showcase__img {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes showcaseRise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -464,8 +534,26 @@ img {
   }
 
   .premium-card:hover,
-  .home-choose-card:hover {
+  .home-choose.is-visible .home-choose-card:hover {
     transform: none;
+  }
+
+  .home-choose-reveal,
+  .home-choose-card,
+  .home-choose-benefit,
+  .home-service-showcase article {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .home-choose-visual__img,
+  .home-service-showcase__img,
+  .home-choose-reveal:hover .home-choose-visual__img,
+  .home-service-showcase article:hover .home-service-showcase__img {
+    transform: none !important;
+    transition: none !important;
   }
 }
 

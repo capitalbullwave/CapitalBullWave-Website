@@ -1,4 +1,4 @@
-import { FaChartLine, FaHandshake, FaShieldAlt, FaMapMarkerAlt } from "react-icons/fa";
+import { FaChartLine, FaHandshake, FaShieldAlt } from "react-icons/fa";
 import StackedCards from "./StackedCards";
 
 const services = [
@@ -22,6 +22,30 @@ const services = [
     description:
       "Professional advisory services covering asset allocation, risk control, and portfolio review for disciplined investing.",
     icon: FaShieldAlt,
+  },
+];
+
+const showcase = [
+  {
+    title: "Stock Market Research",
+    caption: "Actionable equity insights.",
+    image:
+      "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1400&auto=format&fit=crop",
+    className: "md:col-span-2 md:row-span-2 min-h-[240px] sm:min-h-[280px] md:min-h-[420px]",
+  },
+  {
+    title: "Investment Guidance",
+    caption: "Structured advice for every horizon.",
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
+    className: "min-h-[200px] sm:min-h-[220px]",
+  },
+  {
+    title: "Financial Advisory",
+    caption: "Practical wealth-building support.",
+    image:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop",
+    className: "min-h-[200px] sm:min-h-[220px]",
   },
 ];
 
@@ -63,81 +87,49 @@ const HomeService = ({ theme = "light" }) => {
         <StackedCards items={services} theme={theme} />
       </div>
 
-      <div
-        className={`mt-12 sm:mt-16 overflow-hidden rounded-2xl sm:rounded-[1.75rem]
-        ${
-          isDark
-            ? "bg-slate-900 ring-1 ring-white/10"
-            : "bg-white ring-1 ring-sky-100 shadow-[0_12px_36px_rgba(14,165,233,0.07)]"
-        }`}
-      >
-        <div className="grid lg:grid-cols-2">
-          <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
-            <span
-              className={`text-sm font-semibold uppercase tracking-[0.28em] ${
-                isDark ? "text-sky-400" : "text-sky-600"
-              }`}
-            >
-              Office Location
-            </span>
-
-            <h3
-              className={`mt-4 text-2xl font-bold leading-tight sm:text-3xl ${
-                isDark ? "text-white" : "text-slate-950"
-              }`}
-            >
-              Aggarwal Millennium Tower 2,
-              <br />
-              Netaji Subhash Place
-            </h3>
-
-            <p
-              className={`mt-5 text-base leading-8 ${
-                isDark ? "text-slate-400" : "text-slate-600"
-              }`}
-            >
-              Bull Wave Capital is proudly headquartered in Netaji Subhash Place
-              (NSP), Delhi. Our office serves investors with equity research,
-              portfolio guidance, and strategic financial planning in a professional
-              and client-focused environment.
-            </p>
-
-            <div
-              className={`mt-8 flex items-center gap-4 rounded-2xl p-4
+      <div className="home-service-showcase mt-12 sm:mt-16">
+        <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-3 md:grid-rows-2">
+          {showcase.map((item, index) => (
+            <article
+              key={item.title}
+              className={`group relative overflow-hidden rounded-2xl sm:rounded-[1.35rem]
+              ${item.className}
               ${
                 isDark
-                  ? "bg-slate-800/80"
-                  : "bg-sky-50 ring-1 ring-sky-100"
+                  ? "ring-1 ring-white/10 shadow-[0_18px_40px_rgba(0,0,0,0.35)]"
+                  : "ring-1 ring-sky-100 shadow-[0_14px_36px_rgba(14,165,233,0.1)]"
               }`}
+              style={{ animationDelay: `${index * 120}ms` }}
             >
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-sky-500 text-white">
-                <FaMapMarkerAlt className="text-xl" />
-              </div>
-              <div>
-                <p className="text-xs uppercase tracking-[0.2em] text-slate-500">
-                  Head Office
+              <img
+                src={item.image}
+                alt={item.title}
+                loading="lazy"
+                decoding="async"
+                className="home-service-showcase__img absolute inset-0 h-full w-full object-cover"
+              />
+              <div
+                className={`absolute inset-0 ${
+                  isDark
+                    ? "bg-gradient-to-t from-slate-950/90 via-slate-950/35 to-transparent"
+                    : "bg-gradient-to-t from-slate-950/80 via-slate-900/25 to-transparent"
+                }`}
+              />
+              <div
+                aria-hidden="true"
+                className={`pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full blur-2xl animate-soft-pulse
+                ${isDark ? "bg-sky-400/20" : "bg-sky-300/30"}`}
+              />
+              <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-sky-200">
+                  {item.caption}
                 </p>
-                <p
-                  className={`mt-1 text-base sm:text-lg font-semibold ${
-                    isDark ? "text-white" : "text-slate-900"
-                  }`}
-                >
-                  Netaji Subhash Place (NSP), Delhi
-                </p>
+                <h3 className="mt-1.5 text-lg sm:text-xl font-bold text-white">
+                  {item.title}
+                </h3>
               </div>
-            </div>
-          </div>
-
-          <div className="h-[260px] sm:h-[340px] lg:h-full lg:min-h-[420px]">
-            <iframe
-              title="Bull Wave Capital Office"
-              src="https://www.google.com/maps?q=Aggarwal+Millennium+Tower+2,+Netaji+Subhash+Place,+Delhi&output=embed"
-              className="h-full w-full"
-              loading="lazy"
-              allowFullScreen
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
+            </article>
+          ))}
         </div>
       </div>
     </section>
