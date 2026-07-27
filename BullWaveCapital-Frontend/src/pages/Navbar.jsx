@@ -205,7 +205,7 @@ export default function Navbar({ theme, toggleTheme }) {
           {/* Mobile panel */}
           <div
             className={`lg:hidden overflow-hidden transition-all duration-300 ease-out
-            ${menuOpen ? "max-h-[520px] opacity-100" : "max-h-0 opacity-0"}`}
+            ${menuOpen ? "trade-nav__panel--open max-h-[520px] opacity-100" : "max-h-0 opacity-0"}`}
           >
             <div
               className={`border-t px-3 py-3 sm:px-4 ${

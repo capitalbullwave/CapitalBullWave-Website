@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { FaChartLine, FaHandshake, FaShieldAlt } from "react-icons/fa";
 import StackedCards from "./StackedCards";
 import TradingAtmosphere from "./TradingAtmosphere";
@@ -52,6 +53,24 @@ const showcase = [
 
 const HomeService = ({ theme = "light" }) => {
   const isDark = theme === "dark";
+  const showcaseRef = useRef(null);
+  const [showcaseVisible, setShowcaseVisible] = useState(false);
+
+  useEffect(() => {
+    const node = showcaseRef.current;
+    if (!node) return undefined;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShowcaseVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section className="relative w-full overflow-hidden py-12 sm:py-16 lg:py-20">
@@ -89,7 +108,12 @@ const HomeService = ({ theme = "light" }) => {
         <StackedCards items={services} theme={theme} />
       </div>
 
-      <div className="home-service-showcase relative z-10 mt-12 sm:mt-16">
+      <div
+        ref={showcaseRef}
+        className={`home-service-showcase relative z-10 mt-12 sm:mt-16 ${
+          showcaseVisible ? "is-visible" : ""
+        }`}
+      >
         <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-3 md:grid-rows-2">
           {showcase.map((item, index) => (
             <article

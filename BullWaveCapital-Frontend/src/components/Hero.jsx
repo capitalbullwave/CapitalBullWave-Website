@@ -107,7 +107,8 @@ export default function Hero({ theme = "light" }) {
   return (
     <section
       className={`hero-section olymp-hero relative overflow-hidden rounded-none sm:rounded-[1.5rem] lg:rounded-[2rem] transition-colors duration-500
-        min-h-[88vh] sm:min-h-[90vh] bg-slate-950
+        -mx-2 sm:-mx-3 md:mx-0
+        min-h-[78vh] max-sm:min-h-[70vh] sm:min-h-[88vh] lg:min-h-[90vh] bg-slate-950
         ${ready ? "hero-section--ready" : ""}`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
@@ -159,7 +160,7 @@ export default function Hero({ theme = "light" }) {
         />
       </div>
 
-      <div className="relative z-20 flex min-h-[88vh] sm:min-h-[90vh] flex-col justify-between px-3 pb-6 pt-10 sm:px-6 sm:pb-8 sm:pt-14 lg:px-10 lg:pb-10 lg:pt-16">
+      <div className="relative z-20 flex min-h-[78vh] max-sm:min-h-[70vh] sm:min-h-[88vh] lg:min-h-[90vh] flex-col justify-between px-3 pb-6 pt-10 sm:px-6 sm:pb-8 sm:pt-14 lg:px-10 lg:pb-10 lg:pt-16">
         <div className="grid flex-1 items-center gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
           <div className="hero-copy mx-auto max-w-2xl text-center lg:mx-0 lg:text-left">
             <span className="hero-fade hero-fade--1 olymp-chip inline-flex items-center gap-2">

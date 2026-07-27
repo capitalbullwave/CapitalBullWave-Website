@@ -554,6 +554,14 @@ img {
 
 /* Services showcase mosaic */
 .home-service-showcase article {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.home-service-showcase.is-visible article {
   animation: showcaseRise 0.7s ease both;
 }
 
@@ -1116,7 +1124,30 @@ html.theme-dark * {
 
 @media (max-width: 640px) {
   .hero-section {
-    min-height: auto;
+    min-height: 70vh;
+  }
+}
+
+/* Sitewide responsive polish */
+.site-main {
+  overflow-x: clip;
+}
+
+img,
+video,
+svg {
+  max-width: 100%;
+}
+
+@media (max-width: 640px) {
+  .section-title {
+    letter-spacing: -0.02em;
+  }
+}
+
+@supports (padding: max(0px)) {
+  .chat-fab {
+    margin-bottom: env(safe-area-inset-bottom, 0px);
   }
 }
 
@@ -1430,6 +1461,11 @@ html.theme-dark * {
 }
 
 .trade-nav__mobile-link {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.trade-nav__panel--open .trade-nav__mobile-link {
   animation: tradeNavLinkIn 0.35s ease both;
 }
 
@@ -1449,6 +1485,8 @@ html.theme-dark * {
   .trade-nav__live-dot,
   .trade-nav__mobile-link {
     animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 
@@ -2204,16 +2242,27 @@ html.theme-dark * {
 }
 
 .plan-card-anim {
+  opacity: 0;
+  transform: translateY(28px) scale(0.98);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.plans-grid.is-visible .plan-card-anim {
   animation: planRise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.plan-card-anim:nth-child(1) { animation-delay: 0.05s; }
-.plan-card-anim:nth-child(2) { animation-delay: 0.15s; }
-.plan-card-anim:nth-child(3) { animation-delay: 0.25s; }
+.plans-grid.is-visible .plan-card-anim:nth-child(1) { animation-delay: 0.05s; }
+.plans-grid.is-visible .plan-card-anim:nth-child(2) { animation-delay: 0.15s; }
+.plans-grid.is-visible .plan-card-anim:nth-child(3) { animation-delay: 0.25s; }
 
 @media (prefers-reduced-motion: reduce) {
-  .plan-card-anim {
+  .plan-card-anim,
+  .plans-grid.is-visible .plan-card-anim {
     animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 

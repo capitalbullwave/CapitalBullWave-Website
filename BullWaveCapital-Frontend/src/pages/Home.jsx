@@ -32,7 +32,7 @@ const organizationSchema = {
 
 const Home = ({ theme }) => {
   return (
-    <div className="page-enter space-y-2 sm:space-y-3 lg:space-y-4">
+    <div className="page-enter space-y-10 sm:space-y-12 lg:space-y-14">
       <Helmet>
         <title>
           Capital BullWave | Stock Market Research & Investment Advisory in Delhi
@@ -68,9 +68,7 @@ const Home = ({ theme }) => {
         </script>
       </Helmet>
 
-      <div className="animate-fade-in">
-        <Hero theme={theme} />
-      </div>
+      <Hero theme={theme} />
 
       <RevealOnScroll>
         <HomeTrading theme={theme} />
@@ -84,9 +82,7 @@ const Home = ({ theme }) => {
         <HomeFeatureProduct theme={theme} />
       </RevealOnScroll>
 
-      <RevealOnScroll delay={50}>
-        <HomeChoose theme={theme} />
-      </RevealOnScroll>
+      <HomeChoose theme={theme} />
 
       <RevealOnScroll delay={40}>
         <HomeFAQS theme={theme} />

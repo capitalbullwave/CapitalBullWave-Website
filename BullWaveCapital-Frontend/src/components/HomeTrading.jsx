@@ -127,98 +127,98 @@ const HomeTrading = ({ theme }) => {
           </div>
         </RevealOnScroll>
 
-        <div className="mt-12 sm:mt-16 grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-3">
-          {steps.map(({ id, icon: Icon, title, desc }, idx) => (
-            <div
-              key={id}
-              className={`olymp-section-card relative flex flex-col items-center text-center rounded-2xl sm:rounded-[1.35rem] p-5 sm:p-7
-              ${
-                isDark
-                  ? "bg-slate-900/90 ring-1 ring-white/10"
-                  : "bg-white ring-1 ring-sky-100 shadow-[0_10px_30px_rgba(14,165,233,0.06)]"
+        <RevealOnScroll className="mt-12 sm:mt-16">
+          <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-3">
+            {steps.map(({ id, icon: Icon, title, desc }, idx) => (
+              <div
+                key={id}
+                style={{ transitionDelay: `${idx * 80}ms` }}
+                className={`olymp-section-card relative flex flex-col items-center text-center rounded-2xl sm:rounded-[1.35rem] p-5 sm:p-7
+                ${
+                  isDark
+                    ? "bg-slate-900/90 ring-1 ring-white/10"
+                    : "bg-white ring-1 ring-sky-100 shadow-[0_10px_30px_rgba(14,165,233,0.06)]"
+                }`}
+              >
+                {idx < steps.length - 1 && (
+                  <div
+                    aria-hidden="true"
+                    className={`
+                      hidden md:block absolute top-[3.25rem] left-[calc(50%+2.75rem)]
+                      h-px w-[calc(100%-3.5rem)] z-0
+                      ${isDark ? "bg-slate-700" : "bg-sky-100"}
+                    `}
+                  />
+                )}
+
+                <div className="relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl bg-sky-500">
+                  <Icon className="h-6 w-6 text-white" strokeWidth={1.75} />
+                  <span
+                    className={`
+                      absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center
+                      rounded-full text-[10px] font-bold
+                      ${
+                        isDark
+                          ? "bg-slate-950 text-sky-300 ring-1 ring-slate-700"
+                          : "bg-white text-sky-700 ring-1 ring-sky-100 shadow-sm"
+                      }
+                    `}
+                  >
+                    {id}
+                  </span>
+                </div>
+
+                <h3
+                  className={`mt-5 text-base sm:text-lg font-semibold ${
+                    isDark ? "text-white" : "text-slate-900"
+                  }`}
+                >
+                  {title}
+                </h3>
+                <p
+                  className={`mt-2 max-w-xs text-sm leading-relaxed ${
+                    isDark ? "text-slate-400" : "text-slate-600"
+                  }`}
+                >
+                  {desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </RevealOnScroll>
+
+        <RevealOnScroll className="mt-12 sm:mt-16" delay={60}>
+          <div className="flex flex-col items-center gap-3">
+            <Link
+              to="/contact"
+              className={`
+                group inline-flex w-full sm:w-auto items-center justify-center gap-2
+                rounded-xl px-6 sm:px-8 py-3 sm:py-3.5
+                text-sm sm:text-base font-semibold text-white
+                transition-all duration-200 active:scale-[0.98]
+                focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2
+                ${
+                  isDark
+                    ? "bg-sky-500 hover:bg-sky-400 focus-visible:ring-offset-slate-950 shadow-lg shadow-sky-500/20"
+                    : "bg-sky-600 hover:bg-sky-500 focus-visible:ring-offset-white shadow-lg shadow-sky-600/20"
+                }
+              `}
+            >
+              Contact Us
+              <ArrowRight
+                className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
+                strokeWidth={2}
+              />
+            </Link>
+            <span
+              className={`text-sm font-semibold ${
+                isDark ? "text-slate-500" : "text-slate-500"
               }`}
             >
-              {idx < steps.length - 1 && (
-                <div
-                  aria-hidden="true"
-                  className={`
-                    hidden md:block absolute top-[3.25rem] left-[calc(50%+2.75rem)]
-                    h-px w-[calc(100%-3.5rem)] z-0
-                    ${isDark ? "bg-slate-700" : "bg-sky-100"}
-                  `}
-                />
-              )}
-
-              <div
-                className={`
-                  relative z-10 flex h-14 w-14 items-center justify-center rounded-2xl
-                  ${isDark ? "bg-sky-500" : "bg-sky-500"}
-                `}
-              >
-                <Icon className="h-6 w-6 text-white" strokeWidth={1.75} />
-                <span
-                  className={`
-                    absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center
-                    rounded-full text-[10px] font-bold
-                    ${
-                      isDark
-                        ? "bg-slate-950 text-sky-300 ring-1 ring-slate-700"
-                        : "bg-white text-sky-700 ring-1 ring-sky-100 shadow-sm"
-                    }
-                  `}
-                >
-                  {id}
-                </span>
-              </div>
-
-              <h3
-                className={`mt-5 text-base sm:text-lg font-semibold ${
-                  isDark ? "text-white" : "text-slate-900"
-                }`}
-              >
-                {title}
-              </h3>
-              <p
-                className={`mt-2 max-w-xs text-sm leading-relaxed ${
-                  isDark ? "text-slate-400" : "text-slate-600"
-                }`}
-              >
-                {desc}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        <div className="mt-12 sm:mt-16 flex flex-col items-center gap-3">
-          <Link
-            to="/contact"
-            className={`
-              group inline-flex w-full sm:w-auto items-center justify-center gap-2
-              rounded-xl px-6 sm:px-8 py-3 sm:py-3.5
-              text-sm sm:text-base font-semibold text-white
-              transition-all duration-200 active:scale-[0.98]
-              focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2
-              ${
-                isDark
-                  ? "bg-sky-500 hover:bg-sky-400 focus-visible:ring-offset-slate-950 shadow-lg shadow-sky-500/20"
-                  : "bg-sky-600 hover:bg-sky-500 focus-visible:ring-offset-white shadow-lg shadow-sky-600/20"
-              }
-            `}
-          >
-            Contact Us
-            <ArrowRight
-              className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1"
-              strokeWidth={2}
-            />
-          </Link>
-          <span
-            className={`text-sm font-semibold ${
-              isDark ? "text-slate-500" : "text-slate-500"
-            }`}
-          >
-            No trading experience? This program isn't for you — yet.
-          </span>
-        </div>
+              No trading experience? This program isn't for you — yet.
+            </span>
+          </div>
+        </RevealOnScroll>
       </div>
     </section>
   );

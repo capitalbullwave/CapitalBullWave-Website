@@ -374,6 +374,24 @@ const FeatureSection = ({ theme = "light" }) => {
 
 const HomeFeatureProduct = ({ theme }) => {
   const isDark = theme === "dark";
+  const plansRef = useRef(null);
+  const [plansVisible, setPlansVisible] = useState(false);
+
+  useEffect(() => {
+    const node = plansRef.current;
+    if (!node) return undefined;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setPlansVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.12 }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section className="w-full py-12 sm:py-16 lg:py-20 transition-colors duration-300">
@@ -411,7 +429,12 @@ const HomeFeatureProduct = ({ theme }) => {
         </p>
       </div>
 
-      <div className="mt-12 grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 xl:grid-cols-3">
+      <div
+        ref={plansRef}
+        className={`plans-grid mt-12 grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-2 xl:grid-cols-3 ${
+          plansVisible ? "is-visible" : ""
+        }`}
+      >
         {plans.map((plan) => (
           <article
             key={plan.title}

@@ -11,7 +11,7 @@ import { AIsendMessage } from "../api/chatApi.js";
 import { getLocalBotReply } from "./chatbotdata.js";
 
 const WELCOME =
-  "Welcome to Capital BullWave.\n\nI'm your assistant — ask me clearly about:\n\n• Services & markets\n• Pricing & plans\n• Skilled Trader Funding\n• Contact details\n• Refund / KYC / Grievance policies";
+  "Welcome to **Capital BullWave**.\n\nI'm your assistant — ask me clearly about:\n\n• **Services & markets**\n• **Pricing & plans**\n• **Skilled Trader Funding**\n• **Contact details**\n• **Refund / KYC / Grievance** policies";
 
 const quickReplies = [
   "Services",
@@ -22,6 +22,9 @@ const quickReplies = [
   "Refund Policy",
 ];
 
+const CONTACT_LABELS =
+  /^(email|phone|whatsapp|phone\/whatsapp|office|address|business hours|support|compliance|location|policy|acknowledgement|typical resolution|profit split|services|our plans|contact capital bullwave|why choose capital bullwave|kyc & aml|refund policy|grievance redressal|skilled trader funding program)\s*:/i;
+
 function nowTime() {
   return new Date().toLocaleTimeString([], {
     hour: "2-digit",
@@ -29,23 +32,24 @@ function nowTime() {
   });
 }
 
-function linkifyText(text) {
+function linkifyInline(text, keyPrefix, accentClass, linkClass) {
   const pattern =
-    /(https?:\/\/[^\s]+|\/[a-z0-9\-/?#]+|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|\+?\d[\d\s-]{8,}\d)/g;
+    /(https?:\/\/[^\s]+|\/[a-z0-9\-/?#]+|[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}|\+?\d[\d\s\-()]{8,}\d)/g;
 
   const parts = String(text).split(pattern);
 
   return parts.map((part, index) => {
     if (!part) return null;
+    const key = `${keyPrefix}-${index}`;
 
     if (/^https?:\/\//i.test(part)) {
       return (
         <a
-          key={`${part}-${index}`}
+          key={key}
           href={part}
           target="_blank"
           rel="noreferrer"
-          className="underline underline-offset-2 break-all"
+          className={linkClass}
         >
           {part}
         </a>
@@ -54,43 +58,132 @@ function linkifyText(text) {
 
     if (/^\/[a-z0-9\-/?#]+/i.test(part)) {
       return (
-        <a
-          key={`${part}-${index}`}
-          href={part}
-          className="underline underline-offset-2 break-all"
-        >
+        <a key={key} href={part} className={linkClass}>
           {part}
         </a>
       );
     }
 
-    if (/@/.test(part) && part.includes(".")) {
+    if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(part)) {
       return (
-        <a
-          key={`${part}-${index}`}
-          href={`mailto:${part}`}
-          className="underline underline-offset-2 break-all"
-        >
+        <a key={key} href={`mailto:${part}`} className={linkClass}>
           {part}
         </a>
       );
     }
 
-    if (/^\+?\d[\d\s-]{8,}\d$/.test(part)) {
+    if (/^\+?\d[\d\s\-()]{8,}\d$/.test(part)) {
       const tel = part.replace(/[^\d+]/g, "");
       return (
-        <a
-          key={`${part}-${index}`}
-          href={`tel:${tel}`}
-          className="underline underline-offset-2"
-        >
+        <a key={key} href={`tel:${tel}`} className={linkClass}>
           {part}
         </a>
       );
     }
 
-    return <span key={`${index}-${part.slice(0, 8)}`}>{part}</span>;
+    return (
+      <span key={key} className={accentClass}>
+        {part}
+      </span>
+    );
   });
+}
+
+function formatRichSegments(text, keyPrefix, titleClass, linkClass) {
+  const segments = String(text).split(/(\*\*[^*]+\*\*)/g);
+
+  return segments.map((segment, index) => {
+    if (!segment) return null;
+    const key = `${keyPrefix}-seg-${index}`;
+
+    if (segment.startsWith("**") && segment.endsWith("**")) {
+      const inner = segment.slice(2, -2);
+      return (
+        <strong key={key} className={titleClass}>
+          {linkifyInline(inner, key, "", linkClass)}
+        </strong>
+      );
+    }
+
+    return (
+      <span key={key}>
+        {linkifyInline(segment, key, "", linkClass)}
+      </span>
+    );
+  });
+}
+
+function ChatMessageBody({ text, isUser, isDark }) {
+  const titleClass = isUser
+    ? "font-bold text-white"
+    : isDark
+      ? "font-bold text-sky-300"
+      : "font-bold text-sky-700";
+
+  const linkClass = isUser
+    ? "underline underline-offset-2 break-all text-white font-semibold"
+    : isDark
+      ? "underline underline-offset-2 break-all text-sky-300 font-semibold"
+      : "underline underline-offset-2 break-all text-sky-700 font-semibold";
+
+  const labelClass = isUser
+    ? "font-bold text-white"
+    : isDark
+      ? "font-bold text-sky-300"
+      : "font-bold text-sky-700";
+
+  const lines = String(text).split("\n");
+
+  return (
+    <div className="space-y-1.5 text-[13px] sm:text-sm leading-6">
+      {lines.map((line, lineIndex) => {
+        const key = `line-${lineIndex}`;
+        const trimmed = line.trim();
+
+        if (!trimmed) {
+          return <div key={key} className="h-1.5" />;
+        }
+
+        const bulletMatch = trimmed.match(/^([-•*]|\d+\.)\s+(.*)$/);
+        const content = bulletMatch ? bulletMatch[2] : trimmed;
+        const bullet = bulletMatch ? bulletMatch[1] : null;
+
+        const contactMatch = content.match(CONTACT_LABELS);
+        if (contactMatch) {
+          const label = contactMatch[0];
+          const value = content.slice(label.length).trim();
+          return (
+            <p key={key} className="flex flex-wrap gap-x-1.5">
+              {bullet && <span className="shrink-0 opacity-70">{bullet}</span>}
+              <span className={labelClass}>{label}</span>
+              <span>{linkifyInline(value, key, "", linkClass)}</span>
+            </p>
+          );
+        }
+
+        // "Title: rest of sentence" without markdown — bold the title caption
+        const plainTitle = content.match(
+          /^([A-Z][A-Za-z0-9 &/+\-]{1,40}):(\s+.+)$/
+        );
+        if (plainTitle && !content.includes("**")) {
+          return (
+            <p key={key}>
+              {bullet && <span className="mr-1.5 opacity-70">{bullet}</span>}
+              <strong className={titleClass}>{plainTitle[1]}:</strong>
+              {formatRichSegments(plainTitle[2], key, titleClass, linkClass)}
+            </p>
+          );
+        }
+
+        return (
+          <p key={key}>
+            {bullet && <span className="mr-1.5 opacity-70">{bullet}</span>}
+            {formatRichSegments(content, key, titleClass, linkClass)}
+          </p>
+        );
+      })}
+    </div>
+  );
 }
 
 export default function ChatWidget({ theme }) {
@@ -175,8 +268,10 @@ export default function ChatWidget({ theme }) {
         type="button"
         aria-label={isOpen ? "Close chat" : "Open chat assistant"}
         onClick={() => setIsOpen((v) => !v)}
-        className={`chat-fab fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-[9999]
-          flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-full
+        className={`chat-fab fixed z-[9999]
+          right-4 sm:right-6
+          bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] sm:bottom-[calc(1.5rem+env(safe-area-inset-bottom,0px))]
+          flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full
           bg-gradient-to-br from-sky-500 to-cyan-600 text-white
           shadow-[0_16px_40px_rgba(14,165,233,0.4)]
           transition-all duration-300 hover:scale-105 active:scale-95
@@ -199,8 +294,8 @@ export default function ChatWidget({ theme }) {
               ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
               : "opacity-0 scale-95 translate-y-6 pointer-events-none"
           }
-          inset-x-2 bottom-[4.75rem] h-[min(72vh,640px)]
-          sm:inset-x-auto sm:right-6 sm:bottom-24 sm:h-[620px] sm:w-[400px]
+          inset-x-2 bottom-[calc(4.25rem+env(safe-area-inset-bottom,0px))] h-[min(68vh,600px)]
+          sm:inset-x-auto sm:right-6 sm:bottom-[calc(5.5rem+env(safe-area-inset-bottom,0px))] sm:h-[600px] sm:w-[400px]
           md:w-[420px]
           rounded-2xl sm:rounded-[1.5rem] backdrop-blur-xl
           shadow-[0_25px_60px_rgba(2,6,23,0.28)]
@@ -289,9 +384,11 @@ export default function ChatWidget({ theme }) {
                         : "rounded-bl-md bg-white text-slate-800 ring-1 ring-sky-100"
                   }`}
                 >
-                  <p className="whitespace-pre-line text-[13px] sm:text-sm leading-6">
-                    {linkifyText(msg.text)}
-                  </p>
+                  <ChatMessageBody
+                    text={msg.text}
+                    isUser={msg.sender === "user"}
+                    isDark={isDark}
+                  />
                   <p
                     className={`mt-1.5 text-[10px] ${
                       msg.sender === "user"

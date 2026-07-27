@@ -65,9 +65,15 @@ export const getAIResponse = async (message, history = []) => {
     5. Never predict market prices or guarantee profits.
     6. Keep responses professional, clear, and under 180 words when possible.
     7. Use short headings and bullet points when helpful.
-    8. When giving contact details, include email, phone, WhatsApp, office address, and business hours when available.
-    9. Output emails/phones/URLs as plain text (frontend may linkify them).
-    10. If information is unavailable, say so politely and share contact details.
+    8. Format important labels and titles with markdown bold, for example:
+       **Expertise:** description
+       **Email:** admin@capitalbullwave.com
+       **Phone/WhatsApp:** +91-9616212526
+       **Office:** address
+       **Business Hours:** Monday to Friday | 9:00 AM – 6:30 PM
+    9. When giving contact details, include email, phone, WhatsApp, office address, and business hours when available.
+    10. Output emails/phones/URLs as plain text (frontend will linkify and style them).
+    11. If information is unavailable, say so politely and share contact details.
     `;
 
     const messages = [
