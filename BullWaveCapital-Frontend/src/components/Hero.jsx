@@ -22,6 +22,8 @@ const slides = [
   },
 ];
 
+const trustItems = ["SEBI Registered", "Trusted Research", "Risk Managed"];
+
 function CountUp({ end, duration = 2000, decimals = 0, suffix = "" }) {
   const [count, setCount] = useState(0);
   const frameRef = useRef(null);
@@ -68,13 +70,12 @@ export default function Hero({ theme = "light" }) {
   return (
     <section
       className={`
-        hero-section relative min-h-[72vh] sm:min-h-[82vh]
-        overflow-hidden rounded-xl sm:rounded-2xl lg:rounded-3xl
+        hero-section relative min-h-[78vh] sm:min-h-[88vh]
+        overflow-hidden rounded-[1.25rem] sm:rounded-[1.75rem] lg:rounded-[2rem]
         transition-colors duration-300
         ${isDark ? "bg-slate-950" : "bg-white"}
       `}
     >
-      {/* Full-bleed background slideshow — both themes */}
       {slides.map((slide, index) => (
         <img
           key={slide.image}
@@ -89,50 +90,45 @@ export default function Hero({ theme = "light" }) {
         />
       ))}
 
-      {/* Theme-aware overlays for readable copy + visible image */}
       {isDark ? (
         <>
-          <div className="absolute inset-0 bg-slate-950/75" />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-slate-950/35" />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-slate-950/20" />
+          <div className="absolute inset-0 bg-slate-950/78" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/75 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/30" />
         </>
       ) : (
         <>
-          <div className="absolute inset-0 bg-white/45" />
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-sky-50/85 to-sky-100/25" />
-          <div className="absolute inset-0 bg-gradient-to-t from-sky-100/70 via-transparent to-white/30" />
+          <div className="absolute inset-0 bg-white/50" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-sky-50/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-sky-50/80 via-transparent to-white/40" />
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -top-24 -right-16 h-80 w-80 rounded-full bg-sky-300/35 blur-3xl animate-soft-pulse"
+            className="pointer-events-none absolute -top-28 right-0 h-[28rem] w-[28rem] rounded-full bg-sky-300/30 blur-3xl animate-soft-pulse"
           />
         </>
       )}
 
-      <div className="relative z-20 flex h-full min-h-[72vh] sm:min-h-[82vh] items-center px-1 py-12 sm:px-2 sm:py-14 lg:px-3 lg:py-16">
-        <div className="grid w-full items-center gap-10 lg:grid-cols-2 lg:gap-14">
+      <div className="relative z-20 flex min-h-[78vh] sm:min-h-[88vh] flex-col justify-between px-2 py-10 sm:px-3 sm:py-12 lg:px-4 lg:py-14">
+        <div className="grid w-full flex-1 items-center gap-8 lg:grid-cols-2 lg:gap-10 xl:gap-14">
           <div
             className={`flex flex-col items-center text-center lg:items-start lg:text-left animate-slide-in-left ${
               isDark ? "text-white" : "text-slate-900"
             }`}
           >
             <span
-              className={`inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.28em]
+              className={`inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[11px] font-semibold uppercase tracking-[0.22em]
               ${
                 isDark
-                  ? "bg-sky-500/15 text-sky-300 ring-1 ring-sky-400/30"
-                  : "bg-white/95 text-sky-600 shadow-sm shadow-sky-200/60 ring-1 ring-sky-100"
+                  ? "bg-white/10 text-sky-300 ring-1 ring-white/15"
+                  : "bg-sky-50 text-sky-700 ring-1 ring-sky-100"
               }`}
             >
-              <span
-                className={`h-2 w-2 rounded-full ${
-                  isDark ? "bg-sky-400" : "bg-sky-500"
-                } animate-pulse`}
-              />
+              <span className="h-2 w-2 rounded-full bg-sky-500 animate-pulse" />
               Trusted Investment Partner
             </span>
 
-            <h1 className="mt-5 max-w-xl text-3xl font-bold leading-tight tracking-tight sm:text-4xl lg:text-5xl xl:text-[3.25rem]">
-              <span className={isDark ? "text-white" : "text-slate-900"}>
+            <h1 className="mt-5 max-w-2xl text-[2rem] font-extrabold leading-[1.1] tracking-tight sm:text-5xl lg:text-[3.4rem] xl:text-[3.75rem]">
+              <span className={isDark ? "text-white" : "text-slate-950"}>
                 Invest Smarter
               </span>
               <span
@@ -154,14 +150,14 @@ export default function Hero({ theme = "light" }) {
               intelligence designed for long-term financial success.
             </p>
 
-            <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:gap-4">
+            <div className="mt-8 flex w-full max-w-md flex-col gap-3 sm:max-w-none sm:w-auto sm:flex-row sm:gap-3">
               <Link
                 to="/services"
-                className={`inline-flex items-center justify-center rounded-full px-8 py-3.5 font-semibold !text-white shadow-lg transition hover:-translate-y-0.5
+                className={`inline-flex w-full sm:w-auto items-center justify-center rounded-full px-8 py-3.5 text-[15px] font-semibold !text-white shadow-lg transition hover:-translate-y-0.5 active:scale-[0.98]
                 ${
                   isDark
-                    ? "bg-sky-500 shadow-sky-500/25 hover:bg-sky-400"
-                    : "bg-slate-900 shadow-slate-900/20 hover:bg-slate-800"
+                    ? "bg-sky-500 shadow-sky-500/30 hover:bg-sky-400"
+                    : "bg-slate-950 shadow-slate-900/20 hover:bg-slate-800"
                 }`}
               >
                 Explore Services
@@ -169,56 +165,37 @@ export default function Hero({ theme = "light" }) {
 
               <Link
                 to="/contact"
-                className={`hero-contact-btn inline-flex items-center justify-center rounded-full px-8 py-3.5 font-semibold transition hover:-translate-y-0.5
+                className={`hero-contact-btn inline-flex w-full sm:w-auto items-center justify-center rounded-full px-8 py-3.5 text-[15px] font-semibold transition hover:-translate-y-0.5 active:scale-[0.98]
                 ${
                   isDark
                     ? "bg-white/10 !text-white ring-1 ring-white/20 hover:bg-white/15"
-                    : "bg-sky-100 !text-sky-800 ring-1 ring-sky-200 hover:bg-sky-200/70"
+                    : "bg-sky-100 !text-sky-800 ring-1 ring-sky-200 hover:bg-sky-200/80"
                 }`}
               >
                 Contact Us
               </Link>
             </div>
-
-            <div
-              className={`mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-sm font-medium lg:justify-start
-              ${isDark ? "text-slate-300" : "text-slate-600"}`}
-            >
-              <span>SEBI Registered</span>
-              <span
-                className={`hidden h-1 w-1 rounded-full sm:block ${
-                  isDark ? "bg-slate-600" : "bg-sky-300"
-                }`}
-              />
-              <span>Trusted Research</span>
-              <span
-                className={`hidden h-1 w-1 rounded-full sm:block ${
-                  isDark ? "bg-slate-600" : "bg-sky-300"
-                }`}
-              />
-              <span>Risk Managed</span>
-            </div>
           </div>
 
           <div
-            className="relative w-full max-w-lg mx-auto lg:max-w-none lg:mx-0 animate-slide-in-right"
-            style={{ animationDelay: "140ms" }}
+            className="relative w-full max-w-xl mx-auto lg:max-w-none lg:mx-0 animate-slide-in-right"
+            style={{ animationDelay: "120ms" }}
           >
             <div
               aria-hidden="true"
-              className={`absolute inset-0 -z-10 blur-3xl rounded-full
-              ${isDark ? "bg-sky-500/20" : "bg-sky-300/45"}`}
+              className={`absolute -inset-6 -z-10 rounded-[2rem] blur-3xl
+              ${isDark ? "bg-sky-500/15" : "bg-sky-300/35"}`}
             />
 
             <div
-              className={`overflow-hidden rounded-2xl sm:rounded-3xl shadow-xl
+              className={`overflow-hidden rounded-[1.5rem] sm:rounded-[1.75rem] shadow-2xl
               ${
                 isDark
-                  ? "bg-slate-900/90 ring-1 ring-slate-700 shadow-sky-900/20"
-                  : "bg-white/95 ring-1 ring-sky-100 shadow-sky-200/50 backdrop-blur-xl"
+                  ? "bg-slate-900/95 ring-1 ring-white/10"
+                  : "bg-white/95 ring-1 ring-sky-100 backdrop-blur-xl"
               }`}
             >
-              <div className="relative h-48 sm:h-56 md:h-64 lg:h-[280px] overflow-hidden">
+              <div className="relative h-52 sm:h-60 md:h-72 lg:h-[300px] overflow-hidden">
                 {slides.map((slide, index) => (
                   <img
                     key={`panel-${slide.title}`}
@@ -232,7 +209,7 @@ export default function Hero({ theme = "light" }) {
                     }`}
                   />
                 ))}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/85 via-slate-900/25 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/25 to-transparent" />
 
                 <div
                   className={`absolute left-4 top-4 flex items-center gap-2 rounded-full px-3 py-1.5 text-xs font-semibold uppercase tracking-wider
@@ -246,11 +223,11 @@ export default function Hero({ theme = "light" }) {
                   Our Market
                 </div>
 
-                <div className="absolute bottom-5 left-5 right-5 animate-fade-in" key={active}>
-                  <h2 className="text-xl sm:text-2xl font-bold text-white">
+                <div className="absolute bottom-5 left-5 right-5" key={active}>
+                  <h2 className="text-xl sm:text-2xl font-bold text-white animate-fade-in">
                     {slides[active].title}
                   </h2>
-                  <p className="mt-2 text-sm leading-6 text-slate-200">
+                  <p className="mt-2 text-sm leading-6 text-slate-200 animate-fade-in">
                     {slides[active].desc}
                   </p>
                 </div>
@@ -258,13 +235,13 @@ export default function Hero({ theme = "light" }) {
 
               <div
                 className={`grid grid-cols-2 gap-3 p-4 sm:gap-4 sm:p-5
-                ${isDark ? "bg-slate-900" : "bg-sky-50/90"}`}
+                ${isDark ? "bg-slate-950/80" : "bg-sky-50/90"}`}
               >
                 <div
-                  className={`rounded-xl p-3.5 sm:p-4 transition hover:-translate-y-0.5
+                  className={`rounded-2xl p-3.5 sm:p-4 transition hover:-translate-y-0.5
                   ${
                     isDark
-                      ? "bg-slate-800/80"
+                      ? "bg-slate-900 ring-1 ring-white/5"
                       : "bg-white ring-1 ring-sky-100 shadow-sm"
                   }`}
                 >
@@ -295,10 +272,10 @@ export default function Hero({ theme = "light" }) {
                 </div>
 
                 <div
-                  className={`rounded-xl p-3.5 sm:p-4 transition hover:-translate-y-0.5
+                  className={`rounded-2xl p-3.5 sm:p-4 transition hover:-translate-y-0.5
                   ${
                     isDark
-                      ? "bg-slate-800/80"
+                      ? "bg-slate-900 ring-1 ring-white/5"
                       : "bg-white ring-1 ring-sky-100 shadow-sm"
                   }`}
                 >
@@ -325,26 +302,56 @@ export default function Hero({ theme = "light" }) {
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="absolute bottom-5 left-1/2 z-30 flex -translate-x-1/2 gap-2.5">
-        {slides.map((_, index) => (
-          <button
-            key={index}
-            type="button"
-            aria-label={`Go to slide ${index + 1}`}
-            onClick={() => setActive(index)}
-            className={`rounded-full transition-all duration-500 ${
-              active === index
-                ? isDark
-                  ? "h-2 w-8 bg-sky-400"
-                  : "h-2 w-8 bg-sky-600"
-                : isDark
-                  ? "h-2 w-2 bg-slate-600 hover:bg-slate-400"
-                  : "h-2 w-2 bg-sky-300 hover:bg-sky-500"
+        {/* Olymp-style trust strip — same existing labels */}
+        <div className="relative mt-8 sm:mt-10">
+          <div className="mb-4 flex justify-center gap-2.5">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                aria-label={`Go to slide ${index + 1}`}
+                onClick={() => setActive(index)}
+                className={`rounded-full transition-all duration-500 ${
+                  active === index
+                    ? isDark
+                      ? "h-2 w-8 bg-sky-400"
+                      : "h-2 w-8 bg-sky-600"
+                    : isDark
+                      ? "h-2 w-2 bg-slate-600 hover:bg-slate-400"
+                      : "h-2 w-2 bg-sky-300 hover:bg-sky-500"
+                }`}
+              />
+            ))}
+          </div>
+
+          <div
+            className={`grid grid-cols-1 gap-2 sm:grid-cols-3 sm:gap-0
+            ${
+              isDark
+                ? "rounded-2xl bg-white/5 ring-1 ring-white/10"
+                : "rounded-2xl bg-white/85 ring-1 ring-sky-100 shadow-sm backdrop-blur"
             }`}
-          />
-        ))}
+          >
+            {trustItems.map((item, i) => (
+              <div
+                key={item}
+                className={`flex items-center justify-center gap-2 px-3 py-3.5 text-sm font-semibold
+                ${isDark ? "text-slate-200" : "text-slate-700"}
+                ${
+                  i < trustItems.length - 1
+                    ? isDark
+                      ? "sm:border-r sm:border-white/10"
+                      : "sm:border-r sm:border-sky-100"
+                    : ""
+                }`}
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-sky-500" />
+                {item}
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );

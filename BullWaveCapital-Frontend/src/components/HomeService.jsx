@@ -1,4 +1,5 @@
 import { FaChartLine, FaHandshake, FaShieldAlt, FaMapMarkerAlt } from "react-icons/fa";
+import StackedCards from "./StackedCards";
 
 const services = [
   {
@@ -41,8 +42,8 @@ const HomeService = ({ theme = "light" }) => {
           Our Services
         </p>
         <h2
-          className={`mt-5 text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl ${
-            isDark ? "text-white" : "text-slate-900"
+          className={`section-title mt-5 text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl ${
+            isDark ? "text-white" : "text-slate-950"
           }`}
         >
           Professional stock market research and investment advisory from Delhi.
@@ -58,58 +59,16 @@ const HomeService = ({ theme = "light" }) => {
         </p>
       </div>
 
-      <div className="mt-12 grid gap-5 sm:gap-6 md:grid-cols-3">
-        {services.map((service) => {
-          const Icon = service.icon;
-
-          return (
-            <article
-              key={service.title}
-              className={`min-w-0 rounded-2xl p-6 sm:p-8 transition duration-300 hover:-translate-y-1
-              ${
-                isDark
-                  ? "bg-slate-900 ring-1 ring-slate-800 hover:ring-sky-500/40"
-                  : "bg-white ring-1 ring-sky-100 shadow-sm shadow-sky-100/80 hover:shadow-md hover:ring-sky-200"
-              }`}
-            >
-              <div
-                className={`mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl text-white
-                ${isDark ? "bg-sky-500" : "bg-sky-500"}`}
-              >
-                <Icon className="h-5 w-5" />
-              </div>
-              <h3
-                className={`text-xl font-semibold ${
-                  isDark ? "text-white" : "text-slate-900"
-                }`}
-              >
-                {service.title}
-              </h3>
-              <p
-                className={`mt-2 text-xs font-semibold uppercase tracking-[0.2em] ${
-                  isDark ? "text-sky-400" : "text-sky-600"
-                }`}
-              >
-                {service.subtitle}
-              </p>
-              <p
-                className={`mt-3 text-sm leading-7 ${
-                  isDark ? "text-slate-400" : "text-slate-600"
-                }`}
-              >
-                {service.description}
-              </p>
-            </article>
-          );
-        })}
+      <div className="mt-10 sm:mt-14">
+        <StackedCards items={services} theme={theme} />
       </div>
 
       <div
-        className={`mt-12 sm:mt-16 overflow-hidden rounded-2xl sm:rounded-3xl
+        className={`mt-12 sm:mt-16 overflow-hidden rounded-2xl sm:rounded-[1.75rem]
         ${
           isDark
-            ? "bg-slate-900 ring-1 ring-slate-800"
-            : "bg-white ring-1 ring-sky-100 shadow-sm shadow-sky-100/80"
+            ? "bg-slate-900 ring-1 ring-white/10"
+            : "bg-white ring-1 ring-sky-100 shadow-[0_12px_36px_rgba(14,165,233,0.07)]"
         }`}
       >
         <div className="grid lg:grid-cols-2">
@@ -124,7 +83,7 @@ const HomeService = ({ theme = "light" }) => {
 
             <h3
               className={`mt-4 text-2xl font-bold leading-tight sm:text-3xl ${
-                isDark ? "text-white" : "text-slate-900"
+                isDark ? "text-white" : "text-slate-950"
               }`}
             >
               Aggarwal Millennium Tower 2,
@@ -144,25 +103,18 @@ const HomeService = ({ theme = "light" }) => {
             </p>
 
             <div
-              className={`mt-8 flex items-center gap-4 rounded-xl p-4
+              className={`mt-8 flex items-center gap-4 rounded-2xl p-4
               ${
                 isDark
                   ? "bg-slate-800/80"
                   : "bg-sky-50 ring-1 ring-sky-100"
               }`}
             >
-              <div
-                className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-white
-                ${isDark ? "bg-sky-500" : "bg-sky-500"}`}
-              >
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-sky-500 text-white">
                 <FaMapMarkerAlt className="text-xl" />
               </div>
               <div>
-                <p
-                  className={`text-xs uppercase tracking-[0.2em] ${
-                    isDark ? "text-slate-500" : "text-slate-500"
-                  }`}
-                >
+                <p className="text-xs uppercase tracking-[0.2em] text-slate-500">
                   Head Office
                 </p>
                 <p

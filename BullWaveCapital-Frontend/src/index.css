@@ -286,6 +286,7 @@ img {
 }
 
 .premium-card {
+  border-radius: 1.25rem;
   transition:
     transform 0.35s ease,
     box-shadow 0.35s ease,
@@ -295,6 +296,14 @@ img {
 
 .premium-card:hover {
   transform: translateY(-4px);
+}
+
+.theme-light .premium-card:hover {
+  box-shadow: 0 18px 40px rgba(14, 165, 233, 0.12);
+}
+
+.theme-dark .premium-card:hover {
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
 }
 
 /* Home-only motion flourishes */
@@ -343,18 +352,97 @@ img {
   animation: accordionOpen 0.35s ease both;
 }
 
-.home-section-divider {
-  height: 1px;
-  width: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(14, 165, 233, 0.35),
-    transparent
-  );
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  padding: 0.375rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.section-title {
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+.fintech-surface-light {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(186, 230, 253, 0.7);
+  box-shadow: 0 12px 36px rgba(14, 165, 233, 0.07);
+}
+
+.fintech-surface-dark {
+  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.28);
+}
+
+/* Stacked cards (INDmoney-inspired) */
+.stacked-cards {
+  touch-action: pan-y;
+}
+
+.stacked-card {
+  will-change: transform, opacity;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.stacked-card--front {
+  animation: stackedGlow 4.5s ease-in-out infinite;
+}
+
+@keyframes stackedGlow {
+  0%,
+  100% {
+    box-shadow: 0 16px 40px rgba(14, 165, 233, 0.12);
+  }
+  50% {
+    box-shadow: 0 22px 48px rgba(14, 165, 233, 0.2);
+  }
+}
+
+.theme-dark .stacked-card--front {
+  animation-name: stackedGlowDark;
+}
+
+@keyframes stackedGlowDark {
+  0%,
+  100% {
+    box-shadow: 0 18px 48px rgba(0, 0, 0, 0.45);
+  }
+  50% {
+    box-shadow: 0 24px 56px rgba(14, 165, 233, 0.18);
+  }
+}
+
+@media (max-width: 480px) {
+  .stacked-cards .stacked-card:not(.stacked-card--front) {
+    /* Soften rear layers on very small screens */
+    opacity: 0.55 !important;
+  }
+}
+
+/* Why Choose — premium card motion */
+.home-choose-card {
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .home-choose-card:hover {
+    transform: translateY(-4px);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .stacked-card--front {
+    animation: none !important;
+  }
+
   .animate-fade-up,
   .animate-fade-in,
   .animate-float,
@@ -375,7 +463,8 @@ img {
     transition: none !important;
   }
 
-  .premium-card:hover {
+  .premium-card:hover,
+  .home-choose-card:hover {
     transform: none;
   }
 }

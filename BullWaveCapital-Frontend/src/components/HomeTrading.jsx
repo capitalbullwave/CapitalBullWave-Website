@@ -127,11 +127,11 @@ const HomeTrading = ({ theme }) => {
           {steps.map(({ id, icon: Icon, title, desc }, idx) => (
             <div
               key={id}
-              className={`relative flex flex-col items-center text-center rounded-2xl p-6 sm:p-8 transition
+              className={`relative flex flex-col items-center text-center rounded-2xl sm:rounded-[1.35rem] p-5 sm:p-7 transition hover:-translate-y-1
               ${
                 isDark
-                  ? "bg-slate-900/80 ring-1 ring-slate-800"
-                  : "bg-white ring-1 ring-sky-100 shadow-sm shadow-sky-100/80"
+                  ? "bg-slate-900/90 ring-1 ring-white/10"
+                  : "bg-white ring-1 ring-sky-100 shadow-[0_10px_30px_rgba(14,165,233,0.06)]"
               }`}
             >
               {idx < steps.length - 1 && (

@@ -18,7 +18,6 @@ const navItems = [
   { name: "About", path: "/about", icon: FaRocket },
   { name: "Services", path: "/services", icon: FaBriefcase },
   { name: "Markets", path: "/markets", icon: FaGlobe },
-  { name: "Contact", path: "/contact", icon: FaEnvelope },
 ];
 
 export default function Navbar({ theme, toggleTheme }) {
@@ -27,25 +26,16 @@ export default function Navbar({ theme, toggleTheme }) {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-xl border-b shadow-sm
+      className={`fixed top-0 left-0 right-0 z-50 border-b backdrop-blur-xl
       ${
         isDark
           ? "bg-slate-950/95 border-slate-800"
-          : "bg-white/90 border-sky-100"
+          : "bg-white/95 border-sky-100 shadow-[0_1px_0_rgba(14,165,233,0.08)]"
       }`}
     >
-      <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-sky-300 via-sky-500 to-sky-600" />
-
-      <div className="mx-auto flex h-16 sm:h-18 lg:h-20 max-w-[1600px] items-center justify-between px-3 sm:px-4 md:px-5 lg:px-6">
-
-          {/* ========================= LOGO ========================= */}
-
-        <Link
-          to="/"
-          className="flex items-center gap-3 sm:gap-4 flex-shrink-0"
-        >
-          {/* Logo mark (unchanged) */}
-          <div className="flex h-11 w-11 sm:h-12 sm:w-12 lg:h-14 lg:w-14 items-center justify-center overflow-hidden rounded-full border border-blue-200 bg-white shadow-md transition-all duration-300 hover:shadow-lg">
+      <div className="mx-auto flex h-16 sm:h-[4.25rem] max-w-[1680px] items-center justify-between gap-3 px-2.5 sm:px-3.5 md:px-4 lg:px-5">
+        <Link to="/" className="flex min-w-0 items-center gap-2.5 sm:gap-3 flex-shrink-0">
+          <div className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center overflow-hidden rounded-full ring-1 ring-sky-200 bg-white shadow-sm">
             <img
               src={logo}
               alt="Capital BullWave Pvt. Ltd."
@@ -53,229 +43,140 @@ export default function Navbar({ theme, toggleTheme }) {
             />
           </div>
 
-          {/* Divider between mark and wordmark, a common finance-brand cue */}
-          <div
-            className={`hidden sm:block h-7 lg:h-8 w-px ${
-              isDark ? "bg-slate-700" : "bg-slate-300"
-            }`}
-          />
-
-          {/* Company Name */}
-          <div className="flex flex-col justify-center leading-tight">
-
-            <div className="flex items-baseline gap-1.5 whitespace-nowrap">
-
+          <div className="flex min-w-0 flex-col justify-center leading-tight">
+            <div className="flex items-baseline gap-1 whitespace-nowrap">
               <span
-                className={`text-[16px] sm:text-[18px] lg:text-[20px] font-semibold tracking-tight ${
-                  isDark ? "text-white" : "text-slate-900"
+                className={`text-[15px] sm:text-[17px] font-semibold tracking-tight ${
+                  isDark ? "text-white" : "text-slate-950"
                 }`}
               >
                 Capital
               </span>
-
               <span
-                className={`text-[16px] sm:text-[18px] lg:text-[20px] font-bold tracking-tight ${
-                  isDark ? "text-sky-400" : "text-blue-700"
+                className={`text-[15px] sm:text-[17px] font-bold tracking-tight ${
+                  isDark ? "text-sky-400" : "text-sky-600"
                 }`}
               >
                 BullWave
               </span>
-
             </div>
-
-            <div className="mt-1 flex items-center gap-1.5">
-
-              <span
-                className={`h-[3px] w-[3px] rounded-full ${
-                  isDark ? "bg-sky-500" : "bg-sky-500"
-                }`}
-              />
-
-              <span
-                className={`text-[8.5px] sm:text-[9.5px] font-medium uppercase tracking-[0.28em] ${
-                  isDark ? "text-slate-400" : "text-slate-500"
-                }`}
-              >
-                Private Limited
-              </span>
-
-            </div>
-
+            <span
+              className={`mt-0.5 hidden text-[9px] font-medium uppercase tracking-[0.22em] sm:block ${
+                isDark ? "text-slate-400" : "text-slate-500"
+              }`}
+            >
+              Private Limited
+            </span>
           </div>
-
         </Link>
 
-        {/* ====================== Desktop Navigation ====================== */}
-
-        <div className="hidden lg:flex flex-1 justify-center items-center gap-8 xl:gap-10">
-
-          {navItems.map((item) => {
-            const Icon = item.icon;
-
-            return (
-              <NavLink
-                key={item.name}
-                to={item.path}
-                end={item.path === "/"}
-                className={({ isActive }) =>
-                  `group relative flex items-center gap-2 py-2 text-[14px] font-semibold transition-all duration-300 ${
-                    isActive
-                      ? "text-blue-600"
-                      : isDark
-                      ? "text-slate-200 hover:text-blue-400"
-                      : "text-slate-700 hover:text-blue-600"
-                  }`
-                }
-              >
-                {({ isActive }) => (
-                  <>
-                    <Icon
-                      className={`text-[13px] transition-all duration-300 ${
-                        isActive
-                          ? "text-sky-600"
-                          : "group-hover:text-sky-500"
-                      }`}
-                    />
-
-                    <span>{item.name}</span>
-
-                    <span
-                      className={`absolute left-0 -bottom-[6px] h-[2px] rounded-full bg-sky-500 transition-all duration-300 ${
-                        isActive
-                          ? "w-full"
-                          : "w-0 group-hover:w-full"
-                      }`}
-                    />
-                  </>
-                )}
-              </NavLink>
-            );
-          })}
-
+        <div
+          className={`hidden lg:flex items-center gap-1 rounded-full px-2 py-1
+          ${isDark ? "bg-white/5" : "bg-sky-50/80"}`}
+        >
+          {navItems.map((item) => (
+            <NavLink
+              key={item.name}
+              to={item.path}
+              end={item.path === "/"}
+              className={({ isActive }) =>
+                `rounded-full px-4 py-2 text-[13px] font-semibold transition-all duration-200 ${
+                  isActive
+                    ? isDark
+                      ? "bg-sky-500 text-white"
+                      : "bg-white text-sky-700 shadow-sm ring-1 ring-sky-100"
+                    : isDark
+                      ? "text-slate-300 hover:text-white hover:bg-white/5"
+                      : "text-slate-600 hover:text-sky-700 hover:bg-white/70"
+                }`
+              }
+            >
+              {item.name}
+            </NavLink>
+          ))}
         </div>
 
-        {/* ===================== Right Side ===================== */}
-
-        <div className="flex items-center gap-3 ml-8 lg:ml-10 flex-shrink-0">
-
-          {/* Theme */}
-
+        <div className="flex items-center gap-2 sm:gap-2.5 flex-shrink-0">
           <button
             onClick={toggleTheme}
             aria-label="Toggle Theme"
-            className={`flex h-8 w-8 items-center justify-center cursor-pointer rounded-full border transition-all duration-300 ${
+            className={`flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 ${
               isDark
-                ? "border-slate-700 text-white hover:bg-slate-800"
-                : "border-slate-300 text-slate-700 hover:bg-slate-100"
+                ? "bg-white/5 text-white ring-1 ring-white/10 hover:bg-white/10"
+                : "bg-sky-50 text-slate-700 ring-1 ring-sky-100 hover:bg-sky-100"
             }`}
           >
-            {isDark ? <FaSun size={15} /> : <FaMoon size={15} />}
+            {isDark ? <FaSun size={14} /> : <FaMoon size={14} />}
           </button>
 
-          {/* Mobile */}
+          <Link
+            to="/contact"
+            className={`hidden sm:inline-flex items-center justify-center rounded-full px-4 py-2 text-[13px] font-semibold !text-white transition hover:-translate-y-0.5 ${
+              isDark
+                ? "bg-sky-500 hover:bg-sky-400"
+                : "bg-slate-950 hover:bg-slate-800"
+            }`}
+          >
+            Contact
+          </Link>
 
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className={`lg:hidden flex h-8 w-8 items-center justify-center rounded-lg border transition-all duration-300 ${
+            aria-label="Toggle menu"
+            className={`lg:hidden flex h-9 w-9 items-center justify-center rounded-full transition-all duration-300 ${
               isDark
-                ? "border-slate-700 bg-slate-900 text-white"
-                : "border-slate-300 bg-white text-blue-700"
+                ? "bg-white/5 text-white ring-1 ring-white/10"
+                : "bg-sky-50 text-sky-700 ring-1 ring-sky-100"
             }`}
           >
-            {menuOpen ? <FaTimes size={18} /> : <FaBars size={18} />}
+            {menuOpen ? <FaTimes size={16} /> : <FaBars size={16} />}
           </button>
-
         </div>
-
       </div>
-
-      {/* ===========================
-              Mobile Menu
-      =========================== */}
 
       <div
         className={`lg:hidden overflow-hidden transition-all duration-300
-        ${
-          menuOpen
-            ? "max-h-[500px] border-t"
-            : "max-h-0"
-        }
-        ${
-          isDark
-            ? "border-slate-800"
-            : "border-slate-200"
-        }`}
+        ${menuOpen ? "max-h-[420px] border-t" : "max-h-0"}
+        ${isDark ? "border-slate-800" : "border-sky-100"}`}
       >
-
         <div
-          className={`px-5 py-5 backdrop-blur-xl
-          ${
-            isDark
-              ? "bg-slate-950"
-              : "bg-white"
+          className={`px-3 py-3 sm:px-4 ${
+            isDark ? "bg-slate-950" : "bg-white"
           }`}
         >
-
-          {navItems.map((item) => {
-            const Icon = item.icon;
-
-            return (
-              <NavLink
-                key={item.name}
-                to={item.path}
-                end={item.path === "/"}
-                onClick={() => setMenuOpen(false)}
-                className={({ isActive }) =>
-                  `group flex items-center justify-between border-b py-4 transition-all duration-300
-                  ${
-                    isActive
-                      ? "border-blue-600 text-blue-600"
-                      : isDark
-                      ? "border-slate-800 text-slate-200 hover:text-blue-400"
-                      : "border-slate-200 text-slate-700 hover:text-blue-600"
-                  }`
-                }
-              >
-                {({ isActive }) => (
-                  <>
-                    <div className="flex items-center gap-3">
-
-                      <Icon
-                        className={`text-[15px]
-                        ${
-                          isActive
-                            ? "text-blue-600"
-                            : ""
-                        }`}
-                      />
-
-                      <span className="text-[15px] font-medium">
-                        {item.name}
-                      </span>
-
-                    </div>
-
-                    <span
-                      className={`text-lg transition-all
-                      ${
-                        isActive
-                          ? "translate-x-1 text-blue-600"
-                          : "group-hover:translate-x-1"
-                      }`}
-                    >
-                      →
-                    </span>
-                  </>
-                )}
-              </NavLink>
-            );
-          })}
-
+          {[...navItems, { name: "Contact", path: "/contact", icon: FaEnvelope }].map(
+            (item) => {
+              const Icon = item.icon;
+              return (
+                <NavLink
+                  key={item.name}
+                  to={item.path}
+                  end={item.path === "/"}
+                  onClick={() => setMenuOpen(false)}
+                  className={({ isActive }) =>
+                    `mb-1 flex items-center justify-between rounded-xl px-3 py-3 text-[15px] font-medium transition-all
+                    ${
+                      isActive
+                        ? isDark
+                          ? "bg-sky-500/15 text-sky-300"
+                          : "bg-sky-50 text-sky-700"
+                        : isDark
+                          ? "text-slate-200 hover:bg-white/5"
+                          : "text-slate-700 hover:bg-sky-50"
+                    }`
+                  }
+                >
+                  <div className="flex items-center gap-3">
+                    <Icon className="text-[14px]" />
+                    <span>{item.name}</span>
+                  </div>
+                  <span aria-hidden="true">→</span>
+                </NavLink>
+              );
+            }
+          )}
         </div>
-
       </div>
-            {/* Bottom Accent Line */}
-      <div className="h-[2px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent" />
     </nav>
   );
 }

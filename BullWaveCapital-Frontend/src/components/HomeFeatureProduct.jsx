@@ -231,7 +231,7 @@ const HomeFeatureProduct = ({ theme }) => {
         {plans.map((plan) => (
           <article
             key={plan.title}
-            className={`group relative min-w-0 rounded-2xl p-6 sm:p-8 transition duration-300 hover:-translate-y-1 plan-card-anim
+              className={`group relative min-w-0 rounded-2xl sm:rounded-[1.35rem] p-5 sm:p-7 transition duration-300 hover:-translate-y-1 plan-card-anim
             ${plan.featured ? "featured-plan-card" : ""}
             ${
               plan.featured
@@ -239,8 +239,8 @@ const HomeFeatureProduct = ({ theme }) => {
                   ? "bg-sky-500 text-white shadow-lg shadow-sky-500/20 ring-1 ring-sky-400"
                   : "bg-gradient-to-br from-sky-500 to-sky-600 text-white shadow-lg shadow-sky-500/25"
                 : isDark
-                  ? "bg-slate-900 ring-1 ring-slate-800 text-white"
-                  : "bg-white ring-1 ring-sky-100 shadow-sm shadow-sky-100/80 text-slate-900"
+                  ? "bg-slate-900 ring-1 ring-white/10 text-white"
+                  : "bg-white ring-1 ring-sky-100 shadow-[0_10px_30px_rgba(14,165,233,0.06)] text-slate-900"
             }`}
           >
             {plan.featured && (

@@ -10,8 +10,8 @@ const About = ({ theme }) => {
   const dark = theme === "dark";
 
   const shell = dark
-    ? "relative overflow-hidden rounded-2xl sm:rounded-3xl bg-slate-900/95 ring-1 ring-slate-800"
-    : "relative overflow-hidden rounded-2xl sm:rounded-3xl bg-white/95 ring-1 ring-sky-100 shadow-sm shadow-sky-100/80";
+    ? "relative overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] bg-slate-900/95 ring-1 ring-white/10"
+    : "relative overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] bg-white/95 ring-1 ring-sky-100 shadow-[0_16px_50px_rgba(14,165,233,0.08)]";
 
   const card = dark
     ? "premium-card rounded-2xl bg-slate-800/80 ring-1 ring-slate-700 p-5 sm:p-7"

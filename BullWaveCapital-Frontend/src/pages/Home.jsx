@@ -32,7 +32,7 @@ const organizationSchema = {
 
 const Home = ({ theme }) => {
   return (
-    <>
+    <div className="space-y-1 sm:space-y-2">
       <Helmet>
         <title>
           Capital BullWave | Stock Market Research & Investment Advisory in Delhi
@@ -72,34 +72,26 @@ const Home = ({ theme }) => {
         <Hero theme={theme} />
       </div>
 
-      <div className="home-section-divider my-2 sm:my-3" aria-hidden="true" />
-
       <RevealOnScroll>
         <HomeTrading theme={theme} />
       </RevealOnScroll>
-
-      <div className="home-section-divider my-2 sm:my-3" aria-hidden="true" />
 
       <RevealOnScroll delay={40}>
         <HomeService theme={theme} />
       </RevealOnScroll>
 
-      <div className="home-section-divider my-2 sm:my-3" aria-hidden="true" />
-
       <RevealOnScroll delay={40}>
         <HomeFeatureProduct theme={theme} />
       </RevealOnScroll>
 
-      <RevealOnScroll delay={60}>
+      <RevealOnScroll delay={50}>
         <HomeChoose theme={theme} />
       </RevealOnScroll>
-
-      <div className="home-section-divider my-2 sm:my-3" aria-hidden="true" />
 
       <RevealOnScroll delay={40}>
         <HomeFAQS theme={theme} />
       </RevealOnScroll>
-    </>
+    </div>
   );
 };
 

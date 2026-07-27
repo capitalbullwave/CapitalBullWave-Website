@@ -79,9 +79,9 @@ export default function HomeFAQS({ theme }) {
         dark ? "text-white" : "text-slate-900"
       }`}
     >
-      <div className="mx-auto mb-12 max-w-4xl text-center">
+      <div className="mx-auto mb-10 sm:mb-12 max-w-4xl text-center">
         <span
-          className={`inline-flex rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-[0.28em]
+          className={`inline-flex rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-[0.22em]
           ${
             dark
               ? "bg-sky-500/15 text-sky-300"
@@ -92,8 +92,8 @@ export default function HomeFAQS({ theme }) {
         </span>
 
         <h2
-          className={`mt-5 text-2xl font-bold leading-tight sm:text-3xl lg:text-4xl ${
-            dark ? "text-white" : "text-slate-900"
+          className={`section-title mt-5 text-2xl font-bold sm:text-3xl lg:text-4xl ${
+            dark ? "text-white" : "text-slate-950"
           }`}
         >
           Research, plans, and advisory questions answered clearly.
@@ -109,20 +109,20 @@ export default function HomeFAQS({ theme }) {
         </p>
       </div>
 
-      <div className="space-y-6 sm:space-y-8">
+      <div className="mx-auto max-w-5xl space-y-4 sm:space-y-5">
         {faqSections.map((section) => (
           <div
             key={section.title}
-            className={`rounded-2xl p-5 sm:p-7
+            className={`rounded-2xl sm:rounded-[1.35rem] p-4 sm:p-6 transition
             ${
               dark
-                ? "bg-slate-900 ring-1 ring-slate-800"
-                : "bg-white ring-1 ring-sky-100 shadow-sm shadow-sky-100/80"
+                ? "bg-slate-900 ring-1 ring-white/10"
+                : "bg-white ring-1 ring-sky-100 shadow-[0_10px_30px_rgba(14,165,233,0.06)]"
             }`}
           >
             <h3
-              className={`mb-4 text-lg font-bold sm:text-xl ${
-                dark ? "text-white" : "text-slate-900"
+              className={`mb-2 px-1 text-lg font-bold sm:text-xl ${
+                dark ? "text-sky-300" : "text-sky-700"
               }`}
             >
               {section.title}
@@ -130,7 +130,7 @@ export default function HomeFAQS({ theme }) {
 
             <div
               className={`divide-y ${
-                dark ? "divide-slate-800" : "divide-sky-100"
+                dark ? "divide-white/10" : "divide-sky-100"
               }`}
             >
               {section.items.map((item, index) => {
@@ -142,9 +142,16 @@ export default function HomeFAQS({ theme }) {
                     key={key}
                     type="button"
                     onClick={() => toggleItem(key)}
-                    className="group w-full py-4 text-left transition-colors"
+                    className={`group w-full rounded-xl px-2 py-4 text-left transition-colors sm:px-3
+                    ${
+                      open
+                        ? dark
+                          ? "bg-white/5"
+                          : "bg-sky-50/70"
+                        : ""
+                    }`}
                   >
-                    <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-start justify-between gap-4">
                       <h4
                         className={`text-base font-semibold sm:text-lg ${
                           dark ? "text-slate-100" : "text-slate-900"
@@ -153,15 +160,26 @@ export default function HomeFAQS({ theme }) {
                         {item.question}
                       </h4>
 
-                      <FaChevronDown
-                        className={`h-4 w-4 shrink-0 transition-transform duration-300 ${
-                          open ? "rotate-180 text-sky-500" : ""
-                        } ${dark ? "text-slate-400" : "text-slate-500"}`}
-                      />
+                      <span
+                        className={`mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition
+                        ${
+                          open
+                            ? "bg-sky-500 text-white"
+                            : dark
+                              ? "bg-white/5 text-slate-400"
+                              : "bg-sky-50 text-sky-600 ring-1 ring-sky-100"
+                        }`}
+                      >
+                        <FaChevronDown
+                          className={`h-3.5 w-3.5 transition-transform duration-300 ${
+                            open ? "rotate-180" : ""
+                          }`}
+                        />
+                      </span>
                     </div>
 
                     <div
-                      className={`grid transition-all duration-350 ease-out ${
+                      className={`grid transition-all duration-300 ease-out ${
                         open
                           ? "mt-3 grid-rows-[1fr] opacity-100"
                           : "grid-rows-[0fr] opacity-0"
@@ -170,7 +188,7 @@ export default function HomeFAQS({ theme }) {
                       <div className="overflow-hidden">
                         {open && (
                           <p
-                            className={`faq-answer-enter pt-1 text-sm leading-7 sm:text-base ${
+                            className={`faq-answer-enter text-sm leading-7 sm:text-base ${
                               dark ? "text-slate-400" : "text-slate-600"
                             }`}
                           >

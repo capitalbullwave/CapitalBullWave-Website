@@ -74,8 +74,8 @@ function App() {
 
         <ScrollToTop />
 
-        {/* Main Content — wide layout, minimal side gutters (funding-style) */}
-        <main className="mx-auto min-h-screen w-full max-w-[1600px] px-3 pt-20 pb-8 sm:px-4 sm:pt-24 sm:pb-10 md:px-5 lg:px-6">
+        {/* Main — full-width fintech shell, minimal side gutters */}
+        <main className="site-main mx-auto min-h-screen w-full max-w-[1680px] px-2.5 pt-[4.5rem] pb-6 sm:px-3.5 sm:pt-24 sm:pb-8 md:px-4 lg:px-5">
           <Routes>
             <Route path="/" element={<Home theme={theme} />} />
             <Route path="/about" element={<About theme={theme} />} />

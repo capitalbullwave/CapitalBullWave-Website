@@ -56,19 +56,19 @@ const Footer = ({ theme }) => {
 
   const footer = dark
     ? "border-slate-800 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-300"
-    : "border-slate-300 bg-gradient-to-r from-slate-200 via-blue-100 to-slate-200 text-slate-800";
+    : "border-sky-100 bg-gradient-to-br from-white via-sky-50 to-sky-100/70 text-slate-800";
     
-  const heading = dark ? "text-white" : "text-slate-900";
+  const heading = dark ? "text-white" : "text-slate-950";
 
   const text = dark ? "text-slate-400" : "text-slate-600";
 
   const link = dark
     ? "text-slate-300 hover:text-sky-300"
-    : "text-blue-700 hover:text-blue-900";
+    : "text-sky-700 hover:text-sky-900";
 
   const icon = dark
     ? "border-slate-700 bg-slate-900/80 text-slate-300"
-    : "border-white bg-white/90 shadow-md text-slate-700";
+    : "border-sky-100 bg-white shadow-sm text-sky-700";
 
   return (
     <footer className={`relative overflow-hidden border-t ${footer}`}>
@@ -79,19 +79,19 @@ const Footer = ({ theme }) => {
 
         <div
           className={`absolute -left-32 -top-32 h-60 w-72 rounded-full blur-3xl opacity-20 ${
-            dark ? "bg-sky-500" : "bg-blue-300"
+            dark ? "bg-sky-500" : "bg-sky-300"
           }`}
         />
 
         <div
           className={`absolute bottom-0 right-0 h-96 w-96 rounded-full blur-3xl opacity-20 ${
-            dark ? "bg-indigo-500" : "bg-cyan-300"
+            dark ? "bg-cyan-500" : "bg-sky-200"
           }`}
         />
 
       </div>
 
-      <div className="relative mx-auto max-w-[1600px] px-3 py-6 sm:px-4 md:px-5 lg:px-6">
+      <div className="relative mx-auto max-w-[1680px] px-2.5 py-6 sm:px-3.5 md:px-4 lg:px-5">
 
          <div className="grid gap-8 md:grid-cols-[1.5fr_0.8fr_0.8fr] md:grid-rows-[auto_auto]">
 
@@ -106,7 +106,7 @@ const Footer = ({ theme }) => {
               ${
                 dark
                   ? "border-slate-700 bg-slate-800/80 text-sky-300"
-                  : "border-blue-200 bg-white/80 text-blue-700 shadow-sm"
+                  : "border-sky-200 bg-white/90 text-sky-700 shadow-sm"
               }`}
             >
               Capital BullWave Private Limited
@@ -139,7 +139,7 @@ const Footer = ({ theme }) => {
                   href={link}
                   target="_blank"
                   rel="noreferrer"
-                  className={`flex h-11 w-11 items-center justify-center rounded-full border transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:border-blue-600 hover:bg-blue-600 hover:text-white ${icon}`}
+                  className={`flex h-11 w-11 items-center justify-center rounded-full border transition-all duration-300 hover:-translate-y-1 hover:scale-110 hover:border-sky-500 hover:bg-sky-500 hover:text-white ${icon}`}
                 >
                   <Icon className="text-lg" />
                 </a>
@@ -153,7 +153,7 @@ const Footer = ({ theme }) => {
               href="mailto:admin@capitalbullwave.com"
               className={`mt-4 inline-flex items-center gap-3 text-[15px] font-medium transition-colors ${link}`}
             >
-              <span className="h-[2px] w-8 rounded-full bg-blue-600"></span>
+              <span className="h-[2px] w-8 rounded-full bg-sky-500"></span>
 
               admin@capitalbullwave.com
             </a>
@@ -350,7 +350,7 @@ const Footer = ({ theme }) => {
 
         <div
           className={`mt-2 border-t pt-7 ${
-            dark ? "border-slate-800" : "border-blue-200"
+            dark ? "border-slate-800" : "border-sky-200"
           }`}
         >
 
@@ -379,7 +379,7 @@ const Footer = ({ theme }) => {
 
               <Link
                 to="/privacy-policy"
-                className={`transition-colors hover:text-blue-600 ${text}`}
+                className={`transition-colors hover:text-sky-600 ${text}`}
               >
                 Privacy
               </Link>
@@ -388,7 +388,7 @@ const Footer = ({ theme }) => {
 
               <Link
                 to="/terms"
-                className={`transition-colors hover:text-blue-600 ${text}`}
+                className={`transition-colors hover:text-sky-600 ${text}`}
               >
                 Terms
               </Link>
@@ -397,7 +397,7 @@ const Footer = ({ theme }) => {
 
               <Link
                 to="/disclaimer"
-                className={`transition-colors hover:text-blue-600 ${text}`}
+                className={`transition-colors hover:text-sky-600 ${text}`}
               >
                 Disclaimer
               </Link>
