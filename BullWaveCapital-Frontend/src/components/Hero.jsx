@@ -98,12 +98,12 @@ export default function Hero({ theme = "light" }) {
         </>
       ) : (
         <>
-          <div className="absolute inset-0 bg-white/50" />
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-sky-50/20" />
-          <div className="absolute inset-0 bg-gradient-to-t from-sky-50/80 via-transparent to-white/40" />
+          <div className="absolute inset-0 bg-gradient-to-br from-white/85 via-sky-50/70 to-sky-200/55" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-sky-100/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-sky-100/90 via-transparent to-sky-50/40" />
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -top-28 right-0 h-[28rem] w-[28rem] rounded-full bg-sky-300/30 blur-3xl animate-soft-pulse"
+            className="pointer-events-none absolute -top-28 right-0 h-[28rem] w-[28rem] rounded-full bg-sky-400/35 blur-3xl animate-soft-pulse"
           />
         </>
       )}
@@ -112,7 +112,7 @@ export default function Hero({ theme = "light" }) {
         <div className="grid w-full flex-1 items-center gap-8 lg:grid-cols-2 lg:gap-10 xl:gap-14">
           <div
             className={`flex flex-col items-center text-center lg:items-start lg:text-left animate-slide-in-left ${
-              isDark ? "text-white" : "text-slate-900"
+              isDark ? "text-white" : "text-black"
             }`}
           >
             <span
@@ -128,13 +128,15 @@ export default function Hero({ theme = "light" }) {
             </span>
 
             <h1 className="mt-5 max-w-2xl text-[2rem] font-extrabold leading-[1.1] tracking-tight sm:text-5xl lg:text-[3.4rem] xl:text-[3.75rem]">
-              <span className={isDark ? "text-white" : "text-slate-950"}>
+              <span className={isDark ? "text-white" : "text-black"}>
                 Invest Smarter
               </span>
               <span
-                className={`mt-2 block ${
-                  isDark ? "text-sky-400" : "text-sky-600"
-                }`}
+                className={`mt-2 block bg-gradient-to-r ${
+                  isDark
+                    ? "from-sky-300 to-cyan-300"
+                    : "from-sky-600 to-sky-400"
+                } bg-clip-text text-transparent`}
               >
                 Build Wealth.
               </span>
@@ -142,7 +144,7 @@ export default function Hero({ theme = "light" }) {
 
             <p
               className={`mt-5 max-w-xl text-base leading-7 sm:text-lg ${
-                isDark ? "text-slate-300" : "text-slate-600"
+                isDark ? "text-slate-300" : "text-neutral-800"
               }`}
             >
               BullWave Capital helps investors grow with disciplined trading,
@@ -153,12 +155,7 @@ export default function Hero({ theme = "light" }) {
             <div className="mt-8 flex w-full max-w-md flex-col gap-3 sm:max-w-none sm:w-auto sm:flex-row sm:gap-3">
               <Link
                 to="/services"
-                className={`inline-flex w-full sm:w-auto items-center justify-center rounded-full px-8 py-3.5 text-[15px] font-semibold !text-white shadow-lg transition hover:-translate-y-0.5 active:scale-[0.98]
-                ${
-                  isDark
-                    ? "bg-sky-500 shadow-sky-500/30 hover:bg-sky-400"
-                    : "bg-slate-950 shadow-slate-900/20 hover:bg-slate-800"
-                }`}
+                className="bw-gradient-btn inline-flex w-full sm:w-auto items-center justify-center rounded-full px-8 py-3.5 text-[15px] font-semibold !text-white transition hover:-translate-y-0.5 active:scale-[0.98]"
               >
                 Explore Services
               </Link>
@@ -169,7 +166,7 @@ export default function Hero({ theme = "light" }) {
                 ${
                   isDark
                     ? "bg-white/10 !text-white ring-1 ring-white/20 hover:bg-white/15"
-                    : "bg-sky-100 !text-sky-800 ring-1 ring-sky-200 hover:bg-sky-200/80"
+                    : "bg-white !text-sky-800 ring-1 ring-sky-200 hover:bg-sky-50"
                 }`}
               >
                 Contact Us

@@ -29,8 +29,8 @@ export default function Navbar({ theme, toggleTheme }) {
       className={`fixed top-0 left-0 right-0 z-50 border-b backdrop-blur-xl
       ${
         isDark
-          ? "bg-slate-950/95 border-slate-800"
-          : "bg-white/95 border-sky-100 shadow-[0_1px_0_rgba(14,165,233,0.08)]"
+          ? "border-sky-900/50 bg-slate-950/95"
+          : "border-sky-200 bg-gradient-to-r from-white via-sky-50 to-sky-100/90 shadow-[0_1px_0_rgba(14,165,233,0.15)]"
       }`}
     >
       <div className="mx-auto flex h-16 sm:h-[4.25rem] max-w-[1680px] items-center justify-between gap-3 px-2.5 sm:px-3.5 md:px-4 lg:px-5">
@@ -47,7 +47,7 @@ export default function Navbar({ theme, toggleTheme }) {
             <div className="flex items-baseline gap-1 whitespace-nowrap">
               <span
                 className={`text-[15px] sm:text-[17px] font-semibold tracking-tight ${
-                  isDark ? "text-white" : "text-slate-950"
+                  isDark ? "text-white" : "text-black"
                 }`}
               >
                 Capital
@@ -111,11 +111,7 @@ export default function Navbar({ theme, toggleTheme }) {
 
           <Link
             to="/contact"
-            className={`hidden sm:inline-flex items-center justify-center rounded-full px-4 py-2 text-[13px] font-semibold !text-white transition hover:-translate-y-0.5 ${
-              isDark
-                ? "bg-sky-500 hover:bg-sky-400"
-                : "bg-slate-950 hover:bg-slate-800"
-            }`}
+            className="bw-gradient-btn hidden sm:inline-flex items-center justify-center rounded-full px-4 py-2 text-[13px] font-semibold !text-white transition hover:-translate-y-0.5"
           >
             Contact
           </Link>

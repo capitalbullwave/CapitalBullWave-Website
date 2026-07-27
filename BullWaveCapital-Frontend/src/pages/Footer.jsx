@@ -55,12 +55,12 @@ const Footer = ({ theme }) => {
   =========================================== */
 
   const footer = dark
-    ? "border-slate-800 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-300"
-    : "border-sky-100 bg-gradient-to-br from-white via-sky-50 to-sky-100/70 text-slate-800";
+    ? "border-slate-800 bg-gradient-to-br from-slate-950 via-slate-900 to-sky-950 text-slate-300"
+    : "border-sky-100 bg-gradient-to-br from-white via-sky-50 to-sky-100 text-black";
     
-  const heading = dark ? "text-white" : "text-slate-950";
+  const heading = dark ? "text-white" : "text-black";
 
-  const text = dark ? "text-slate-400" : "text-slate-600";
+  const text = dark ? "text-slate-400" : "text-neutral-800";
 
   const link = dark
     ? "text-slate-300 hover:text-sky-300"

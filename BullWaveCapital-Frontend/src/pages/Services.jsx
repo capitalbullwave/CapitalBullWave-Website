@@ -9,9 +9,9 @@ export default function Services({ theme }) {
     ? "premium-card rounded-2xl bg-slate-800/80 ring-1 ring-slate-700 p-5 sm:p-7"
     : "premium-card rounded-2xl bg-white ring-1 ring-sky-100 shadow-sm shadow-sky-100/70 p-5 sm:p-7";
 
-  const muted = dark ? "text-slate-300" : "text-slate-600";
+  const muted = dark ? "text-slate-300" : "text-neutral-800";
   const heading = dark ? "text-sky-300" : "text-sky-700";
-  const title = dark ? "text-white" : "text-slate-900";
+  const title = dark ? "text-white" : "text-black";
 
   return (
     <div className="page-shell">

@@ -21,9 +21,9 @@ const About = ({ theme }) => {
     ? "rounded-xl bg-slate-900/80 p-4 sm:p-5"
     : "rounded-xl bg-sky-50 p-4 sm:p-5 ring-1 ring-sky-100";
 
-  const muted = dark ? "text-slate-300" : "text-slate-600";
+  const muted = dark ? "text-slate-300" : "text-neutral-800";
   const heading = dark ? "text-sky-300" : "text-sky-700";
-  const title = dark ? "text-white" : "text-slate-900";
+  const title = dark ? "text-white" : "text-black";
 
   return (
     <div className="page-shell">
@@ -54,7 +54,7 @@ const About = ({ theme }) => {
             className={`absolute inset-0 ${
               dark
                 ? "bg-linear-to-br from-slate-900 via-slate-900 to-sky-950/40"
-                : "bg-linear-to-br from-white via-sky-50 to-sky-100/80"
+                : "bg-gradient-to-br from-white via-sky-50 to-sky-100"
             }`}
           />
           <div

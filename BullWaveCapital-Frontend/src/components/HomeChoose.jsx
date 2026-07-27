@@ -97,7 +97,7 @@ const HomeChoose = ({ theme }) => {
         </p>
         <h2
           className={`mt-4 text-2xl font-bold leading-tight tracking-tight sm:mt-5 sm:text-3xl lg:text-4xl ${
-            isDark ? "text-white" : "text-slate-950"
+            isDark ? "text-white" : "text-black"
           }`}
         >
           Modern stock market research, advisory, and trading support designed
@@ -105,7 +105,7 @@ const HomeChoose = ({ theme }) => {
         </h2>
         <p
           className={`mx-auto mt-3 max-w-2xl text-sm leading-7 sm:mt-4 sm:text-base md:text-lg ${
-            isDark ? "text-slate-400" : "text-slate-600"
+            isDark ? "text-slate-400" : "text-neutral-800"
           }`}
         >
           Capital Bull Wave focuses on structured market research, active

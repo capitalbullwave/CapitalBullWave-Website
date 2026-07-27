@@ -76,7 +76,7 @@ export default function HomeFAQS({ theme }) {
     <section
       id="faq"
       className={`w-full scroll-mt-24 py-12 sm:py-16 lg:py-20 ${
-        dark ? "text-white" : "text-slate-900"
+        dark ? "text-white" : "text-black"
       }`}
     >
       <div className="mx-auto mb-10 sm:mb-12 max-w-4xl text-center">

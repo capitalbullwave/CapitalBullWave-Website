@@ -58,7 +58,7 @@ const HomeTrading = ({ theme }) => {
           className={`
             mt-5 text-center font-bold tracking-tight
             text-2xl sm:text-3xl md:text-4xl leading-tight
-            ${isDark ? "text-white" : "text-slate-900"}
+            ${isDark ? "text-white" : "text-black"}
           `}
         >
           Got the skill?{" "}
@@ -70,7 +70,7 @@ const HomeTrading = ({ theme }) => {
         <p
           className={`
             mx-auto mt-4 max-w-2xl text-center text-sm sm:text-base leading-relaxed
-            ${isDark ? "text-slate-400" : "text-slate-600"}
+            ${isDark ? "text-slate-400" : "text-neutral-800"}
           `}
         >
           Know how to trade but don't have money to invest? Contact us and take

@@ -754,8 +754,8 @@ export default function Contact({ theme }) {
           <div
             className={`overflow-hidden rounded-2xl sm:rounded-[32px] px-5 py-8 sm:px-8 sm:py-12 text-center ${
               isDark
-                ? "bg-gradient-to-r from-sky-700 to-blue-800"
-                : "bg-gradient-to-r from-blue-700 to-sky-500"
+                ? "bg-gradient-to-r from-sky-700 to-cyan-800"
+                : "bg-gradient-to-r from-sky-500 via-sky-600 to-cyan-500"
             }`}
           >
 

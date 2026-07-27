@@ -67,14 +67,14 @@ const HomeService = ({ theme = "light" }) => {
         </p>
         <h2
           className={`section-title mt-5 text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl ${
-            isDark ? "text-white" : "text-slate-950"
+            isDark ? "text-white" : "text-black"
           }`}
         >
           Professional stock market research and investment advisory from Delhi.
         </h2>
         <p
           className={`mt-4 text-base leading-7 sm:text-lg ${
-            isDark ? "text-slate-400" : "text-slate-600"
+            isDark ? "text-slate-400" : "text-neutral-800"
           }`}
         >
           Bull Wave Capital provides market research, investment guidance, and
