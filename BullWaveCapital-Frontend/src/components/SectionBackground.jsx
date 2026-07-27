@@ -1,4 +1,5 @@
 import React from "react";
+import TradingAtmosphere from "./TradingAtmosphere";
 
 const SectionBackground = ({ children, className = "", dark = false }) => {
   return (
@@ -25,6 +26,8 @@ const SectionBackground = ({ children, className = "", dark = false }) => {
         className={`pointer-events-none absolute -bottom-36 -right-24 h-80 w-80 rounded-full blur-3xl
         ${dark ? "bg-cyan-500/10" : "bg-sky-200/70"}`}
       />
+
+      <TradingAtmosphere theme={dark ? "dark" : "light"} />
 
       <div className="relative z-10 p-4 sm:p-6 lg:p-8">{children}</div>
     </div>

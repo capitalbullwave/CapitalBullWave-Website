@@ -1,5 +1,6 @@
 import { FaChartLine, FaHandshake, FaShieldAlt } from "react-icons/fa";
 import StackedCards from "./StackedCards";
+import TradingAtmosphere from "./TradingAtmosphere";
 
 const services = [
   {
@@ -53,8 +54,9 @@ const HomeService = ({ theme = "light" }) => {
   const isDark = theme === "dark";
 
   return (
-    <section className="w-full py-12 sm:py-16 lg:py-20">
-      <div className="mx-auto max-w-4xl text-center">
+    <section className="relative w-full overflow-hidden py-12 sm:py-16 lg:py-20">
+      <TradingAtmosphere theme={theme} />
+      <div className="relative z-10 mx-auto max-w-4xl text-center">
         <p
           className={`inline-flex rounded-full px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.28em]
           ${
@@ -83,11 +85,11 @@ const HomeService = ({ theme = "light" }) => {
         </p>
       </div>
 
-      <div className="mt-10 sm:mt-14">
+      <div className="relative z-10 mt-10 sm:mt-14">
         <StackedCards items={services} theme={theme} />
       </div>
 
-      <div className="home-service-showcase mt-12 sm:mt-16">
+      <div className="home-service-showcase relative z-10 mt-12 sm:mt-16">
         <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-3 md:grid-rows-2">
           {showcase.map((item, index) => (
             <article

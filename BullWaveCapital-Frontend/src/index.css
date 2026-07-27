@@ -933,6 +933,406 @@ html.theme-dark * {
   color: #ffffff !important;
 }
 
+/* Hero — professional motion */
+.hero-bg-slide {
+  opacity: 0;
+  transform: scale(1.08);
+  transition:
+    opacity 1.2s ease,
+    transform 6s ease;
+}
+
+.hero-bg-slide.is-active {
+  opacity: 1;
+  transform: scale(1);
+  animation: heroKenburns 5.2s ease-out both;
+}
+
+.hero-panel__img {
+  opacity: 0;
+  transform: scale(1.08);
+  transition:
+    opacity 0.9s ease,
+    transform 5.2s ease;
+}
+
+.hero-panel__img.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.hero-progress {
+  width: 0%;
+  animation: heroProgress 5.2s linear both;
+  transform-origin: left center;
+}
+
+.hero-progress.is-paused {
+  animation-play-state: paused;
+}
+
+@keyframes heroProgress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes heroKenburns {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.hero-orb {
+  animation: heroOrb 7s ease-in-out infinite;
+}
+
+.hero-orb--delay {
+  animation-delay: 1.4s;
+}
+
+@keyframes heroOrb {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.75;
+  }
+  50% {
+    transform: translate3d(-12px, 10px, 0) scale(1.08);
+    opacity: 1;
+  }
+}
+
+.hero-section--ready .hero-fade {
+  animation: heroFadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.hero-fade--1 {
+  animation-delay: 0.05s;
+}
+.hero-fade--2 {
+  animation-delay: 0.14s;
+}
+.hero-fade--3 {
+  animation-delay: 0.24s;
+}
+.hero-fade--4 {
+  animation-delay: 0.34s;
+}
+.hero-fade--5 {
+  animation-delay: 0.48s;
+}
+
+.hero-section--ready .hero-panel {
+  animation: heroPanelIn 0.85s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: 0.18s;
+}
+
+.hero-section--ready .hero-stat {
+  animation: heroFadeUp 0.65s ease both;
+  animation-delay: 0.45s;
+}
+
+.hero-section--ready .hero-stat--delay {
+  animation-delay: 0.55s;
+}
+
+.hero-section--ready .hero-trust {
+  animation: heroFadeUp 0.55s ease both;
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroPanelIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.hero-slide-text {
+  animation: heroFadeUp 0.45s ease both;
+}
+
+.hero-slide-text--delay {
+  animation-delay: 0.08s;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hero-stat:hover {
+    transform: translateY(-3px);
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-section {
+    min-height: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-bg-slide,
+  .hero-panel__img,
+  .hero-progress,
+  .hero-orb,
+  .hero-section--ready .hero-fade,
+  .hero-section--ready .hero-panel,
+  .hero-section--ready .hero-stat,
+  .hero-section--ready .hero-trust,
+  .hero-slide-text {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .hero-progress {
+    width: 100%;
+  }
+}
+
+/* ==========================================
+   MONEY / TRADING ATMOSPHERE
+========================================== */
+
+.trading-atmosphere {
+  z-index: 1;
+}
+
+.trading-atmosphere--light {
+  color: rgba(2, 132, 199, 0.45);
+}
+
+.trading-atmosphere--dark {
+  color: rgba(56, 189, 248, 0.45);
+}
+
+.trading-chart__line {
+  stroke-dasharray: 520;
+  stroke-dashoffset: 520;
+  animation: tradingDraw 4.5s ease-in-out infinite;
+}
+
+.trading-chart__dot {
+  opacity: 0;
+  animation: tradingDot 4.5s ease-in-out infinite;
+}
+
+@keyframes tradingDraw {
+  0% {
+    stroke-dashoffset: 520;
+    opacity: 0.2;
+  }
+  35% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+  75% {
+    stroke-dashoffset: 0;
+    opacity: 0.95;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.25;
+  }
+}
+
+@keyframes tradingDot {
+  0%,
+  30% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  40%,
+  70% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+}
+
+.trading-candle {
+  width: 6px;
+  border-radius: 2px;
+  animation: tradingCandle 2.4s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.trading-candle.is-up {
+  background: linear-gradient(180deg, #38bdf8, #0284c7);
+}
+
+.trading-candle.is-down {
+  background: linear-gradient(180deg, #7dd3fc, #0ea5e9);
+  opacity: 0.65;
+}
+
+.trading-atmosphere--dark .trading-candle.is-up {
+  background: linear-gradient(180deg, #7dd3fc, #0ea5e9);
+}
+
+@keyframes tradingCandle {
+  0%,
+  100% {
+    transform: scaleY(0.85);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scaleY(1.15);
+    opacity: 1;
+  }
+}
+
+.trading-float {
+  position: absolute;
+  font-weight: 700;
+  font-size: clamp(1rem, 2.4vw, 1.45rem);
+  opacity: 0.28;
+  animation: tradingFloat 7s ease-in-out infinite;
+  user-select: none;
+}
+
+.trading-atmosphere--light .trading-float {
+  color: #0369a1;
+}
+
+.trading-atmosphere--dark .trading-float {
+  color: #7dd3fc;
+}
+
+.trading-float--1 {
+  top: 12%;
+  left: 8%;
+  animation-delay: 0s;
+}
+
+.trading-float--2 {
+  top: 36%;
+  right: 10%;
+  animation-delay: 1.2s;
+  font-size: clamp(0.95rem, 2vw, 1.25rem);
+}
+
+.trading-float--3 {
+  bottom: 28%;
+  left: 16%;
+  animation-delay: 2.1s;
+}
+
+.trading-float--4 {
+  top: 58%;
+  right: 22%;
+  animation-delay: 2.8s;
+}
+
+.trading-atmosphere--dense .trading-float {
+  opacity: 0.34;
+}
+
+@keyframes tradingFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(4deg);
+  }
+}
+
+.trading-ticker {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.trading-ticker__track {
+  display: flex;
+  width: max-content;
+  gap: 0;
+  white-space: nowrap;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.35;
+  animation: tradingTicker 28s linear infinite;
+}
+
+.trading-atmosphere--light .trading-ticker__track {
+  color: #0369a1;
+}
+
+.trading-atmosphere--dark .trading-ticker__track {
+  color: #7dd3fc;
+}
+
+@keyframes tradingTicker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 640px) {
+  .trading-chart {
+    opacity: 0.55;
+    top: 10%;
+    width: 70%;
+    height: 4.5rem;
+  }
+
+  .trading-float--2,
+  .trading-float--4 {
+    display: none;
+  }
+
+  .trading-float {
+    opacity: 0.2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trading-chart__line,
+  .trading-chart__dot,
+  .trading-candle,
+  .trading-float,
+  .trading-ticker__track {
+    animation: none !important;
+  }
+
+  .trading-chart__line {
+    stroke-dashoffset: 0;
+    opacity: 0.5;
+  }
+
+  .trading-chart__dot {
+    opacity: 0.7;
+  }
+}
+
 .theme-light .site-main {
   color: #000000;
 }

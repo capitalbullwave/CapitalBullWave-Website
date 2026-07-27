@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { PhoneCall, ClipboardCheck, TrendingUp, ArrowRight } from "lucide-react";
+import TradingAtmosphere from "./TradingAtmosphere";
 
 const steps = [
   {
@@ -40,7 +41,9 @@ const HomeTrading = ({ theme }) => {
         ${isDark ? "bg-sky-500/10" : "bg-sky-200/60"}`}
       />
 
-      <div className="relative w-full">
+      <TradingAtmosphere theme={theme} />
+
+      <div className="relative z-10 w-full">
         <div className="flex justify-center">
           <span
             className={`inline-flex items-center rounded-full px-4 py-1.5 text-xs sm:text-sm font-semibold
