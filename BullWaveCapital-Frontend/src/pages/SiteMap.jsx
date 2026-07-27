@@ -8,8 +8,10 @@ import {
   FaEnvelope,
   FaShieldAlt,
   FaFileContract,
-  FaExclamationTriangle,
+  FaComments,
   FaSitemap,
+  FaUndoAlt,
+  FaUserCheck,
 } from "react-icons/fa";
 import RevealOnScroll from "../components/RevealOnScroll";
 
@@ -21,7 +23,21 @@ const pages = [
   { name: "Contact", path: "/contact", icon: FaEnvelope },
   { name: "Privacy Policy", path: "/privacy-policy", icon: FaShieldAlt },
   { name: "Terms & Conditions", path: "/terms", icon: FaFileContract },
-  { name: "Disclaimer", path: "/disclaimer", icon: FaExclamationTriangle },
+  {
+    name: "Refund & Cancellation Policy",
+    path: "/refund-policy",
+    icon: FaUndoAlt,
+  },
+  {
+    name: "KYC & AML Policy",
+    path: "/kyc-aml-policy",
+    icon: FaUserCheck,
+  },
+  {
+    name: "Grievance Redressal Policy",
+    path: "/grievance-policy",
+    icon: FaComments,
+  },
   { name: "Site Map", path: "/site-map", icon: FaSitemap },
 ];
 
@@ -34,7 +50,7 @@ export default function SiteMap({ theme }) {
         <title>Site Map | Capital BullWave</title>
         <meta
           name="description"
-          content="Browse all pages of the Capital BullWave website including Home, About, Services, Markets, Contact, Privacy Policy, Terms and Disclaimer."
+          content="Browse all pages of the Capital BullWave website including Home, About, Services, Markets, Contact, Privacy Policy, Terms, Refund, KYC & AML, and Grievance Policy."
         />
         <link rel="canonical" href="https://www.capitalbullwave.com/site-map" />
         <meta property="og:title" content="Site Map | Capital BullWave" />

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 
 import Navbar from "./pages/Navbar";
 import Footer from "./pages/Footer";
@@ -10,8 +10,10 @@ import Market from "./pages/Market";
 import Contact from "./pages/Contact";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import TermsCondition from "./pages/TermsCondition";
+import RefundPolicy from "./pages/RefundPolicy";
+import KycAmlPolicy from "./pages/KycAmlPolicy";
 import SiteMap from "./pages/SiteMap";
-import Disclaimer from "./pages/Disclaimer";
+import GrievancePolicy from "./pages/GrievancePolicy";
 import ChatWidget from "./components/ChatWidget";
 import ScrollToTop from "./components/ScrollToTop";
 import { Toaster } from "react-hot-toast";
@@ -27,6 +29,7 @@ function App() {
   const [theme, setTheme] = useState(() => {
     return localStorage.getItem("bullwave-theme") || "light";
   });
+  const location = useLocation();
 
   useEffect(() => {
     localStorage.setItem("bullwave-theme", theme);
@@ -84,7 +87,7 @@ function App() {
         <ScrollToTop />
 
         <main className="site-main mx-auto min-h-screen w-full max-w-[1680px] px-2 sm:px-3 md:px-4 lg:px-5 pt-[4.75rem] pb-5 sm:pt-[5.75rem] sm:pb-8">
-          <Routes>
+          <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home theme={theme} />} />
             <Route path="/about" element={<About theme={theme} />} />
             <Route path="/services" element={<Services theme={theme} />} />
@@ -95,8 +98,23 @@ function App() {
               element={<PrivacyPolicy theme={theme} />}
             />
             <Route path="/terms" element={<TermsCondition theme={theme} />} />
+            <Route
+              path="/refund-policy"
+              element={<RefundPolicy theme={theme} />}
+            />
+            <Route
+              path="/kyc-aml-policy"
+              element={<KycAmlPolicy theme={theme} />}
+            />
             <Route path="/site-map" element={<SiteMap theme={theme} />} />
-            <Route path="/disclaimer" element={<Disclaimer theme={theme} />} />
+            <Route
+              path="/grievance-policy"
+              element={<GrievancePolicy theme={theme} />}
+            />
+            <Route
+              path="/disclaimer"
+              element={<Navigate to="/grievance-policy" replace />}
+            />
           </Routes>
         </main>
 

@@ -25,7 +25,8 @@ export default function ScrollToTop() {
         : null;
 
     if (!id) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      // Instant jump so new pages mount into view (avoids invisible reveal content)
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" });
       return;
     }
 
@@ -44,7 +45,7 @@ export default function ScrollToTop() {
       }
     };
 
-    // Wait one frame so home sections (and FAQ) can mount after route change
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
     timer = window.setTimeout(tryScroll, 50);
 
     return () => {

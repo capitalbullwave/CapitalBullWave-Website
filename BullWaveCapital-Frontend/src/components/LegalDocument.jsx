@@ -1,4 +1,5 @@
 import RevealOnScroll from "./RevealOnScroll";
+import { useLocation } from "react-router-dom";
 
 /**
  * Premium shell for Privacy / Terms / Disclaimer pages.
@@ -8,13 +9,25 @@ export default function LegalDocument({
   theme = "light",
   badge,
   title,
+  effectiveDate,
   children,
 }) {
   const isDark = theme === "dark";
+  const { pathname } = useLocation();
+  const dateLabel =
+    effectiveDate ||
+    new Date().toLocaleDateString("en-IN", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
 
   return (
-    <section className="page-shell legal-doc w-full py-4 sm:py-6 lg:py-8">
-      <RevealOnScroll>
+    <section
+      key={pathname}
+      className="page-shell legal-doc page-enter w-full py-4 sm:py-6 lg:py-8"
+    >
+      <RevealOnScroll eager>
         <div
           className={`legal-doc__card relative overflow-hidden rounded-2xl sm:rounded-[1.75rem]
           ${
@@ -68,7 +81,7 @@ export default function LegalDocument({
                 isDark ? "text-slate-400" : "text-neutral-700"
               }`}
             >
-              Effective Date: {new Date().toLocaleDateString()}
+              Effective Date: {dateLabel}
             </p>
           </header>
 

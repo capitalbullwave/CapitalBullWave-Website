@@ -218,8 +218,16 @@ const Footer = ({ theme }) => {
                   path: "/terms",
                 },
                 {
-                  name: "Disclaimer",
-                  path: "/disclaimer",
+                  name: "Refund & Cancellation Policy",
+                  path: "/refund-policy",
+                },
+                {
+                  name: "KYC & AML Policy",
+                  path: "/kyc-aml-policy",
+                },
+                {
+                  name: "Grievance Redressal Policy",
+                  path: "/grievance-policy",
                 },
                 {
                   name: "Site Map",
@@ -396,10 +404,28 @@ const Footer = ({ theme }) => {
               <span className="text-slate-400">•</span>
 
               <Link
-                to="/disclaimer"
+                to="/grievance-policy"
                 className={`transition-colors hover:text-sky-600 ${text}`}
               >
-                Disclaimer
+                Grievance
+              </Link>
+
+              <span className="text-slate-400">•</span>
+
+              <Link
+                to="/refund-policy"
+                className={`transition-colors hover:text-sky-600 ${text}`}
+              >
+                Refund Policy
+              </Link>
+
+              <span className="text-slate-400">•</span>
+
+              <Link
+                to="/kyc-aml-policy"
+                className={`transition-colors hover:text-sky-600 ${text}`}
+              >
+                KYC & AML
               </Link>
 
             </div>
