@@ -30,17 +30,17 @@ export const chatbotData = [
   {
     keywords: ["refund", "cancel", "cancellation"],
     answer:
-      "**Refund Policy:** Refund requests may apply for duplicate payments, technical errors, or if we cannot deliver the service. Fees for services already rendered are generally non-refundable.\n\n**Email:** support@capitalbullwave.com\n**Policy:** /refund-policy",
+      "**Refund Policy:** Refund requests may apply for duplicate payments, technical errors, or if we cannot deliver the service. Fees for services already rendered are generally non-refundable.\n\n**Email:** admin@capitalbullwave.com\n**Policy:** /refund-policy",
   },
   {
     keywords: ["kyc", "aml", "verification"],
     answer:
-      "**KYC & AML:** We follow identity verification, due diligence, and monitoring procedures.\n\n**Compliance:** compliance@capitalbullwave.com\n**Policy:** /kyc-aml-policy",
+      "**KYC & AML:** We follow identity verification, due diligence, and monitoring procedures.\n\n**Compliance:** admin@capitalbullwave.com\n**Policy:** /kyc-aml-policy",
   },
   {
     keywords: ["grievance", "complaint", "support", "help", "issue"],
     answer:
-      "**Grievance Redressal:** Email support@capitalbullwave.com with your name, email, phone, reference (if any), and issue details.\n\n**Acknowledgement:** within 2 business days\n**Typical Resolution:** 7–15 business days\n**Policy:** /grievance-policy",
+      "**Grievance Redressal:** Email admin@capitalbullwave.com with your name, email, phone, reference (if any), and issue details.\n\n**Acknowledgement:** within 2 business days\n**Typical Resolution:** 7–15 business days\n**Policy:** /grievance-policy",
   },
   {
     keywords: ["hello", "hi", "hey", "namaste"],

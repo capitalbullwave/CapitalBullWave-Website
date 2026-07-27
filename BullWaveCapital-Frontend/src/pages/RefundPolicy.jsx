@@ -137,8 +137,8 @@ const RefundPolicy = ({ theme }) => {
             <strong className={isDark ? "text-white" : "text-black"}>
               Email:
             </strong>{" "}
-            <LegalLink theme={theme} href="mailto:support@capitalbullwave.com">
-              support@capitalbullwave.com
+            <LegalLink theme={theme} href="mailto:admin@capitalbullwave.com">
+              admin@capitalbullwave.com
             </LegalLink>
           </p>
         </LegalSection>
@@ -220,8 +220,8 @@ const RefundPolicy = ({ theme }) => {
             <strong className={isDark ? "text-white" : "text-black"}>
               Email:
             </strong>{" "}
-            <LegalLink theme={theme} href="mailto:support@capitalbullwave.com">
-              support@capitalbullwave.com
+            <LegalLink theme={theme} href="mailto:admin@capitalbullwave.com">
+              admin@capitalbullwave.com
             </LegalLink>
           </p>
         </LegalSection>

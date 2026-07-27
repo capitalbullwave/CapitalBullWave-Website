@@ -194,8 +194,8 @@ export const companyData = {
 
   contact: {
     email: "admin@capitalbullwave.com",
-    supportEmail: "support@capitalbullwave.com",
-    complianceEmail: "compliance@capitalbullwave.com",
+    supportEmail: "admin@capitalbullwave.com",
+    complianceEmail: "admin@capitalbullwave.com",
     phone: "+91 8796565234",
     whatsapp: "+91 9616212526",
     office:
@@ -221,11 +221,11 @@ export const companyData = {
 
   policies: {
     refund:
-      "Refund & Cancellation Policy — cancellations before service starts may be accepted; refunds for duplicate payments/technical errors; fees for rendered services are generally non-refundable. Email: support@capitalbullwave.com",
+      "Refund & Cancellation Policy — cancellations before service starts may be accepted; refunds for duplicate payments/technical errors; fees for rendered services are generally non-refundable. Email: admin@capitalbullwave.com",
     kycAml:
-      "KYC & AML Policy — identity verification, due diligence, sanctions screening, transaction monitoring. Email: compliance@capitalbullwave.com",
+      "KYC & AML Policy — identity verification, due diligence, sanctions screening, transaction monitoring. Email: admin@capitalbullwave.com",
     grievance:
-      "Grievance Redressal Policy — acknowledge within 2 business days; resolve typically in 7–15 business days. Email: support@capitalbullwave.com",
+      "Grievance Redressal Policy — acknowledge within 2 business days; resolve typically in 7–15 business days. Email: admin@capitalbullwave.com",
     privacy:
       "Privacy Policy — explains collection, use, storage and protection of personal information. Email: admin@capitalbullwave.com",
     terms:
