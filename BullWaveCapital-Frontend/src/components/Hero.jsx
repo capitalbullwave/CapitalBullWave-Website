@@ -98,22 +98,23 @@ export default function Hero({ theme = "light" }) {
     const delta = end - start;
     if (Math.abs(delta) < 40) return;
     setActive((prev) =>
-      delta < 0 ? (prev + 1) % slides.length : (prev - 1 + slides.length) % slides.length
+      delta < 0
+        ? (prev + 1) % slides.length
+        : (prev - 1 + slides.length) % slides.length
     );
   };
 
   return (
     <section
-      className={`hero-section relative overflow-hidden rounded-[1.25rem] sm:rounded-[1.75rem] lg:rounded-[2rem] transition-colors duration-500
-        min-h-[auto] sm:min-h-[82vh] lg:min-h-[86vh]
-        ${isDark ? "bg-slate-950" : "bg-white"}
+      className={`hero-section olymp-hero relative overflow-hidden rounded-none sm:rounded-[1.5rem] lg:rounded-[2rem] transition-colors duration-500
+        min-h-[88vh] sm:min-h-[90vh] bg-slate-950
         ${ready ? "hero-section--ready" : ""}`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
-      {/* Background slideshow */}
+      {/* Cinematic background */}
       {slides.map((slide, index) => (
         <img
           key={slide.image}
@@ -124,137 +125,85 @@ export default function Hero({ theme = "light" }) {
         />
       ))}
 
-      {/* Theme overlays */}
-      {isDark ? (
-        <>
-          <div className="absolute inset-0 bg-slate-950/80" />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/80 to-slate-950/25" />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-slate-950/40" />
-          <div
-            aria-hidden="true"
-            className="hero-orb pointer-events-none absolute -top-24 right-0 h-72 w-72 rounded-full bg-sky-500/20 blur-3xl sm:h-[28rem] sm:w-[28rem]"
-          />
-        </>
-      ) : (
-        <>
-          <div className="absolute inset-0 bg-gradient-to-br from-white/90 via-sky-50/75 to-sky-200/50" />
-          <div className="absolute inset-0 bg-gradient-to-r from-white via-white/85 to-sky-100/35" />
-          <div className="absolute inset-0 bg-gradient-to-t from-sky-100/95 via-transparent to-sky-50/45" />
-          <div
-            aria-hidden="true"
-            className="hero-orb pointer-events-none absolute -top-24 right-0 h-72 w-72 rounded-full bg-sky-400/40 blur-3xl sm:h-[28rem] sm:w-[28rem]"
-          />
-          <div
-            aria-hidden="true"
-            className="hero-orb hero-orb--delay pointer-events-none absolute -bottom-28 -left-16 h-64 w-64 rounded-full bg-cyan-300/30 blur-3xl"
-          />
-        </>
-      )}
+      <div className="absolute inset-0 bg-slate-950/55" />
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-slate-950/50" />
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-transparent to-slate-950/40" />
 
-      <div className="absolute inset-0 z-[5]">
-        <TradingAtmosphere theme={theme} variant="dense" />
+      {/* Olymp-style animated glass bars */}
+      <div className="olymp-bars pointer-events-none absolute inset-0 z-[2]" aria-hidden="true">
+        {[42, 68, 55, 88, 50, 75, 60, 92, 48, 70].map((h, i) => (
+          <span
+            key={i}
+            className="olymp-bar"
+            style={{
+              height: `${h}%`,
+              animationDelay: `${i * 0.18}s`,
+              left: `${6 + i * 9.2}%`,
+            }}
+          />
+        ))}
       </div>
 
-      {/* Slide progress */}
+      <div className="absolute inset-0 z-[3] opacity-70">
+        <TradingAtmosphere theme="dark" variant="dense" />
+      </div>
+
       <div
-        className={`absolute left-0 right-0 top-0 z-30 h-1 overflow-hidden ${
-          isDark ? "bg-white/10" : "bg-sky-100/80"
+        className={`absolute left-0 right-0 top-0 z-30 h-0.5 overflow-hidden ${
+          isDark ? "bg-white/10" : "bg-white/15"
         }`}
       >
         <div
           key={active}
-          className={`hero-progress h-full ${
-            isDark ? "bg-sky-400" : "bg-sky-500"
-          } ${paused ? "is-paused" : ""}`}
+          className={`hero-progress h-full bg-sky-400 ${paused ? "is-paused" : ""}`}
         />
       </div>
 
-      <div className="relative z-20 flex flex-col justify-between px-3 py-8 sm:px-5 sm:py-12 lg:px-8 lg:py-14">
-        <div className="grid w-full flex-1 items-center gap-8 lg:grid-cols-2 lg:gap-10 xl:gap-14">
-          {/* Copy */}
-          <div
-            className={`hero-copy flex flex-col items-center text-center lg:items-start lg:text-left ${
-              isDark ? "text-white" : "text-black"
-            }`}
-          >
-            <span
-              className={`hero-fade hero-fade--1 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-[0.2em] sm:tracking-[0.22em]
-              ${
-                isDark
-                  ? "bg-white/10 text-sky-300 ring-1 ring-white/15"
-                  : "bg-white/90 text-sky-700 ring-1 ring-sky-100 shadow-sm"
-              }`}
-            >
+      <div className="relative z-20 flex min-h-[88vh] sm:min-h-[90vh] flex-col justify-between px-3 pb-6 pt-10 sm:px-6 sm:pb-8 sm:pt-14 lg:px-10 lg:pb-10 lg:pt-16">
+        <div className="grid flex-1 items-center gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-12">
+          <div className="hero-copy mx-auto max-w-2xl text-center lg:mx-0 lg:text-left">
+            <span className="hero-fade hero-fade--1 olymp-chip inline-flex items-center gap-2">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-50" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-sky-500" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-sky-400" />
               </span>
               Trusted Investment Partner
             </span>
 
-            <h1 className="hero-fade hero-fade--2 mt-4 sm:mt-5 max-w-2xl text-[1.85rem] font-extrabold leading-[1.12] tracking-tight sm:text-5xl lg:text-[3.25rem] xl:text-[3.6rem]">
-              <span className={isDark ? "text-white" : "text-black"}>
-                Invest Smarter
-              </span>
-              <span
-                className={`mt-1.5 block bg-gradient-to-r bg-clip-text text-transparent sm:mt-2 ${
-                  isDark
-                    ? "from-sky-300 via-cyan-300 to-sky-200"
-                    : "from-sky-700 via-sky-500 to-cyan-500"
-                }`}
-              >
+            <h1 className="hero-fade hero-fade--2 mt-5 text-[2.15rem] font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-[3.5rem] xl:text-[3.85rem]">
+              Invest Smarter
+              <span className="mt-2 block bg-gradient-to-r from-sky-300 via-cyan-300 to-sky-200 bg-clip-text text-transparent">
                 Build Wealth.
               </span>
             </h1>
 
-            <p
-              className={`hero-fade hero-fade--3 mt-4 sm:mt-5 max-w-xl text-sm leading-7 sm:text-base md:text-lg ${
-                isDark ? "text-slate-300" : "text-neutral-800"
-              }`}
-            >
+            <p className="hero-fade hero-fade--3 mx-auto mt-5 max-w-xl text-sm leading-7 text-slate-200 sm:text-base md:text-lg lg:mx-0">
               BullWave Capital helps investors grow with disciplined trading,
               portfolio management, wealth advisory, and data-driven market
               intelligence designed for long-term financial success.
             </p>
 
-            <div className="hero-fade hero-fade--4 mt-6 sm:mt-8 flex w-full max-w-md flex-col gap-3 sm:max-w-none sm:w-auto sm:flex-row sm:gap-3">
+            <div className="hero-fade hero-fade--4 mt-7 flex w-full flex-col gap-3 sm:mt-8 sm:flex-row sm:justify-center lg:justify-start">
               <Link
                 to="/services"
-                className="bw-gradient-btn inline-flex w-full sm:w-auto items-center justify-center rounded-full px-7 py-3.5 text-sm sm:text-[15px] font-semibold !text-white transition hover:-translate-y-0.5 active:scale-[0.98]"
+                className="bw-gradient-btn inline-flex items-center justify-center rounded-full px-8 py-3.5 text-[15px] font-semibold !text-white transition hover:-translate-y-0.5 active:scale-[0.98]"
               >
                 Explore Services
               </Link>
               <Link
                 to="/contact"
-                className={`hero-contact-btn inline-flex w-full sm:w-auto items-center justify-center rounded-full px-7 py-3.5 text-sm sm:text-[15px] font-semibold transition hover:-translate-y-0.5 active:scale-[0.98]
-                ${
-                  isDark
-                    ? "bg-white/10 !text-white ring-1 ring-white/20 hover:bg-white/15"
-                    : "bg-white !text-sky-800 ring-1 ring-sky-200 hover:bg-sky-50 shadow-sm"
-                }`}
+                className="olymp-ghost-btn inline-flex items-center justify-center rounded-full px-8 py-3.5 text-[15px] font-semibold text-white transition hover:-translate-y-0.5 active:scale-[0.98]"
               >
                 Contact Us
               </Link>
             </div>
           </div>
 
-          {/* Visual panel */}
-          <div className="hero-panel relative mx-auto w-full max-w-xl lg:mx-0 lg:max-w-none">
+          <div className="hero-panel relative mx-auto w-full max-w-lg lg:max-w-none">
             <div
-              aria-hidden="true"
-              className={`absolute -inset-4 sm:-inset-6 -z-10 rounded-[2rem] blur-3xl
-              ${isDark ? "bg-sky-500/20" : "bg-sky-300/40"}`}
-            />
-
-            <div
-              className={`hero-panel__card overflow-hidden rounded-[1.35rem] sm:rounded-[1.75rem] shadow-2xl
-              ${
-                isDark
-                  ? "bg-slate-900/95 ring-1 ring-white/10"
-                  : "bg-white/95 ring-1 ring-sky-100 backdrop-blur-xl shadow-sky-200/40"
-              }`}
+              className="olymp-glass overflow-hidden rounded-[1.5rem] sm:rounded-[1.85rem] shadow-[0_30px_80px_rgba(0,0,0,0.45)]"
             >
-              <div className="relative h-48 overflow-hidden sm:h-60 md:h-72 lg:h-[300px]">
+              <div className="relative h-52 overflow-hidden sm:h-64 md:h-72 lg:h-[310px]">
                 {slides.map((slide, index) => (
                   <img
                     key={`panel-${slide.title}`}
@@ -264,98 +213,51 @@ export default function Hero({ theme = "light" }) {
                     ${active === index ? "is-active" : ""}`}
                   />
                 ))}
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/92 via-slate-950/30 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/35 to-transparent" />
 
-                <div
-                  className={`absolute left-3 top-3 sm:left-4 sm:top-4 flex items-center gap-2 rounded-full px-2.5 py-1.5 sm:px-3 text-[10px] sm:text-xs font-semibold uppercase tracking-wider
-                  ${
-                    isDark
-                      ? "bg-slate-950/80 text-sky-300"
-                      : "bg-white/95 text-sky-700 shadow-sm"
-                  }`}
-                >
-                  <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                <div className="olymp-chip absolute left-3 top-3 sm:left-4 sm:top-4">
+                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
                   Our Market
                 </div>
 
                 <div className="absolute bottom-4 left-4 right-4 sm:bottom-5 sm:left-5 sm:right-5" key={active}>
-                  <h2 className="hero-slide-text text-lg sm:text-2xl font-bold text-white">
+                  <h2 className="hero-slide-text text-xl font-bold text-white sm:text-2xl">
                     {slides[active].title}
                   </h2>
-                  <p className="hero-slide-text hero-slide-text--delay mt-1.5 sm:mt-2 text-xs sm:text-sm leading-5 sm:leading-6 text-slate-200">
+                  <p className="hero-slide-text hero-slide-text--delay mt-2 text-sm leading-6 text-slate-200">
                     {slides[active].desc}
                   </p>
                 </div>
               </div>
 
-              <div
-                className={`grid grid-cols-2 gap-2.5 p-3.5 sm:gap-4 sm:p-5
-                ${isDark ? "bg-slate-950/80" : "bg-sky-50/95"}`}
-              >
-                <div
-                  className={`hero-stat rounded-xl sm:rounded-2xl p-3 sm:p-4 transition
-                  ${
-                    isDark
-                      ? "bg-slate-900 ring-1 ring-white/5"
-                      : "bg-white ring-1 ring-sky-100 shadow-sm"
-                  }`}
-                >
-                  <p
-                    className={`text-[10px] sm:text-xs uppercase tracking-[0.14em]
-                    ${isDark ? "text-slate-400" : "text-slate-500"}`}
-                  >
+              <div className="grid grid-cols-2 gap-3 border-t border-white/10 bg-slate-950/70 p-3.5 backdrop-blur-xl sm:gap-4 sm:p-5">
+                <div className="hero-stat olymp-stat rounded-2xl p-3.5 sm:p-4">
+                  <p className="text-[10px] uppercase tracking-[0.16em] text-slate-400 sm:text-xs">
                     Annual Return
                   </p>
-                  <h3
-                    className={`mt-1 text-xl sm:text-3xl font-bold
-                    ${isDark ? "text-sky-400" : "text-sky-600"}`}
-                  >
+                  <h3 className="mt-1.5 text-2xl font-bold text-sky-300 sm:text-3xl">
                     +
                     <CountUp end={18.6} decimals={1} duration={2200} suffix="%" />
                   </h3>
-                  <p
-                    className={`mt-1 text-[11px] sm:text-sm
-                    ${isDark ? "text-slate-400" : "text-slate-500"}`}
-                  >
-                    Average Growth
-                  </p>
+                  <p className="mt-1 text-xs text-slate-400 sm:text-sm">Average Growth</p>
                 </div>
-
-                <div
-                  className={`hero-stat hero-stat--delay rounded-xl sm:rounded-2xl p-3 sm:p-4 transition
-                  ${
-                    isDark
-                      ? "bg-slate-900 ring-1 ring-white/5"
-                      : "bg-white ring-1 ring-sky-100 shadow-sm"
-                  }`}
-                >
-                  <p
-                    className={`text-[10px] sm:text-xs uppercase tracking-[0.14em]
-                    ${isDark ? "text-slate-400" : "text-slate-500"}`}
-                  >
+                <div className="hero-stat hero-stat--delay olymp-stat rounded-2xl p-3.5 sm:p-4">
+                  <p className="text-[10px] uppercase tracking-[0.16em] text-slate-400 sm:text-xs">
                     Investors
                   </p>
-                  <h3
-                    className={`mt-1 text-xl sm:text-3xl font-bold
-                    ${isDark ? "text-sky-400" : "text-sky-600"}`}
-                  >
+                  <h3 className="mt-1.5 text-2xl font-bold text-sky-300 sm:text-3xl">
                     <CountUp end={12} duration={2200} suffix="K+" />
                   </h3>
-                  <p
-                    className={`mt-1 text-[11px] sm:text-sm
-                    ${isDark ? "text-slate-400" : "text-slate-500"}`}
-                  >
-                    Worldwide Clients
-                  </p>
+                  <p className="mt-1 text-xs text-slate-400 sm:text-sm">Worldwide Clients</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Dots + trust strip */}
-        <div className="hero-fade hero-fade--5 relative mt-7 sm:mt-10">
-          <div className="mb-3.5 sm:mb-4 flex justify-center gap-2">
+        {/* Olymp-style chip row */}
+        <div className="hero-fade hero-fade--5 mt-8 sm:mt-10">
+          <div className="mb-4 flex justify-center gap-2">
             {slides.map((_, index) => (
               <button
                 key={index}
@@ -364,42 +266,35 @@ export default function Hero({ theme = "light" }) {
                 onClick={() => setActive(index)}
                 className={`rounded-full transition-all duration-500 ${
                   active === index
-                    ? isDark
-                      ? "h-2 w-8 bg-sky-400"
-                      : "h-2 w-8 bg-sky-600"
-                    : isDark
-                      ? "h-2 w-2 bg-slate-600 hover:bg-slate-400"
-                      : "h-2 w-2 bg-sky-300 hover:bg-sky-500"
+                    ? "h-2 w-8 bg-sky-400"
+                    : "h-2 w-2 bg-white/30 hover:bg-white/60"
                 }`}
               />
             ))}
           </div>
 
-          <div
-            className={`grid grid-cols-1 gap-px overflow-hidden rounded-xl sm:rounded-2xl sm:grid-cols-3
-            ${
-              isDark
-                ? "bg-white/5 ring-1 ring-white/10"
-                : "bg-white/90 ring-1 ring-sky-100 shadow-sm backdrop-blur"
-            }`}
-          >
+          <div className="olymp-chip-row -mx-1 flex gap-2 overflow-x-auto px-1 pb-1 sm:mx-0 sm:flex-wrap sm:justify-center sm:overflow-visible sm:pb-0">
             {trustItems.map((item, i) => (
               <div
                 key={item}
-                className={`hero-trust flex items-center justify-center gap-2 px-3 py-3 sm:py-3.5 text-xs sm:text-sm font-semibold
-                ${isDark ? "text-slate-200" : "text-neutral-800"}
-                ${
-                  i < trustItems.length - 1
-                    ? isDark
-                      ? "sm:border-r sm:border-white/10"
-                      : "sm:border-r sm:border-sky-100"
-                    : ""
-                }`}
-                style={{ animationDelay: `${520 + i * 90}ms` }}
+                className="olymp-chip olymp-chip--row shrink-0"
+                style={{ animationDelay: `${480 + i * 90}ms` }}
               >
-                <span className="h-1.5 w-1.5 rounded-full bg-sky-500" />
+                <span className="h-1.5 w-1.5 rounded-full bg-sky-400" />
                 {item}
               </div>
+            ))}
+            {slides.map((slide, i) => (
+              <button
+                key={slide.title}
+                type="button"
+                onClick={() => setActive(i)}
+                className={`olymp-chip olymp-chip--row shrink-0 transition ${
+                  active === i ? "is-active" : ""
+                }`}
+              >
+                {slide.title}
+              </button>
             ))}
           </div>
         </div>

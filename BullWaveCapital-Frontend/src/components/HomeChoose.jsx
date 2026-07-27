@@ -163,7 +163,7 @@ const HomeChoose = ({ theme }) => {
             return (
               <article
                 key={item.title}
-                className={`home-choose-reveal home-choose-card group flex gap-3 rounded-2xl p-4 sm:gap-4 sm:p-5
+                className={`home-choose-reveal home-choose-card olymp-section-card group flex gap-3 rounded-2xl p-4 sm:gap-4 sm:p-5
                 ${
                   isDark
                     ? "bg-slate-900/80 ring-1 ring-white/10"

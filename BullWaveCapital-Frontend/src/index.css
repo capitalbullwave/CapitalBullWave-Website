@@ -1333,6 +1333,342 @@ html.theme-dark * {
   }
 }
 
+/* ==========================================
+   OLYMP-INSPIRED LAYOUT SYSTEM
+========================================== */
+
+.olymp-nav {
+  transition:
+    background-color 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.olymp-bars {
+  display: block;
+}
+
+.olymp-bar {
+  position: absolute;
+  bottom: 8%;
+  width: clamp(1.4rem, 3.2vw, 2.6rem);
+  border-radius: 999px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.18),
+    rgba(14, 165, 233, 0.08)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  animation: olympBar 5.5s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+@keyframes olympBar {
+  0%,
+  100% {
+    transform: scaleY(0.82) translateY(0);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scaleY(1.08) translateY(-8px);
+    opacity: 0.7;
+  }
+}
+
+.olymp-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.olymp-chip--row {
+  padding: 0.7rem 1rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  animation: heroFadeUp 0.55s ease both;
+}
+
+.olymp-chip--row.is-active {
+  background: rgba(14, 165, 233, 0.28);
+  border-color: rgba(56, 189, 248, 0.55);
+  box-shadow: 0 0 0 1px rgba(56, 189, 248, 0.2);
+}
+
+.olymp-chip-row {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.olymp-chip-row::-webkit-scrollbar {
+  display: none;
+}
+
+.olymp-ghost-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.olymp-ghost-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.olymp-glass {
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.olymp-stat {
+  background: rgba(2, 6, 23, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.olymp-section-card {
+  border-radius: 1.35rem;
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .olymp-section-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .olymp-chip--row:hover {
+    transform: translateY(-2px);
+    border-color: rgba(56, 189, 248, 0.45);
+  }
+}
+
+.theme-light .olymp-section-card {
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(186, 230, 253, 0.85);
+  box-shadow: 0 16px 40px rgba(14, 165, 233, 0.08);
+}
+
+.theme-dark .olymp-section-card {
+  background: rgba(15, 23, 42, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+}
+
+@media (max-width: 640px) {
+  .olymp-bar {
+    width: 0.9rem;
+    opacity: 0.45;
+  }
+
+  .olymp-bars .olymp-bar:nth-child(n + 7) {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .olymp-bar,
+  .olymp-chip--row {
+    animation: none !important;
+  }
+}
+
+/* Trade chart preview */
+.trade-chart-line {
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: tradeDraw 3.2s ease-out infinite;
+}
+
+.trade-chart-fill {
+  opacity: 0;
+  animation: tradeFillIn 3.2s ease-out infinite;
+}
+
+.trade-chart-pulse {
+  animation: tradePulse 1.8s ease-in-out infinite;
+}
+
+.trade-chart-pulse-ring {
+  animation: tradePulseRing 1.8s ease-in-out infinite;
+}
+
+.trade-chart-expiry {
+  animation: tradeExpiry 2.4s ease-in-out infinite;
+}
+
+@keyframes tradeDraw {
+  0% {
+    stroke-dashoffset: 900;
+  }
+  45%,
+  80% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes tradeFillIn {
+  0%,
+  20% {
+    opacity: 0;
+  }
+  50%,
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes tradePulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 0.85;
+  }
+}
+
+@keyframes tradePulseRing {
+  0%,
+  100% {
+    opacity: 0.15;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.35);
+  }
+}
+
+@keyframes tradeExpiry {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.trade-marker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 999px;
+  padding: 0.3rem 0.55rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  animation: tradeMarkerIn 3.2s ease-in-out infinite;
+  backdrop-filter: blur(8px);
+}
+
+.trade-marker--sell {
+  background: rgba(239, 68, 68, 0.92);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(239, 68, 68, 0.25);
+}
+
+.trade-marker--price {
+  background: rgba(255, 255, 255, 0.92);
+  color: #0f172a;
+}
+
+.trade-marker__arrow {
+  display: inline-flex;
+  width: 1rem;
+  height: 1rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #0f172a;
+  font-size: 0.65rem;
+  line-height: 1;
+}
+
+@keyframes tradeMarkerIn {
+  0%,
+  25% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.95);
+  }
+  40%,
+  80% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0.85;
+  }
+}
+
+.trade-metric {
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .trade-metric:hover {
+    transform: translateY(-2px);
+    background-color: rgba(255, 255, 255, 0.09);
+  }
+
+  .feature-stack__card:hover {
+    transform: translateY(-3px);
+  }
+}
+
+.feature-stack__card {
+  transition:
+    opacity 0.45s ease,
+    transform 0.45s ease,
+    box-shadow 0.35s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trade-chart-line,
+  .trade-chart-fill,
+  .trade-chart-pulse,
+  .trade-chart-pulse-ring,
+  .trade-chart-expiry,
+  .trade-marker {
+    animation: none !important;
+  }
+
+  .trade-chart-line {
+    stroke-dashoffset: 0;
+  }
+
+  .trade-chart-fill,
+  .trade-marker {
+    opacity: 1 !important;
+  }
+}
+
 .theme-light .site-main {
   color: #000000;
 }

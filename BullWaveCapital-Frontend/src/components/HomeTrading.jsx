@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { PhoneCall, ClipboardCheck, TrendingUp, ArrowRight } from "lucide-react";
 import TradingAtmosphere from "./TradingAtmosphere";
+import TradeChartPreview from "./TradeChartPreview";
+import RevealOnScroll from "./RevealOnScroll";
 
 const steps = [
   {
@@ -86,51 +88,50 @@ const HomeTrading = ({ theme }) => {
           of the profit, no capital risk on your end.
         </p>
 
-        <div className="mt-10 flex justify-center">
+        {/* Olymp-style chart feature */}
+        <RevealOnScroll className="mt-10 sm:mt-14">
           <div
-            className={`flex w-full max-w-md items-stretch overflow-hidden rounded-2xl shadow-sm
-            ${isDark ? "ring-1 ring-slate-700" : "ring-1 ring-sky-100"}`}
+            className={`grid items-center gap-8 lg:grid-cols-2 lg:gap-12 rounded-[1.5rem] sm:rounded-[2rem] p-4 sm:p-6 lg:p-8
+            ${
+              isDark
+                ? "bg-slate-950/70 ring-1 ring-white/10"
+                : "bg-slate-950 ring-1 ring-slate-800 shadow-[0_24px_60px_rgba(2,6,23,0.2)]"
+            }`}
           >
-            <div
-              className={`
-                flex flex-1 flex-col items-center justify-center gap-1 px-4 py-5 sm:py-6
-                ${isDark ? "bg-sky-500" : "bg-sky-500"}
-              `}
-            >
-              <span className="text-2xl sm:text-3xl font-bold text-white">70%</span>
-              <span className="text-[11px] sm:text-xs font-medium uppercase tracking-wide text-sky-100">
-                Our share
-              </span>
-            </div>
-            <div
-              className={`
-                flex flex-1 flex-col items-center justify-center gap-1 px-4 py-5 sm:py-6
-                ${isDark ? "bg-slate-800" : "bg-white"}
-              `}
-            >
-              <span
-                className={`text-2xl sm:text-3xl font-bold ${
-                  isDark ? "text-sky-300" : "text-sky-600"
-                }`}
-              >
-                30%
-              </span>
-              <span
-                className={`text-[11px] sm:text-xs font-medium uppercase tracking-wide ${
-                  isDark ? "text-slate-400" : "text-slate-500"
-                }`}
-              >
-                Trader's share
-              </span>
+            <TradeChartPreview theme={theme} />
+
+            <div className="px-1 sm:px-2 text-center lg:text-left">
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight tracking-tight text-white">
+                You trade{" "}
+                <span className="bg-gradient-to-r from-sky-300 to-cyan-300 bg-clip-text text-transparent">
+                  our capital
+                </span>
+              </h3>
+              <p className="mt-4 text-sm sm:text-base leading-7 text-slate-300">
+                Pass the test and we fund your account. You trade, we split the
+                profits — simple as that. You keep 30% of the profit, no capital
+                risk on your end.
+              </p>
+
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-3 lg:justify-start">
+                <div className="olymp-chip">
+                  <span className="h-1.5 w-1.5 rounded-full bg-sky-400" />
+                  Our share 70%
+                </div>
+                <div className="olymp-chip">
+                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                  Trader's share 30%
+                </div>
+              </div>
             </div>
           </div>
-        </div>
+        </RevealOnScroll>
 
         <div className="mt-12 sm:mt-16 grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-3">
           {steps.map(({ id, icon: Icon, title, desc }, idx) => (
             <div
               key={id}
-              className={`relative flex flex-col items-center text-center rounded-2xl sm:rounded-[1.35rem] p-5 sm:p-7 transition hover:-translate-y-1
+              className={`olymp-section-card relative flex flex-col items-center text-center rounded-2xl sm:rounded-[1.35rem] p-5 sm:p-7
               ${
                 isDark
                   ? "bg-slate-900/90 ring-1 ring-white/10"

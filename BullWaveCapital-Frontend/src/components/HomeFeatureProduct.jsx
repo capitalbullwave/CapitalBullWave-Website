@@ -109,41 +109,30 @@ const FeatureSection = ({ theme = "light" }) => {
     };
   }, []);
 
-  const circleTop = Math.min(Math.max(progress, 4), 96);
-
   return (
     <div
       ref={sectionRef}
-      className={`mt-12 sm:mt-16 rounded-2xl sm:rounded-3xl p-5 sm:p-8 lg:p-10
+      className={`feature-stack mt-12 sm:mt-16 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8
       ${
         isDark
-          ? "bg-slate-900/80 ring-1 ring-slate-800"
-          : "bg-sky-50/70 ring-1 ring-sky-100"
+          ? "bg-slate-900/60 ring-1 ring-white/10"
+          : "bg-sky-50/80 ring-1 ring-sky-100"
       }`}
     >
-      <div className="relative">
+      <div className="relative mx-auto max-w-2xl">
         <div
-          className={`absolute left-4 lg:left-[30px] top-0 bottom-0 w-[3px] rounded-full ${
-            isDark ? "bg-slate-800" : "bg-sky-200"
-          }`}
+          className={`absolute left-4 sm:left-5 top-3 bottom-3 w-px
+          ${isDark ? "bg-white/10" : "bg-sky-200"}`}
         />
         <div
-          className="absolute left-4 lg:left-[30px] top-0 w-[3px] rounded-full transition-all duration-300"
+          className="absolute left-4 sm:left-5 top-3 w-px rounded-full transition-all duration-300"
           style={{
             background: "linear-gradient(to bottom,#0ea5e9,#38bdf8)",
-            height: `${progress}%`,
+            height: `${Math.max(progress - 2, 0)}%`,
           }}
         />
-        <div
-          className="absolute z-20 left-4 lg:left-[30px] -translate-x-1/2 transition-all duration-300"
-          style={{ top: `calc(${circleTop}% - 12px)` }}
-        >
-          <div className="flex h-6 w-6 items-center justify-center rounded-full bg-sky-500">
-            <div className="h-2 w-2 rounded-full bg-white" />
-          </div>
-        </div>
 
-        <div className="space-y-5 sm:space-y-6 w-full pl-12 sm:pl-14 lg:pl-16">
+        <div className="space-y-4 sm:space-y-5 pl-12 sm:pl-14">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             const activeCard = active >= index;
@@ -151,30 +140,43 @@ const FeatureSection = ({ theme = "light" }) => {
               <article
                 key={feature.title}
                 data-index={index}
-                className={`relative rounded-xl p-4 sm:p-5 transition-all duration-500
+                className={`feature-stack__card group relative rounded-2xl p-5 sm:p-6 transition-all duration-500
                 ${
                   activeCard
                     ? isDark
-                      ? "bg-slate-800/90 ring-1 ring-sky-500/30 opacity-100"
-                      : "bg-white ring-1 ring-sky-100 shadow-sm opacity-100"
+                      ? "bg-slate-950/90 ring-1 ring-sky-400/25 opacity-100 translate-y-0"
+                      : "bg-white ring-1 ring-sky-100 shadow-[0_12px_30px_rgba(14,165,233,0.1)] opacity-100 translate-y-0"
                     : isDark
-                      ? "bg-slate-900/40 opacity-50"
-                      : "bg-white/50 opacity-55"
+                      ? "bg-slate-900/50 opacity-45 translate-y-2"
+                      : "bg-white/60 opacity-50 translate-y-2"
                 }`}
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-sky-500 text-white">
-                  <Icon className="text-sm" />
+                <div
+                  className={`absolute -left-[2.65rem] sm:-left-[2.85rem] top-6 flex h-8 w-8 items-center justify-center rounded-full
+                  ${
+                    activeCard
+                      ? "bg-sky-500 text-white shadow-lg shadow-sky-500/30"
+                      : isDark
+                        ? "bg-slate-800 text-slate-500"
+                        : "bg-sky-100 text-sky-400"
+                  }`}
+                >
+                  <span className="h-2 w-2 rounded-full bg-current" />
+                </div>
+
+                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-sky-500 text-white shadow-md shadow-sky-500/25 transition group-hover:scale-105">
+                  <Icon className="text-base" />
                 </div>
                 <h3
-                  className={`mt-3 text-base sm:text-lg font-semibold ${
-                    isDark ? "text-white" : "text-slate-900"
+                  className={`mt-4 text-base sm:text-lg font-bold ${
+                    isDark ? "text-white" : "text-black"
                   }`}
                 >
                   {feature.title}
                 </h3>
                 <p
-                  className={`mt-2 text-sm leading-6 ${
-                    isDark ? "text-slate-400" : "text-slate-600"
+                  className={`mt-2 text-sm leading-6 sm:leading-7 ${
+                    isDark ? "text-slate-400" : "text-neutral-700"
                   }`}
                 >
                   {feature.description}
