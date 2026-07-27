@@ -3,54 +3,44 @@ dotenv.config();
 
 import OpenAI from "openai";
 import { companyData, bullWaveRidesData } from "../data/companyData.js";
+import { getLocalReply } from "./chatKnowledge.js";
 
+const hasApiKey = Boolean(process.env.OPENAI_API_KEY?.trim());
 
-const client = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+const client = hasApiKey
+  ? new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    })
+  : null;
 
 /* ==========================================
-   OpenAI Chat Service
+   OpenAI Chat Service (with local fallback)
 ========================================== */
 
 export const getAIResponse = async (message, history = []) => {
-  try {
+  const trimmed = String(message || "").trim();
 
+  // Fast local path when OpenAI is not configured
+  if (!client) {
+    console.warn("OPENAI_API_KEY missing — using local knowledge base.");
+    return getLocalReply(trimmed);
+  }
+
+  try {
     const systemPrompt = `
-    You are the official AI Assistant for Capital Bull Wave.
+    You are the official AI Assistant for Capital Bull Wave (Capital BullWave Private Limited).
 
     Capital Bull Wave is the primary company and this website belongs to Capital Bull Wave.
 
     BullWave Rides is a ride-booking application developed and provided by Capital Bull Wave.
 
-    Users visiting this website are primarily looking for information about Capital Bull Wave, its services, plans, contact information, company details, research services and investment education.
+    Users visiting this website are primarily looking for information about Capital Bull Wave, its services, plans, contact information, company details, research services, investment education, funding program, and policies.
 
-    Only answer about BullWave Rides when the user explicitly asks about:
-
-    • BullWave Rides
-    • Ride Booking
-    • Cab
-    • Taxi
-    • Driver
-    • Driver App
-    • Customer App
-    • Vehicle
-    • Ride
-    • Trip
-    • Pickup
-    • Drop
-    • Booking
-    • Fare
+    Only answer about BullWave Rides when the user explicitly asks about rides, cab, taxi, driver, booking, fare, trip, pickup, or BullWave Rides.
 
     Otherwise ALWAYS assume the user is referring to Capital Bull Wave.
 
     Use previous conversation history to understand the user's current topic.
-
-    If the user has been discussing Capital Bull Wave, continue answering about Capital Bull Wave until they clearly switch to BullWave Rides.
-
-    If the user has been discussing BullWave Rides, continue answering about BullWave Rides until they clearly switch back.
-
-    Never repeatedly ask the user which company they mean unless the question is genuinely impossible to determine.
 
     ====================================================
     CAPITAL BULL WAVE INFORMATION
@@ -69,60 +59,21 @@ export const getAIResponse = async (message, history = []) => {
     ====================================================
 
     1. Capital Bull Wave is the default topic.
-
-    2. BullWave Rides is an application developed by Capital Bull Wave.
-
-    3. If the question mentions rides, drivers, booking, taxi, cab, vehicle, trip, fare or BullWave Rides, answer using bullWaveRidesData.
-
-    4. Otherwise answer using companyData.
-
-    5. Never mix information from the two datasets.
-
-    6. Never invent information.
-
-    7. If the requested information is unavailable, politely say:
-
-    "I couldn't find that information. Please contact Capital Bull Wave for further assistance."
-
-    8. Never provide personalized investment advice.
-
-    9. Never recommend buying or selling stocks.
-
-    10. Never predict market prices.
-
-    11. Never guarantee profits.
-
-    12. Never guarantee ride availability.
-
-    13. Keep responses professional, natural and conversational.
-
-    14. Use headings and bullet points whenever appropriate.
-
-    15. When giving contact details, always include:
-    • Email
-    • Phone
-    • WhatsApp
-    • Office Address
-    • Business Hours
-    if available.
-
-    16. When providing a website, email address or phone number, output them as plain text only. The frontend will automatically convert them into clickable links.
-
-    17. Keep responses under 180 words whenever possible.
+    2. Never invent information — use only the data above.
+    3. Never provide personalized investment advice.
+    4. Never recommend buying or selling stocks.
+    5. Never predict market prices or guarantee profits.
+    6. Keep responses professional, clear, and under 180 words when possible.
+    7. Use short headings and bullet points when helpful.
+    8. When giving contact details, include email, phone, WhatsApp, office address, and business hours when available.
+    9. Output emails/phones/URLs as plain text (frontend may linkify them).
+    10. If information is unavailable, say so politely and share contact details.
     `;
 
     const messages = [
-      {
-        role: "system",
-        content: systemPrompt,
-      },
-
+      { role: "system", content: systemPrompt },
       ...history,
- 
-      {
-        role: "user",
-        content: message,
-      },
+      { role: "user", content: trimmed },
     ];
 
     const completion = await client.chat.completions.create({
@@ -134,20 +85,22 @@ export const getAIResponse = async (message, history = []) => {
 
     return (
       completion.choices[0]?.message?.content ||
-      "I'm sorry, I couldn't generate a response."
+      getLocalReply(trimmed)
     );
-
   } catch (error) {
-    console.error("OpenAI Error:", error);
+    console.error("OpenAI Error:", error?.message || error);
 
-    if (error.status === 401) {
-      return "OpenAI API Key is invalid.";
+    // Always fall back to local knowledge so the bot still responds
+    const local = getLocalReply(trimmed);
+
+    if (error?.status === 401) {
+      return `${local}\n\n(Note: AI service key issue — answered from company knowledge.)`;
     }
 
-    if (error.status === 429) {
-      return "AI service is currently busy. Please try again in a few moments.";
+    if (error?.status === 429) {
+      return `${local}\n\n(Note: AI is busy — answered from company knowledge.)`;
     }
 
-    return "Sorry, I'm unable to answer right now. Please try again later.";
+    return local;
   }
 };

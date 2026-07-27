@@ -58,43 +58,39 @@ export const companyData = {
 
   plans: [
     {
-      name: "Core Plan",
-
-      price: "₹4,999/month",
-
-      suitableFor: [
-        "Equity Investors",
-        "Swing Traders",
-        "Delivery Investors",
-      ],
-
+      name: "Core / Starter Plan",
+      price: "₹4,999 / month",
+      description:
+        "Entry-level guidance for swing traders, focused on fundamentally sound equity opportunities.",
+      suitableFor: ["Swing Traders", "Equity Investors", "Beginners"],
       features: [
-        "12–15 Monthly Research Calls",
-        "Swing Trading Ideas",
-        "Delivery Stock Recommendations",
-        "Long-term Investment Opportunities",
+        "12–15 equity recommendations every month",
+        "Momentum-based stock selection",
+        "Actionable buy & sell guidance",
       ],
     },
-
     {
-      name: "Elite Plan",
-
-      price: "₹7,999/month",
-
-      suitableFor: [
-        "Derivative Traders",
-        "Nifty Traders",
-        "Bank Nifty Traders",
-      ],
-
+      name: "Elite Plan / Pro Trader",
+      price: "₹9,999 / month",
+      description:
+        "Designed for active traders with advanced Futures & Options guidance covering Nifty and Bank Nifty.",
+      suitableFor: ["Active Traders", "F&O Traders", "Nifty & Bank Nifty Traders"],
       features: [
-        "Everything in Core Plan",
-        "Nifty Futures Analysis",
-        "Bank Nifty Analysis",
-        "Daily Market Outlook",
-        "Weekly Market Outlook",
-        "Trend Analysis",
-        "Reversal Levels",
+        "Nifty & Bank Nifty F&O advisory",
+        "Daily market direction updates",
+        "Risk & reversal level guidance",
+      ],
+    },
+    {
+      name: "Elite Investor Plan",
+      price: "₹7,999 / month",
+      description:
+        "Premium advisory for long-term investors including portfolio reviews and exclusive research reports.",
+      suitableFor: ["Long-term Investors", "Portfolio Focused Clients"],
+      features: [
+        "1-on-1 portfolio consultation",
+        "Premium research reports",
+        "Long-term wealth strategy",
       ],
     },
   ],
@@ -198,29 +194,42 @@ export const companyData = {
 
   contact: {
     email: "admin@capitalbullwave.com",
-
-    phone: "+91-9616212526",
-
-    whatsapp: "+91-9616212526",
-
+    supportEmail: "support@capitalbullwave.com",
+    complianceEmail: "compliance@capitalbullwave.com",
+    phone: "+91 8796565234",
+    whatsapp: "+91 9616212526",
     office:
-      "Aggarwal Millennium Tower 2, Netaji Subhash Place, Pitampura, New Delhi - 110034",
-
-    businessHours:
-      "Monday to Friday | 9:00 AM – 6:30 PM",
-
+      "Aggarwal Millennium Tower 2, Office No. 1275 (12th Floor), Netaji Subhash Place, Pitampura, New Delhi - 110034",
+    businessHours: "Monday to Friday | 9:00 AM – 6:30 PM",
     country: "India",
-
     support:
-      "Users can contact Capital Bull Wave through the Contact page, email, phone, or WhatsApp.",
+      "Users can contact Capital BullWave through the Contact page, email, phone, or WhatsApp.",
   },
 
   website: {
     homepage: "/",
     about: "/about",
     services: "/services",
-    plans: "/plans",
+    markets: "/markets",
     contact: "/contact",
+    privacy: "/privacy-policy",
+    terms: "/terms",
+    refund: "/refund-policy",
+    kycAml: "/kyc-aml-policy",
+    grievance: "/grievance-policy",
+  },
+
+  policies: {
+    refund:
+      "Refund & Cancellation Policy — cancellations before service starts may be accepted; refunds for duplicate payments/technical errors; fees for rendered services are generally non-refundable. Email: support@capitalbullwave.com",
+    kycAml:
+      "KYC & AML Policy — identity verification, due diligence, sanctions screening, transaction monitoring. Email: compliance@capitalbullwave.com",
+    grievance:
+      "Grievance Redressal Policy — acknowledge within 2 business days; resolve typically in 7–15 business days. Email: support@capitalbullwave.com",
+    privacy:
+      "Privacy Policy — explains collection, use, storage and protection of personal information. Email: admin@capitalbullwave.com",
+    terms:
+      "Terms & Conditions — eligibility 18+, account security, fees, risk disclosures, Delhi jurisdiction. Email: admin@capitalbullwave.com",
   },
 
   privacyPolicy: {

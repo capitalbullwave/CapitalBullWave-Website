@@ -50,32 +50,109 @@ const features = [
     description:
       "Price-action insights with support, resistance and trend analysis for smarter market decisions.",
     icon: FaChartLine,
+    image:
+      "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1200&auto=format&fit=crop",
+    imageAlt: "Trading chart analysis on screen",
   },
   {
     title: "Risk Management Planning",
     description:
       "Structured allocation and position sizing strategies to protect capital during market volatility.",
     icon: FaShieldAlt,
+    image:
+      "https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1200&auto=format&fit=crop",
+    imageAlt: "Financial planning and capital protection",
   },
   {
     title: "Portfolio Learning Plans",
     description:
       "Build disciplined investing habits through practical portfolio learning and continuous market education.",
     icon: FaClipboardList,
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
+    imageAlt: "Portfolio analytics dashboard",
   },
   {
     title: "Intraday & Swing Support",
     description:
       "Timely trading updates during market hours to help capture short-term opportunities confidently.",
     icon: FaRocket,
+    image:
+      "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=1200&auto=format&fit=crop",
+    imageAlt: "Live market trading workspace",
   },
 ];
+
+const featureGallery = [
+  {
+    src: "https://images.unsplash.com/photo-1535320903710-d993d3d77d29?q=80&w=900&auto=format&fit=crop",
+    alt: "Market data screens",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=900&auto=format&fit=crop",
+    alt: "Financial district skyline",
+  },
+  {
+    src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=900&auto=format&fit=crop",
+    alt: "Investment analytics workspace",
+  },
+];
+
+function FeatureImage({ src, alt, imgClassName = "" }) {
+  const [loaded, setLoaded] = useState(false);
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <div className="feature-image relative h-full w-full overflow-hidden">
+      {!loaded && !failed && (
+        <div className="absolute inset-0 z-[1] flex items-center justify-center bg-sky-100/90">
+          <span className="feature-circle-loader" aria-label="Loading" />
+        </div>
+      )}
+      {!failed ? (
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          decoding="async"
+          onLoad={() => setLoaded(true)}
+          onError={() => {
+            setFailed(true);
+            setLoaded(true);
+          }}
+          className={`w-full object-cover transition-opacity duration-500 ${
+            loaded ? "opacity-100" : "opacity-0"
+          } ${imgClassName || "h-full"}`}
+        />
+      ) : (
+        <div className="flex h-full min-h-[5rem] w-full items-center justify-center bg-gradient-to-br from-sky-200 via-sky-100 to-cyan-50 px-2 text-center text-[11px] font-semibold text-sky-800">
+          {alt}
+        </div>
+      )}
+    </div>
+  );
+}
 
 const FeatureSection = ({ theme = "light" }) => {
   const isDark = theme === "dark";
   const sectionRef = useRef(null);
   const [progress, setProgress] = useState(0);
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(-1);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const node = sectionRef.current;
+    if (!node) return undefined;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setInView(true);
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -83,16 +160,16 @@ const FeatureSection = ({ theme = "light" }) => {
 
       const rect = sectionRef.current.getBoundingClientRect();
       const viewportHeight = window.innerHeight;
-      const total = rect.height + viewportHeight;
-      const current = viewportHeight - rect.top;
-      const percentage = Math.min(Math.max((current / total) * 100, 0), 100);
+      const usable = Math.max(rect.height - viewportHeight * 0.25, 1);
+      const traveled = Math.min(Math.max(viewportHeight * 0.55 - rect.top, 0), usable);
+      const percentage = Math.min(Math.max((traveled / usable) * 100, 0), 100);
       setProgress(percentage);
 
       const cards = sectionRef.current.querySelectorAll("[data-index]");
-      let nextActive = 0;
+      let nextActive = -1;
       cards.forEach((card, index) => {
         const cardRect = card.getBoundingClientRect();
-        if (cardRect.top < viewportHeight * 0.65) {
+        if (cardRect.top < viewportHeight * 0.72) {
           nextActive = index;
         }
       });
@@ -112,75 +189,180 @@ const FeatureSection = ({ theme = "light" }) => {
   return (
     <div
       ref={sectionRef}
-      className={`feature-stack mt-12 sm:mt-16 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8
+      className={`feature-stack relative mt-12 sm:mt-16 overflow-hidden rounded-2xl sm:rounded-[1.75rem] p-4 sm:p-6 lg:p-10
       ${
         isDark
-          ? "bg-slate-900/60 ring-1 ring-white/10"
-          : "bg-sky-50/80 ring-1 ring-sky-100"
-      }`}
+          ? "bg-gradient-to-b from-slate-900/80 via-slate-950/70 to-slate-900/80 ring-1 ring-white/10"
+          : "bg-gradient-to-b from-sky-50 via-white to-sky-50/90 ring-1 ring-sky-100 shadow-[0_18px_50px_rgba(14,165,233,0.08)]"
+      }
+      ${inView ? "feature-stack--inview" : ""}`}
     >
-      <div className="relative mx-auto max-w-2xl">
+      {/* Animated background */}
+      <div className="feature-stack__bg pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+        <span className="feature-orb feature-orb--1" />
+        <span className="feature-orb feature-orb--2" />
+        <span className="feature-orb feature-orb--3" />
+        <span className="feature-ring feature-ring--1" />
+        <span className="feature-ring feature-ring--2" />
+        {[0, 1, 2, 3, 4, 5].map((i) => (
+          <span
+            key={i}
+            className="feature-float-dot"
+            style={{
+              left: `${12 + i * 14}%`,
+              top: `${18 + ((i * 17) % 60)}%`,
+              animationDelay: `${i * 0.55}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full blur-3xl
+        ${isDark ? "bg-sky-500/10" : "bg-sky-200/50"}`}
+      />
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute -bottom-20 -left-10 h-56 w-56 rounded-full blur-3xl
+        ${isDark ? "bg-cyan-500/10" : "bg-sky-100/70"}`}
+      />
+
+      <div className="relative mb-8 sm:mb-10 text-center">
+        <span
+          className={`inline-flex rounded-full px-3.5 py-1.5 text-[10px] sm:text-xs font-bold uppercase tracking-[0.22em]
+          ${
+            isDark
+              ? "bg-sky-500/15 text-sky-300 ring-1 ring-sky-400/20"
+              : "bg-white text-sky-700 ring-1 ring-sky-100 shadow-sm"
+          }`}
+        >
+          How We Support You
+        </span>
+        <h3
+          className={`mt-3 text-xl sm:text-2xl font-bold tracking-tight ${
+            isDark ? "text-white" : "text-black"
+          }`}
+        >
+          Research-led guidance, step by step
+        </h3>
+      </div>
+
+      {/* Image gallery strip */}
+      <div className="feature-gallery relative z-[1] mx-auto mb-8 sm:mb-10 grid max-w-4xl grid-cols-3 gap-2 sm:gap-3">
+        {featureGallery.map((shot, i) => (
+          <div
+            key={shot.src}
+            className={`feature-gallery__frame overflow-hidden rounded-xl sm:rounded-2xl
+            ${i === 1 ? "mt-3 sm:mt-5" : ""}
+            ${i === 2 ? "mt-1.5 sm:mt-2" : ""}`}
+            style={{ animationDelay: `${120 + i * 110}ms` }}
+          >
+            <FeatureImage
+              src={shot.src}
+              alt={shot.alt}
+              imgClassName="feature-gallery__img h-20 sm:h-28 md:h-36"
+            />
+            <div
+              className={`pointer-events-none absolute inset-0 ${
+                isDark
+                  ? "bg-gradient-to-t from-slate-950/50 to-transparent"
+                  : "bg-gradient-to-t from-sky-950/25 to-transparent"
+              }`}
+            />
+          </div>
+        ))}
+      </div>
+
+      <div className="relative z-[1] mx-auto max-w-3xl">
+        {/* Track */}
         <div
-          className={`absolute left-4 sm:left-5 top-3 bottom-3 w-px
+          className={`feature-stack__track absolute left-[1.15rem] sm:left-5 top-2 bottom-2 w-[2px] rounded-full
           ${isDark ? "bg-white/10" : "bg-sky-200"}`}
         />
         <div
-          className="absolute left-4 sm:left-5 top-3 w-px rounded-full transition-all duration-300"
-          style={{
-            background: "linear-gradient(to bottom,#0ea5e9,#38bdf8)",
-            height: `${Math.max(progress - 2, 0)}%`,
-          }}
+          className="feature-stack__progress absolute left-[1.15rem] sm:left-5 top-2 w-[2px] origin-top rounded-full"
+          style={{ height: `${Math.max(progress, 4)}%` }}
         />
 
-        <div className="space-y-4 sm:space-y-5 pl-12 sm:pl-14">
+        <div className="space-y-4 sm:space-y-5 pl-[3.25rem] sm:pl-14">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             const activeCard = active >= index;
+            const isCurrent = active === index;
+
             return (
               <article
                 key={feature.title}
                 data-index={index}
-                className={`feature-stack__card group relative rounded-2xl p-5 sm:p-6 transition-all duration-500
+                style={{ "--feature-delay": `${index * 90}ms` }}
+                className={`feature-stack__card group relative overflow-hidden rounded-2xl sm:rounded-[1.35rem]
+                ${activeCard ? "is-active" : "is-idle"}
+                ${isCurrent ? "is-current" : ""}
                 ${
-                  activeCard
-                    ? isDark
-                      ? "bg-slate-950/90 ring-1 ring-sky-400/25 opacity-100 translate-y-0"
-                      : "bg-white ring-1 ring-sky-100 shadow-[0_12px_30px_rgba(14,165,233,0.1)] opacity-100 translate-y-0"
-                    : isDark
-                      ? "bg-slate-900/50 opacity-45 translate-y-2"
-                      : "bg-white/60 opacity-50 translate-y-2"
+                  isDark
+                    ? "feature-stack__card--dark"
+                    : "feature-stack__card--light"
                 }`}
               >
                 <div
-                  className={`absolute -left-[2.65rem] sm:-left-[2.85rem] top-6 flex h-8 w-8 items-center justify-center rounded-full
+                  className={`feature-stack__dot absolute -left-[2.9rem] sm:-left-[3.05rem] top-8 z-10 flex h-9 w-9 items-center justify-center rounded-full
                   ${
                     activeCard
-                      ? "bg-sky-500 text-white shadow-lg shadow-sky-500/30"
+                      ? "is-lit bg-sky-500 text-white shadow-lg shadow-sky-500/35"
                       : isDark
-                        ? "bg-slate-800 text-slate-500"
-                        : "bg-sky-100 text-sky-400"
+                        ? "bg-slate-800 text-slate-500 ring-1 ring-white/10"
+                        : "bg-sky-100 text-sky-400 ring-1 ring-sky-200"
                   }`}
                 >
-                  <span className="h-2 w-2 rounded-full bg-current" />
+                  <span className="feature-stack__dot-ring" aria-hidden="true" />
+                  {isCurrent && (
+                    <span className="feature-stack__dot-pulse" aria-hidden="true" />
+                  )}
+                  <span className="relative z-[1] h-2 w-2 rounded-full bg-current" />
                 </div>
 
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-sky-500 text-white shadow-md shadow-sky-500/25 transition group-hover:scale-105">
-                  <Icon className="text-base" />
+                <div className="grid sm:grid-cols-[minmax(0,0.95fr)_minmax(0,1.15fr)]">
+                  <div className="feature-stack__media relative h-36 overflow-hidden sm:h-full sm:min-h-[168px]">
+                    <FeatureImage
+                      src={feature.image}
+                      alt={feature.imageAlt}
+                      imgClassName="feature-stack__img absolute inset-0 h-full"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/55 via-slate-950/10 to-transparent sm:bg-gradient-to-r sm:from-transparent sm:via-transparent sm:to-slate-950/25" />
+                    <div
+                      className={`absolute left-3 top-3 flex h-10 w-10 items-center justify-center rounded-xl text-white shadow-lg backdrop-blur-md
+                      ${activeCard ? "bg-sky-500/90" : "bg-slate-950/55"}`}
+                    >
+                      <Icon className="text-sm" />
+                    </div>
+                  </div>
+
+                  <div className="p-5 sm:p-6">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <span
+                        className={`text-[10px] font-bold uppercase tracking-[0.18em]
+                        ${isDark ? "text-sky-400" : "text-sky-600"}`}
+                      >
+                        0{index + 1}
+                      </span>
+                      <h3
+                        className={`text-base sm:text-lg font-bold tracking-tight ${
+                          isDark ? "text-white" : "text-black"
+                        }`}
+                      >
+                        {feature.title}
+                      </h3>
+                    </div>
+                    <p
+                      className={`mt-2 text-sm leading-6 sm:leading-7 ${
+                        isDark ? "text-slate-300" : "text-neutral-700"
+                      }`}
+                    >
+                      {feature.description}
+                    </p>
+                  </div>
                 </div>
-                <h3
-                  className={`mt-4 text-base sm:text-lg font-bold ${
-                    isDark ? "text-white" : "text-black"
-                  }`}
-                >
-                  {feature.title}
-                </h3>
-                <p
-                  className={`mt-2 text-sm leading-6 sm:leading-7 ${
-                    isDark ? "text-slate-400" : "text-neutral-700"
-                  }`}
-                >
-                  {feature.description}
-                </p>
               </article>
             );
           })}

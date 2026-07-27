@@ -230,25 +230,29 @@ export default function Hero({ theme = "light" }) {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-3 border-t border-white/10 bg-slate-950/70 p-3.5 backdrop-blur-xl sm:gap-4 sm:p-5">
-                <div className="hero-stat olymp-stat rounded-2xl p-3.5 sm:p-4">
-                  <p className="text-[10px] uppercase tracking-[0.16em] text-slate-400 sm:text-xs">
+              <div className="grid grid-cols-2 gap-3 border-t border-white/10 bg-slate-950/80 p-3.5 backdrop-blur-xl sm:gap-4 sm:p-5">
+                <div className="hero-stat olymp-stat rounded-2xl p-3.5 sm:p-4 ring-1 ring-white/10">
+                  <p className="hero-stat__label text-[10px] font-semibold uppercase tracking-[0.16em] sm:text-xs">
                     Annual Return
                   </p>
-                  <h3 className="mt-1.5 text-2xl font-bold text-sky-300 sm:text-3xl">
+                  <h3 className="hero-stat__value mt-1.5 text-2xl font-bold sm:text-3xl">
                     +
                     <CountUp end={18.6} decimals={1} duration={2200} suffix="%" />
                   </h3>
-                  <p className="mt-1 text-xs text-slate-400 sm:text-sm">Average Growth</p>
+                  <p className="hero-stat__sub mt-1 text-xs sm:text-sm">
+                    Average Growth
+                  </p>
                 </div>
-                <div className="hero-stat hero-stat--delay olymp-stat rounded-2xl p-3.5 sm:p-4">
-                  <p className="text-[10px] uppercase tracking-[0.16em] text-slate-400 sm:text-xs">
+                <div className="hero-stat hero-stat--delay olymp-stat rounded-2xl p-3.5 sm:p-4 ring-1 ring-white/10">
+                  <p className="hero-stat__label text-[10px] font-semibold uppercase tracking-[0.16em] sm:text-xs">
                     Investors
                   </p>
-                  <h3 className="mt-1.5 text-2xl font-bold text-sky-300 sm:text-3xl">
+                  <h3 className="hero-stat__value mt-1.5 text-2xl font-bold sm:text-3xl">
                     <CountUp end={12} duration={2200} suffix="K+" />
                   </h3>
-                  <p className="mt-1 text-xs text-slate-400 sm:text-sm">Worldwide Clients</p>
+                  <p className="hero-stat__sub mt-1 text-xs sm:text-sm">
+                    Worldwide Clients
+                  </p>
                 </div>
               </div>
             </div>
