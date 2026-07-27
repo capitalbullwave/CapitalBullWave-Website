@@ -14,10 +14,11 @@ import {
 
 import { sendContact } from "../api/contactApi.js";
 import toast from "react-hot-toast";
-import RideLogo from "../assets/bullwaverides-logo.jpeg"; // update path if required
+import RideLogo from "../assets/bullwaverides-logo.jpeg";
 import AppStoreBadge from "../assets/appstore-icon.png";
 import PlayStoreBadge from "../assets/playstore-icon.png";
 import { Helmet } from "react-helmet-async";
+import RevealOnScroll from "../components/RevealOnScroll";
 
 const contactDetails = [
   {
@@ -91,46 +92,32 @@ export default function Contact({ theme }) {
     }
   };
 
-  const pageBg = isDark
-    ? "bg-[#020817] text-slate-100"
-    : "bg-slate-50 text-slate-900";
-
   const wrapper = isDark
-    ? "rounded-2xl sm:rounded-[34px] border border-slate-700 bg-slate-900 overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,.55)]"
-    : "rounded-2xl sm:rounded-[34px] border border-slate-200 bg-white overflow-hidden shadow-[0_30px_80px_rgba(15,23,42,.08)]";
+    ? "rounded-2xl sm:rounded-[34px] border border-white/10 bg-gradient-to-br from-slate-950 via-slate-900 to-sky-950 overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,.55)]"
+    : "rounded-2xl sm:rounded-[34px] border border-sky-100 bg-gradient-to-br from-white via-sky-50 to-sky-100 overflow-hidden shadow-[0_24px_60px_rgba(14,165,233,.12)]";
 
   const card = isDark
-    ? "rounded-2xl sm:rounded-3xl border border-blue-400 bg-slate-800 p-4 sm:p-6 transition-all duration-300 hover:border-sky-500 hover:bg-slate-800/90 hover:-translate-y-1"
-    : "rounded-2xl sm:rounded-3xl border border-blue-400 bg-white p-4 sm:p-6 transition-all duration-300 hover:border-blue-500 hover:-translate-y-1 shadow-xl";
+    ? "premium-card rounded-2xl sm:rounded-3xl border border-sky-500/30 bg-slate-800/80 p-4 sm:p-6 transition-all duration-300 hover:border-sky-400 hover:-translate-y-1"
+    : "premium-card rounded-2xl sm:rounded-3xl border border-sky-100 bg-white p-4 sm:p-6 transition-all duration-300 hover:border-sky-300 hover:-translate-y-1 shadow-lg shadow-sky-100/70";
 
   const input = isDark
     ? "w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-2.5 sm:px-5 sm:py-3 text-sm sm:text-base text-white placeholder:text-slate-500 outline-none transition focus:border-sky-500"
-    : "w-full rounded-xl border border-slate-300 bg-white px-4 py-2.5 sm:px-5 sm:py-3 text-sm sm:text-base text-slate-900 placeholder:text-slate-400 outline-none transition focus:border-blue-600";
+    : "w-full rounded-xl border border-sky-200 bg-white px-4 py-2.5 sm:px-5 sm:py-3 text-sm sm:text-base text-black placeholder:text-slate-400 outline-none transition focus:border-sky-500";
 
-  const heading = isDark
-    ? "text-slate-100"
-    : "text-blue-700";
+  const heading = isDark ? "text-sky-300" : "text-sky-700";
 
-  const text = isDark
-    ? "text-slate-400"
-    : "text-slate-600";
+  const text = isDark ? "text-slate-400" : "text-neutral-800";
 
   const label = isDark
     ? "text-sky-300 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] sm:tracking-[0.32em]"
-    : "text-blue-700 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] sm:tracking-[0.32em]";
+    : "text-sky-700 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em] sm:tracking-[0.32em]";
 
   const iconBox = isDark
     ? "flex h-11 w-11 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl bg-sky-500/15 text-sky-400"
-    : "flex h-11 w-11 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl bg-blue-100 text-blue-700";
+    : "flex h-11 w-11 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl bg-sky-100 text-sky-700";
 
   return (
-    <section
-      className={`relative overflow-hidden border-b transition-all duration-300 ${
-        isDark
-          ? "bg-slate-950 border-slate-800"
-          : "bg-gradient-to-br from-white via-sky-50 to-sky-100/70 border-sky-100"
-      }`}
-    >
+    <section className="page-shell page-enter relative overflow-hidden">
 
       <Helmet>
         <title>Contact Us | Capital BullWave - Delhi Office, Netaji Subhash Place</title>
@@ -148,46 +135,38 @@ export default function Contact({ theme }) {
         <meta property="og:type" content="website" />
       </Helmet>
 
-      {/* ---------------- HERO ---------------- */}
-
       <section
-        className={`relative overflow-hidden border-b ${
-          isDark
-            ? "border-slate-800 bg-[#020817]"
-            : "border-sky-100 bg-gradient-to-br from-sky-50 via-white to-sky-100/60"
-        }`}
+        className={`relative overflow-hidden rounded-2xl sm:rounded-[1.75rem] ${wrapper}`}
       >
         <div className={`absolute inset-0 ${isDark ? "opacity-30" : "opacity-70"}`}>
           <div
-            className={`absolute -top-20 -left-20 h-56 w-56 sm:h-80 sm:w-80 rounded-full blur-[90px] sm:blur-[140px] ${
-              isDark ? "bg-sky-500/15" : "bg-blue-300/40"
+            className={`absolute -top-20 -left-20 h-56 w-56 sm:h-80 sm:w-80 rounded-full blur-[90px] sm:blur-[140px] animate-soft-pulse ${
+              isDark ? "bg-sky-500/15" : "bg-sky-300/50"
             }`}
           />
 
           <div
             className={`absolute -bottom-20 -right-20 h-56 w-56 sm:h-80 sm:w-80 rounded-full blur-[90px] sm:blur-[140px] ${
-              isDark ? "bg-cyan-500/15" : "bg-cyan-300/40"
+              isDark ? "bg-cyan-500/15" : "bg-cyan-300/45"
             }`}
           />
         </div>
 
-        <div className="relative mx-auto py-10 sm:py-14 lg:py-16">
-
-          <div className="text-center">
-
+        <div className="relative mx-auto px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
+          <RevealOnScroll className="text-center">
             <span
               className={`inline-flex rounded-full px-3 py-1.5 sm:px-5 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.25em] sm:tracking-[0.4em] ${
                 isDark
                   ? "bg-sky-500/15 text-sky-300"
-                  : "bg-blue-100 text-blue-700"
+                  : "bg-white text-sky-700 ring-1 ring-sky-100"
               }`}
             >
               Contact Capital BullWave
             </span>
 
-           <h1
+            <h1
               className={`mt-4 sm:mt-6 font-bold tracking-tight text-2xl sm:text-3xl lg:text-4xl ${
-              isDark ? "text-white" : "text-slate-900"
+                isDark ? "text-white" : "text-black"
               }`}
             >
               Let's Start A Conversation
@@ -195,7 +174,7 @@ export default function Contact({ theme }) {
 
             <p
               className={`mx-auto mt-4 sm:mt-6 max-w-3xl text-sm sm:text-base lg:text-lg leading-6 sm:leading-8 ${
-              isDark ? "text-slate-300" : "text-slate-600"
+                isDark ? "text-slate-300" : "text-neutral-800"
               }`}
             >
               Whether you need market research, trading guidance, investment
@@ -205,7 +184,7 @@ export default function Contact({ theme }) {
 
             <div
               className={`mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm ${
-                isDark ? "text-slate-400" : "text-slate-600"
+                isDark ? "text-slate-400" : "text-neutral-700"
               }`}
             >
               <span>Home</span>
@@ -216,15 +195,13 @@ export default function Contact({ theme }) {
                 className={
                   isDark
                     ? "font-semibold text-sky-300"
-                    : "font-semibold text-blue-700"
+                    : "font-semibold text-sky-700"
                 }
               >
                 Contact
               </span>
             </div>
-
-          </div>
-
+          </RevealOnScroll>
         </div>
       </section>
 
@@ -250,7 +227,7 @@ export default function Contact({ theme }) {
                 className={`inline-flex rounded-full px-3 py-1.5 sm:px-5 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.35em] ${
                   isDark
                     ? "bg-sky-500/15 text-sky-300"
-                    : "bg-blue-100 text-blue-700"
+                    : "bg-sky-50 text-sky-700 ring-1 ring-sky-100"
                 }`}
               >
                 Contact Information
@@ -298,7 +275,7 @@ export default function Contact({ theme }) {
                               className={`${text} mt-2 sm:mt-3 block break-words text-sm sm:text-base transition ${
                                   isDark
                                     ? "hover:text-sky-300"
-                                    : "hover:text-blue-600"
+                                    : "hover:text-sky-700"
                                 }`}
                             >
                               {item.value}
@@ -397,7 +374,7 @@ export default function Contact({ theme }) {
               className={`inline-flex rounded-full px-3 py-1.5 sm:px-5 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.35em] ${
                 isDark
                   ? "bg-sky-500/15 text-sky-300"
-                  : "bg-blue-100 text-blue-700"
+                  : "bg-sky-50 text-sky-700 ring-1 ring-sky-100"
               }`}
             >
               Send Message
@@ -545,7 +522,7 @@ export default function Contact({ theme }) {
                 className={`group cursor-pointer inline-flex w-full items-center justify-center gap-2 sm:gap-3 rounded-xl sm:rounded-2xl px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-lg font-semibold transition-all duration-300 md:w-auto ${
                   isDark
                     ? "bg-sky-500 text-white hover:bg-sky-600 hover:shadow-[0_15px_35px_rgba(14,165,233,.35)]"
-                    : "bg-blue-700 text-white hover:bg-blue-800 hover:shadow-[0_15px_35px_rgba(37,99,235,.35)]"
+                    : "bw-gradient-btn text-white hover:shadow-[0_15px_35px_rgba(14,165,233,.35)]"
                 }`}
               >
                 <FaPaperPlane className="text-sm sm:text-base transition-transform cursor-pointer duration-300 group-hover:translate-x-1" />
@@ -640,7 +617,7 @@ export default function Contact({ theme }) {
                 className={`inline-flex rounded-full px-3 py-1.5 sm:px-5 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.35em] ${
                   isDark
                     ? "bg-sky-500/15 text-sky-300"
-                    : "bg-blue-100 text-blue-700"
+                    : "bg-sky-50 text-sky-700 ring-1 ring-sky-100"
                 }`}
               >
                 Visit Our Office
@@ -692,7 +669,7 @@ export default function Contact({ theme }) {
                 className={`inline-flex rounded-full px-3 py-1.5 sm:px-5 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.35em] ${
                   isDark
                     ? "bg-sky-500/15 text-sky-300"
-                    : "bg-blue-100 text-blue-700"
+                    : "bg-sky-50 text-sky-700 ring-1 ring-sky-100"
                 }`}
               >
                 Why Choose Us
@@ -763,7 +740,7 @@ export default function Contact({ theme }) {
               Ready To Talk With Our Experts?
             </h2>
 
-            <p className="mx-auto mt-3 sm:mt-5 max-w-2xl text-sm sm:text-base lg:text-lg leading-6 sm:leading-8 text-blue-100">
+            <p className="mx-auto mt-3 sm:mt-5 max-w-2xl text-sm sm:text-base lg:text-lg leading-6 sm:leading-8 text-sky-50">
               Whether you are a beginner or an experienced investor,
               our professionals are here to provide reliable market
               insights and personalized investment guidance.
@@ -773,7 +750,7 @@ export default function Contact({ theme }) {
 
               <a
                 href="tel:+918796565234"
-                className="rounded-full bg-white px-5 py-2.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-blue-700 transition hover:scale-105"
+                className="rounded-full bg-white px-5 py-2.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-sky-700 transition hover:scale-105"
               >
                 Call Now
               </a>

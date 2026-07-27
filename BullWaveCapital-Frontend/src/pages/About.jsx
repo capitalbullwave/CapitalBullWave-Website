@@ -26,7 +26,7 @@ const About = ({ theme }) => {
   const title = dark ? "text-white" : "text-black";
 
   return (
-    <div className="page-shell">
+    <div className="page-shell page-enter">
       <Helmet>
         <title>About Us | Capital BullWave - Market Research & Trading Advisory Delhi</title>
         <meta
@@ -53,7 +53,7 @@ const About = ({ theme }) => {
           <div
             className={`absolute inset-0 ${
               dark
-                ? "bg-linear-to-br from-slate-900 via-slate-900 to-sky-950/40"
+                ? "bg-gradient-to-br from-slate-900 via-slate-900 to-sky-950/40"
                 : "bg-gradient-to-br from-white via-sky-50 to-sky-100"
             }`}
           />
@@ -74,14 +74,14 @@ const About = ({ theme }) => {
           />
           <div
             className={`absolute -bottom-28 -left-20 h-80 w-80 rounded-full blur-3xl ${
-              dark ? "bg-blue-600/10" : "bg-sky-200/50"
+              dark ? "bg-sky-600/10" : "bg-sky-200/50"
             }`}
           />
           <div
             className={`absolute inset-x-0 top-0 h-1.5 ${
               dark
-                ? "bg-linear-to-r from-sky-500/40 via-sky-400/70 to-blue-500/40"
-                : "bg-linear-to-r from-sky-300 via-sky-500 to-sky-400"
+                ? "bg-gradient-to-r from-sky-500/40 via-sky-400/70 to-cyan-500/40"
+                : "bg-gradient-to-r from-sky-300 via-sky-500 to-sky-400"
             }`}
           />
           <svg

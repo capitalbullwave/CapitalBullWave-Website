@@ -178,6 +178,48 @@ img {
   box-shadow: 0 14px 36px rgba(14, 165, 233, 0.08);
 }
 
+/* Page enter + legal document motion */
+.page-shell {
+  width: 100%;
+}
+
+.page-enter {
+  animation: pageEnter 0.55s ease both;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.legal-doc__section {
+  padding-top: 0.15rem;
+}
+
+.legal-doc__card {
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .legal-doc__card:hover {
+    transform: translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter,
+  .legal-doc__card {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
 /* ==========================================
    ANIMATIONS
 ========================================== */

@@ -1,7 +1,5 @@
-import React from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-
 import {
   FaHome,
   FaInfoCircle,
@@ -13,6 +11,7 @@ import {
   FaExclamationTriangle,
   FaSitemap,
 } from "react-icons/fa";
+import RevealOnScroll from "../components/RevealOnScroll";
 
 const pages = [
   { name: "Home", path: "/", icon: FaHome },
@@ -30,13 +29,8 @@ export default function SiteMap({ theme }) {
   const isDark = theme === "dark";
 
   return (
-    <section
-      className={`w-full py-8 sm:py-10 transition-all duration-300 ${
-        isDark ? "bg-slate-950" : "bg-slate-50"
-      }`}
-    >
-
-       <Helmet>
+    <section className="page-shell page-enter w-full py-4 sm:py-6 lg:py-8">
+      <Helmet>
         <title>Site Map | Capital BullWave</title>
         <meta
           name="description"
@@ -48,87 +42,86 @@ export default function SiteMap({ theme }) {
         <meta property="og:type" content="website" />
       </Helmet>
 
-      <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-10">
+      <RevealOnScroll>
         <div
-          className={`rounded-2xl border shadow-lg transition-all duration-300 ${
+          className={`overflow-hidden rounded-2xl sm:rounded-[1.75rem]
+          ${
             isDark
-              ? "bg-slate-900 border-slate-800"
-              : "bg-white border-slate-200"
+              ? "bg-gradient-to-br from-slate-950 via-slate-900 to-sky-950 ring-1 ring-white/10"
+              : "bg-gradient-to-br from-white via-sky-50 to-sky-100 ring-1 ring-sky-100 shadow-[0_16px_40px_rgba(14,165,233,0.1)]"
           }`}
         >
-          {/* Header */}
-          <div className="border-b border-slate-200/20 p-6 sm:p-8">
+          <div
+            className={`border-b px-5 py-6 sm:px-8 sm:py-8 ${
+              isDark ? "border-white/10" : "border-sky-100"
+            }`}
+          >
+            <p
+              className={`inline-flex rounded-full px-3 py-1.5 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.22em]
+              ${
+                isDark
+                  ? "bg-sky-500/15 text-sky-300"
+                  : "bg-white text-sky-700 ring-1 ring-sky-100"
+              }`}
+            >
+              Navigation
+            </p>
             <h1
-              className={`text-3xl font-bold ${
-                isDark ? "text-white" : "text-slate-900"
+              className={`mt-4 text-2xl sm:text-3xl font-bold tracking-tight ${
+                isDark ? "text-white" : "text-black"
               }`}
             >
               Site Map
             </h1>
-
             <p
               className={`mt-3 text-sm sm:text-base ${
-                isDark ? "text-slate-400" : "text-slate-600"
+                isDark ? "text-slate-400" : "text-neutral-800"
               }`}
             >
               Quickly navigate through all public pages of our website.
             </p>
           </div>
 
-          {/* Links */}
-          <div className="p-6 sm:p-8">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {pages.map((page) => {
-                const Icon = page.icon;
-
-                return (
-                  <Link key={page.path} to={page.path} className="group">
-                    <div
-                      className={`flex items-center gap-4 rounded-xl border p-4 transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-lg ${
-                        isDark
-                          ? "border-slate-700 bg-slate-800 hover:border-blue-500 hover:bg-slate-700"
-                          : "border-slate-200 bg-white hover:border-blue-500 hover:bg-blue-50"
-                      }`}
-                    >
-                      <div
-                        className={`flex h-11 w-11 items-center justify-center rounded-lg transition-all duration-300 ${
-                          isDark
-                            ? "bg-slate-700 text-sky-400 group-hover:bg-blue-600 group-hover:text-white"
-                            : "bg-blue-100 text-blue-700 group-hover:bg-blue-600 group-hover:text-white"
-                        }`}
-                      >
-                        <Icon size={18} />
-                      </div>
-
-                      <div>
-                        <h3
-                          className={`font-semibold transition-colors duration-300 ${
-                            isDark
-                              ? "text-white group-hover:text-sky-300"
-                              : "text-slate-900 group-hover:text-blue-700"
-                          }`}
-                        >
-                          {page.name}
-                        </h3>
-
-                        <p
-                          className={`text-sm ${
-                            isDark
-                              ? "text-slate-400"
-                              : "text-slate-500"
-                          }`}
-                        >
-                          Visit page
-                        </p>
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
+          <div className="grid grid-cols-1 gap-3 p-5 sm:grid-cols-2 sm:gap-4 sm:p-8 lg:grid-cols-3">
+            {pages.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.path}
+                  to={item.path}
+                  className={`premium-card group flex items-center gap-3 rounded-xl p-4 transition hover:-translate-y-0.5
+                  ${
+                    isDark
+                      ? "bg-slate-950/50 ring-1 ring-white/10 hover:ring-sky-400/30"
+                      : "bg-white ring-1 ring-sky-100 hover:ring-sky-300 shadow-sm"
+                  }`}
+                  style={{ animationDelay: `${index * 40}ms` }}
+                >
+                  <span
+                    className={`flex h-10 w-10 items-center justify-center rounded-xl
+                    ${
+                      isDark
+                        ? "bg-sky-500/15 text-sky-300"
+                        : "bg-sky-50 text-sky-700"
+                    }`}
+                  >
+                    <Icon className="text-sm" />
+                  </span>
+                  <span
+                    className={`text-sm sm:text-base font-semibold ${
+                      isDark
+                        ? "text-white group-hover:text-sky-300"
+                        : "text-black group-hover:text-sky-700"
+                    }`}
+                  >
+                    {item.name}
+                  </span>
+                </Link>
+              );
+            })}
           </div>
         </div>
-      </div>
+      </RevealOnScroll>
     </section>
   );
 }

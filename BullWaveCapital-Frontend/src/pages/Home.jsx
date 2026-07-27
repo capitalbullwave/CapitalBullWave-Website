@@ -32,7 +32,7 @@ const organizationSchema = {
 
 const Home = ({ theme }) => {
   return (
-    <div className="space-y-1 sm:space-y-2">
+    <div className="page-enter space-y-1 sm:space-y-2">
       <Helmet>
         <title>
           Capital BullWave | Stock Market Research & Investment Advisory in Delhi
