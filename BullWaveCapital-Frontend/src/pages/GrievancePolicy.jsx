@@ -101,8 +101,8 @@ const GrievancePolicy = ({ theme }) => {
             <strong className={isDark ? "text-white" : "text-black"}>
               Email:
             </strong>{" "}
-            <LegalLink theme={theme} href="mailto:support@capitalbullwave.com">
-              support@capitalbullwave.com
+            <LegalLink theme={theme} href="mailto:admin@capitalbullwave.com">
+              admin@capitalbullwave.com
             </LegalLink>
           </p>
           <p className="mt-3 sm:mt-4">
@@ -213,8 +213,8 @@ const GrievancePolicy = ({ theme }) => {
             <strong className={isDark ? "text-white" : "text-black"}>
               Email:
             </strong>{" "}
-            <LegalLink theme={theme} href="mailto:support@capitalbullwave.com">
-              support@capitalbullwave.com
+            <LegalLink theme={theme} href="mailto:admin@capitalbullwave.com">
+              admin@capitalbullwave.com
             </LegalLink>
           </p>
         </LegalSection>

@@ -338,9 +338,9 @@ const KycAmlPolicy = ({ theme }) => {
             </strong>{" "}
             <LegalLink
               theme={theme}
-              href="mailto:compliance@capitalbullwave.com"
+              href="mailto:admin@capitalbullwave.com"
             >
-              compliance@capitalbullwave.com
+              admin@capitalbullwave.com
             </LegalLink>
           </p>
         </LegalSection>
