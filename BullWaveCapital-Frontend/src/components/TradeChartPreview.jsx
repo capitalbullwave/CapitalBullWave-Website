@@ -91,15 +91,15 @@ export default function TradeChartPreview({ theme = "light" }) {
       </div>
 
       <div className="grid grid-cols-2 gap-2.5 border-t border-white/10 p-3 sm:gap-3 sm:p-4">
-        <div className="trade-metric rounded-xl sm:rounded-2xl bg-white/5 px-3 py-3 sm:px-4 sm:py-3.5 ring-1 ring-white/10">
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.16em] text-slate-400">
+        <div className="trade-metric rounded-xl sm:rounded-2xl bg-white/10 px-3 py-3 sm:px-4 sm:py-3.5 ring-1 ring-white/15">
+          <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-slate-200">
             Our share
           </p>
           <p className="mt-1 text-lg sm:text-xl font-bold text-white">70%</p>
         </div>
-        <div className="trade-metric rounded-xl sm:rounded-2xl bg-white/5 px-3 py-3 sm:px-4 sm:py-3.5 ring-1 ring-white/10">
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.16em] text-slate-400">
-            Trader's share
+        <div className="trade-metric rounded-xl sm:rounded-2xl bg-white/10 px-3 py-3 sm:px-4 sm:py-3.5 ring-1 ring-white/15">
+          <p className="text-[10px] sm:text-xs font-semibold uppercase tracking-[0.16em] text-slate-200">
+            Trader&apos;s share
           </p>
           <p className="mt-1 text-lg sm:text-xl font-bold text-sky-300">30%</p>
         </div>

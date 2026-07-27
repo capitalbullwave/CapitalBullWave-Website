@@ -1344,6 +1344,83 @@ html.theme-dark * {
     box-shadow 0.35s ease;
 }
 
+/* Trading navbar */
+.trade-nav {
+  position: relative;
+  isolation: isolate;
+}
+
+.trade-nav__accent {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(56, 189, 248, 0.55) 20%,
+    rgba(34, 197, 94, 0.45) 50%,
+    rgba(56, 189, 248, 0.55) 80%,
+    transparent 100%
+  );
+  opacity: 0.85;
+}
+
+.trade-nav--elevated .trade-nav__accent {
+  opacity: 1;
+}
+
+.trade-nav__pulse {
+  animation: tradeNavPulse 1.6s ease-in-out infinite;
+}
+
+.trade-nav__live-dot {
+  animation: tradeNavPulse 1.6s ease-in-out infinite;
+}
+
+@keyframes tradeNavPulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(0.85);
+  }
+}
+
+.trade-nav__link.is-active {
+  position: relative;
+}
+
+.trade-nav__cta {
+  box-shadow: 0 10px 24px rgba(14, 165, 233, 0.28);
+}
+
+.trade-nav__cta:hover {
+  box-shadow: 0 14px 28px rgba(14, 165, 233, 0.36);
+}
+
+.trade-nav__mobile-link {
+  animation: tradeNavLinkIn 0.35s ease both;
+}
+
+@keyframes tradeNavLinkIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trade-nav__pulse,
+  .trade-nav__live-dot,
+  .trade-nav__mobile-link {
+    animation: none !important;
+  }
+}
+
 .olymp-bars {
   display: block;
 }
