@@ -4,8 +4,12 @@ import {
   FaFacebookF,
   FaInstagram,
   FaLinkedinIn,
-} from "react-icons/fa6";
+  FaMapMarkerAlt,
+  FaEnvelope,
+  FaPhoneAlt,
+} from "react-icons/fa";
 
+import logo from "../assets/capitalbullwave.png";
 import RideLogo from "../assets/bullwaverides-logo.jpeg";
 import PlayStore from "../assets/playstore-icon.png";
 import AppStore from "../assets/appstore-icon.png";
@@ -13,26 +17,27 @@ import ClubLogo from "../assets/bullwaveClub.jpeg";
 import DunsRegisteredSeal from "../components/DunsRegisteredSeal";
 import RevealOnScroll from "../components/RevealOnScroll";
 
-const navigateLinks = [
+const siteLinks = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
   { name: "Services", path: "/services" },
   { name: "Markets", path: "/markets" },
   { name: "Contact", path: "/contact" },
-];
-
-const resourceLinks = [
-  { name: "FAQs", isFaq: true },
-  { name: "Site Map", path: "/site-map" },
-  { name: "WhatsApp", href: "https://wa.me/919616212526" },
-];
-
-const policyLinks = [
   { name: "Privacy Policy", path: "/privacy-policy" },
   { name: "Terms & Conditions", path: "/terms" },
-  { name: "Refund Policy", path: "/refund-policy" },
-  { name: "KYC & AML", path: "/kyc-aml-policy" },
-  { name: "Grievance Redressal", path: "/grievance-policy" },
+];
+
+const apps = [
+  {
+    name: "BullWave Rides",
+    tagline: "Book rides instantly",
+    logo: RideLogo,
+  },
+  {
+    name: "BullWave Club",
+    tagline: "Enjoy and have fun",
+    logo: ClubLogo,
+  },
 ];
 
 const social = [
@@ -53,7 +58,30 @@ const social = [
   },
 ];
 
-const Footer = ({ theme }) => {
+const storeBadges = (
+  <div className="bw-footer__stores mt-1 flex flex-wrap items-center gap-2">
+    <a
+      href="https://play.google.com/store"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="bw-footer__store"
+      aria-label="Get it on Google Play"
+    >
+      <img src={PlayStore} alt="Google Play" className="h-9 w-auto rounded-md sm:h-10" />
+    </a>
+    <a
+      href="https://www.apple.com/app-store/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="bw-footer__store"
+      aria-label="Download on the App Store"
+    >
+      <img src={AppStore} alt="App Store" className="h-9 w-auto rounded-md sm:h-10" />
+    </a>
+  </div>
+);
+
+const Footer = ({ theme = "light" }) => {
   const dark = theme === "dark";
   const navigate = useNavigate();
   const location = useLocation();
@@ -72,205 +100,220 @@ const Footer = ({ theme }) => {
     navigate("/#faq");
   };
 
-  const heading = dark ? "text-white" : "text-slate-950";
-  const muted = dark ? "text-slate-400" : "text-slate-600";
-  const colHead = dark
-    ? "text-base font-bold tracking-[0.06em] text-sky-100 sm:text-[17px]"
-    : "text-base font-bold tracking-[0.06em] text-sky-950 sm:text-[17px]";
-  const itemLink = dark
-    ? "bw-foot-link text-[13px] font-medium leading-6 text-slate-300 hover:text-sky-300 sm:text-[13.5px]"
-    : "bw-foot-link text-[13px] font-medium leading-6 text-slate-700 hover:text-sky-700 sm:text-[13.5px]";
-
-  const renderLink = (item, className) => {
-    if (item.isFaq) {
-      return (
-        <button
-          type="button"
-          onClick={handleFaqClick}
-          className={`cursor-pointer text-left ${className}`}
-        >
-          {item.name}
-        </button>
-      );
-    }
-    if (item.href) {
-      return (
-        <a
-          href={item.href}
-          target={item.href.startsWith("http") ? "_blank" : undefined}
-          rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-          className={className}
-        >
-          {item.name}
-        </a>
-      );
-    }
-    return (
-      <Link to={item.path} className={className}>
-        {item.name}
-      </Link>
-    );
-  };
-
   return (
     <footer
       className={`bw-footer footer-container relative overflow-hidden border-t ${
-        dark ? "bw-footer--dark border-sky-500/20" : "bw-footer--light border-sky-200"
+        dark ? "bw-footer--dark" : "bw-footer--light"
       }`}
     >
       <div className="bw-footer__mesh" aria-hidden="true">
         <span className="bw-footer__orb bw-footer__orb--1" />
         <span className="bw-footer__orb bw-footer__orb--2" />
+        <span className="bw-footer__orb bw-footer__orb--3" />
         <span className="bw-footer__beam" />
+        <span className="bw-footer__sheen" />
       </div>
 
-      <div className="relative mx-auto max-w-[1100px] px-3 py-4 sm:px-4 sm:py-5 lg:px-5 lg:py-6">
+      <div className="relative mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-12">
         <RevealOnScroll>
-          <div className="grid grid-cols-2 gap-x-4 gap-y-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-6 lg:gap-y-0">
-            {/* Navigate — site pages once */}
+          <div className="grid grid-cols-1 gap-9 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+            {/* About Company */}
             <div className="bw-footer__col">
-              <h3 className={`bw-footer__heading ${colHead}`}>Navigate</h3>
-              <ul className="mt-2.5 space-y-2 sm:mt-3 sm:space-y-2.5">
-                {navigateLinks.map((item, i) => (
-                  <li key={item.name} style={{ "--i": i }} className="bw-footer__li">
-                    {renderLink(item, itemLink)}
-                  </li>
-                ))}
-              </ul>
-            </div>
+              <h3 className="bw-footer__heading bw-f-title text-lg font-bold sm:text-xl">
+                About Company
+              </h3>
+              <p className="bw-f-text mt-4 text-sm leading-7 sm:text-[15px]">
+                Capital BullWave Private Limited provides professional stock market
+                research, investment guidance, and investor education from Netaji
+                Subhash Place, Delhi.
+              </p>
 
-            {/* Resources — unique support links */}
-            <div className="bw-footer__col">
-              <h3 className={`bw-footer__heading ${colHead}`}>Resources</h3>
-              <ul className="mt-2.5 space-y-2 sm:mt-3 sm:space-y-2.5">
-                {resourceLinks.map((item, i) => (
-                  <li key={item.name} style={{ "--i": i }} className="bw-footer__li">
-                    {renderLink(item, itemLink)}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Policies — legal once */}
-            <div className="bw-footer__col">
-              <h3 className={`bw-footer__heading ${colHead}`}>Policies</h3>
-              <ul className="mt-2.5 space-y-2 sm:mt-3 sm:space-y-2.5">
-                {policyLinks.map((item, i) => (
-                  <li key={item.name} style={{ "--i": i }} className="bw-footer__li">
-                    {renderLink(item, itemLink)}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Apps & Trust */}
-            <div className="bw-footer__col col-span-2 sm:col-span-2 lg:col-span-1">
-              <h3 className={`bw-footer__heading ${colHead}`}>Apps &amp; Trust</h3>
-
-              <div className="mt-2.5 space-y-2.5 sm:mt-3">
-                <div className="bw-footer__app flex items-center gap-2.5">
-                  <img
-                    src={RideLogo}
-                    alt="BullWave Rides"
-                    className="h-10 w-10 rounded-lg object-cover shadow-sm"
-                  />
-                  <div className="min-w-0">
-                    <p className={`text-[14px] font-bold leading-snug sm:text-[15px] ${heading}`}>
-                      BullWave Rides
-                    </p>
-                    <p className={`text-[12px] font-medium leading-snug sm:text-[12.5px] ${muted}`}>
-                      Book rides instantly
-                    </p>
-                  </div>
-                </div>
-                <div className="bw-footer__app flex items-center gap-2.5">
-                  <img
-                    src={ClubLogo}
-                    alt="BullWave Club"
-                    className="h-10 w-10 rounded-lg object-cover shadow-sm"
-                  />
-                  <div className="min-w-0">
-                    <p className={`text-[14px] font-bold leading-snug sm:text-[15px] ${heading}`}>
-                      BullWave Club
-                    </p>
-                    <p className={`text-[12px] font-medium leading-snug sm:text-[12.5px] ${muted}`}>
-                      Enjoy and have fun
-                    </p>
-                  </div>
+              <div className="mt-5 flex items-center gap-3">
+                <img
+                  src={logo}
+                  alt="Capital BullWave"
+                  className="bw-footer__brand-logo h-14 w-14 rounded-full object-cover ring-2 ring-sky-400/50 shadow-lg"
+                />
+                <div>
+                  <p className="bw-f-brand text-base font-bold">
+                    Capital <span className="bw-f-accent">BullWave</span>
+                  </p>
+                  <p className="bw-f-muted mt-0.5 text-xs font-medium">
+                    Private Limited
+                  </p>
                 </div>
               </div>
+            </div>
 
-              <div className="mt-2.5 flex flex-wrap items-center gap-2">
-                <a
-                  href="https://play.google.com/store"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bw-footer__store"
-                >
-                  <img
-                    src={PlayStore}
-                    alt="Google Play"
-                    className="h-8 w-auto rounded-md sm:h-9"
-                  />
-                </a>
-                <a
-                  href="https://www.apple.com/app-store/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bw-footer__store"
-                >
-                  <img
-                    src={AppStore}
-                    alt="App Store"
-                    className="h-8 w-auto rounded-md sm:h-9"
-                  />
-                </a>
-              </div>
+            {/* Site Links */}
+            <div className="bw-footer__col">
+              <h3 className="bw-footer__heading bw-f-title text-lg font-bold sm:text-xl">
+                Site Links
+              </h3>
+              <ul className="mt-4 space-y-2.5">
+                {siteLinks.map((item, i) => (
+                  <li key={item.name} style={{ "--i": i }} className="bw-footer__li">
+                    <Link
+                      to={item.path}
+                      className="bw-foot-link bw-f-link text-sm sm:text-[15px]"
+                    >
+                      {item.name}
+                    </Link>
+                  </li>
+                ))}
+                <li style={{ "--i": siteLinks.length }} className="bw-footer__li">
+                  <button
+                    type="button"
+                    onClick={handleFaqClick}
+                    className="bw-foot-link bw-f-link cursor-pointer text-left text-sm sm:text-[15px]"
+                  >
+                    FAQs
+                  </button>
+                </li>
+                <li style={{ "--i": siteLinks.length + 1 }} className="bw-footer__li">
+                  <Link
+                    to="/refund-policy"
+                    className="bw-foot-link bw-f-link text-sm sm:text-[15px]"
+                  >
+                    Refund Policy
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
-              <div className="mt-2.5">
-                <DunsRegisteredSeal theme={theme} compact />
+            {/* Contact Us */}
+            <div className="bw-footer__col">
+              <h3 className="bw-footer__heading bw-f-title text-lg font-bold sm:text-xl">
+                Contact Us
+              </h3>
+              <ul className="mt-4 space-y-4">
+                <li className="bw-footer__contact flex gap-3" style={{ "--i": 0 }}>
+                  <span className="bw-footer__icon mt-0.5">
+                    <FaMapMarkerAlt />
+                  </span>
+                  <div>
+                    <p className="bw-f-label text-sm font-semibold">Registered Office</p>
+                    <p className="bw-f-detail mt-1 text-sm leading-6">
+                      Aggarwal Millennium Tower 2, Office No. 1275 (12th Floor),
+                      Netaji Subhash Place, Pitampura, New Delhi – 110034
+                    </p>
+                  </div>
+                </li>
+                <li className="bw-footer__contact flex gap-3" style={{ "--i": 1 }}>
+                  <span className="bw-footer__icon mt-0.5">
+                    <FaEnvelope />
+                  </span>
+                  <div>
+                    <p className="bw-f-label text-sm font-semibold">Email</p>
+                    <a
+                      href="mailto:admin@capitalbullwave.com"
+                      className="bw-foot-link bw-f-link mt-1 block text-sm"
+                    >
+                      admin@capitalbullwave.com
+                    </a>
+                  </div>
+                </li>
+                <li className="bw-footer__contact flex gap-3" style={{ "--i": 2 }}>
+                  <span className="bw-footer__icon mt-0.5">
+                    <FaPhoneAlt />
+                  </span>
+                  <div>
+                    <p className="bw-f-label text-sm font-semibold">Phone</p>
+                    <a
+                      href="tel:+918796565234"
+                      className="bw-foot-link bw-f-link mt-1 block text-sm"
+                    >
+                      +91 87965 65234
+                    </a>
+                    <a
+                      href="https://wa.me/919616212526"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bw-foot-link bw-f-link mt-1 block text-sm"
+                    >
+                      WhatsApp +91 96162 12526
+                    </a>
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            {/* Apps & Downloads */}
+            <div className="bw-footer__col">
+              <h3 className="bw-footer__heading bw-f-title text-lg font-bold sm:text-xl">
+                Apps &amp; Downloads
+              </h3>
+
+              <div className="mt-4 space-y-3">
+                {apps.map((app, i) => (
+                  <div
+                    key={app.name}
+                    style={{ "--i": i }}
+                    className="bw-footer__app-card"
+                  >
+                    <div className="flex items-center gap-3">
+                      <img
+                        src={app.logo}
+                        alt={app.name}
+                        className="bw-footer__app-logo h-11 w-11 shrink-0 rounded-xl object-cover shadow-md ring-1 ring-sky-300/40"
+                      />
+                      <div className="min-w-0 flex-1">
+                        <p className="bw-f-app-name truncate text-sm font-bold sm:text-[15px]">
+                          {app.name}
+                        </p>
+                        <p className="bw-f-muted mt-0.5 text-xs">{app.tagline}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+                <div
+                  style={{ "--i": apps.length }}
+                  className="bw-footer__app-card bw-footer__app-card--stores"
+                >
+                  <p className="bw-f-available mb-2 text-[11px] font-semibold uppercase tracking-[0.16em]">
+                    Available on
+                  </p>
+                  {storeBadges}
+                </div>
               </div>
             </div>
           </div>
         </RevealOnScroll>
+      </div>
 
-        <div className="bw-footer__rule my-3.5 sm:my-4" aria-hidden="true" />
+      {/* Bottom trust bar */}
+      <div className="bw-footer__bottom relative border-t">
+        <div className="bw-footer__rule absolute inset-x-0 top-0" aria-hidden="true" />
+        <RevealOnScroll delay={30}>
+          <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-5 px-4 py-5 sm:flex-row sm:justify-between sm:gap-6 sm:px-6 lg:px-8">
+            <div className="bw-footer__duns-slot flex shrink-0 justify-center sm:justify-start">
+              <DunsRegisteredSeal theme={theme} variant="bar" />
+            </div>
 
-        <RevealOnScroll delay={40}>
-          <div className="flex flex-col items-center text-center">
-            <div className="flex items-center justify-center gap-2.5 sm:gap-3">
-              {social.map(({ icon: Icon, link, label }, i) => (
+            <p className="bw-f-copy max-w-xl flex-1 text-center text-[12px] leading-5 sm:text-[13px] sm:leading-6">
+              © {new Date().getFullYear()} Capital BullWave Private Limited. All
+              rights reserved. Research &amp; education only — investments subject
+              to market risks.
+            </p>
+
+            <div className="flex shrink-0 items-center gap-2.5 sm:gap-3">
+              {social.map(({ icon: Icon, link: href, label: socialLabel }, i) => (
                 <a
-                  key={label}
-                  href={link}
+                  key={socialLabel}
+                  href={href}
                   target="_blank"
                   rel="noreferrer"
-                  aria-label={label}
+                  aria-label={socialLabel}
                   style={{ "--i": i }}
                   className={`bw-footer__social ${
-                    dark
-                      ? "text-slate-300 hover:text-sky-300"
-                      : "text-sky-800 hover:text-sky-600"
+                    dark ? "text-slate-200 hover:text-sky-300" : "text-sky-800 hover:text-sky-600"
                   }`}
                 >
                   <Icon className="text-base sm:text-lg" />
                 </a>
               ))}
             </div>
-
-            <p
-              className={`bw-footer__brand mt-3 text-xl font-extrabold tracking-tight sm:mt-3.5 sm:text-2xl ${heading}`}
-            >
-              Capital <span className="bw-footer__brand-accent">BullWave</span>
-            </p>
-            <p className={`mt-1 text-sm font-semibold sm:text-[15px] ${muted}`}>
-              Private Limited · Research &amp; advisory
-            </p>
-
-            <p className={`mt-2.5 max-w-xl text-[13px] font-medium leading-6 sm:text-sm sm:leading-6 ${muted}`}>
-              © {new Date().getFullYear()} Capital BullWave Private Limited.
-              Research &amp; education only — investments subject to market risks.
-            </p>
           </div>
         </RevealOnScroll>
       </div>
