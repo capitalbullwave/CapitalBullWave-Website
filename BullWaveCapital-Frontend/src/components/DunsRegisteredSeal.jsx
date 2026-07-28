@@ -91,8 +91,8 @@ export default function DunsRegisteredSeal({
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Verify Capital BullWave D-U-N-S Registered Profile"
-      className={`footer-duns-seal group inline-flex max-w-full items-center gap-2 rounded-md transition-all duration-300 ${
-        compact ? "p-1 pr-2" : "p-2.5 sm:gap-3 sm:p-3"
+      className={`footer-duns-seal group inline-flex max-w-full items-center gap-2.5 rounded-lg transition-all duration-300 ${
+        compact ? "p-1.5 pr-2.5" : "p-2.5 sm:gap-3 sm:p-3"
       } ${
         dark
           ? "bg-white/[0.04] ring-1 ring-white/10 hover:bg-white/[0.07]"
@@ -100,14 +100,14 @@ export default function DunsRegisteredSeal({
       }`}
     >
       <span
-        className={`footer-duns-mark flex shrink-0 items-center justify-center overflow-hidden rounded bg-white ${
-          compact ? "h-9 w-11" : "h-[78px] w-[92px] sm:h-[97px] sm:w-[114px]"
+        className={`footer-duns-mark flex shrink-0 items-center justify-center overflow-hidden rounded-md bg-white ${
+          compact ? "h-11 w-[3.25rem]" : "h-[78px] w-[92px] sm:h-[97px] sm:w-[114px]"
         } ${dark ? "ring-1 ring-white/10" : "ring-1 ring-slate-200/70"}`}
       >
         <DunsSealMark
           className={
             compact
-              ? "h-9 w-11"
+              ? "h-11 w-[3.25rem]"
               : "h-[78px] w-[92px] sm:h-[97px] sm:w-[114px]"
           }
         />
@@ -115,19 +115,19 @@ export default function DunsRegisteredSeal({
 
       <span className="min-w-0">
         <span
-          className={`block font-semibold tracking-tight leading-tight ${
-            compact ? "text-[11px]" : "text-[12px] sm:text-[13px]"
+          className={`block font-semibold tracking-tight leading-snug ${
+            compact ? "text-[13px] sm:text-[14px]" : "text-[12px] sm:text-[13px]"
           } ${dark ? "text-sky-300" : "text-sky-800"}`}
         >
           D-U-N-S® Registered™
         </span>
         <span
-          className={`mt-0.5 block leading-tight ${
-            compact ? "text-[10px]" : "text-[11px] sm:text-[12px]"
+          className={`mt-0.5 block leading-snug ${
+            compact ? "text-[12px] sm:text-[13px]" : "text-[11px] sm:text-[12px]"
           } ${dark ? "text-slate-300" : "text-slate-600"}`}
         >
           {compact ? (
-            <span className="footer-duns-cta inline-flex items-center gap-0.5">
+            <span className="footer-duns-cta inline-flex items-center gap-1">
               View profile
               <span aria-hidden="true" className="footer-duns-arrow">
                 →

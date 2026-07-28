@@ -5,7 +5,11 @@ import {
   FaShieldAlt,
   FaGraduationCap,
 } from "react-icons/fa";
-import workspaceImage from "../assets/why-choose-workspace.svg";
+import workspaceFallback from "../assets/why-choose-workspace.svg";
+
+/** Premium trading-desk visual (matches hero/services imagery pattern) */
+const WORKSPACE_IMAGE =
+  "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1400&auto=format&fit=crop";
 
 const choiceIcons = [FaLayerGroup, FaShieldAlt, FaGraduationCap];
 
@@ -49,18 +53,27 @@ function useInView() {
       return undefined;
     }
 
+    const reveal = () => setVisible(true);
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setVisible(true);
+          reveal();
           observer.disconnect();
         }
       },
-      { threshold: 0.12, rootMargin: "0px 0px -6% 0px" }
+      { threshold: 0.06, rootMargin: "0px 0px -2% 0px" }
     );
 
     observer.observe(node);
-    return () => observer.disconnect();
+
+    // Fail-safe: never leave the section permanently hidden
+    const safety = window.setTimeout(reveal, 1800);
+
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(safety);
+    };
   }, []);
 
   return [ref, visible];
@@ -69,6 +82,7 @@ function useInView() {
 const HomeChoose = ({ theme }) => {
   const isDark = theme === "dark";
   const [sectionRef, sectionVisible] = useInView();
+  const [imgSrc, setImgSrc] = useState(WORKSPACE_IMAGE);
 
   return (
     <section
@@ -117,7 +131,7 @@ const HomeChoose = ({ theme }) => {
       {/* Visual + pillars */}
       <div className="mt-8 grid items-stretch gap-5 sm:mt-12 lg:grid-cols-12 lg:gap-6">
         <div
-          className={`home-choose-reveal home-choose-reveal--delay-1 relative overflow-hidden rounded-2xl sm:rounded-3xl lg:col-span-5
+          className={`home-choose-reveal home-choose-reveal--delay-1 home-choose-visual relative overflow-hidden rounded-2xl sm:rounded-3xl lg:col-span-5
           ${
             isDark
               ? "bg-slate-900 ring-1 ring-white/10"
@@ -125,19 +139,20 @@ const HomeChoose = ({ theme }) => {
           }`}
         >
           <img
-            src={workspaceImage}
-            alt="Market research workspace"
-            width={960}
-            height={640}
-            loading="lazy"
+            src={imgSrc}
+            alt="Capital BullWave market research workspace"
+            width={1400}
+            height={900}
+            loading="eager"
             decoding="async"
-            className="home-choose-visual__img h-48 w-full object-cover object-center sm:h-56 lg:h-full lg:min-h-[360px]"
+            onError={() => setImgSrc(workspaceFallback)}
+            className="home-choose-visual__img h-56 w-full object-cover object-center sm:h-64 lg:absolute lg:inset-0 lg:h-full lg:min-h-[380px]"
           />
           <div
-            className={`absolute inset-x-0 bottom-0 p-4 sm:p-5 ${
+            className={`pointer-events-none absolute inset-x-0 bottom-0 z-10 p-4 sm:p-5 ${
               isDark
-                ? "bg-gradient-to-t from-slate-950 via-slate-950/80 to-transparent"
-                : "bg-gradient-to-t from-white via-white/85 to-transparent"
+                ? "bg-gradient-to-t from-slate-950 via-slate-950/75 to-transparent"
+                : "bg-gradient-to-t from-slate-950/70 via-slate-900/35 to-transparent"
             }`}
           >
             <div
@@ -145,7 +160,7 @@ const HomeChoose = ({ theme }) => {
               ${
                 isDark
                   ? "bg-slate-900/90 text-sky-300 ring-1 ring-white/10"
-                  : "bg-white text-sky-700 shadow-md shadow-sky-100/80 ring-1 ring-sky-100"
+                  : "bg-white/95 text-sky-700 shadow-md shadow-sky-900/20 ring-1 ring-white/40"
               }`}
             >
               <span className="relative flex h-2 w-2">
@@ -155,6 +170,8 @@ const HomeChoose = ({ theme }) => {
               Research · Guidance · Education
             </div>
           </div>
+          {/* Keeps column height on large screens when image is absolute */}
+          <div className="hidden lg:block lg:min-h-[380px]" aria-hidden="true" />
         </div>
 
         <div className="grid gap-3 sm:gap-4 lg:col-span-7">

@@ -75,11 +75,11 @@ const Footer = ({ theme }) => {
   const heading = dark ? "text-white" : "text-slate-950";
   const muted = dark ? "text-slate-400" : "text-slate-600";
   const colHead = dark
-    ? "text-[12px] font-semibold text-sky-200"
-    : "text-[12px] font-semibold text-sky-900";
+    ? "text-[15px] font-bold tracking-[0.04em] text-sky-100 sm:text-base"
+    : "text-[15px] font-bold tracking-[0.04em] text-sky-950 sm:text-base";
   const itemLink = dark
-    ? "bw-foot-link text-[12px] text-slate-300 hover:text-sky-300 sm:text-[13px]"
-    : "bw-foot-link text-[12px] text-slate-700 hover:text-sky-700 sm:text-[13px]";
+    ? "bw-foot-link text-[15px] font-semibold leading-7 text-slate-200 hover:text-sky-300 sm:text-base"
+    : "bw-foot-link text-[15px] font-semibold leading-7 text-slate-800 hover:text-sky-700 sm:text-base";
 
   const renderLink = (item, className) => {
     if (item.isFaq) {
@@ -124,13 +124,13 @@ const Footer = ({ theme }) => {
         <span className="bw-footer__beam" />
       </div>
 
-      <div className="relative mx-auto max-w-[1100px] px-3 py-3.5 sm:px-4 sm:py-4 lg:px-5 lg:py-5">
+      <div className="relative mx-auto max-w-[1100px] px-3 py-4 sm:px-4 sm:py-5 lg:px-5 lg:py-6">
         <RevealOnScroll>
-          <div className="grid grid-cols-2 gap-x-3 gap-y-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-5 lg:gap-y-0">
+          <div className="grid grid-cols-2 gap-x-4 gap-y-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-6 lg:gap-y-0">
             {/* Navigate — site pages once */}
             <div className="bw-footer__col">
               <h3 className={`bw-footer__heading ${colHead}`}>Navigate</h3>
-              <ul className="mt-1.5 space-y-1 sm:mt-2 sm:space-y-1.5">
+              <ul className="mt-2.5 space-y-2 sm:mt-3 sm:space-y-2.5">
                 {navigateLinks.map((item, i) => (
                   <li key={item.name} style={{ "--i": i }} className="bw-footer__li">
                     {renderLink(item, itemLink)}
@@ -142,7 +142,7 @@ const Footer = ({ theme }) => {
             {/* Resources — unique support links */}
             <div className="bw-footer__col">
               <h3 className={`bw-footer__heading ${colHead}`}>Resources</h3>
-              <ul className="mt-1.5 space-y-1 sm:mt-2 sm:space-y-1.5">
+              <ul className="mt-2.5 space-y-2 sm:mt-3 sm:space-y-2.5">
                 {resourceLinks.map((item, i) => (
                   <li key={item.name} style={{ "--i": i }} className="bw-footer__li">
                     {renderLink(item, itemLink)}
@@ -154,7 +154,7 @@ const Footer = ({ theme }) => {
             {/* Policies — legal once */}
             <div className="bw-footer__col">
               <h3 className={`bw-footer__heading ${colHead}`}>Policies</h3>
-              <ul className="mt-1.5 space-y-1 sm:mt-2 sm:space-y-1.5">
+              <ul className="mt-2.5 space-y-2 sm:mt-3 sm:space-y-2.5">
                 {policyLinks.map((item, i) => (
                   <li key={item.name} style={{ "--i": i }} className="bw-footer__li">
                     {renderLink(item, itemLink)}
@@ -167,40 +167,40 @@ const Footer = ({ theme }) => {
             <div className="bw-footer__col col-span-2 sm:col-span-2 lg:col-span-1">
               <h3 className={`bw-footer__heading ${colHead}`}>Apps &amp; Trust</h3>
 
-              <div className="mt-1.5 space-y-1.5 sm:mt-2">
-                <div className="bw-footer__app flex items-center gap-2">
+              <div className="mt-2.5 space-y-2.5 sm:mt-3">
+                <div className="bw-footer__app flex items-center gap-2.5">
                   <img
                     src={RideLogo}
                     alt="BullWave Rides"
-                    className="h-8 w-8 rounded-lg object-cover shadow-sm"
+                    className="h-10 w-10 rounded-lg object-cover shadow-sm"
                   />
                   <div className="min-w-0">
-                    <p className={`text-[13px] font-semibold leading-tight ${heading}`}>
+                    <p className={`text-[15px] font-bold leading-snug sm:text-base ${heading}`}>
                       BullWave Rides
                     </p>
-                    <p className={`text-[11px] leading-tight ${muted}`}>
+                    <p className={`text-[13px] font-medium leading-snug sm:text-sm ${muted}`}>
                       Book rides instantly
                     </p>
                   </div>
                 </div>
-                <div className="bw-footer__app flex items-center gap-2">
+                <div className="bw-footer__app flex items-center gap-2.5">
                   <img
                     src={ClubLogo}
                     alt="BullWave Club"
-                    className="h-8 w-8 rounded-lg object-cover shadow-sm"
+                    className="h-10 w-10 rounded-lg object-cover shadow-sm"
                   />
                   <div className="min-w-0">
-                    <p className={`text-[13px] font-semibold leading-tight ${heading}`}>
+                    <p className={`text-[15px] font-bold leading-snug sm:text-base ${heading}`}>
                       BullWave Club
                     </p>
-                    <p className={`text-[11px] leading-tight ${muted}`}>
+                    <p className={`text-[13px] font-medium leading-snug sm:text-sm ${muted}`}>
                       Enjoy and have fun
                     </p>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-2 flex flex-wrap items-center gap-1.5">
+              <div className="mt-2.5 flex flex-wrap items-center gap-2">
                 <a
                   href="https://play.google.com/store"
                   target="_blank"
@@ -210,7 +210,7 @@ const Footer = ({ theme }) => {
                   <img
                     src={PlayStore}
                     alt="Google Play"
-                    className="h-7 w-auto rounded-md"
+                    className="h-8 w-auto rounded-md sm:h-9"
                   />
                 </a>
                 <a
@@ -222,23 +222,23 @@ const Footer = ({ theme }) => {
                   <img
                     src={AppStore}
                     alt="App Store"
-                    className="h-7 w-auto rounded-md"
+                    className="h-8 w-auto rounded-md sm:h-9"
                   />
                 </a>
               </div>
 
-              <div className="mt-2">
+              <div className="mt-2.5">
                 <DunsRegisteredSeal theme={theme} compact />
               </div>
             </div>
           </div>
         </RevealOnScroll>
 
-        <div className="bw-footer__rule my-3 sm:my-3.5" aria-hidden="true" />
+        <div className="bw-footer__rule my-3.5 sm:my-4" aria-hidden="true" />
 
         <RevealOnScroll delay={40}>
           <div className="flex flex-col items-center text-center">
-            <div className="flex items-center justify-center gap-2 sm:gap-2.5">
+            <div className="flex items-center justify-center gap-2.5 sm:gap-3">
               {social.map(({ icon: Icon, link, label }, i) => (
                 <a
                   key={label}
@@ -253,21 +253,21 @@ const Footer = ({ theme }) => {
                       : "text-sky-800 hover:text-sky-600"
                   }`}
                 >
-                  <Icon className="text-sm sm:text-base" />
+                  <Icon className="text-base sm:text-lg" />
                 </a>
               ))}
             </div>
 
             <p
-              className={`bw-footer__brand mt-2 text-[15px] font-bold tracking-tight sm:mt-2.5 sm:text-base ${heading}`}
+              className={`bw-footer__brand mt-3 text-xl font-extrabold tracking-tight sm:mt-3.5 sm:text-2xl ${heading}`}
             >
               Capital <span className="bw-footer__brand-accent">BullWave</span>
             </p>
-            <p className={`text-[11px] leading-tight ${muted}`}>
+            <p className={`mt-1 text-sm font-semibold sm:text-[15px] ${muted}`}>
               Private Limited · Research &amp; advisory
             </p>
 
-            <p className={`mt-1.5 max-w-lg text-[10px] leading-4 sm:text-[11px] ${muted}`}>
+            <p className={`mt-2.5 max-w-xl text-[13px] font-medium leading-6 sm:text-sm sm:leading-6 ${muted}`}>
               © {new Date().getFullYear()} Capital BullWave Private Limited.
               Research &amp; education only — investments subject to market risks.
             </p>

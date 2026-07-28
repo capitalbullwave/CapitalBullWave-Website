@@ -527,6 +527,13 @@ img {
 
 .home-choose-visual__img {
   transition: transform 0.8s ease;
+  display: block;
+  width: 100%;
+  background: linear-gradient(135deg, #e0f2fe, #f8fafc 50%, #bae6fd);
+}
+
+.home-choose-visual {
+  min-height: 14rem;
 }
 
 .home-choose-card {
@@ -3197,22 +3204,23 @@ svg {
 
 .bw-footer__heading {
   position: relative;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.04em;
+  font-weight: 700;
 }
 
 .bw-footer__heading::after {
   content: "";
   display: block;
-  margin-top: 0.2rem;
-  height: 2px;
-  width: 1rem;
+  margin-top: 0.35rem;
+  height: 2.5px;
+  width: 1.35rem;
   border-radius: 999px;
-  background: linear-gradient(90deg, #0ea5e9, transparent);
+  background: linear-gradient(90deg, #0ea5e9, #38bdf8, transparent);
   transition: width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .bw-footer__col:hover .bw-footer__heading::after {
-  width: 2rem;
+  width: 2.5rem;
 }
 
 .bw-footer__li {
@@ -3224,13 +3232,25 @@ svg {
 
 .bw-foot-link {
   display: inline-block;
+  font-weight: 600;
+  letter-spacing: 0.01em;
   transition:
     color 0.22s ease,
-    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1),
+    text-shadow 0.22s ease;
 }
 
 .bw-foot-link:hover {
-  transform: translateX(3px);
+  transform: translateX(4px);
+  font-weight: 700;
+}
+
+.bw-footer--light .bw-foot-link:hover {
+  text-shadow: 0 0 18px rgba(14, 165, 233, 0.18);
+}
+
+.bw-footer--dark .bw-foot-link:hover {
+  text-shadow: 0 0 18px rgba(56, 189, 248, 0.28);
 }
 
 .bw-footer__app {
@@ -3283,8 +3303,8 @@ svg {
 
 .bw-footer__social {
   display: inline-flex;
-  height: 2rem;
-  width: 2rem;
+  height: 2.35rem;
+  width: 2.35rem;
   align-items: center;
   justify-content: center;
   border-radius: 9999px;
@@ -3312,15 +3332,17 @@ svg {
 }
 
 .bw-footer__brand {
+  letter-spacing: -0.02em;
   animation: bwFootBrandIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .bw-footer__brand-accent {
-  background: linear-gradient(90deg, #0284c7, #38bdf8, #0284c7);
+  background: linear-gradient(105deg, #0284c7 0%, #0ea5e9 45%, #38bdf8 70%, #0284c7 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  font-weight: 800;
   animation: bwFootShimmer 5s linear infinite;
 }
 
