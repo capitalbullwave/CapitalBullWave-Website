@@ -23,7 +23,11 @@ const slides = [
   },
 ];
 
-const trustItems = ["SEBI Registered", "Trusted Research", "Risk Managed"];
+const trustItems = [
+  { label: "D-U-N-S Registered", href: "/duns-profile/", highlight: true },
+  { label: "Trusted Research", href: null, highlight: false },
+  { label: "Risk Managed", href: null, highlight: false },
+];
 
 function CountUp({ end, duration = 2000, decimals = 0, suffix = "" }) {
   const [count, setCount] = useState(0);
@@ -126,9 +130,27 @@ export default function Hero({ theme = "light" }) {
         />
       ))}
 
-      <div className="absolute inset-0 bg-slate-950/55" />
-      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-slate-950/50" />
-      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-transparent to-slate-950/40" />
+      <div className="absolute inset-0 bg-slate-950/50" />
+      <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/45 to-sky-950/35" />
+      <div className="absolute inset-0 bg-gradient-to-r from-slate-950/85 via-sky-950/20 to-slate-950/55" />
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_15%_20%,rgba(56,189,248,0.28),transparent_55%),radial-gradient(ellipse_55%_45%_at_90%_80%,rgba(14,165,233,0.18),transparent_50%)]"
+      />
+
+      {/* Animated gradient orbs */}
+      <span
+        aria-hidden="true"
+        className="hero-orb pointer-events-none absolute -left-16 top-16 z-[1] h-56 w-56 rounded-full bg-sky-400/25 blur-3xl sm:h-72 sm:w-72"
+      />
+      <span
+        aria-hidden="true"
+        className="hero-orb hero-orb--delay pointer-events-none absolute -right-10 bottom-20 z-[1] h-48 w-48 rounded-full bg-cyan-400/20 blur-3xl sm:h-64 sm:w-64"
+      />
+      <span
+        aria-hidden="true"
+        className="hero-sheen pointer-events-none absolute inset-0 z-[1]"
+      />
 
       {/* Olymp-style animated glass bars */}
       <div className="olymp-bars pointer-events-none absolute inset-0 z-[2]" aria-hidden="true">
@@ -279,16 +301,37 @@ export default function Hero({ theme = "light" }) {
           </div>
 
           <div className="olymp-chip-row -mx-1 flex gap-2 overflow-x-auto px-1 pb-1 sm:mx-0 sm:flex-wrap sm:justify-center sm:overflow-visible sm:pb-0">
-            {trustItems.map((item, i) => (
-              <div
-                key={item}
-                className="olymp-chip olymp-chip--row shrink-0"
-                style={{ animationDelay: `${480 + i * 90}ms` }}
-              >
-                <span className="h-1.5 w-1.5 rounded-full bg-sky-400" />
-                {item}
-              </div>
-            ))}
+            {trustItems.map((item, i) => {
+              const ChipTag = item.href ? "a" : "div";
+              const chipProps = item.href
+                ? {
+                    href: item.href,
+                    target: "_blank",
+                    rel: "noopener noreferrer",
+                    "aria-label": "View D-U-N-S Registered profile",
+                  }
+                : {};
+
+              return (
+                <ChipTag
+                  key={item.label}
+                  {...chipProps}
+                  className={`olymp-chip olymp-chip--row shrink-0 ${
+                    item.highlight ? "olymp-chip--duns cursor-pointer" : ""
+                  }`}
+                  style={{ animationDelay: `${480 + i * 90}ms` }}
+                >
+                  <span
+                    className={`h-1.5 w-1.5 rounded-full ${
+                      item.highlight
+                        ? "bg-emerald-400 animate-pulse"
+                        : "bg-sky-400"
+                    }`}
+                  />
+                  {item.label}
+                </ChipTag>
+              );
+            })}
             {slides.map((slide, i) => (
               <button
                 key={slide.title}
