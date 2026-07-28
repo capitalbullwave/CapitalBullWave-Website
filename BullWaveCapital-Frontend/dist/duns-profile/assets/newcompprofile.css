@@ -1,0 +1,802 @@
+﻿.divhead {
+    width: 1000px;
+    height: 185px;
+    background: linear-gradient(to right, #3094b4 0%,#106989, #015172 100%);
+}
+
+.diverrorhead {
+    width: 1000px;
+    background: linear-gradient(to right, #3094b4 0%,#106989, #015172 100%);
+}
+
+.imghead {
+    margin-top: 45px;
+    margin-left: 42px;
+    width: 200px;
+    height: 100%;
+    vertical-align: bottom;
+}
+
+.keyempdetials .spnprofileelement {
+    width: 250px;
+    color: #565656;
+    font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+    word-wrap: break-word;
+    display: inline-block;
+    /*margin-left:100px;*/
+}
+
+.divsubhead {
+    width: 938px;
+    height: 130px;
+    margin-top: 30px;
+    background-color: #ffffff;
+    margin-left: 35px;
+    border-radius: 5px;
+    position: absolute;
+}
+
+.divorgname {
+    font-family: 'Open Sans', sans-serif;
+    color: #004e71;
+    font-size: 19px;
+    font-weight: bolder;
+    padding-top: 30px;
+    padding-left: 35px;
+    position: absolute;
+width: 800px;
+}
+
+.divdunsseal {
+    float: right;
+    padding-top: 20px;
+    padding-right: 25px;
+}
+
+.divmemberdate {
+    font-family: 'Open Sans', sans-serif;
+    color: #555555;
+    padding-top: 105px;
+    padding-left: 35px;
+    position: absolute;
+    font-size: 15px;
+}
+
+.divcontainer {
+    width: 1000px;
+    height: 100%;
+    background-color: #f4f2f3;
+    padding-top: 45px;
+}
+
+.divprofilecompanypic {
+}
+
+.divprofileblock {
+    margin-left: 25px;
+    width: 440px;
+    height: 100%;
+    vertical-align: top;
+    display: inline-block;
+    padding-bottom: 30px;
+}
+
+.divblockhead {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: #035274;
+    padding-left: 25px;
+    padding-top: 30px;
+}
+
+.divprofileelement {
+    margin-top: 15px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#DivAudit {
+    margin-top: 15px;
+    width: 800px;
+}
+
+.lblprofileelement {
+    font-weight: bold;
+    margin-left: 25px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: #545454;
+    word-wrap: break-word;
+    width: 175px;
+    /* position: absolute; */
+    vertical-align: top;
+    display: inline-block;
+}
+
+.spnprofileelement {
+    width: 199px;
+    color: #565656;
+    font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+    word-wrap: break-word;
+    display: inline-block;
+    margin-left: 3px;
+    vertical-align: top;
+}
+
+.lblprofileelementIL {
+    margin-left: 25px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: #545454;
+    word-wrap: break-word;
+    width: 199px;
+    vertical-align: top;
+    display: inline-block;
+}
+
+.spnprofileelementIL {
+    text-align: right;
+    font-weight: bold;
+    width: 175px;
+    color: #565656;
+    font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+    word-wrap: break-word;
+    display: inline-block;
+    margin-left: 3px;
+    vertical-align: top;
+}
+
+.spnprofileelementrefcomt {
+    width: 675px;
+    color: #565656;
+    font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+    word-wrap: break-word;
+    display: inline-block;
+    margin-left: 3px;
+}
+
+.divdisclaimer {
+    color: #555555;
+    font-size: 12px;
+    font-weight: 400;
+    text-align: left;
+    padding-left: 35px;
+    padding-right: 20px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.divcpyrights {
+    color: #555555;
+    text-align: left;
+    padding-left: 35px;
+    padding-bottom: 25px;
+    font-size: 13px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.divpurchaserpt {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+.apurchaserpt {
+    background-color: #015172;
+    font-weight: bolder;
+    font-size: 15px;
+    color: White;
+    font-family: 'Open Sans', sans-serif;
+    border-radius: 10px;
+    padding: 20px 30px 20px 20px;
+    line-height: 1.5;
+    text-decoration: none;
+}
+
+.imgcomppic {
+    padding-left: 35px;
+}
+
+.divavaillang {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    background-color: white;
+    width: 85px;
+    /*height: 75px;*/
+    font-weight: bold;
+    position: absolute;
+    margin-top: 25px;
+    border: groove white;
+    z-index: 100;
+    border-radius: 10px;
+    display: none;
+    padding-top: 10px;
+    padding-left: 10px;
+    line-height: 2;
+    color: black;
+}
+
+    .divavaillang a {
+        text-decoration: none;
+        padding-bottom: 2px;
+    }
+
+.abtcompany {
+    display: inline-block;
+    margin-left: 25px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: #545454;
+    margin-right: 25px;
+}
+
+.divabtcompany {
+    margin-left: 35px;
+    width: 94%;
+    height: 100%;
+    vertical-align: top;
+    display: inline-block;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding-bottom: 20px;
+}
+
+.divprofilecompanypic {
+    margin-left: 35px;
+    width: 94%;
+    height: 100%;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding-bottom: 20px;
+}
+
+.spnduns {
+    font-family: 'Open Sans', sans-serif;
+    color: white;
+    padding-left: 60px;
+    font-weight: bolder;
+    font-size: 20px;
+    /*padding-top: -20px;
+    position: absolute;
+    padding-top: 51px;*/
+}
+
+.divtaitrasme {
+    margin-top: 25px;
+    text-align: center;
+    margin-left: 35px;
+    width: 94%;
+    height: 100%;
+    display: inline-block;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+.divtaitrasme2 {
+    position: absolute;
+    margin-top: 45px;
+    margin-left: 250px;
+}
+
+.divprofileblockcontainer {
+    background-color: white;
+    margin-left: 35px;
+    width: 944px;
+    border-radius: 10px;
+}
+
+.divdocuments {
+    
+    margin-left: 25px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: #545454;
+    width: 300px;
+    display: inline-block;
+    word-break: break-word;
+}
+
+.lblemp {
+    margin-left: 25px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: #545454;
+    display: inline-block;
+    position: absolute;
+}
+
+.SpanLabel {
+    font-weight: bold;
+    margin-left: 25px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: #545454;
+    vertical-align: top;
+}
+.SpanLabelSAMEH1 {
+    font-weight: bold;
+    margin-left: 25px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: #035274;
+    vertical-align: top;
+}
+.SpanLabelSAMEH2 {
+    font-weight: bold;
+    margin-left: 25px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: #035274;
+    vertical-align: top;
+}
+.SpanLabelAudit {
+    font-weight: bold;
+    margin-left: 25px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: #545454;
+    vertical-align: top;
+    background-image: url('../newimages/dotlist.png');
+    background-repeat: no-repeat;
+    background-position: left;
+    padding-left: 15px;
+}
+
+.SpanElement {
+    width: 80%;
+    color: #565656;
+    font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+    word-wrap: break-word;
+    vertical-align:top;
+}
+
+.SpanElementkeyemp {
+    width: 60%;
+    color: #565656;
+    font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+    word-wrap: break-word;
+    display: inline-block;
+    margin-left: 25px;
+}
+
+.divprofileblockref {
+    margin-left: 25px;
+    height: 100%;
+    vertical-align: top;
+    display: inline-block;
+    padding-bottom: 30px;
+    width: 900px;
+}
+
+.divprofileblockrefIL {
+    height: 100%;
+    vertical-align: top;
+    display: inline-block;
+    width: 900px;
+}
+
+.KeyemphrIL {
+    margin-left: 25px;
+    width: 825px;
+}
+
+.divvipprofile {
+    margin-top: 65px;
+    font-family: 'Open Sans', sans-serif;
+    color: Gray;
+    font-size: 20px;
+    font-weight: bolder;
+    padding-right: 170px;
+    text-align: right;
+}
+
+.divvipprofilechina {
+    margin-top: 60px;
+    font-family: 'Open Sans', sans-serif;
+    color: Gray;
+    font-size: 18px;
+    font-weight: bolder;
+    padding-right: 170px;
+    text-align: right;
+}
+
+.divonsiteaudit {
+    font-family: 'Open Sans', sans-serif;
+    color: Gray;
+    font-size: 20px;
+    font-weight: bolder;
+    padding-right: 170px;
+    text-align: right;
+}
+
+.companyaudit {
+    margin-left: 25px;
+    color: #035274;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-family: Arial;
+}
+
+.divmenuactive {
+    display: inline-block;
+    background: #015172;
+    border-radius: 29px;
+    width: 225px;
+    height: 35px;
+    font-weight: bolder;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    padding-top: 16px;
+    text-align: center;
+    margin-left: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.divmenu {
+    display: inline-block;
+    background: white;
+    border-radius: 29px;
+    width: 225px;
+    height: 35px;
+    font-weight: bolder;
+    color: #015172;
+    font-family: 'Open Sans', sans-serif;
+    padding-top: 16px;
+    text-align: center;
+    margin-left: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    cursor: pointer;
+}
+/*carousel*/
+.img {
+    width: 150px;
+    height: 150px;
+}
+
+.prev {
+    position: absolute;
+    margin-top: 90px;
+    margin-left: 35px;
+    z-index: 10;
+}
+
+.nav {
+    width: 25px;
+    height: 25px;
+}
+
+.next {
+    position: absolute;
+    margin-left: 800px;
+    margin-top: -110px;
+}
+
+.container {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    padding-left: 0px;
+    padding-right: 45px;
+    margin-left: 165px;
+    width: 550px;
+}
+
+.wrapper {
+    position: relative;
+    float: left;
+    /*    padding: 25px;*/
+    width: 100px;
+    height: 150px;
+    padding-right: 85px;
+    padding-top: 25px;
+}
+
+.wrapper2 {
+    position: relative;
+    float: left;
+    padding: 33px;
+    width: 100px;
+    height: 150px;
+}
+
+.active {
+    display: block;
+}
+
+.inactive {
+    display: none;
+}
+
+.lbldesc {
+    display: inline-block;
+    width: 150%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 12px;
+    color: #565656;
+}
+
+.noimgkeyemp {
+    padding-left: 20px;
+    padding-top: 15px;
+    width: 100px;
+    height: 128px
+}
+
+.imgkeyemp {
+    padding-left: 20px;
+    padding-top: 15px;
+}
+
+.keyempcontainer {
+    display: inline-block;
+}
+
+.keyempdetials {
+    float: left;
+    width: 700px;
+}
+
+.keyempimg {
+    float: right;
+    background-color: #f4f2f3;
+    height: 150px;
+    width: 150px;
+}
+
+.companypic div {
+    display: inline-block;
+    margin-left: 35px;
+    width: 400px;
+    margin-top: 25px;
+}
+
+.spnsupply {
+    width: 675px;
+    color: #565656;
+    font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+    display: inline-block;
+}
+
+.spnsupplycmts {
+    color: #565656;
+    font-size: 12px;
+    font-family: 'Open Sans', sans-serif;
+    display: inline-block;
+}
+
+.headertab {
+    margin-top: 25px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.supplytable {
+    border: solid 1px #d7e0e4;
+    border-top: solid 2px #009ece;
+    width: 641px;
+}
+
+.supplytablehead {
+    color: #035274;
+    font-weight: bold;
+    font-size: 15px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.divmemberdateVIPprofile {
+    display: inline-block;
+    font-family: 'Open Sans', sans-serif;
+    color: #555555;
+    font-size: 15px;
+}
+
+.divvipprofilechina2 {
+    display: inline-block;
+    margin-right: 15px;
+    font-family: 'Open Sans', sans-serif;
+    color: Gray;
+    font-size: 18px;
+    font-weight: bolder;
+    word-break: break-word;
+    vertical-align: bottom;
+}
+
+.divorgnamechina {
+    display: inline-block;
+    font-family: 'Open Sans', sans-serif;
+    color: #004e71;
+    font-size: 20px;
+    font-weight: bolder;
+    height: 88px;
+}
+
+.dunssealchina {
+    display: inline-block;
+    vertical-align: bottom;
+    /*margin-top: 20px;*/
+}
+
+.subheadleft {
+    float: left;
+    margin-top: 15px;
+    margin-left: 35px;
+    width: 475px;
+}
+
+.subheadright {
+    float: right;
+    margin-right: 15px;
+    margin-top: 25px;
+}
+
+.qualitysectionheader {
+    margin-left: 25px;
+    color: #035274;
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.birlink {
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    border-width: 0px;
+    position: absolute;
+    border-width: 0px;
+    position: absolute;
+    margin-left: 410px;
+    margin-top: -80px;
+}
+
+.birlinkdiv {
+    display: none;
+    font-size: 12px;
+    color: #545454;
+    font-family: 'Open Sans',sans-serif;
+    width: 100px;
+    height: 50px;
+    border-style: solid;
+    border-width: 2px;
+    position: absolute;
+    margin-left: 191px;
+    width: 230px;
+    background-color: #FFFFFF;
+    margin-top: -40px;
+    padding-top: 15px;
+    padding-left: 15px
+}
+
+.birlinkdivclose {
+    height: 20px;
+    width: 20px;
+    border-width: 0px;
+    position: absolute;
+    margin-left: 210px;
+    margin-top: -15px;
+}
+
+.birlinkdivclose a{
+    cursor:pointer;
+}
+
+.divreports {
+    cursor: pointer;
+    font-weight: bold;
+    color: #545454;
+}
+/* ---- Progressbar ----*/
+.LineHoriz {
+    border-top: 1px solid #ccc;
+    height: 1px;
+    width: 650px;
+}
+
+.comments {
+    color: #545454;
+    font-size: 13px;
+    margin-top: 20px;
+    vertical-align: top;
+    display: inline-block;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.scheader {
+    color: #005172;
+    font-weight: bold;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.sclblscoregrid {
+    font-size: 14px;
+    color: #005172;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.scprogressbarscoregrid {
+    width: 350px;
+    height: 25px;
+    background-color: #fafbfc;
+}
+
+.ui-progressbar {
+    height: 2em;
+    text-align: left;
+    overflow: hidden;
+}
+
+    .ui-progressbar .ui-progressbar-value {
+        height: 100%;
+    }
+
+.ui-progressbar-indeterminate .ui-progressbar-value {
+    background-image: none;
+}
+
+.ui-widget {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.1em;
+}
+
+    .ui-widget .ui-widget {
+        font-size: 1em;
+    }
+
+    .ui-widget input,
+    .ui-widget select,
+    .ui-widget textarea,
+    .ui-widget button {
+        font-family: 'Open Sans', sans-serif;
+        font-size: 1em;
+    }
+
+    .ui-widget.ui-widget-content {
+        border: 1px solid #d3d3d3;
+    }
+
+.ui-widget-content {
+    border: 1px solid #aaaaaa;
+    background: #FAFBFD;
+    color: #222222;
+}
+
+    .ui-widget-content a {
+        color: #222222;
+    }
+
+.ui-widget-header {
+    background: #009ECE;
+    color: #222222;
+    font-weight: bold;
+    font-family: 'Open Sans', sans-serif;
+}
+
+    .ui-widget-header a {
+        color: #222222;
+    }
+
+/* Corner radius */
+.ui-corner-all {
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
