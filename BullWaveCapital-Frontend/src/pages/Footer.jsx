@@ -75,11 +75,11 @@ const Footer = ({ theme }) => {
   const heading = dark ? "text-white" : "text-slate-950";
   const muted = dark ? "text-slate-400" : "text-slate-600";
   const colHead = dark
-    ? "text-[15px] font-bold tracking-[0.04em] text-sky-100 sm:text-base"
-    : "text-[15px] font-bold tracking-[0.04em] text-sky-950 sm:text-base";
+    ? "text-base font-bold tracking-[0.06em] text-sky-100 sm:text-[17px]"
+    : "text-base font-bold tracking-[0.06em] text-sky-950 sm:text-[17px]";
   const itemLink = dark
-    ? "bw-foot-link text-[15px] font-semibold leading-7 text-slate-200 hover:text-sky-300 sm:text-base"
-    : "bw-foot-link text-[15px] font-semibold leading-7 text-slate-800 hover:text-sky-700 sm:text-base";
+    ? "bw-foot-link text-[13px] font-medium leading-6 text-slate-300 hover:text-sky-300 sm:text-[13.5px]"
+    : "bw-foot-link text-[13px] font-medium leading-6 text-slate-700 hover:text-sky-700 sm:text-[13.5px]";
 
   const renderLink = (item, className) => {
     if (item.isFaq) {
@@ -175,10 +175,10 @@ const Footer = ({ theme }) => {
                     className="h-10 w-10 rounded-lg object-cover shadow-sm"
                   />
                   <div className="min-w-0">
-                    <p className={`text-[15px] font-bold leading-snug sm:text-base ${heading}`}>
+                    <p className={`text-[14px] font-bold leading-snug sm:text-[15px] ${heading}`}>
                       BullWave Rides
                     </p>
-                    <p className={`text-[13px] font-medium leading-snug sm:text-sm ${muted}`}>
+                    <p className={`text-[12px] font-medium leading-snug sm:text-[12.5px] ${muted}`}>
                       Book rides instantly
                     </p>
                   </div>
@@ -190,10 +190,10 @@ const Footer = ({ theme }) => {
                     className="h-10 w-10 rounded-lg object-cover shadow-sm"
                   />
                   <div className="min-w-0">
-                    <p className={`text-[15px] font-bold leading-snug sm:text-base ${heading}`}>
+                    <p className={`text-[14px] font-bold leading-snug sm:text-[15px] ${heading}`}>
                       BullWave Club
                     </p>
-                    <p className={`text-[13px] font-medium leading-snug sm:text-sm ${muted}`}>
+                    <p className={`text-[12px] font-medium leading-snug sm:text-[12.5px] ${muted}`}>
                       Enjoy and have fun
                     </p>
                   </div>

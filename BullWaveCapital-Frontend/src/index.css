@@ -3232,7 +3232,7 @@ svg {
 
 .bw-foot-link {
   display: inline-block;
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: 0.01em;
   transition:
     color 0.22s ease,
@@ -3242,7 +3242,7 @@ svg {
 
 .bw-foot-link:hover {
   transform: translateX(4px);
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .bw-footer--light .bw-foot-link:hover {

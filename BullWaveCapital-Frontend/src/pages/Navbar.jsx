@@ -107,14 +107,14 @@ export default function Navbar({ theme, toggleTheme }) {
               <div className="flex min-w-0 flex-col justify-center leading-tight">
                 <div className="flex items-baseline gap-1 whitespace-nowrap">
                   <span
-                    className={`text-[15px] sm:text-[17px] font-semibold tracking-tight ${
+                    className={`text-base sm:text-lg font-bold tracking-tight ${
                       isDark ? "text-white" : "text-black"
                     }`}
                   >
                     Capital
                   </span>
                   <span
-                    className={`text-[15px] sm:text-[17px] font-bold tracking-tight ${
+                    className={`text-base sm:text-lg font-extrabold tracking-tight ${
                       isDark ? "text-sky-400" : "text-sky-600"
                     }`}
                   >
@@ -122,7 +122,7 @@ export default function Navbar({ theme, toggleTheme }) {
                   </span>
                 </div>
                 <span
-                  className={`mt-0.5 hidden text-[9px] font-semibold uppercase tracking-[0.22em] sm:block ${
+                  className={`mt-0.5 hidden text-[10px] font-bold uppercase tracking-[0.24em] sm:block ${
                     isDark ? "text-slate-400" : "text-slate-500"
                   }`}
                 >
@@ -146,14 +146,14 @@ export default function Navbar({ theme, toggleTheme }) {
                   to={item.path}
                   end={item.path === "/"}
                   className={({ isActive }) =>
-                    `trade-nav__link relative rounded-full px-4 xl:px-5 py-2 text-[13px] font-semibold transition-all duration-200 ${
+                    `trade-nav__link relative rounded-full px-4 xl:px-5 py-2.5 text-[15px] font-bold tracking-wide transition-all duration-200 xl:text-base ${
                       isActive
                         ? isDark
                           ? "is-active bg-sky-500 text-white shadow-lg shadow-sky-500/30"
                           : "is-active bg-white text-sky-700 shadow-sm ring-1 ring-sky-100"
                         : isDark
-                          ? "text-slate-300 hover:text-white hover:bg-white/6"
-                          : "text-neutral-700 hover:text-sky-700 hover:bg-white/90"
+                          ? "text-slate-200 hover:text-white hover:bg-white/6"
+                          : "text-neutral-800 hover:text-sky-700 hover:bg-white/90"
                     }`
                   }
                 >
@@ -179,7 +179,7 @@ export default function Navbar({ theme, toggleTheme }) {
 
               <Link
                 to="/contact"
-                className="bw-gradient-btn trade-nav__cta hidden sm:inline-flex items-center justify-center rounded-full px-4 sm:px-5 py-2.5 text-[13px] font-semibold !text-white transition hover:-translate-y-0.5"
+                className="bw-gradient-btn trade-nav__cta hidden sm:inline-flex items-center justify-center rounded-full px-5 sm:px-6 py-2.5 text-[15px] font-bold tracking-wide !text-white transition hover:-translate-y-0.5"
               >
                 Contact
               </Link>
@@ -227,7 +227,7 @@ export default function Navbar({ theme, toggleTheme }) {
                     onClick={() => setMenuOpen(false)}
                     style={{ animationDelay: `${index * 40}ms` }}
                     className={({ isActive }) =>
-                      `trade-nav__mobile-link mb-1.5 flex items-center justify-between rounded-2xl px-3.5 py-3.5 text-[15px] font-semibold transition-all
+                      `trade-nav__mobile-link mb-1.5 flex items-center justify-between rounded-2xl px-3.5 py-3.5 text-base font-bold tracking-wide transition-all
                       ${
                         isActive
                           ? isDark
@@ -247,7 +247,7 @@ export default function Navbar({ theme, toggleTheme }) {
                             : "bg-sky-100 text-sky-600"
                         }`}
                       >
-                        <Icon className="text-[14px]" />
+                        <Icon className="text-[15px]" />
                       </span>
                       <span>{item.name}</span>
                     </div>
