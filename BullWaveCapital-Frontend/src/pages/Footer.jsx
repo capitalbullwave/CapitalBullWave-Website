@@ -285,9 +285,9 @@ const Footer = ({ theme = "light" }) => {
       {/* Bottom trust bar */}
       <div className="bw-footer__bottom relative border-t">
         <div className="bw-footer__rule absolute inset-x-0 top-0" aria-hidden="true" />
-        <RevealOnScroll delay={30}>
+        <RevealOnScroll delay={30} eager>
           <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-5 px-4 py-5 sm:flex-row sm:justify-between sm:gap-6 sm:px-6 lg:px-8">
-            <div className="bw-footer__duns-slot flex shrink-0 justify-center sm:justify-start">
+            <div className="bw-footer__duns-slot relative z-30 flex shrink-0 justify-center sm:justify-start">
               <DunsRegisteredSeal theme={theme} variant="bar" />
             </div>
 

@@ -1,11 +1,11 @@
-/* ========== Capital BullWave theme-responsive footer ========== */
+﻿/* ========== Capital BullWave theme-responsive footer ========== */
 .bw-footer {
   position: relative;
   overflow: hidden;
   transition: background 0.45s ease, border-color 0.45s ease, color 0.35s ease;
 }
 
-/* Light theme — soft blue sky gradients */
+/* Light theme â€” soft blue sky gradients */
 .bw-footer--light {
   background:
     radial-gradient(ellipse 85% 65% at 0% 0%, rgba(56, 189, 248, 0.35), transparent 55%),
@@ -23,7 +23,7 @@
   color: #0f172a !important;
 }
 
-/* Dark theme — deep navy + sky blue gradients */
+/* Dark theme â€” deep navy + sky blue gradients */
 .bw-footer--dark {
   background:
     radial-gradient(ellipse 80% 60% at 5% -5%, rgba(14, 165, 233, 0.28), transparent 55%),
@@ -383,7 +383,7 @@
 }
 
 .bw-footer__duns-slot {
-  min-height: 118px;
+  min-height: 140px;
 }
 
 @keyframes bwFootOrb {
