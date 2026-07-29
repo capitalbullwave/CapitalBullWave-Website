@@ -75,7 +75,7 @@ export default function HomeFAQS({ theme }) {
   return (
     <section
       id="faq"
-      className={`w-full scroll-mt-24 py-12 sm:py-16 lg:py-20 ${
+      className={`w-full scroll-mt-[calc(4.75rem+env(safe-area-inset-top,0px))] py-12 sm:py-16 lg:py-20 ${
         dark ? "text-white" : "text-black"
       }`}
     >
@@ -135,6 +135,8 @@ export default function HomeFAQS({ theme }) {
             >
               {section.items.map((item, index) => {
                 const key = `${section.title}-${index}`;
+                const panelId = `faq-panel-${section.title.replace(/\W+/g, "-").toLowerCase()}-${index}`;
+                const btnId = `faq-btn-${section.title.replace(/\W+/g, "-").toLowerCase()}-${index}`;
                 const open = activeItem === key;
 
                 return (
@@ -142,6 +144,9 @@ export default function HomeFAQS({ theme }) {
                     key={key}
                     type="button"
                     onClick={() => toggleItem(key)}
+                    aria-expanded={open}
+                    aria-controls={panelId}
+                    id={btnId}
                     className={`group w-full rounded-xl px-2 py-4 text-left transition-colors sm:px-3
                     ${
                       open
@@ -179,6 +184,9 @@ export default function HomeFAQS({ theme }) {
                     </div>
 
                     <div
+                      id={panelId}
+                      role="region"
+                      aria-labelledby={btnId}
                       className={`grid transition-all duration-300 ease-out ${
                         open
                           ? "mt-3 grid-rows-[1fr] opacity-100"

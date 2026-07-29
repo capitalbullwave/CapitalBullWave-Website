@@ -53,7 +53,7 @@
 
 html {
   scroll-behavior: auto;
-  scroll-padding-top: 6rem;
+  scroll-padding-top: calc(4.75rem + env(safe-area-inset-top, 0px));
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
@@ -79,6 +79,7 @@ body,
 }
 
 body {
+  overflow-x: hidden;
   overflow-x: clip;
   overscroll-behavior-y: contain;
   -webkit-overflow-scrolling: touch;
@@ -777,7 +778,7 @@ img {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .coverflow--compact .coverflow__stage {
     height: auto;
     perspective: none;
@@ -1470,7 +1471,7 @@ html.theme-dark * {
 
 /* Hero layout + responsive shell */
 .hero-section {
-  min-height: min(90vh, 860px);
+  min-height: auto;
 }
 
 .hero-inner {
@@ -1661,7 +1662,7 @@ html.theme-dark * {
 /* Hero breakpoints — large → small */
 @media (min-width: 640px) {
   .hero-section {
-    min-height: min(88vh, 900px);
+    min-height: auto;
   }
 
   .hero-inner {
@@ -1794,6 +1795,7 @@ html.theme-dark * {
 
 /* Sitewide responsive polish */
 .site-main {
+  overflow-x: hidden;
   overflow-x: clip;
 }
 
@@ -1826,7 +1828,8 @@ svg {
   h1,
   h2,
   h3 {
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
+    word-break: normal;
   }
 }
 
@@ -1836,7 +1839,15 @@ svg {
 
 /* Hide floating actions while mobile nav is open */
 body.bw-nav-open .chat-dock,
+body.bw-nav-open .chat-panel,
 body.bw-nav-open .bw-whatsapp-fab {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Hide WhatsApp while chat panel is open to avoid overlap */
+body.bw-chat-open .bw-whatsapp-fab {
   opacity: 0 !important;
   visibility: hidden !important;
   pointer-events: none !important;
@@ -2360,6 +2371,10 @@ body.bw-nav-open .bw-whatsapp-fab {
 }
 
 @media (max-width: 380px) {
+  .chat-prompt {
+    display: none;
+  }
+
   .chat-prompt__text {
     font-size: 0.72rem;
   }

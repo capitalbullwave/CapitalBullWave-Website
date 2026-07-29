@@ -383,7 +383,7 @@
 }
 
 .bw-footer__duns-slot {
-  min-height: 140px;
+  min-height: 0;
 }
 
 @keyframes bwFootOrb {

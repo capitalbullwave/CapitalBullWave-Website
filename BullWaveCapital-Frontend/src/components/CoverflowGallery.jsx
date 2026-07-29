@@ -35,7 +35,7 @@ export default function CoverflowGallery({
   const prev = useCallback(() => goTo(active - 1), [active, goTo]);
 
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 768px)");
+    const mq = window.matchMedia("(max-width: 900px)");
     const sync = () => setCompact(mq.matches);
     sync();
     mq.addEventListener?.("change", sync);
@@ -207,7 +207,7 @@ export default function CoverflowGallery({
                 >
                   <img
                     src={item.image}
-                    alt=""
+                    alt={item.title}
                     loading="lazy"
                     decoding="async"
                     draggable={false}

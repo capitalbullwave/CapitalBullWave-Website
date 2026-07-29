@@ -70,10 +70,13 @@ export default function RevealOnScroll({
     const timer = window.setTimeout(() => {
       if (isInView()) reveal();
     }, 120);
+    // Hard failsafe so content never stays invisible
+    const failsafe = window.setTimeout(() => reveal(), 1800);
 
     return () => {
       window.cancelAnimationFrame(raf);
       window.clearTimeout(timer);
+      window.clearTimeout(failsafe);
       if (observer) observer.disconnect();
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);

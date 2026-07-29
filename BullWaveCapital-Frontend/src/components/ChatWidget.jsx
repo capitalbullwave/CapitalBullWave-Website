@@ -121,10 +121,10 @@ function ChatMessageBody({ text, isUser, isDark }) {
       : "font-bold text-sky-700";
 
   const linkClass = isUser
-    ? "underline underline-offset-2 break-all text-white font-semibold"
+    ? "underline underline-offset-2 break-words text-white font-semibold"
     : isDark
-      ? "underline underline-offset-2 break-all text-sky-300 font-semibold"
-      : "underline underline-offset-2 break-all text-sky-700 font-semibold";
+      ? "underline underline-offset-2 break-words text-sky-300 font-semibold"
+      : "underline underline-offset-2 break-words text-sky-700 font-semibold";
 
   const labelClass = isUser
     ? "font-bold text-white"
@@ -225,9 +225,14 @@ export default function ChatWidget({ theme }) {
 
   useEffect(() => {
     if (isOpen) {
+      document.body.classList.add("bw-chat-open");
       const t = window.setTimeout(() => inputRef.current?.focus(), 180);
-      return () => window.clearTimeout(t);
+      return () => {
+        document.body.classList.remove("bw-chat-open");
+        window.clearTimeout(t);
+      };
     }
+    document.body.classList.remove("bw-chat-open");
     return undefined;
   }, [isOpen]);
 
@@ -371,7 +376,7 @@ export default function ChatWidget({ theme }) {
         role="dialog"
         aria-label="Capital BullWave assistant"
         aria-hidden={!isOpen}
-        className={`fixed z-[9998] flex flex-col overflow-hidden transition-all duration-300
+        className={`chat-panel fixed z-[9998] flex flex-col overflow-hidden transition-all duration-300
           ${
             isOpen
               ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"

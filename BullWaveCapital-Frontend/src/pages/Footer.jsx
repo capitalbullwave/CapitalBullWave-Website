@@ -189,48 +189,48 @@ const Footer = ({ theme = "light" }) => {
               </h3>
               <ul className="mt-4 space-y-4">
                 <li className="bw-footer__contact flex gap-3" style={{ "--i": 0 }}>
-                  <span className="bw-footer__icon mt-0.5">
+                  <span className="bw-footer__icon mt-0.5 shrink-0">
                     <FaMapMarkerAlt />
                   </span>
-                  <div>
+                  <div className="min-w-0">
                     <p className="bw-f-label text-sm font-semibold">India Office</p>
-                    <p className="bw-f-detail mt-1 text-sm leading-6">
+                    <p className="bw-f-detail mt-1 break-words text-sm leading-6">
                       Aggarwal Millennium Tower 2, Office No. 1275 (12th Floor),
                       Netaji Subhash Place, Pitampura, New Delhi – 110034
                     </p>
                   </div>
                 </li>
                 <li className="bw-footer__contact flex gap-3" style={{ "--i": 1 }}>
-                  <span className="bw-footer__icon mt-0.5">
+                  <span className="bw-footer__icon mt-0.5 shrink-0">
                     <FaMapMarkerAlt />
                   </span>
-                  <div>
+                  <div className="min-w-0">
                     <p className="bw-f-label text-sm font-semibold">Dubai Office</p>
-                    <p className="bw-f-detail mt-1 text-sm leading-6">
+                    <p className="bw-f-detail mt-1 break-words text-sm leading-6">
                       World Trade Centre (Rashid Tower), Sheikh Zayed Road,
                       P.O. Box: 9700, Dubai, United Arab Emirates
                     </p>
                   </div>
                 </li>
                 <li className="bw-footer__contact flex gap-3" style={{ "--i": 2 }}>
-                  <span className="bw-footer__icon mt-0.5">
+                  <span className="bw-footer__icon mt-0.5 shrink-0">
                     <FaEnvelope />
                   </span>
-                  <div>
+                  <div className="min-w-0">
                     <p className="bw-f-label text-sm font-semibold">Email</p>
                     <a
                       href="mailto:admin@capitalbullwave.com"
-                      className="bw-foot-link bw-f-link mt-1 block break-all text-sm"
+                      className="bw-foot-link bw-f-link mt-1 block break-words text-sm"
                     >
                       admin@capitalbullwave.com
                     </a>
                   </div>
                 </li>
                 <li className="bw-footer__contact flex gap-3" style={{ "--i": 3 }}>
-                  <span className="bw-footer__icon mt-0.5">
+                  <span className="bw-footer__icon mt-0.5 shrink-0">
                     <FaPhoneAlt />
                   </span>
-                  <div>
+                  <div className="min-w-0">
                     <p className="bw-f-label text-sm font-semibold">Phone</p>
                     <a
                       href="tel:+918796565234"

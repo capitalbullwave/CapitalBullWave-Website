@@ -6,9 +6,6 @@ import {
   FaPaperPlane,
   FaMapMarkerAlt,
   FaClock,
-  FaFacebookF,
-  FaInstagram,
-  FaLinkedinIn,
   FaArrowRight,
 } from "react-icons/fa";
 
@@ -107,7 +104,9 @@ export default function Contact({ theme }) {
       }
     } catch (error) {
       toast.dismiss(loadingToast);
-      console.error(error);
+      if (import.meta.env.DEV) {
+        console.error(error);
+      }
       const serverMessage = error?.response?.data?.message;
       toast.error(
         serverMessage || "An error occurred while sending your message."
@@ -140,7 +139,7 @@ export default function Contact({ theme }) {
     : "flex h-11 w-11 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl bg-sky-100 text-sky-700";
 
   return (
-    <section className="page-shell page-enter relative overflow-hidden">
+    <div className="page-shell page-enter relative overflow-hidden">
 
       <Helmet>
         <title>Contact Us | Capital BullWave - Delhi & Dubai Offices</title>
@@ -362,42 +361,8 @@ export default function Contact({ theme }) {
 
               </div>
 
-              {/* Locations */}
+              {/* Locations card removed — offices shown in contact cards + maps */}
 
-              <div className={`${card} mt-6 sm:mt-8`}>
-                <div className="flex items-start gap-3 sm:gap-5">
-                  <div className={iconBox}>
-                    <FaMapMarkerAlt className="text-base sm:text-xl" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <p className={label}>Our Locations</p>
-                    <div className="mt-3 sm:mt-4 space-y-5">
-                      <div>
-                        <h3 className={`${heading} text-base sm:text-xl font-semibold`}>
-                          New Delhi, India
-                        </h3>
-                        <p className={`${text} mt-2 text-sm sm:text-base leading-6 sm:leading-7`}>
-                          Aggarwal Millennium Tower 2, Office No. 1275 (12th Floor),
-                          Netaji Subhash Place, Pitampura, New Delhi - 110034
-                        </p>
-                      </div>
-                      <div
-                        className={`border-t pt-5 ${
-                          isDark ? "border-slate-700" : "border-slate-200"
-                        }`}
-                      >
-                        <h3 className={`${heading} text-base sm:text-xl font-semibold`}>
-                          Dubai, UAE
-                        </h3>
-                        <p className={`${text} mt-2 text-sm sm:text-base leading-6 sm:leading-7`}>
-                          World Trade Centre (Rashid Tower), Sheikh Zayed Road,
-                          P.O. Box: 9700, Dubai, United Arab Emirates
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
 
             </div>
@@ -847,7 +812,7 @@ export default function Contact({ theme }) {
 
       </div>
 
-    </section>
+    </div>
 
   );
 };

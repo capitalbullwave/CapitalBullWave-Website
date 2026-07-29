@@ -123,14 +123,14 @@ export default function Navbar({ theme, toggleTheme }) {
               <div className="flex min-w-0 flex-col justify-center leading-tight">
                 <div className="flex min-w-0 items-baseline gap-1">
                   <span
-                    className={`truncate text-sm font-bold tracking-tight xs:text-base sm:text-lg ${
+                    className={`truncate text-sm font-bold tracking-tight sm:text-base lg:text-lg ${
                       isDark ? "text-white" : "text-black"
                     }`}
                   >
                     Capital
                   </span>
                   <span
-                    className={`truncate text-sm font-extrabold tracking-tight xs:text-base sm:text-lg ${
+                    className={`truncate text-sm font-extrabold tracking-tight sm:text-base lg:text-lg ${
                       isDark ? "text-sky-400" : "text-sky-600"
                     }`}
                   >

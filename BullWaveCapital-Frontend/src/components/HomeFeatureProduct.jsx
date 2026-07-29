@@ -149,14 +149,23 @@ const FeatureSection = ({ theme = "light" }) => {
     const node = sectionRef.current;
     if (!node) return undefined;
 
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setInView(true);
+      return undefined;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) setInView(true);
       },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+      { threshold: 0.08, rootMargin: "0px 0px -4% 0px" }
     );
     observer.observe(node);
-    return () => observer.disconnect();
+    const failsafe = window.setTimeout(() => setInView(true), 1800);
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(failsafe);
+    };
   }, []);
 
   useEffect(() => {
@@ -307,7 +316,7 @@ const FeatureSection = ({ theme = "light" }) => {
           style={{ height: `${Math.max(progress, 4)}%` }}
         />
 
-        <div className="space-y-4 sm:space-y-5 pl-12 sm:pl-14">
+        <div className="space-y-4 sm:space-y-5 pl-10 sm:pl-14">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             const activeCard = active >= index;
@@ -341,7 +350,7 @@ const FeatureSection = ({ theme = "light" }) => {
                 <span className="feature-stack__sheen" aria-hidden="true" />
 
                 <div
-                  className={`feature-stack__dot absolute -left-[2.9rem] sm:-left-[3.05rem] top-8 z-10 flex h-9 w-9 items-center justify-center rounded-full
+                  className={`feature-stack__dot absolute -left-[2.35rem] sm:-left-[3.05rem] top-8 z-10 flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full
                   ${
                     activeCard
                       ? "is-lit bg-sky-500 text-white shadow-lg shadow-sky-500/35"
@@ -457,6 +466,12 @@ const HomeFeatureProduct = ({ theme }) => {
   useEffect(() => {
     const node = plansRef.current;
     if (!node) return undefined;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setPlansVisible(true);
+      return undefined;
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -464,10 +479,14 @@ const HomeFeatureProduct = ({ theme }) => {
           observer.disconnect();
         }
       },
-      { threshold: 0.12 }
+      { threshold: 0.1 }
     );
     observer.observe(node);
-    return () => observer.disconnect();
+    const failsafe = window.setTimeout(() => setPlansVisible(true), 1800);
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(failsafe);
+    };
   }, []);
 
   return (

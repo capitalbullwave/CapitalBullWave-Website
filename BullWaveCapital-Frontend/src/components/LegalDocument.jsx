@@ -152,7 +152,7 @@ export function LegalLink({ theme, href, children }) {
   return (
     <a
       href={href}
-      className={`inline-block break-all border-b-2 pb-0.5 font-medium transition-colors ${
+      className={`inline-block break-words border-b-2 pb-0.5 font-medium transition-colors ${
         isDark
           ? "border-sky-400 text-sky-400 hover:border-sky-300 hover:text-sky-300"
           : "border-sky-600 text-sky-700 hover:border-sky-800 hover:text-sky-900"
