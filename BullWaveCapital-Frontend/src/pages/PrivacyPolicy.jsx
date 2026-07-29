@@ -312,10 +312,17 @@ const PrivacyPolicy = ({ theme }) => {
           </p>
           <p className="mt-2">
             <strong className={isDark ? "text-white" : "text-black"}>
-              Registered Office:
+              India Office:
             </strong>{" "}
             Aggarwal Millennium Tower 2, Netaji Subhash Place, Pitampura, New
             Delhi – 110034
+          </p>
+          <p className="mt-2">
+            <strong className={isDark ? "text-white" : "text-black"}>
+              Dubai Office:
+            </strong>{" "}
+            World Trade Centre (Rashid Tower), Sheikh Zayed Road, P.O. Box: 9700,
+            Dubai, United Arab Emirates
           </p>
           <p className="mt-2">
             <strong className={isDark ? "text-white" : "text-black"}>

@@ -53,12 +53,36 @@ const COMPANY_EMAIL = cleanEnv(
 const BREVO_SMTP_HOST =
   cleanEnv(process.env.BREVO_SMTP_HOST) || "smtp-relay.brevo.com";
 const BREVO_SMTP_PORT = Number(process.env.BREVO_SMTP_PORT || 587);
-const BREVO_SMTP_USER = cleanEnv(
-  process.env.BREVO_SMTP_USER || BREVO_SENDER_EMAIL
-);
+/** Must be Brevo SMTP login (e.g. xxx@smtp-brevo.com) — never default to Gmail sender */
+const BREVO_SMTP_USER = cleanEnv(process.env.BREVO_SMTP_USER);
 
 let smtpTransporter = null;
 let loggedProvider = false;
+
+export const getEmailConfigStatus = () => {
+  let provider = "none";
+  try {
+    provider = resolveProvider();
+  } catch {
+    provider = "invalid";
+  }
+
+  return {
+    provider,
+    hasSender: Boolean(BREVO_SENDER_EMAIL),
+    hasCompanyEmail: Boolean(COMPANY_EMAIL),
+    hasSmtpHost: Boolean(BREVO_SMTP_HOST),
+    hasSmtpUser: Boolean(BREVO_SMTP_USER),
+    hasSmtpKey: Boolean(BREVO_SMTP_KEY),
+    hasApiKey: Boolean(BREVO_API_KEY),
+    smtpUserLooksValid: /@smtp-brevo\.com$/i.test(BREVO_SMTP_USER),
+    ready: Boolean(
+      BREVO_SENDER_EMAIL &&
+        COMPANY_EMAIL &&
+        ((BREVO_SMTP_KEY && BREVO_SMTP_USER) || BREVO_API_KEY)
+    ),
+  };
+};
 
 const assertMailConfig = () => {
   if (!BREVO_SENDER_EMAIL) {
@@ -69,6 +93,11 @@ const assertMailConfig = () => {
   }
   if (!BREVO_API_KEY && !BREVO_SMTP_KEY) {
     throw new Error("BREVO_API_KEY or BREVO_SMTP_KEY is missing in .env");
+  }
+  if (BREVO_SMTP_KEY && !BREVO_SMTP_USER) {
+    throw new Error(
+      "BREVO_SMTP_USER is missing. Use your Brevo SMTP login (e.g. xxx@smtp-brevo.com)."
+    );
   }
 };
 

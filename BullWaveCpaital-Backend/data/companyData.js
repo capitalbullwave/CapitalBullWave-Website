@@ -6,20 +6,27 @@ export const companyData = {
       "Professional Market Research, Trading Guidance & Investor Education",
 
     headquarters: {
-      city: "Delhi",
+      city: "New Delhi & Dubai",
       offices: [
         {
           location: "Netaji Subhash Place",
           building: "Aggarwal Millennium Tower 2",
-          offices: [
-            "Office No. 1275 (12th Floor)",
-          ],
+          city: "New Delhi",
+          country: "India",
+          offices: ["Office No. 1275 (12th Floor)"],
+        },
+        {
+          location: "Sheikh Zayed Road",
+          building: "World Trade Centre (Rashid Tower)",
+          city: "Dubai",
+          country: "United Arab Emirates",
+          offices: ["P.O. Box: 9700"],
         },
       ],
     },
 
     description:
-      "Capital Bull Wave is a Delhi-based research advisory company providing stock market research, trading guidance, technical analysis, investor education, and risk management for Indian financial markets.",
+      "Capital Bull Wave is a research advisory company with offices in New Delhi and Dubai, providing stock market research, trading guidance, technical analysis, investor education, and risk management.",
   },
 
   services: [
@@ -199,9 +206,9 @@ export const companyData = {
     phone: "+91 8796565234",
     whatsapp: "+91 9616212526",
     office:
-      "Aggarwal Millennium Tower 2, Office No. 1275 (12th Floor), Netaji Subhash Place, Pitampura, New Delhi - 110034",
+      "India: Aggarwal Millennium Tower 2, Office No. 1275 (12th Floor), Netaji Subhash Place, Pitampura, New Delhi - 110034 | Dubai: World Trade Centre (Rashid Tower), Sheikh Zayed Road, P.O. Box: 9700, Dubai, United Arab Emirates",
     businessHours: "Monday to Friday | 9:00 AM – 6:30 PM",
-    country: "India",
+    country: "India & United Arab Emirates",
     support:
       "Users can contact Capital BullWave through the Contact page, email, phone, or WhatsApp.",
   },
@@ -281,7 +288,7 @@ export const companyData = {
     contact: {
       email: "admin@capitalbullwave.com",
       office:
-        "Aggarwal Millennium Tower 2, Netaji Subhash Place, Pitampura, New Delhi - 110034",
+        "India: Aggarwal Millennium Tower 2, Netaji Subhash Place, Pitampura, New Delhi - 110034 | Dubai: World Trade Centre (Rashid Tower), Sheikh Zayed Road, P.O. Box: 9700, Dubai, UAE",
     },
   },
 

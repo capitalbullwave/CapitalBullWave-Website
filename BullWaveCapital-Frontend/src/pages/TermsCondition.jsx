@@ -95,10 +95,17 @@ const TermsCondition = ({ theme }) => {
             </li>
             <li>
               <strong className={isDark ? "text-white" : "text-black"}>
-                Office Location:
+                India Office:
               </strong>{" "}
               UNIT NO. 1275, 12TH FLOOR, AGGARWAL MILLENIUM TOWER-2, NETAJI
               SUBHASH PLACE, PITAMPURA, New Delhi – 110034
+            </li>
+            <li>
+              <strong className={isDark ? "text-white" : "text-black"}>
+                Dubai Office:
+              </strong>{" "}
+              World Trade Centre (Rashid Tower), Sheikh Zayed Road, P.O. Box:
+              9700, Dubai, United Arab Emirates
             </li>
           </ul>
           <p className="mt-3 sm:mt-4">

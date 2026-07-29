@@ -89,7 +89,7 @@ const HomeService = ({ theme = "light" }) => {
           }`}
         >
           Bull Wave Capital provides market research, investment guidance, and
-          financial advisory services from Netaji Subhash Place, helping clients
+          financial advisory services from New Delhi and Dubai, helping clients
           pursue disciplined wealth growth in equities and financial assets.
         </p>
       </div>

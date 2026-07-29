@@ -22,12 +22,19 @@ import RevealOnScroll from "../components/RevealOnScroll";
 
 const contactDetails = [
   {
-    title: "Corporate Address",
+    title: "India Office",
+    subtitle: "Registered Office · New Delhi",
     value:
-      "Aggarwal Millennium Tower 2, Office No. Office No. 1275 (12th Floor), Netaji Subhash Place, Pitampura, New Delhi - 110034",
+      "Aggarwal Millennium Tower 2, Office No. 1275 (12th Floor), Netaji Subhash Place, Pitampura, New Delhi - 110034",
     icon: FaBuilding,
   },
-
+  {
+    title: "Dubai Office",
+    subtitle: "United Arab Emirates",
+    value:
+      "World Trade Centre (Rashid Tower), Sheikh Zayed Road, P.O. Box: 9700, Dubai, United Arab Emirates",
+    icon: FaMapMarkerAlt,
+  },
   {
     title: "Mobile Number",
     value: "+91 8796565234",
@@ -136,16 +143,16 @@ export default function Contact({ theme }) {
     <section className="page-shell page-enter relative overflow-hidden">
 
       <Helmet>
-        <title>Contact Us | Capital BullWave - Delhi Office, Netaji Subhash Place</title>
+        <title>Contact Us | Capital BullWave - Delhi & Dubai Offices</title>
         <meta
           name="description"
-          content="Contact Capital BullWave at our Netaji Subhash Place office in Delhi. Call +91 8796565234 or email admin@capitalbullwave.com for investment guidance and market research support."
+          content="Contact Capital BullWave at our New Delhi and Dubai offices. Call +91 8796565234 or email admin@capitalbullwave.com for investment guidance and market research support."
         />
         <link rel="canonical" href="https://www.capitalbullwave.com/contact" />
-        <meta property="og:title" content="Contact Capital BullWave | Delhi Office" />
+        <meta property="og:title" content="Contact Capital BullWave | Delhi & Dubai" />
         <meta
           property="og:description"
-          content="Reach our Delhi office for market research, trading guidance and investment support."
+          content="Reach our Delhi and Dubai offices for market research, trading guidance and investment support."
         />
         <meta property="og:url" content="https://www.capitalbullwave.com/contact" />
         <meta property="og:type" content="website" />
@@ -252,13 +259,13 @@ export default function Contact({ theme }) {
               {/* Heading */}
 
               <h2 className={`${heading} mt-4 sm:mt-6 text-xl sm:text-2xl lg:text-3xl font-bold`}>
-                Reach Our Delhi Office
+                Reach Our Offices
               </h2>
 
               <p className={`${text} mt-3 sm:mt-4 text-sm sm:text-base leading-6 sm:leading-8`}>
-                Our team is available to assist you with investment guidance,
-                stock market research, trading support, account-related
-                queries and partnership opportunities.
+                Capital BullWave operates from New Delhi and Dubai. Our team is
+                available to assist with investment guidance, market research,
+                trading support, and partnership enquiries.
               </p>
 
               {/* Contact Cards */}
@@ -284,6 +291,16 @@ export default function Contact({ theme }) {
                           <p className={label}>
                             {item.title}
                           </p>
+
+                          {item.subtitle ? (
+                            <p
+                              className={`mt-1 text-xs sm:text-sm font-medium ${
+                                isDark ? "text-sky-400/90" : "text-sky-600"
+                              }`}
+                            >
+                              {item.subtitle}
+                            </p>
+                          ) : null}
 
                           {item.href ? (
                             <a
@@ -345,37 +362,41 @@ export default function Contact({ theme }) {
 
               </div>
 
-              {/* Location */}
+              {/* Locations */}
 
               <div className={`${card} mt-6 sm:mt-8`}>
-
                 <div className="flex items-start gap-3 sm:gap-5">
-
                   <div className={iconBox}>
                     <FaMapMarkerAlt className="text-base sm:text-xl" />
                   </div>
-
-                  <div>
-
-                    <p className={label}>
-                      Office Location
-                    </p>
-
-                    <h3 className={`${heading} mt-2 text-base sm:text-xl font-semibold`}>
-                      Netaji Subhash Place
-                    </h3>
-
-                    <p className={`${text} mt-2 sm:mt-3 text-sm sm:text-base leading-6 sm:leading-7`}>
-                      Aggarwal Millennium Tower 2,
-                      Office No. 1275 (12th Floor), Pitampura,
-                      <br />
-                      New Delhi - 110034
-                    </p>
-
+                  <div className="min-w-0 flex-1">
+                    <p className={label}>Our Locations</p>
+                    <div className="mt-3 sm:mt-4 space-y-5">
+                      <div>
+                        <h3 className={`${heading} text-base sm:text-xl font-semibold`}>
+                          New Delhi, India
+                        </h3>
+                        <p className={`${text} mt-2 text-sm sm:text-base leading-6 sm:leading-7`}>
+                          Aggarwal Millennium Tower 2, Office No. 1275 (12th Floor),
+                          Netaji Subhash Place, Pitampura, New Delhi - 110034
+                        </p>
+                      </div>
+                      <div
+                        className={`border-t pt-5 ${
+                          isDark ? "border-slate-700" : "border-slate-200"
+                        }`}
+                      >
+                        <h3 className={`${heading} text-base sm:text-xl font-semibold`}>
+                          Dubai, UAE
+                        </h3>
+                        <p className={`${text} mt-2 text-sm sm:text-base leading-6 sm:leading-7`}>
+                          World Trade Centre (Rashid Tower), Sheikh Zayed Road,
+                          P.O. Box: 9700, Dubai, United Arab Emirates
+                        </p>
+                      </div>
+                    </div>
                   </div>
-
                 </div>
-
               </div>
 
 
@@ -636,7 +657,7 @@ export default function Contact({ theme }) {
                     : "bg-sky-50 text-sky-700 ring-1 ring-sky-100"
                 }`}
               >
-                Visit Our Office
+                Visit Our Offices
               </span>
 
               <h2 className={`${heading} mt-4 sm:mt-5 text-xl sm:text-2xl lg:text-3xl font-bold`}>
@@ -644,27 +665,67 @@ export default function Contact({ theme }) {
               </h2>
 
               <p className={`${text} mx-auto mt-3 sm:mt-4 max-w-3xl text-sm sm:text-base leading-6 sm:leading-8`}>
-                Visit our corporate office in Netaji Subhash Place, Delhi.
-                Our experienced team is always available to assist with
-                investment solutions, market research and trading guidance.
+                Visit Capital BullWave in New Delhi or Dubai. Our team is
+                available to assist with investment solutions, market research,
+                and trading guidance.
               </p>
 
             </div>
 
-            <div className={`mt-6 sm:mt-10 overflow-hidden rounded-2xl sm:rounded-3xl border shadow-xl ${
-              isDark
-                ? "border-slate-700"
-                : "border-slate-200"
-            }`}>
+            <div className="mt-6 sm:mt-10 grid gap-5 sm:gap-6 lg:grid-cols-2">
+              <div
+                className={`overflow-hidden rounded-2xl sm:rounded-3xl border shadow-xl ${
+                  isDark ? "border-slate-700" : "border-slate-200"
+                }`}
+              >
+                <div
+                  className={`px-4 py-3 sm:px-5 sm:py-3.5 border-b ${
+                    isDark
+                      ? "border-slate-700 bg-slate-900/80"
+                      : "border-slate-200 bg-slate-50"
+                  }`}
+                >
+                  <p className={label}>India</p>
+                  <h3 className={`${heading} mt-1 text-base sm:text-lg font-semibold`}>
+                    New Delhi Office
+                  </h3>
+                </div>
+                <iframe
+                  title="Capital BullWave New Delhi Office"
+                  src="https://www.google.com/maps?q=Aggarwal+Millennium+Tower+2+Netaji+Subhash+Place+Delhi&output=embed"
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="h-[240px] sm:h-[300px] lg:h-[360px] w-full border-0"
+                />
+              </div>
 
-              <iframe
-                title="Bull Wave Capital Location"
-                src="https://www.google.com/maps?q=Aggarwal+Millennium+Tower+2+Netaji+Subhash+Place+Delhi&output=embed"
-                loading="lazy"
-                allowFullScreen
-                className="h-[260px] sm:h-[340px] lg:h-[420px] w-full border-0"
-              />
-
+              <div
+                className={`overflow-hidden rounded-2xl sm:rounded-3xl border shadow-xl ${
+                  isDark ? "border-slate-700" : "border-slate-200"
+                }`}
+              >
+                <div
+                  className={`px-4 py-3 sm:px-5 sm:py-3.5 border-b ${
+                    isDark
+                      ? "border-slate-700 bg-slate-900/80"
+                      : "border-slate-200 bg-slate-50"
+                  }`}
+                >
+                  <p className={label}>United Arab Emirates</p>
+                  <h3 className={`${heading} mt-1 text-base sm:text-lg font-semibold`}>
+                    Dubai Office
+                  </h3>
+                </div>
+                <iframe
+                  title="Capital BullWave Dubai Office"
+                  src="https://www.google.com/maps?q=World+Trade+Centre+Rashid+Tower+Sheikh+Zayed+Road+Dubai&output=embed"
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="h-[240px] sm:h-[300px] lg:h-[360px] w-full border-0"
+                />
+              </div>
             </div>
 
           </div>

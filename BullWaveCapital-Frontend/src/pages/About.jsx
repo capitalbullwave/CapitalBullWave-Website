@@ -28,23 +28,23 @@ const About = ({ theme }) => {
   return (
     <div className="page-shell page-enter">
       <Helmet>
-        <title>About Us | Capital BullWave - Market Research & Trading Advisory Delhi</title>
+        <title>About Us | Capital BullWave - Market Research Delhi & Dubai</title>
         <meta
           name="description"
-          content="Capital BullWave is a Delhi-based market research and trading advisory platform offering equity research, trading guidance, risk management and investor education from Netaji Subhash Place."
+          content="Capital BullWave is a market research and trading advisory platform with offices in New Delhi and Dubai, offering equity research, trading guidance, risk management and investor education."
         />
         <link rel="canonical" href="https://www.capitalbullwave.com/about" />
-        <meta property="og:title" content="About Capital BullWave | Market Research Delhi" />
+        <meta property="og:title" content="About Capital BullWave | Delhi & Dubai" />
         <meta
           property="og:description"
-          content="Delhi-based market research, trading guidance and investor education for modern stock market traders."
+          content="Market research, trading guidance and investor education from our New Delhi and Dubai offices."
         />
         <meta property="og:url" content="https://www.capitalbullwave.com/about" />
         <meta property="og:type" content="website" />
-        <meta name="twitter:title" content="About Capital BullWave | Market Research Delhi" />
+        <meta name="twitter:title" content="About Capital BullWave | Delhi & Dubai" />
         <meta
           name="twitter:description"
-          content="Delhi-based market research, trading guidance and investor education for modern stock market traders."
+          content="Market research, trading guidance and investor education from our New Delhi and Dubai offices."
         />
       </Helmet>
 
@@ -136,9 +136,9 @@ const About = ({ theme }) => {
               </h1>
 
               <p className={`mt-5 sm:mt-6 max-w-2xl text-sm sm:text-lg leading-7 sm:leading-8 ${muted}`}>
-                Capital Bull Wave operates from Netaji Subhash Place and Malviya
-                Nagar, delivering research-driven strategies, risk-managed trading
-                support, and investor education for retail traders across India.
+                Capital Bull Wave operates from New Delhi and Dubai, delivering
+                research-driven strategies, risk-managed trading support, and
+                investor education for traders and investors.
               </p>
             </RevealOnScroll>
 
@@ -149,7 +149,7 @@ const About = ({ theme }) => {
                   <div className="min-w-0">
                     <p className={`font-semibold ${title}`}>Offices</p>
                     <p className="wrap-break-word">
-                      Netaji Subhash Place (Aggarwal Millennium Tower 2)
+                      New Delhi (Netaji Subhash Place) · Dubai (World Trade Centre)
                     </p>
                   </div>
                   <div className="min-w-0">
@@ -227,12 +227,12 @@ const About = ({ theme }) => {
                     </div>
                     <div className="min-w-0">
                       <h3 className={`font-semibold text-base sm:text-lg wrap-break-word ${title}`}>
-                        Netaji Subhash Place (NSP)
+                        New Delhi, India
                       </h3>
                       <p className={`mt-2 text-sm sm:text-base leading-7 wrap-break-word ${muted}`}>
-                        Office No. <strong>1275 (12th Floor)</strong> located at{" "}
-                        <strong>Aggarwal Millennium Tower 2</strong>, Pitampura, North
-                        West Delhi.
+                        Office No. <strong>1275 (12th Floor)</strong> at{" "}
+                        <strong>Aggarwal Millennium Tower 2</strong>, Netaji Subhash
+                        Place, Pitampura, New Delhi - 110034.
                       </p>
                     </div>
                   </div>
@@ -249,12 +249,11 @@ const About = ({ theme }) => {
                     </div>
                     <div className="min-w-0">
                       <h3 className={`font-semibold text-base sm:text-lg wrap-break-word ${title}`}>
-                        Easy Accessibility
+                        Dubai, United Arab Emirates
                       </h3>
                       <p className={`mt-2 text-sm sm:text-base leading-7 wrap-break-word ${muted}`}>
-                        Conveniently located near{" "}
-                        <strong>Netaji Subhash Place Metro Station</strong>, making it
-                        easy for clients and visitors to reach us.
+                        <strong>World Trade Centre (Rashid Tower)</strong>, Sheikh
+                        Zayed Road, P.O. Box: 9700, Dubai, UAE.
                       </p>
                     </div>
                   </div>
@@ -273,9 +272,8 @@ const About = ({ theme }) => {
                           Important Distinction
                         </h3>
                         <p className={`mt-3 text-sm sm:text-base leading-7 wrap-break-word ${dark ? "text-slate-300" : "text-slate-700"}`}>
-                          <strong>Capital BullWave</strong> is a Delhi-based market
-                          research and trading advisory platform operating from Aggarwal
-                          Millennium Tower 2.
+                          <strong>Capital BullWave</strong> is a market research and
+                          trading advisory platform with offices in New Delhi and Dubai.
                         </p>
                       </div>
                     </div>

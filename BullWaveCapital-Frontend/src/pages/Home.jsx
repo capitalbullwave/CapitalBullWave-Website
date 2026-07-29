@@ -15,19 +15,28 @@ const organizationSchema = {
   email: "admin@capitalbullwave.com",
   telephone: "+91-8796565234",
   description:
-    "Professional stock market research, investment guidance, and financial advisory services from Netaji Subhash Place, Delhi.",
-  address: {
-    "@type": "PostalAddress",
-    streetAddress:
-      "Aggarwal Millennium Tower 2, Office No. 1275 (12th Floor), Netaji Subhash Place, Pitampura",
-    addressLocality: "New Delhi",
-    postalCode: "110034",
-    addressCountry: "IN",
-  },
-  areaServed: {
-    "@type": "Country",
-    name: "India",
-  },
+    "Professional stock market research, investment guidance, and financial advisory services from New Delhi and Dubai.",
+  address: [
+    {
+      "@type": "PostalAddress",
+      streetAddress:
+        "Aggarwal Millennium Tower 2, Office No. 1275 (12th Floor), Netaji Subhash Place, Pitampura",
+      addressLocality: "New Delhi",
+      postalCode: "110034",
+      addressCountry: "IN",
+    },
+    {
+      "@type": "PostalAddress",
+      streetAddress: "World Trade Centre (Rashid Tower), Sheikh Zayed Road",
+      addressLocality: "Dubai",
+      postOfficeBoxNumber: "9700",
+      addressCountry: "AE",
+    },
+  ],
+  areaServed: [
+    { "@type": "Country", name: "India" },
+    { "@type": "Country", name: "United Arab Emirates" },
+  ],
 };
 
 const Home = ({ theme }) => {
@@ -39,16 +48,16 @@ const Home = ({ theme }) => {
         </title>
         <meta
           name="description"
-          content="Capital BullWave provides professional stock market research, investment guidance, and financial advisory services from Netaji Subhash Place, Delhi. Trade smarter, invest with confidence."
+          content="Capital BullWave provides professional stock market research, investment guidance, and financial advisory services from New Delhi and Dubai. Trade smarter, invest with confidence."
         />
         <link rel="canonical" href="https://www.capitalbullwave.com/" />
         <meta
           property="og:title"
-          content="Capital BullWave | Investment Advisory Delhi"
+          content="Capital BullWave | Investment Advisory Delhi & Dubai"
         />
         <meta
           property="og:description"
-          content="Professional stock market research, investment guidance and financial advisory services from Delhi."
+          content="Professional stock market research, investment guidance and financial advisory services from New Delhi and Dubai."
         />
         <meta property="og:url" content="https://www.capitalbullwave.com/" />
         <meta property="og:type" content="website" />

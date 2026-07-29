@@ -111,7 +111,7 @@ export const sendContactMessage = async (req, res) => {
 
     const detail = String(error?.message || error || "");
     const isEmailConfig =
-      /Brevo|BREVO_|api key|unauthorized|Key not found|Unable to send contact email/i.test(
+      /Brevo|BREVO_|api key|unauthorized|Key not found|Unable to send contact email|SMTP/i.test(
         detail
       );
 
@@ -120,6 +120,7 @@ export const sendContactMessage = async (req, res) => {
       message: isEmailConfig
         ? "Email service is not configured correctly. Please try again later or contact us by phone."
         : "Something went wrong. Please try again later.",
+      ...(process.env.NODE_ENV !== "production" ? { debug: detail } : {}),
     });
   }
 };

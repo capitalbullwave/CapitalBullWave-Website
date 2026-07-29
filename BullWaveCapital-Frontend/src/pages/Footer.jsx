@@ -193,7 +193,7 @@ const Footer = ({ theme = "light" }) => {
                     <FaMapMarkerAlt />
                   </span>
                   <div>
-                    <p className="bw-f-label text-sm font-semibold">Registered Office</p>
+                    <p className="bw-f-label text-sm font-semibold">India Office</p>
                     <p className="bw-f-detail mt-1 text-sm leading-6">
                       Aggarwal Millennium Tower 2, Office No. 1275 (12th Floor),
                       Netaji Subhash Place, Pitampura, New Delhi – 110034
@@ -201,6 +201,18 @@ const Footer = ({ theme = "light" }) => {
                   </div>
                 </li>
                 <li className="bw-footer__contact flex gap-3" style={{ "--i": 1 }}>
+                  <span className="bw-footer__icon mt-0.5">
+                    <FaMapMarkerAlt />
+                  </span>
+                  <div>
+                    <p className="bw-f-label text-sm font-semibold">Dubai Office</p>
+                    <p className="bw-f-detail mt-1 text-sm leading-6">
+                      World Trade Centre (Rashid Tower), Sheikh Zayed Road,
+                      P.O. Box: 9700, Dubai, United Arab Emirates
+                    </p>
+                  </div>
+                </li>
+                <li className="bw-footer__contact flex gap-3" style={{ "--i": 2 }}>
                   <span className="bw-footer__icon mt-0.5">
                     <FaEnvelope />
                   </span>
@@ -214,7 +226,7 @@ const Footer = ({ theme = "light" }) => {
                     </a>
                   </div>
                 </li>
-                <li className="bw-footer__contact flex gap-3" style={{ "--i": 2 }}>
+                <li className="bw-footer__contact flex gap-3" style={{ "--i": 3 }}>
                   <span className="bw-footer__icon mt-0.5">
                     <FaPhoneAlt />
                   </span>
