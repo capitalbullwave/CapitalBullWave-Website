@@ -109,9 +109,17 @@ export const sendContactMessage = async (req, res) => {
   } catch (error) {
     console.error("Contact Controller Error:", error);
 
+    const detail = String(error?.message || error || "");
+    const isEmailConfig =
+      /Brevo|BREVO_|api key|unauthorized|Key not found|Unable to send contact email/i.test(
+        detail
+      );
+
     return res.status(500).json({
       success: false,
-      message: "Something went wrong. Please try again later.",
+      message: isEmailConfig
+        ? "Email service is not configured correctly. Please try again later or contact us by phone."
+        : "Something went wrong. Please try again later.",
     });
   }
 };

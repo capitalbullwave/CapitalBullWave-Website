@@ -17,7 +17,30 @@ const cleanEnv = (value = "") =>
 
 const EMAIL_PROVIDER = cleanEnv(process.env.EMAIL_PROVIDER || "api").toLowerCase();
 
-const BREVO_API_KEY = cleanEnv(process.env.BREVO_API_KEY);
+const rawApiKey = cleanEnv(process.env.BREVO_API_KEY);
+const rawSmtpKey = cleanEnv(
+  process.env.BREVO_SMTP_KEY || process.env.BREVO_SMTP_PASS
+);
+
+const isApiKey = (key) => Boolean(key && key.startsWith("xkeysib-"));
+
+/**
+ * Accept keys even if pasted into the wrong env var.
+ * Never treat xkeysib- as an SMTP password.
+ */
+const BREVO_API_KEY = isApiKey(rawApiKey)
+  ? rawApiKey
+  : isApiKey(rawSmtpKey)
+    ? rawSmtpKey
+    : "";
+
+const BREVO_SMTP_KEY =
+  rawSmtpKey && !isApiKey(rawSmtpKey)
+    ? rawSmtpKey
+    : rawApiKey && !isApiKey(rawApiKey)
+      ? rawApiKey
+      : "";
+
 const BREVO_SENDER_EMAIL = cleanEnv(
   process.env.BREVO_SENDER_EMAIL || process.env.FROM_EMAIL
 );
@@ -33,18 +56,6 @@ const BREVO_SMTP_PORT = Number(process.env.BREVO_SMTP_PORT || 587);
 const BREVO_SMTP_USER = cleanEnv(
   process.env.BREVO_SMTP_USER || BREVO_SENDER_EMAIL
 );
-
-/**
- * SMTP password must be a Brevo SMTP key (xsmtpsib-...), never an API key (xkeysib-).
- * Ignore xkeysib values if someone accidentally puts the API key in SMTP_KEY.
- */
-const rawSmtpKey = cleanEnv(
-  process.env.BREVO_SMTP_KEY || process.env.BREVO_SMTP_PASS
-);
-const BREVO_SMTP_KEY =
-  rawSmtpKey && !rawSmtpKey.startsWith("xkeysib-") ? rawSmtpKey : "";
-
-const isApiKey = (key) => Boolean(key && key.startsWith("xkeysib-"));
 
 let smtpTransporter = null;
 let loggedProvider = false;
@@ -68,7 +79,13 @@ const assertMailConfig = () => {
  * - api + API key         → API
  */
 const resolveProvider = () => {
-  if (EMAIL_PROVIDER === "smtp" && BREVO_SMTP_KEY) {
+  // Prefer real SMTP credentials whenever present
+  if (BREVO_SMTP_KEY) {
+    if (!BREVO_SMTP_USER) {
+      throw new Error(
+        "BREVO_SMTP_USER is required (use your Brevo SMTP login, e.g. xxx@smtp-brevo.com)."
+      );
+    }
     return "smtp";
   }
 
@@ -82,8 +99,7 @@ const resolveProvider = () => {
     return "api";
   }
 
-  if (BREVO_SMTP_KEY) return "smtp";
-  return "api";
+  return EMAIL_PROVIDER === "smtp" ? "smtp" : "api";
 };
 
 const getSmtpTransporter = () => {
