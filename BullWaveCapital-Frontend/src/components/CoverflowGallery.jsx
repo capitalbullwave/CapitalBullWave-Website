@@ -2,8 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 /**
- * Coverflow-style gallery for trading / service images.
- * Supports arrows, dots, autoplay, and pointer drag / swipe.
+ * Desktop: 3D coverflow. Mobile: single opaque slide (no transparent overlaps).
  */
 export default function CoverflowGallery({
   items = [],
@@ -20,8 +19,9 @@ export default function CoverflowGallery({
   const stageRef = useRef(null);
   const pointerIdRef = useRef(null);
   const startXRef = useRef(0);
-  const dragXRef = useRef(0);
   const didDragRef = useRef(false);
+
+  const current = items[active] ?? items[0];
 
   const goTo = useCallback(
     (index) => {
@@ -35,7 +35,7 @@ export default function CoverflowGallery({
   const prev = useCallback(() => goTo(active - 1), [active, goTo]);
 
   useEffect(() => {
-    const mq = window.matchMedia("(max-width: 480px)");
+    const mq = window.matchMedia("(max-width: 768px)");
     const sync = () => setCompact(mq.matches);
     sync();
     mq.addEventListener?.("change", sync);
@@ -64,10 +64,9 @@ export default function CoverflowGallery({
     const delta = clientX - startXRef.current;
     setDragging(false);
     setDragX(0);
-    dragXRef.current = 0;
     pointerIdRef.current = null;
 
-    if (Math.abs(delta) > 48) {
+    if (Math.abs(delta) > 40) {
       didDragRef.current = true;
       if (delta < 0) next();
       else prev();
@@ -78,7 +77,6 @@ export default function CoverflowGallery({
     if (e.button != null && e.button !== 0) return;
     pointerIdRef.current = e.pointerId;
     startXRef.current = e.clientX;
-    dragXRef.current = 0;
     didDragRef.current = false;
     setDragging(true);
     setPaused(true);
@@ -92,7 +90,6 @@ export default function CoverflowGallery({
   const onPointerMove = (e) => {
     if (pointerIdRef.current !== e.pointerId) return;
     const delta = e.clientX - startXRef.current;
-    dragXRef.current = delta;
     setDragX(delta);
     if (Math.abs(delta) > 8) didDragRef.current = true;
   };
@@ -106,16 +103,17 @@ export default function CoverflowGallery({
   const onPointerCancel = () => {
     setDragging(false);
     setDragX(0);
-    dragXRef.current = 0;
     pointerIdRef.current = null;
     setPaused(false);
   };
 
-  if (!count) return null;
+  if (!count || !current) return null;
 
   return (
     <div
-      className={`coverflow ${isDark ? "coverflow--dark" : "coverflow--light"}`}
+      className={`coverflow ${isDark ? "coverflow--dark" : "coverflow--light"} ${
+        compact ? "coverflow--compact" : ""
+      }`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => {
         if (!dragging) setPaused(false);
@@ -146,41 +144,16 @@ export default function CoverflowGallery({
         aria-roledescription="carousel"
         aria-label="Trading services gallery"
       >
-        <div className="coverflow__track">
-          {items.map((item, index) => {
-            const offset = relativeOffset(index);
-            const abs = Math.abs(offset);
-            const dragBias = dragging ? dragX / 280 : 0;
-            const visual = offset - dragBias;
-            const absVisual = Math.abs(visual);
-
-            // Hide far cards for performance / cleanliness
-            if (abs > 2 && !dragging) return null;
-
-            const translateX = visual * 1;
-            const rotateY = Math.max(
-              compact ? -24 : -40,
-              Math.min(compact ? 24 : 40, visual * (compact ? -22 : -36))
-            );
-            const scale = Math.max(0.68, 1 - absVisual * 0.16);
-            const opacity = Math.max(0.35, 1 - absVisual * 0.28);
-            const zIndex = 40 - Math.round(absVisual * 10);
-            const isActive = abs === 0 && Math.abs(dragBias) < 0.12;
-
-            return (
+        {compact ? (
+          /* Mobile: one full opaque slide — no side-card overlap */
+          <div className="coverflow__simple">
+            {items.map((item, index) => (
               <article
                 key={item.title}
-                className={`coverflow__card ${isActive ? "is-active" : ""}`}
-                style={{
-                  zIndex,
-                  opacity,
-                  transform: `translate(-50%, -50%) translateX(calc(${translateX} * var(--coverflow-gap))) rotateY(${rotateY}deg) scale(${scale})`,
-                }}
-                onClick={() => {
-                  if (didDragRef.current) return;
-                  if (index !== active) goTo(index);
-                }}
-                aria-hidden={abs !== 0}
+                className={`coverflow__simple-card ${
+                  active === index ? "is-active" : ""
+                }`}
+                aria-hidden={active !== index}
               >
                 <img
                   src={item.image}
@@ -190,15 +163,79 @@ export default function CoverflowGallery({
                   draggable={false}
                   className="coverflow__img"
                 />
-                <div className="coverflow__shade" />
-                <div className="coverflow__caption">
-                  <p className="coverflow__eyebrow">{item.caption}</p>
-                  <h3 className="coverflow__title">{item.title}</h3>
-                </div>
               </article>
-            );
-          })}
-        </div>
+            ))}
+            {dragging && Math.abs(dragX) > 4 && (
+              <div
+                className="coverflow__drag-hint"
+                style={{ transform: `translateX(${dragX * 0.08}px)` }}
+                aria-hidden="true"
+              />
+            )}
+          </div>
+        ) : (
+          <div className="coverflow__track">
+            {items.map((item, index) => {
+              const offset = relativeOffset(index);
+              const abs = Math.abs(offset);
+              const dragBias = dragging ? dragX / 280 : 0;
+              const visual = offset - dragBias;
+              const absVisual = Math.abs(visual);
+
+              if (abs > 2 && !dragging) return null;
+
+              const rotateY = Math.max(-36, Math.min(36, visual * -32));
+              const scale = Math.max(0.68, 1 - absVisual * 0.16);
+              const opacity = Math.max(0.45, 1 - absVisual * 0.25);
+              const zIndex = 40 - Math.round(absVisual * 10);
+              const isActive = abs === 0 && Math.abs(dragBias) < 0.12;
+
+              return (
+                <article
+                  key={item.title}
+                  className={`coverflow__card ${isActive ? "is-active" : ""}`}
+                  style={{
+                    zIndex,
+                    opacity,
+                    transform: `translate(-50%, -50%) translateX(calc(${visual} * var(--coverflow-gap))) rotateY(${rotateY}deg) scale(${scale})`,
+                  }}
+                  onClick={() => {
+                    if (didDragRef.current) return;
+                    if (index !== active) goTo(index);
+                  }}
+                  aria-hidden={!isActive}
+                >
+                  <img
+                    src={item.image}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    draggable={false}
+                    className="coverflow__img"
+                  />
+                  <div className="coverflow__shade" aria-hidden="true" />
+                </article>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      <div className="coverflow__copy" key={current.title}>
+        <p
+          className={`coverflow__eyebrow ${
+            isDark ? "text-sky-300" : "text-sky-700"
+          }`}
+        >
+          {current.caption}
+        </p>
+        <h3
+          className={`coverflow__title ${
+            isDark ? "text-white" : "text-slate-950"
+          }`}
+        >
+          {current.title}
+        </h3>
       </div>
 
       <div className="coverflow__controls">

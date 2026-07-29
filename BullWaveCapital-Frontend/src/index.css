@@ -654,37 +654,40 @@ img {
   inset: 0;
   background: linear-gradient(
     to top,
-    rgba(2, 6, 23, 0.92) 0%,
-    rgba(2, 6, 23, 0.35) 42%,
-    transparent 70%
+    rgba(2, 6, 23, 0.45) 0%,
+    transparent 55%
   );
   pointer-events: none;
 }
 
-.coverflow__caption {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 1rem 1.1rem 1.15rem;
-  pointer-events: none;
+.coverflow__copy {
+  position: relative;
+  z-index: 2;
+  margin: 1rem auto 0;
+  max-width: 36rem;
+  padding: 0 0.75rem;
+  text-align: center;
 }
 
 .coverflow__eyebrow {
   margin: 0;
-  font-size: 0.65rem;
+  font-size: clamp(0.65rem, 2.4vw, 0.75rem);
   font-weight: 700;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #bae6fd;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .coverflow__title {
-  margin: 0.35rem 0 0;
-  font-size: clamp(1rem, 2.8vw, 1.25rem);
+  margin: 0.4rem 0 0;
+  font-size: clamp(1.05rem, 4.2vw, 1.45rem);
   font-weight: 800;
-  line-height: 1.2;
-  color: #fff;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 
 .coverflow__controls {
@@ -692,7 +695,7 @@ img {
   justify-content: center;
   align-items: center;
   gap: 0.85rem;
-  margin-top: 1.15rem;
+  margin-top: 1rem;
 }
 
 .coverflow__nav {
@@ -750,12 +753,8 @@ img {
     border-radius: 1.35rem;
   }
 
-  .coverflow__caption {
-    padding: 1.15rem 1.35rem 1.35rem;
-  }
-
-  .coverflow__eyebrow {
-    font-size: 0.7rem;
+  .coverflow__copy {
+    margin-top: 1.15rem;
   }
 }
 
@@ -778,21 +777,69 @@ img {
   }
 }
 
-@media (max-width: 480px) {
-  .coverflow__card {
-    width: min(88%, 19rem);
+@media (max-width: 768px) {
+  .coverflow--compact .coverflow__stage {
+    height: auto;
+    perspective: none;
+    overflow: visible;
   }
 
-  .coverflow__track {
-    --coverflow-gap: 3.75rem;
+  .coverflow__simple {
+    position: relative;
+    width: 100%;
+    max-width: 26rem;
+    margin-inline: auto;
+    aspect-ratio: 4 / 3;
+    border-radius: 1.25rem;
+    overflow: hidden;
+    background: #0f172a;
+    box-shadow: 0 16px 40px rgba(2, 6, 23, 0.22);
+    border: 1px solid rgba(14, 165, 233, 0.2);
   }
 
-  .coverflow__stage {
-    height: 17.5rem;
+  .coverflow__simple-card {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.4s ease,
+      visibility 0.4s ease;
+    pointer-events: none;
   }
 
-  .coverflow__caption {
-    padding: 0.85rem 0.95rem 1rem;
+  .coverflow__simple-card.is-active {
+    opacity: 1;
+    visibility: visible;
+    z-index: 1;
+  }
+
+  .coverflow__simple-card .coverflow__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: none;
+    opacity: 1;
+  }
+
+  .coverflow__drag-hint {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    border-radius: inherit;
+    box-shadow: inset 0 0 0 2px rgba(56, 189, 248, 0.35);
+  }
+
+  .coverflow__eyebrow {
+    letter-spacing: 0.1em;
+  }
+}
+
+@media (max-width: 380px) {
+  .coverflow__simple {
+    aspect-ratio: 5 / 4;
+    border-radius: 1.1rem;
   }
 }
 
@@ -800,7 +847,8 @@ img {
   .coverflow__card,
   .coverflow__img,
   .coverflow__nav,
-  .coverflow__dot {
+  .coverflow__dot,
+  .coverflow__simple-card {
     transition: none !important;
   }
 
@@ -1755,9 +1803,30 @@ svg {
   max-width: 100%;
 }
 
+/* Global responsive text safety */
+.site-main,
+.bw-footer,
+.hero-section,
+.coverflow {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.section-title {
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
 @media (max-width: 640px) {
   .section-title {
     letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+
+  h1,
+  h2,
+  h3 {
+    overflow-wrap: anywhere;
   }
 }
 
