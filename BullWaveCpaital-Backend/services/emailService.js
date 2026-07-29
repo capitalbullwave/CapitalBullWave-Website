@@ -5,44 +5,49 @@ import nodemailer from "nodemailer";
 import validator from "validator";
 
 /* ==========================================
-   Config
+   Config helpers
 ========================================== */
 
-const EMAIL_PROVIDER = (process.env.EMAIL_PROVIDER || "api").toLowerCase().trim();
+const cleanEnv = (value = "") =>
+  String(value)
+    .trim()
+    .replace(/^["']|["']$/g, "")
+    .replace(/>+$/g, "")
+    .trim();
 
-const BREVO_API_KEY = (process.env.BREVO_API_KEY || "").trim().replace(/>$/, "");
-const BREVO_SENDER_EMAIL = (
-  process.env.BREVO_SENDER_EMAIL ||
-  process.env.FROM_EMAIL ||
-  ""
-).trim();
-const BREVO_SENDER_NAME = (
-  process.env.BREVO_SENDER_NAME ||
-  "Capital Bull Wave"
-).trim();
-const COMPANY_EMAIL = (
-  process.env.COMPANY_EMAIL ||
-  process.env.BREVO_SENDER_EMAIL ||
-  ""
-).trim();
+const EMAIL_PROVIDER = cleanEnv(process.env.EMAIL_PROVIDER || "api").toLowerCase();
 
-const BREVO_SMTP_HOST = (
-  process.env.BREVO_SMTP_HOST ||
-  "smtp-relay.brevo.com"
-).trim();
+const BREVO_API_KEY = cleanEnv(process.env.BREVO_API_KEY);
+const BREVO_SENDER_EMAIL = cleanEnv(
+  process.env.BREVO_SENDER_EMAIL || process.env.FROM_EMAIL
+);
+const BREVO_SENDER_NAME =
+  cleanEnv(process.env.BREVO_SENDER_NAME) || "Capital Bull Wave";
+const COMPANY_EMAIL = cleanEnv(
+  process.env.COMPANY_EMAIL || process.env.BREVO_SENDER_EMAIL
+);
+
+const BREVO_SMTP_HOST =
+  cleanEnv(process.env.BREVO_SMTP_HOST) || "smtp-relay.brevo.com";
 const BREVO_SMTP_PORT = Number(process.env.BREVO_SMTP_PORT || 587);
-const BREVO_SMTP_USER = (
-  process.env.BREVO_SMTP_USER ||
-  BREVO_SENDER_EMAIL
-).trim();
-/** Dedicated SMTP key preferred; API keys (xkeysib-) do not work over SMTP */
-const BREVO_SMTP_KEY = (
-  process.env.BREVO_SMTP_KEY ||
-  process.env.BREVO_SMTP_PASS ||
-  ""
-).trim();
+const BREVO_SMTP_USER = cleanEnv(
+  process.env.BREVO_SMTP_USER || BREVO_SENDER_EMAIL
+);
+
+/**
+ * SMTP password must be a Brevo SMTP key (xsmtpsib-...), never an API key (xkeysib-).
+ * Ignore xkeysib values if someone accidentally puts the API key in SMTP_KEY.
+ */
+const rawSmtpKey = cleanEnv(
+  process.env.BREVO_SMTP_KEY || process.env.BREVO_SMTP_PASS
+);
+const BREVO_SMTP_KEY =
+  rawSmtpKey && !rawSmtpKey.startsWith("xkeysib-") ? rawSmtpKey : "";
+
+const isApiKey = (key) => Boolean(key && key.startsWith("xkeysib-"));
 
 let smtpTransporter = null;
+let loggedProvider = false;
 
 const assertMailConfig = () => {
   if (!BREVO_SENDER_EMAIL) {
@@ -56,12 +61,29 @@ const assertMailConfig = () => {
   }
 };
 
+/**
+ * Resolve transport safely:
+ * - smtp + real SMTP key  → SMTP
+ * - smtp + only xkeysib   → API (xkeysib cannot authenticate SMTP)
+ * - api + API key         → API
+ */
 const resolveProvider = () => {
-  // xkeysib- keys are REST API keys — use API even if EMAIL_PROVIDER=smtp
-  if (EMAIL_PROVIDER === "smtp" && BREVO_SMTP_KEY) return "smtp";
-  if (BREVO_API_KEY) return "api";
+  if (EMAIL_PROVIDER === "smtp" && BREVO_SMTP_KEY) {
+    return "smtp";
+  }
+
+  if (isApiKey(BREVO_API_KEY)) {
+    if (EMAIL_PROVIDER === "smtp" && !loggedProvider) {
+      loggedProvider = true;
+      console.warn(
+        "[email] EMAIL_PROVIDER=smtp but only BREVO_API_KEY (xkeysib-) is set. Using Brevo API transport."
+      );
+    }
+    return "api";
+  }
+
   if (BREVO_SMTP_KEY) return "smtp";
-  return EMAIL_PROVIDER === "smtp" ? "smtp" : "api";
+  return "api";
 };
 
 const getSmtpTransporter = () => {
@@ -69,7 +91,7 @@ const getSmtpTransporter = () => {
 
   if (!BREVO_SMTP_USER || !BREVO_SMTP_KEY) {
     throw new Error(
-      "SMTP requires BREVO_SMTP_USER and BREVO_SMTP_KEY (not the xkeysib API key)."
+      "SMTP requires BREVO_SMTP_USER and BREVO_SMTP_KEY (xsmtpsib-...). xkeysib- API keys cannot be used over SMTP."
     );
   }
 
@@ -103,7 +125,7 @@ const escapeHtml = (text = "") =>
 ========================================== */
 
 export const validateEmail = (email) => {
-  if (!email || !validator.isEmail(email.trim())) {
+  if (!email || !validator.isEmail(String(email).trim())) {
     return {
       success: false,
       message: "Please enter a valid email address.",
@@ -118,6 +140,10 @@ export const validateEmail = (email) => {
 ========================================== */
 
 async function sendViaBrevoApi({ to, subject, text, html, replyTo }) {
+  if (!isApiKey(BREVO_API_KEY)) {
+    throw new Error("BREVO_API_KEY is missing or invalid (expected xkeysib-...).");
+  }
+
   const payload = {
     sender: {
       name: BREVO_SENDER_NAME,
@@ -160,7 +186,7 @@ async function sendViaBrevoApi({ to, subject, text, html, replyTo }) {
       bodyJson?.error ||
       bodyText ||
       `HTTP ${response.status}`;
-    throw new Error(`Brevo API error: ${detail}`);
+    throw new Error(`Brevo API error (${response.status}): ${detail}`);
   }
 
   return bodyJson;
@@ -192,10 +218,6 @@ async function sendMail(options) {
 
   if (provider === "smtp") {
     return sendViaSmtp(options);
-  }
-
-  if (!BREVO_API_KEY) {
-    throw new Error("BREVO_API_KEY is required for API email sending.");
   }
 
   return sendViaBrevoApi(options);

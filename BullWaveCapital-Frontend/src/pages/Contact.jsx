@@ -60,18 +60,30 @@ export default function Contact({ theme }) {
     }));
   };
 
- const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-     const loadingToast = toast.loading("Sending your enquiry...");
+    const payload = {
+      name: form.name.trim(),
+      email: form.email.trim(),
+      phone: form.phone.trim().replace(/[\s\-().]/g, ""),
+      subject: form.subject.trim(),
+      message: form.message.trim(),
+    };
+
+    if (payload.message.length < 10) {
+      toast.error("Message should contain at least 10 characters.");
+      return;
+    }
+
+    const loadingToast = toast.loading("Sending your enquiry...");
 
     try {
-      const result = await sendContact(form);
+      const result = await sendContact(payload);
 
       toast.dismiss(loadingToast);
 
       if (result.success) {
-
         setForm({
           name: "",
           email: "",
@@ -81,14 +93,18 @@ export default function Contact({ theme }) {
         });
 
         toast.success(result.message);
-
       } else {
-        toast.error("Unable to send your message. Please try again.");
+        toast.error(
+          result.message || "Unable to send your message. Please try again."
+        );
       }
-
     } catch (error) {
+      toast.dismiss(loadingToast);
       console.error(error);
-      toast.error("An error occurred while sending your message.");
+      const serverMessage = error?.response?.data?.message;
+      toast.error(
+        serverMessage || "An error occurred while sending your message."
+      );
     }
   };
 

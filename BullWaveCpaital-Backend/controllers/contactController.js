@@ -13,9 +13,23 @@ import {
   sendAutoReply,
 } from "../services/emailService.js";
 
+/** Strip spaces/dashes so "+91 87965-65234" validates like "+918796565234". */
+const normalizePhone = (phone) => {
+  if (!phone || typeof phone !== "string") return "";
+  return phone.trim().replace(/[\s\-().]/g, "");
+};
+
+const isValidPhone = (phone) =>
+  validator.isMobilePhone(phone, "en-IN", { strictMode: false }) ||
+  validator.isMobilePhone(phone, "any", { strictMode: false });
+
 export const sendContactMessage = async (req, res) => {
   try {
-    const { name, email, phone, subject, message } = req.body;
+    const name = String(req.body?.name || "").trim();
+    const email = String(req.body?.email || "").trim();
+    const phone = normalizePhone(req.body?.phone);
+    const subject = String(req.body?.subject || "").trim();
+    const message = String(req.body?.message || "").trim();
 
     /* Required Fields */
 
@@ -28,32 +42,31 @@ export const sendContactMessage = async (req, res) => {
 
     /* Input Validation */
 
-    if (!validator.isLength(name.trim(), { min: 2, max: 100 })) {
+    if (!validator.isLength(name, { min: 2, max: 100 })) {
       return res.status(400).json({
         success: false,
         message: "Please enter a valid name.",
       });
     }
 
-    if (phone && !validator.isMobilePhone(phone, "any")) {
+    if (phone && !isValidPhone(phone)) {
       return res.status(400).json({
         success: false,
         message: "Please enter a valid phone number.",
       });
     }
 
-    if (!validator.isLength(subject.trim(), { min: 3, max: 150 })) {
+    if (!validator.isLength(subject, { min: 3, max: 150 })) {
       return res.status(400).json({
         success: false,
         message: "Please enter a valid subject.",
       });
     }
 
-    if (!validator.isLength(message.trim(), { min: 10, max: 5000 })) {
+    if (!validator.isLength(message, { min: 10, max: 5000 })) {
       return res.status(400).json({
         success: false,
-        message:
-          "Message should contain at least 10 characters.",
+        message: "Message should contain at least 10 characters.",
       });
     }
 
@@ -64,7 +77,6 @@ export const sendContactMessage = async (req, res) => {
     if (!validation.success) {
       return res.status(400).json(validation);
     }
-
 
     /* Send Email to Company */
 
@@ -78,20 +90,22 @@ export const sendContactMessage = async (req, res) => {
 
     console.log("✅ Contact email sent successfully");
 
-    /* Send Auto Reply */
-
-    await sendAutoReply({
-      name,
-      email,
-    });
-
-    console.log("✅ Auto reply sent successfully");
+    /* Auto-reply is best-effort — do not fail the enquiry if it errors */
+    try {
+      await sendAutoReply({ name, email });
+      console.log("✅ Auto reply sent successfully");
+    } catch (autoReplyError) {
+      console.error(
+        "Auto reply failed (enquiry still saved/sent):",
+        autoReplyError.message || autoReplyError
+      );
+    }
 
     return res.status(200).json({
-        success: true,
-        message: "Thank you for contacting Bull Wave Capital. We will get back to you shortly.",
+      success: true,
+      message:
+        "Thank you for contacting Bull Wave Capital. We will get back to you shortly.",
     });
-
   } catch (error) {
     console.error("Contact Controller Error:", error);
 
