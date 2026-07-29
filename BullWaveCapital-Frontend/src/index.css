@@ -589,6 +589,7 @@ img {
   perspective-origin: 50% 50%;
   cursor: grab;
   outline: none;
+  overflow: hidden;
   touch-action: pan-y;
 }
 
@@ -779,15 +780,15 @@ img {
 
 @media (max-width: 480px) {
   .coverflow__card {
-    width: min(78%, 18rem);
+    width: min(88%, 19rem);
   }
 
   .coverflow__track {
-    --coverflow-gap: 5.75rem;
+    --coverflow-gap: 3.75rem;
   }
 
   .coverflow__stage {
-    height: 18.5rem;
+    height: 17.5rem;
   }
 
   .coverflow__caption {
@@ -1616,7 +1617,7 @@ html.theme-dark * {
 
 @media (max-width: 639px) {
   .hero-section {
-    min-height: 70vh;
+    min-height: auto;
   }
 
   .hero-slide-chip {
@@ -1630,6 +1631,14 @@ html.theme-dark * {
 
   .hero-panel {
     max-width: 100%;
+  }
+
+  .hero-panel-media {
+    height: 11.5rem;
+  }
+
+  .hero-footer-chips {
+    margin-top: 1.25rem;
   }
 }
 
@@ -1683,9 +1692,15 @@ svg {
 }
 
 @supports (padding: max(0px)) {
-  .chat-fab {
-    margin-bottom: env(safe-area-inset-bottom, 0px);
-  }
+  /* safe-area handled via bottom calc on .chat-dock / WhatsApp — avoid double inset */
+}
+
+/* Hide floating actions while mobile nav is open */
+body.bw-nav-open .chat-dock,
+body.bw-nav-open .bw-whatsapp-fab {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2206,16 +2221,17 @@ svg {
 }
 
 @media (max-width: 380px) {
-  .chat-prompt {
-    max-width: min(58vw, 12.75rem);
-  }
-
   .chat-prompt__text {
     font-size: 0.72rem;
   }
 
   .chat-prompt__bubble {
     padding: 0.55rem 0.75rem;
+  }
+
+  .feature-stack {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
   }
 }
 

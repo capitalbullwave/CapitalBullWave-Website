@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import TradingAtmosphere from "./TradingAtmosphere";
+import { DUNS_PROFILE_PAGE } from "./DunsRegisteredSeal";
 
 const slides = [
   {
@@ -24,7 +25,7 @@ const slides = [
 ];
 
 const trustItems = [
-  { label: "D-U-N-S Registered", href: "/duns-profile/", highlight: true },
+  { label: "D-U-N-S Registered", href: DUNS_PROFILE_PAGE, highlight: true },
   { label: "Trusted Research", href: null, highlight: false },
   { label: "Risk Managed", href: null, highlight: false },
 ];

@@ -7,7 +7,6 @@ import {
   FaRocket,
   FaBriefcase,
   FaGlobe,
-  FaEnvelope,
   FaMoon,
   FaSun,
 } from "react-icons/fa";
@@ -46,21 +45,30 @@ export default function Navbar({ theme, toggleTheme }) {
   }, []);
 
   useEffect(() => {
-    if (!menuOpen) return undefined;
+    if (!menuOpen) {
+      document.body.classList.remove("bw-nav-open");
+      return undefined;
+    }
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    document.body.classList.add("bw-nav-open");
     const onKey = (e) => {
       if (e.key === "Escape") setMenuOpen(false);
     };
     window.addEventListener("keydown", onKey);
     return () => {
       document.body.style.overflow = prev;
+      document.body.classList.remove("bw-nav-open");
       window.removeEventListener("keydown", onKey);
     };
   }, [menuOpen]);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50">
+    <header
+      className={`fixed top-0 left-0 right-0 pt-[env(safe-area-inset-top,0px)] ${
+        menuOpen ? "z-[10050]" : "z-50"
+      }`}
+    >
       {/* Mobile backdrop */}
       <button
         type="button"
@@ -94,11 +102,11 @@ export default function Navbar({ theme, toggleTheme }) {
             {/* Brand */}
             <Link
               to="/"
-              className="group flex min-w-0 items-center gap-2.5 sm:gap-3 flex-shrink-0"
+              className="group flex min-w-0 max-w-[58%] items-center gap-2 sm:max-w-none sm:gap-3"
               onClick={() => setMenuOpen(false)}
             >
               <div
-                className={`relative flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center overflow-hidden rounded-full bg-white shadow-md ring-2 transition duration-300
+                className={`relative flex h-9 w-9 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white shadow-md ring-2 transition duration-300 sm:h-11 sm:w-11
                 ${
                   isDark
                     ? "ring-sky-400/35 group-hover:ring-sky-300/60"
@@ -113,16 +121,16 @@ export default function Navbar({ theme, toggleTheme }) {
               </div>
 
               <div className="flex min-w-0 flex-col justify-center leading-tight">
-                <div className="flex items-baseline gap-1 whitespace-nowrap">
+                <div className="flex min-w-0 items-baseline gap-1">
                   <span
-                    className={`text-base sm:text-lg font-bold tracking-tight ${
+                    className={`truncate text-sm font-bold tracking-tight xs:text-base sm:text-lg ${
                       isDark ? "text-white" : "text-black"
                     }`}
                   >
                     Capital
                   </span>
                   <span
-                    className={`text-base sm:text-lg font-extrabold tracking-tight ${
+                    className={`truncate text-sm font-extrabold tracking-tight xs:text-base sm:text-lg ${
                       isDark ? "text-sky-400" : "text-sky-600"
                     }`}
                   >
@@ -213,19 +221,20 @@ export default function Navbar({ theme, toggleTheme }) {
           {/* Mobile panel */}
           <div
             className={`lg:hidden overflow-hidden transition-all duration-300 ease-out
-            ${menuOpen ? "trade-nav__panel--open max-h-[520px] opacity-100" : "max-h-0 opacity-0"}`}
+            ${
+              menuOpen
+                ? "trade-nav__panel--open max-h-[min(70dvh,520px)] opacity-100"
+                : "max-h-0 opacity-0"
+            }`}
           >
             <div
-              className={`border-t px-3 py-3 sm:px-4 ${
+              className={`max-h-[min(70dvh,520px)] overflow-y-auto overscroll-contain border-t px-3 py-3 sm:px-4 ${
                 isDark
                   ? "border-white/10 bg-slate-950/95"
                   : "border-sky-100 bg-white/95"
               }`}
             >
-              {[
-                ...navItems,
-                { name: "Contact", path: "/contact", icon: FaEnvelope },
-              ].map((item, index) => {
+              {navItems.map((item, index) => {
                 const Icon = item.icon;
                 return (
                   <NavLink
@@ -272,7 +281,7 @@ export default function Navbar({ theme, toggleTheme }) {
               <Link
                 to="/contact"
                 onClick={() => setMenuOpen(false)}
-                className="bw-gradient-btn mt-2 flex w-full items-center justify-center rounded-2xl px-5 py-3.5 text-[15px] font-semibold !text-white sm:hidden"
+                className="bw-gradient-btn mt-2 flex w-full items-center justify-center rounded-2xl px-5 py-3.5 text-[15px] font-semibold !text-white"
               >
                 Contact
               </Link>

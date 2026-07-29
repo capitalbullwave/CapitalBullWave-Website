@@ -208,7 +208,7 @@ const Footer = ({ theme = "light" }) => {
                     <p className="bw-f-label text-sm font-semibold">Email</p>
                     <a
                       href="mailto:admin@capitalbullwave.com"
-                      className="bw-foot-link bw-f-link mt-1 block text-sm"
+                      className="bw-foot-link bw-f-link mt-1 block break-all text-sm"
                     >
                       admin@capitalbullwave.com
                     </a>

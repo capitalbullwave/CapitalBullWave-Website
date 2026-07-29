@@ -53,7 +53,10 @@ function App() {
   return (
     <>
       <Toaster
-        position="top-right"
+        position="top-center"
+        containerStyle={{
+          top: "calc(5.25rem + env(safe-area-inset-top, 0px))",
+        }}
         gutter={10}
         toastOptions={{
           duration: 4000,
@@ -87,7 +90,7 @@ function App() {
 
         <ScrollToTop />
 
-        <main className="site-main mx-auto min-h-screen w-full max-w-[1680px] overflow-x-clip px-2 sm:px-3 md:px-4 lg:px-5 pt-[4.75rem] pb-5 sm:pt-[5.75rem] sm:pb-8">
+        <main className="site-main mx-auto min-h-screen w-full max-w-[1680px] overflow-x-clip px-2 sm:px-3 md:px-4 lg:px-5 pt-[calc(4.75rem+env(safe-area-inset-top,0px))] pb-[calc(7.5rem+env(safe-area-inset-bottom,0px))] sm:pt-[calc(5.75rem+env(safe-area-inset-top,0px))] sm:pb-[calc(8.5rem+env(safe-area-inset-bottom,0px))]">
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home theme={theme} />} />
             <Route path="/about" element={<About theme={theme} />} />

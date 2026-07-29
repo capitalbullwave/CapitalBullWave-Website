@@ -271,7 +271,7 @@ const FeatureSection = ({ theme = "light" }) => {
       </div>
 
       {/* Image gallery strip */}
-      <div className="feature-gallery relative z-[1] mx-auto mb-8 sm:mb-10 grid max-w-4xl grid-cols-3 gap-2 sm:gap-3">
+      <div className="feature-gallery relative z-[1] mx-auto mb-8 hidden max-w-4xl grid-cols-3 gap-2 sm:mb-10 sm:grid sm:gap-3">
         {featureGallery.map((shot, i) => (
           <div
             key={shot.src}
@@ -307,7 +307,7 @@ const FeatureSection = ({ theme = "light" }) => {
           style={{ height: `${Math.max(progress, 4)}%` }}
         />
 
-        <div className="space-y-4 sm:space-y-5 pl-[3.25rem] sm:pl-14">
+        <div className="space-y-4 sm:space-y-5 pl-12 sm:pl-14">
           {features.map((feature, index) => {
             const Icon = feature.icon;
             const activeCard = active >= index;

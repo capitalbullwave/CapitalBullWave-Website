@@ -377,8 +377,8 @@ export default function ChatWidget({ theme }) {
               ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
               : "opacity-0 scale-95 translate-y-6 pointer-events-none"
           }
-          inset-x-2 bottom-[calc(4.25rem+env(safe-area-inset-bottom,0px))] h-[min(68vh,600px)]
-          sm:inset-x-auto sm:right-6 sm:bottom-[calc(5.5rem+env(safe-area-inset-bottom,0px))] sm:h-[600px] sm:w-[400px]
+          inset-x-2 bottom-[calc(4.25rem+env(safe-area-inset-bottom,0px))] h-[min(68dvh,600px)]
+          sm:inset-x-auto sm:right-6 sm:bottom-[calc(5.5rem+env(safe-area-inset-bottom,0px))] sm:h-[min(70dvh,600px)] sm:w-[400px]
           md:w-[420px]
           rounded-2xl sm:rounded-[1.5rem] backdrop-blur-xl
           shadow-[0_25px_60px_rgba(2,6,23,0.28)]

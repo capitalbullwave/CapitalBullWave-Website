@@ -65,9 +65,9 @@ const HomeService = ({ theme = "light" }) => {
   return (
     <section className="relative w-full overflow-hidden py-12 sm:py-16 lg:py-20">
       <TradingAtmosphere theme={theme} />
-      <div className="relative z-10 mx-auto max-w-4xl px-1 text-center sm:px-0">
+      <div className="relative z-10 mx-auto max-w-4xl px-0 text-center">
         <p
-          className={`inline-flex rounded-full px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.28em]
+          className={`inline-flex rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] sm:text-sm sm:tracking-[0.28em]
           ${
             isDark
               ? "bg-sky-500/15 text-sky-300"
@@ -94,7 +94,7 @@ const HomeService = ({ theme = "light" }) => {
         </p>
       </div>
 
-      <div className="relative z-10 mx-auto mt-10 grid max-w-6xl grid-cols-1 gap-4 px-1 sm:mt-14 sm:grid-cols-2 sm:gap-5 sm:px-2 lg:grid-cols-3 lg:gap-6">
+      <div className="relative z-10 mx-auto mt-10 grid max-w-6xl grid-cols-1 gap-4 px-0 sm:mt-14 sm:grid-cols-2 sm:gap-5 sm:px-2 lg:grid-cols-3 lg:gap-6">
         {services.map(({ title, subtitle, description, icon: Icon }) => (
           <article
             key={title}

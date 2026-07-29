@@ -16,6 +16,7 @@ export default function CoverflowGallery({
   const [paused, setPaused] = useState(false);
   const [dragging, setDragging] = useState(false);
   const [dragX, setDragX] = useState(0);
+  const [compact, setCompact] = useState(false);
   const stageRef = useRef(null);
   const pointerIdRef = useRef(null);
   const startXRef = useRef(0);
@@ -32,6 +33,14 @@ export default function CoverflowGallery({
 
   const next = useCallback(() => goTo(active + 1), [active, goTo]);
   const prev = useCallback(() => goTo(active - 1), [active, goTo]);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 480px)");
+    const sync = () => setCompact(mq.matches);
+    sync();
+    mq.addEventListener?.("change", sync);
+    return () => mq.removeEventListener?.("change", sync);
+  }, []);
 
   useEffect(() => {
     if (count < 2 || paused || dragging) return undefined;
@@ -149,7 +158,10 @@ export default function CoverflowGallery({
             if (abs > 2 && !dragging) return null;
 
             const translateX = visual * 1;
-            const rotateY = Math.max(-52, Math.min(52, visual * -38));
+            const rotateY = Math.max(
+              compact ? -24 : -40,
+              Math.min(compact ? 24 : 40, visual * (compact ? -22 : -36))
+            );
             const scale = Math.max(0.68, 1 - absVisual * 0.16);
             const opacity = Math.max(0.35, 1 - absVisual * 0.28);
             const zIndex = 40 - Math.round(absVisual * 10);
