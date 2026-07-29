@@ -4,6 +4,7 @@ import {
   FaShieldAlt,
   FaClipboardList,
   FaRocket,
+  FaArrowRight,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -53,6 +54,7 @@ const features = [
     image:
       "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1200&auto=format&fit=crop",
     imageAlt: "Trading chart analysis on screen",
+    tags: ["Price action", "Trend analysis", "Support & resistance"],
   },
   {
     title: "Risk Management Planning",
@@ -62,6 +64,7 @@ const features = [
     image:
       "https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1200&auto=format&fit=crop",
     imageAlt: "Financial planning and capital protection",
+    tags: ["Capital protection", "Position sizing", "Volatility control"],
   },
   {
     title: "Portfolio Learning Plans",
@@ -71,6 +74,7 @@ const features = [
     image:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
     imageAlt: "Portfolio analytics dashboard",
+    tags: ["Education", "Discipline", "Portfolio habits"],
   },
   {
     title: "Intraday & Swing Support",
@@ -80,6 +84,7 @@ const features = [
     image:
       "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=1200&auto=format&fit=crop",
     imageAlt: "Live market trading workspace",
+    tags: ["Intraday", "Swing setups", "Live updates"],
   },
 ];
 
@@ -155,7 +160,10 @@ const FeatureSection = ({ theme = "light" }) => {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => {
+    let ticking = false;
+
+    const update = () => {
+      ticking = false;
       if (!sectionRef.current) return;
 
       const rect = sectionRef.current.getBoundingClientRect();
@@ -176,9 +184,15 @@ const FeatureSection = ({ theme = "light" }) => {
       setActive(nextActive);
     };
 
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(update);
+    };
+
     window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleScroll);
-    handleScroll();
+    update();
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -240,12 +254,20 @@ const FeatureSection = ({ theme = "light" }) => {
           How We Support You
         </span>
         <h3
-          className={`mt-3 text-xl sm:text-2xl font-bold tracking-tight ${
+          className={`mt-3 text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight ${
             isDark ? "text-white" : "text-black"
           }`}
         >
           Research-led guidance, step by step
         </h3>
+        <p
+          className={`mx-auto mt-3 max-w-2xl text-sm sm:text-base leading-relaxed ${
+            isDark ? "text-slate-400" : "text-slate-600"
+          }`}
+        >
+          Scroll through each capability — from trading ideas to risk control —
+          designed to keep decisions clear, disciplined, and actionable.
+        </p>
       </div>
 
       {/* Image gallery strip */}
@@ -274,7 +296,7 @@ const FeatureSection = ({ theme = "light" }) => {
         ))}
       </div>
 
-      <div className="relative z-[1] mx-auto max-w-3xl">
+      <div className="relative z-[1] mx-auto max-w-3xl lg:max-w-4xl">
         {/* Track */}
         <div
           className={`feature-stack__track absolute left-[1.15rem] sm:left-5 top-2 bottom-2 w-[2px] rounded-full
@@ -296,15 +318,28 @@ const FeatureSection = ({ theme = "light" }) => {
                 key={feature.title}
                 data-index={index}
                 style={{ "--feature-delay": `${index * 90}ms` }}
-                className={`feature-stack__card group relative overflow-hidden rounded-2xl sm:rounded-[1.35rem]
+                onClick={() => setActive(index)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    setActive(index);
+                  }
+                }}
+                tabIndex={0}
+                role="button"
+                aria-pressed={isCurrent}
+                aria-label={`${feature.title}. Step ${index + 1} of ${features.length}`}
+                className={`feature-stack__card group relative cursor-pointer overflow-hidden rounded-2xl sm:rounded-[1.35rem] outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2
                 ${activeCard ? "is-active" : "is-idle"}
                 ${isCurrent ? "is-current" : ""}
                 ${
                   isDark
-                    ? "feature-stack__card--dark"
-                    : "feature-stack__card--light"
+                    ? "feature-stack__card--dark focus-visible:ring-offset-slate-950"
+                    : "feature-stack__card--light focus-visible:ring-offset-white"
                 }`}
               >
+                <span className="feature-stack__sheen" aria-hidden="true" />
+
                 <div
                   className={`feature-stack__dot absolute -left-[2.9rem] sm:-left-[3.05rem] top-8 z-10 flex h-9 w-9 items-center justify-center rounded-full
                   ${
@@ -319,27 +354,35 @@ const FeatureSection = ({ theme = "light" }) => {
                   {isCurrent && (
                     <span className="feature-stack__dot-pulse" aria-hidden="true" />
                   )}
-                  <span className="relative z-[1] h-2 w-2 rounded-full bg-current" />
+                  <span className="relative z-[1] text-[10px] font-bold tabular-nums">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
                 </div>
 
                 <div className="grid sm:grid-cols-[minmax(0,0.95fr)_minmax(0,1.15fr)]">
-                  <div className="feature-stack__media relative h-36 overflow-hidden sm:h-full sm:min-h-[168px]">
+                  <div className="feature-stack__media relative h-40 overflow-hidden sm:h-full sm:min-h-[180px] lg:min-h-[200px]">
                     <FeatureImage
                       src={feature.image}
                       alt={feature.imageAlt}
                       imgClassName="feature-stack__img absolute inset-0 h-full"
                     />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/55 via-slate-950/10 to-transparent sm:bg-gradient-to-r sm:from-transparent sm:via-transparent sm:to-slate-950/25" />
+                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/60 via-slate-950/15 to-transparent sm:bg-gradient-to-r sm:from-transparent sm:via-transparent sm:to-slate-950/30" />
                     <div
-                      className={`absolute left-3 top-3 flex h-10 w-10 items-center justify-center rounded-xl text-white shadow-lg backdrop-blur-md
-                      ${activeCard ? "bg-sky-500/90" : "bg-slate-950/55"}`}
+                      className={`feature-stack__icon absolute left-3 top-3 flex h-10 w-10 items-center justify-center rounded-xl text-white shadow-lg backdrop-blur-md sm:h-11 sm:w-11
+                      ${activeCard ? "bg-sky-500/95" : "bg-slate-950/55"}`}
                     >
-                      <Icon className="text-sm" />
+                      <Icon className="text-sm sm:text-base" />
                     </div>
+                    {isCurrent && (
+                      <span className="feature-stack__live absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-slate-950/70 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-emerald-300 ring-1 ring-white/10 backdrop-blur-md">
+                        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
+                        In focus
+                      </span>
+                    )}
                   </div>
 
-                  <div className="p-5 sm:p-6">
-                    <div className="flex flex-wrap items-center gap-2">
+                  <div className="relative flex flex-col justify-center p-5 sm:p-6 lg:p-7">
+                    <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
                       <span
                         className={`text-[10px] font-bold uppercase tracking-[0.18em]
                         ${isDark ? "text-sky-400" : "text-sky-600"}`}
@@ -347,8 +390,8 @@ const FeatureSection = ({ theme = "light" }) => {
                         0{index + 1}
                       </span>
                       <h3
-                        className={`text-base sm:text-lg font-bold tracking-tight ${
-                          isDark ? "text-white" : "text-black"
+                        className={`text-base sm:text-lg lg:text-xl font-bold tracking-tight ${
+                          isDark ? "text-white" : "text-slate-950"
                         }`}
                       >
                         {feature.title}
@@ -361,6 +404,40 @@ const FeatureSection = ({ theme = "light" }) => {
                     >
                       {feature.description}
                     </p>
+
+                    {feature.tags?.length ? (
+                      <div className="mt-3.5 flex flex-wrap gap-1.5 sm:mt-4">
+                        {feature.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className={`rounded-full px-2.5 py-1 text-[10px] font-semibold tracking-wide sm:text-[11px]
+                            ${
+                              isDark
+                                ? "bg-sky-500/10 text-sky-300 ring-1 ring-sky-400/20"
+                                : "bg-sky-50 text-sky-700 ring-1 ring-sky-100"
+                            }`}
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    ) : null}
+
+                    <div className="mt-4 sm:mt-5">
+                      <Link
+                        to="/services"
+                        onClick={(e) => e.stopPropagation()}
+                        className={`feature-stack__cta inline-flex items-center gap-2 text-sm font-semibold transition
+                        ${
+                          isDark
+                            ? "text-sky-300 hover:text-sky-200"
+                            : "text-sky-700 hover:text-sky-900"
+                        }`}
+                      >
+                        Explore services
+                        <FaArrowRight className="text-[11px] transition-transform duration-300 group-hover:translate-x-1" />
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </article>

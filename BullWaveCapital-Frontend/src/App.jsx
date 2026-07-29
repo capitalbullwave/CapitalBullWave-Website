@@ -38,7 +38,8 @@ function App() {
     root.classList.add(theme === "dark" ? "theme-dark" : "theme-light");
     root.style.colorScheme = theme === "dark" ? "dark" : "light";
     root.style.background = theme === "dark" ? DARK_BG : LIGHT_BG;
-    root.style.backgroundAttachment = "fixed";
+    // Let CSS control attachment (scroll on mobile, fixed on large screens)
+    root.style.backgroundAttachment = "";
     document.body.style.background = "transparent";
     document.body.style.color = theme === "dark" ? "#f8fafc" : "#000000";
   }, [theme]);

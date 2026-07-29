@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from "react";
 import { FaChartLine, FaHandshake, FaShieldAlt } from "react-icons/fa";
-import StackedCards from "./StackedCards";
+import CoverflowGallery from "./CoverflowGallery";
 import TradingAtmosphere from "./TradingAtmosphere";
 
 const services = [
@@ -33,49 +32,40 @@ const showcase = [
     caption: "Actionable equity insights.",
     image:
       "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1400&auto=format&fit=crop",
-    className: "md:col-span-2 md:row-span-2 min-h-[240px] sm:min-h-[280px] md:min-h-[420px]",
   },
   {
     title: "Investment Guidance",
     caption: "Structured advice for every horizon.",
     image:
       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
-    className: "min-h-[200px] sm:min-h-[220px]",
   },
   {
     title: "Financial Advisory",
     caption: "Practical wealth-building support.",
     image:
       "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop",
-    className: "min-h-[200px] sm:min-h-[220px]",
+  },
+  {
+    title: "Market Analytics",
+    caption: "Live charts. Clear decisions.",
+    image:
+      "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=1200&auto=format&fit=crop",
+  },
+  {
+    title: "Portfolio Strategy",
+    caption: "Disciplined wealth building.",
+    image:
+      "https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?q=80&w=1200&auto=format&fit=crop",
   },
 ];
 
 const HomeService = ({ theme = "light" }) => {
   const isDark = theme === "dark";
-  const showcaseRef = useRef(null);
-  const [showcaseVisible, setShowcaseVisible] = useState(false);
-
-  useEffect(() => {
-    const node = showcaseRef.current;
-    if (!node) return undefined;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setShowcaseVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.15 }
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
 
   return (
     <section className="relative w-full overflow-hidden py-12 sm:py-16 lg:py-20">
       <TradingAtmosphere theme={theme} />
-      <div className="relative z-10 mx-auto max-w-4xl text-center">
+      <div className="relative z-10 mx-auto max-w-4xl px-1 text-center sm:px-0">
         <p
           className={`inline-flex rounded-full px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.28em]
           ${
@@ -104,59 +94,62 @@ const HomeService = ({ theme = "light" }) => {
         </p>
       </div>
 
-      <div className="relative z-10 mt-10 sm:mt-14">
-        <StackedCards items={services} theme={theme} />
-      </div>
-
-      <div
-        ref={showcaseRef}
-        className={`home-service-showcase relative z-10 mt-12 sm:mt-16 ${
-          showcaseVisible ? "is-visible" : ""
-        }`}
-      >
-        <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-3 md:grid-rows-2">
-          {showcase.map((item, index) => (
-            <article
-              key={item.title}
-              className={`group relative overflow-hidden rounded-2xl sm:rounded-[1.35rem]
-              ${item.className}
+      <div className="relative z-10 mx-auto mt-10 grid max-w-6xl grid-cols-1 gap-4 px-1 sm:mt-14 sm:grid-cols-2 sm:gap-5 sm:px-2 lg:grid-cols-3 lg:gap-6">
+        {services.map(({ title, subtitle, description, icon: Icon }) => (
+          <article
+            key={title}
+            className={`olymp-section-card flex h-full flex-col items-center rounded-2xl px-5 py-7 text-center sm:rounded-[1.35rem] sm:px-6 sm:py-8
+            ${
+              isDark
+                ? "bg-slate-900/90 ring-1 ring-white/10"
+                : "bg-white ring-1 ring-sky-100 shadow-[0_14px_36px_rgba(14,165,233,0.1)]"
+            }`}
+          >
+            <div
+              className={`relative mb-5 flex h-20 w-20 items-center justify-center rounded-[1.35rem] sm:h-24 sm:w-24
               ${
                 isDark
-                  ? "ring-1 ring-white/10 shadow-[0_18px_40px_rgba(0,0,0,0.35)]"
-                  : "ring-1 ring-sky-100 shadow-[0_14px_36px_rgba(14,165,233,0.1)]"
+                  ? "bg-sky-500/10 ring-1 ring-sky-400/20"
+                  : "bg-sky-50 ring-1 ring-sky-100"
               }`}
-              style={{ animationDelay: `${index * 120}ms` }}
             >
-              <img
-                src={item.image}
-                alt={item.title}
-                loading="lazy"
-                decoding="async"
-                className="home-service-showcase__img absolute inset-0 h-full w-full object-cover"
-              />
               <div
-                className={`absolute inset-0 ${
+                className={`relative flex h-11 w-11 items-center justify-center rounded-2xl text-white shadow-lg sm:h-14 sm:w-14
+                ${
                   isDark
-                    ? "bg-gradient-to-t from-slate-950/90 via-slate-950/35 to-transparent"
-                    : "bg-gradient-to-t from-slate-950/80 via-slate-900/25 to-transparent"
+                    ? "bg-sky-500 shadow-sky-500/30"
+                    : "bg-sky-500 shadow-sky-500/25"
                 }`}
-              />
-              <div
-                aria-hidden="true"
-                className={`pointer-events-none absolute -right-8 -top-8 h-28 w-28 rounded-full blur-2xl animate-soft-pulse
-                ${isDark ? "bg-sky-400/20" : "bg-sky-300/30"}`}
-              />
-              <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-sky-200">
-                  {item.caption}
-                </p>
-                <h3 className="mt-1.5 text-lg sm:text-xl font-bold text-white">
-                  {item.title}
-                </h3>
+              >
+                <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
               </div>
-            </article>
-          ))}
-        </div>
+            </div>
+
+            <h3
+              className={`text-base font-bold leading-snug sm:text-lg ${
+                isDark ? "text-white" : "text-slate-950"
+              }`}
+            >
+              {title}
+            </h3>
+            <p
+              className={`mt-2 text-[10px] font-semibold uppercase tracking-[0.16em] sm:text-xs
+              ${isDark ? "text-sky-400" : "text-sky-600"}`}
+            >
+              {subtitle}
+            </p>
+            <p
+              className={`mt-3 text-sm leading-6 sm:mt-4 sm:leading-7
+              ${isDark ? "text-slate-400" : "text-slate-500"}`}
+            >
+              {description}
+            </p>
+          </article>
+        ))}
+      </div>
+
+      <div className="home-service-showcase relative z-10 mt-12 sm:mt-16">
+        <CoverflowGallery items={showcase} theme={theme} />
       </div>
     </section>
   );

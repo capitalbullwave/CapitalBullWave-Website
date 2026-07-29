@@ -79,10 +79,10 @@ export default function TradeChartPreview({ theme = "light" }) {
         </svg>
 
         {/* Markers */}
-        <div className="trade-marker trade-marker--sell absolute left-[48%] top-[28%] sm:left-[50%] sm:top-[26%]">
+        <div className="trade-marker trade-marker--gain absolute left-[48%] top-[28%] sm:left-[50%] sm:top-[26%]">
           <span>30%</span>
           <span className="trade-marker__arrow" aria-hidden="true">
-            ↓
+            ↑
           </span>
         </div>
         <div className="trade-marker trade-marker--price absolute right-3 top-[12%] sm:right-5 sm:top-[10%]">

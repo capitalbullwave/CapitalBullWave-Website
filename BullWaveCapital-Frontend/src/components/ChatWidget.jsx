@@ -191,6 +191,8 @@ export default function ChatWidget({ theme }) {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState("");
   const [typing, setTyping] = useState(false);
+  const [promptVisible, setPromptVisible] = useState(false);
+  const [promptDismissed, setPromptDismissed] = useState(false);
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -204,7 +206,21 @@ export default function ChatWidget({ theme }) {
   const inputRef = useRef(null);
 
   useEffect(() => {
-    messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    // Clear any old dismiss flag so the assist popup can show again
+    try {
+      sessionStorage.removeItem("bw-chat-prompt-dismissed");
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  useEffect(() => {
+    messageEndRef.current?.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+      block: "nearest",
+    });
   }, [messages, typing, isOpen]);
 
   useEffect(() => {
@@ -214,6 +230,38 @@ export default function ChatWidget({ theme }) {
     }
     return undefined;
   }, [isOpen]);
+
+  useEffect(() => {
+    if (isOpen) {
+      setPromptVisible(false);
+      return undefined;
+    }
+
+    // When chat closes, allow popup again unless user just dismissed it
+    if (promptDismissed) return undefined;
+
+    const show = window.setTimeout(() => setPromptVisible(true), 400);
+    return () => window.clearTimeout(show);
+  }, [isOpen, promptDismissed]);
+
+  const dismissPrompt = (e) => {
+    e?.preventDefault?.();
+    e?.stopPropagation?.();
+    setPromptVisible(false);
+    setPromptDismissed(true);
+  };
+
+  const openChat = () => {
+    setIsOpen(true);
+    setPromptVisible(false);
+    setPromptDismissed(false);
+  };
+
+  const closeChat = () => {
+    setIsOpen(false);
+    // Re-show assist popup after closing chat
+    setPromptDismissed(false);
+  };
 
   const pushBot = (text) => {
     setMessages((prev) => [
@@ -264,25 +312,60 @@ export default function ChatWidget({ theme }) {
 
   return (
     <>
-      <button
-        type="button"
-        aria-label={isOpen ? "Close chat" : "Open chat assistant"}
-        onClick={() => setIsOpen((v) => !v)}
-        className={`chat-fab fixed z-[9999]
+      <div
+        className={`chat-dock fixed z-[10000]
           right-4 sm:right-6
           bottom-[calc(1rem+env(safe-area-inset-bottom,0px))] sm:bottom-[calc(1.5rem+env(safe-area-inset-bottom,0px))]
-          flex h-12 w-12 sm:h-14 sm:w-14 items-center justify-center rounded-full
-          bg-gradient-to-br from-sky-500 to-cyan-600 text-white
-          shadow-[0_16px_40px_rgba(14,165,233,0.4)]
-          transition-all duration-300 hover:scale-105 active:scale-95
-          ${isOpen ? "rotate-0" : "chat-fab--pulse"}`}
+          flex items-center gap-2 sm:gap-2.5`}
       >
-        {isOpen ? (
-          <FaTimes className="text-lg sm:text-xl" />
-        ) : (
-          <FaComments className="text-xl sm:text-2xl" />
+        {!isOpen && (
+          <div
+            className={`chat-prompt ${promptVisible && !promptDismissed ? "is-visible" : ""} ${
+              isDark ? "chat-prompt--dark" : "chat-prompt--light"
+            }`}
+            role="status"
+            aria-live="polite"
+          >
+            <button
+              type="button"
+              className="chat-prompt__bubble"
+              onClick={openChat}
+              aria-label="How may I assist you? Open chat"
+            >
+              <span className="chat-prompt__dot" aria-hidden="true" />
+              <span className="chat-prompt__text">How may I assist you?</span>
+            </button>
+            <button
+              type="button"
+              className="chat-prompt__close"
+              onClick={dismissPrompt}
+              aria-label="Dismiss assist message"
+            >
+              <FaTimes />
+            </button>
+          </div>
         )}
-      </button>
+
+        <button
+          type="button"
+          aria-label={isOpen ? "Close chat" : "Open chat assistant"}
+          onClick={() => {
+            if (isOpen) closeChat();
+            else openChat();
+          }}
+          className={`chat-fab relative z-[1] flex h-12 w-12 shrink-0 cursor-pointer items-center justify-center rounded-full
+            bg-gradient-to-br from-sky-500 to-cyan-600 text-white
+            shadow-[0_16px_40px_rgba(14,165,233,0.4)]
+            transition-all duration-300 hover:scale-105 active:scale-95 sm:h-14 sm:w-14
+            ${isOpen ? "rotate-0" : "chat-fab--pulse"}`}
+        >
+          {isOpen ? (
+            <FaTimes className="text-lg sm:text-xl" />
+          ) : (
+            <FaComments className="text-xl sm:text-2xl" />
+          )}
+        </button>
+      </div>
 
       <div
         role="dialog"
@@ -335,7 +418,7 @@ export default function ChatWidget({ theme }) {
           <button
             type="button"
             aria-label="Close chat"
-            onClick={() => setIsOpen(false)}
+            onClick={closeChat}
             className="rounded-xl p-2.5 text-white/90 transition hover:bg-white/15"
           >
             <FaTimes />

@@ -23,6 +23,7 @@ const siteLinks = [
   { name: "Services", path: "/services" },
   { name: "Markets", path: "/markets" },
   { name: "Contact", path: "/contact" },
+  { name: "Site Map", path: "/site-map" },
   { name: "Privacy Policy", path: "/privacy-policy" },
   { name: "Terms & Conditions", path: "/terms" },
 ];
