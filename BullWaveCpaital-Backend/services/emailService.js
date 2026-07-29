@@ -1,26 +1,90 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import sgMail from "@sendgrid/mail";
+import nodemailer from "nodemailer";
 import validator from "validator";
 
 /* ==========================================
-   Environment Validation
+   Config
 ========================================== */
 
-const requiredEnv = [
-  "SENDGRID_API_KEY",
-  "FROM_EMAIL",
-  "COMPANY_EMAIL",
-];
+const EMAIL_PROVIDER = (process.env.EMAIL_PROVIDER || "api").toLowerCase().trim();
 
-requiredEnv.forEach((key) => {
-  if (!process.env[key]) {
-    throw new Error(`${key} is missing in .env`);
+const BREVO_API_KEY = (process.env.BREVO_API_KEY || "").trim().replace(/>$/, "");
+const BREVO_SENDER_EMAIL = (
+  process.env.BREVO_SENDER_EMAIL ||
+  process.env.FROM_EMAIL ||
+  ""
+).trim();
+const BREVO_SENDER_NAME = (
+  process.env.BREVO_SENDER_NAME ||
+  "Capital Bull Wave"
+).trim();
+const COMPANY_EMAIL = (
+  process.env.COMPANY_EMAIL ||
+  process.env.BREVO_SENDER_EMAIL ||
+  ""
+).trim();
+
+const BREVO_SMTP_HOST = (
+  process.env.BREVO_SMTP_HOST ||
+  "smtp-relay.brevo.com"
+).trim();
+const BREVO_SMTP_PORT = Number(process.env.BREVO_SMTP_PORT || 587);
+const BREVO_SMTP_USER = (
+  process.env.BREVO_SMTP_USER ||
+  BREVO_SENDER_EMAIL
+).trim();
+/** Dedicated SMTP key preferred; API keys (xkeysib-) do not work over SMTP */
+const BREVO_SMTP_KEY = (
+  process.env.BREVO_SMTP_KEY ||
+  process.env.BREVO_SMTP_PASS ||
+  ""
+).trim();
+
+let smtpTransporter = null;
+
+const assertMailConfig = () => {
+  if (!BREVO_SENDER_EMAIL) {
+    throw new Error("BREVO_SENDER_EMAIL (or FROM_EMAIL) is missing in .env");
   }
-});
+  if (!COMPANY_EMAIL) {
+    throw new Error("COMPANY_EMAIL is missing in .env");
+  }
+  if (!BREVO_API_KEY && !BREVO_SMTP_KEY) {
+    throw new Error("BREVO_API_KEY or BREVO_SMTP_KEY is missing in .env");
+  }
+};
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY.trim());
+const resolveProvider = () => {
+  // xkeysib- keys are REST API keys — use API even if EMAIL_PROVIDER=smtp
+  if (EMAIL_PROVIDER === "smtp" && BREVO_SMTP_KEY) return "smtp";
+  if (BREVO_API_KEY) return "api";
+  if (BREVO_SMTP_KEY) return "smtp";
+  return EMAIL_PROVIDER === "smtp" ? "smtp" : "api";
+};
+
+const getSmtpTransporter = () => {
+  if (smtpTransporter) return smtpTransporter;
+
+  if (!BREVO_SMTP_USER || !BREVO_SMTP_KEY) {
+    throw new Error(
+      "SMTP requires BREVO_SMTP_USER and BREVO_SMTP_KEY (not the xkeysib API key)."
+    );
+  }
+
+  smtpTransporter = nodemailer.createTransport({
+    host: BREVO_SMTP_HOST,
+    port: BREVO_SMTP_PORT,
+    secure: BREVO_SMTP_PORT === 465,
+    auth: {
+      user: BREVO_SMTP_USER,
+      pass: BREVO_SMTP_KEY,
+    },
+  });
+
+  return smtpTransporter;
+};
 
 /* ==========================================
    HTML Escape Helper
@@ -46,10 +110,96 @@ export const validateEmail = (email) => {
     };
   }
 
-  return {
-    success: true,
-  };
+  return { success: true };
 };
+
+/* ==========================================
+   Low-level send helpers
+========================================== */
+
+async function sendViaBrevoApi({ to, subject, text, html, replyTo }) {
+  const payload = {
+    sender: {
+      name: BREVO_SENDER_NAME,
+      email: BREVO_SENDER_EMAIL,
+    },
+    to: Array.isArray(to) ? to : [{ email: to }],
+    subject,
+    textContent: text,
+    htmlContent: html,
+  };
+
+  if (replyTo?.email) {
+    payload.replyTo = {
+      email: replyTo.email,
+      name: replyTo.name || replyTo.email,
+    };
+  }
+
+  const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+    method: "POST",
+    headers: {
+      accept: "application/json",
+      "content-type": "application/json",
+      "api-key": BREVO_API_KEY,
+    },
+    body: JSON.stringify(payload),
+  });
+
+  const bodyText = await response.text();
+  let bodyJson = null;
+  try {
+    bodyJson = bodyText ? JSON.parse(bodyText) : null;
+  } catch {
+    bodyJson = { raw: bodyText };
+  }
+
+  if (!response.ok) {
+    const detail =
+      bodyJson?.message ||
+      bodyJson?.error ||
+      bodyText ||
+      `HTTP ${response.status}`;
+    throw new Error(`Brevo API error: ${detail}`);
+  }
+
+  return bodyJson;
+}
+
+async function sendViaSmtp({ to, subject, text, html, replyTo }) {
+  const transporter = getSmtpTransporter();
+  const toAddress = Array.isArray(to)
+    ? to.map((item) => item.email).join(", ")
+    : to;
+
+  await transporter.sendMail({
+    from: `"${BREVO_SENDER_NAME}" <${BREVO_SENDER_EMAIL}>`,
+    to: toAddress,
+    replyTo: replyTo?.email
+      ? `"${replyTo.name || replyTo.email}" <${replyTo.email}>`
+      : undefined,
+    subject,
+    text,
+    html,
+  });
+
+  return true;
+}
+
+async function sendMail(options) {
+  assertMailConfig();
+  const provider = resolveProvider();
+
+  if (provider === "smtp") {
+    return sendViaSmtp(options);
+  }
+
+  if (!BREVO_API_KEY) {
+    throw new Error("BREVO_API_KEY is required for API email sending.");
+  }
+
+  return sendViaBrevoApi(options);
+}
 
 /* ==========================================
    Send Contact Email to Company
@@ -69,115 +219,65 @@ export const sendContactEmail = async ({
     const safeSubject = escapeHtml(subject);
     const safeMessage = escapeHtml(message);
 
-    await sgMail.send({
-      to: process.env.COMPANY_EMAIL,
+    await sendMail({
+      to: [{ email: COMPANY_EMAIL }],
+      replyTo: { email, name },
+      subject: `New Contact Form Enquiry • ${subject}`,
+      text: `
+New Contact Form Submission
 
-      from: {
-        email: process.env.FROM_EMAIL,
-        name: "Capital BullWave ",
-      },
+Name: ${name}
+Email: ${email}
+Phone: ${phone || "-"}
 
-      replyTo: {
-        email,
-        name,
-      },
+Subject:
+${subject}
 
-      subject: `New Contact Form Enquiry • ${safeSubject}`,
-
-        text: `
-        New Contact Form Submission
-
-        Name: ${name}
-        Email: ${email}
-        Phone: ${phone || "-"}
-
-        Subject:
-        ${subject}
-
-        Message:
-        ${message}
-              `,
-
+Message:
+${message}
+      `.trim(),
       html: `
-      <!DOCTYPE html>
-      <html>
-
-      <head>
-      <meta charset="UTF-8">
-      <title>New Contact Form</title>
-      </head>
-
-      <body style="margin:0;padding:40px;background:#f5f7fb;font-family:Arial,sans-serif;">
-
-      <table width="700" align="center" cellpadding="0" cellspacing="0"
-      style="background:#ffffff;border-radius:10px;overflow:hidden;">
-
-      <tr>
-      <td style="background:#0F172A;padding:25px;color:#ffffff;">
-      <h2 style="margin:0;">New Contact Form Submission</h2>
-      </td>
-      </tr>
-
-      <tr>
-      <td style="padding:35px;">
-
-      <table width="100%" cellpadding="10">
-
-      <tr>
-      <td width="150"><strong>Name</strong></td>
-      <td>${safeName}</td>
-      </tr>
-
-      <tr>
-      <td><strong>Email</strong></td>
-      <td>${safeEmail}</td>
-      </tr>
-
-      <tr>
-      <td><strong>Phone</strong></td>
-      <td>${safePhone}</td>
-      </tr>
-
-      <tr>
-      <td><strong>Subject</strong></td>
-      <td>${safeSubject}</td>
-      </tr>
-
-      </table>
-
-      <hr style="margin:30px 0;">
-
-      <h3>Message</h3>
-
-      <p style="line-height:28px;white-space:pre-wrap;">
-      ${safeMessage}
-      </p>
-
-      <hr style="margin-top:40px;">
-
-      <p style="font-size:13px;color:#777;line-height:22px;">
-      Capital Bull Wave<br>
-      SEBI Registered Research Analyst<br>
-      Registration No. INH000013253
-      </p>
-
-      </td>
-      </tr>
-
-      </table>
-
-      </body>
-      </html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>New Contact Form</title>
+</head>
+<body style="margin:0;padding:40px;background:#f5f7fb;font-family:Arial,sans-serif;">
+<table width="700" align="center" cellpadding="0" cellspacing="0"
+style="background:#ffffff;border-radius:10px;overflow:hidden;max-width:100%;">
+<tr>
+<td style="background:#0F172A;padding:25px;color:#ffffff;">
+<h2 style="margin:0;">New Contact Form Submission</h2>
+</td>
+</tr>
+<tr>
+<td style="padding:35px;">
+<table width="100%" cellpadding="10">
+<tr><td width="150"><strong>Name</strong></td><td>${safeName}</td></tr>
+<tr><td><strong>Email</strong></td><td>${safeEmail}</td></tr>
+<tr><td><strong>Phone</strong></td><td>${safePhone}</td></tr>
+<tr><td><strong>Subject</strong></td><td>${safeSubject}</td></tr>
+</table>
+<hr style="margin:30px 0;">
+<h3>Message</h3>
+<p style="line-height:28px;white-space:pre-wrap;">${safeMessage}</p>
+<hr style="margin-top:40px;">
+<p style="font-size:13px;color:#777;line-height:22px;">
+Capital Bull Wave<br>
+Research &amp; Investment Advisory
+</p>
+</td>
+</tr>
+</table>
+</body>
+</html>
       `,
     });
 
     return true;
   } catch (error) {
-    console.error(
-      "SendGrid Contact Email Error:",
-      error.response?.body || error.message
-    );
-
+    console.error("Brevo Contact Email Error:", error.message || error);
     throw new Error("Unable to send contact email.");
   }
 };
@@ -190,105 +290,62 @@ export const sendAutoReply = async ({ name, email }) => {
   try {
     const safeName = escapeHtml(name);
 
-    await sgMail.send({
-      to: email,
-
-      from: {
-        email: process.env.FROM_EMAIL,
-        name: "Capital Bull Wave",
-      },
-
+    await sendMail({
+      to: [{ email }],
       subject: "Thank You for Contacting Capital Bull Wave",
-
       text: `
-      Hello ${name},
+Hello ${name},
 
-      Thank you for contacting Capital BullWave.
+Thank you for contacting Capital BullWave.
 
-      We have received your enquiry successfully.
+We have received your enquiry successfully.
 
-      Our team will review your message and get back to you during business hours.
+Our team will review your message and get back to you during business hours.
 
-      Regards,
-      Capital Bull Wave
-            `,
-
-        html: `
-        <!DOCTYPE html>
-        <html>
-
-        <head>
-        <meta charset="UTF-8">
-        <title>Thank You</title>
-        </head>
-
-        <body style="margin:0;padding:40px;background:#f5f7fb;font-family:Arial,sans-serif;">
-
-        <table width="700" align="center" cellpadding="0" cellspacing="0"
-        style="background:#ffffff;border-radius:10px;overflow:hidden;">
-
-        <tr>
-        <td style="background:#0F172A;padding:25px;color:#ffffff;">
-        <h2 style="margin:0;">Thank You</h2>
-        </td>
-        </tr>
-
-        <tr>
-        <td style="padding:35px;">
-
-        <p>Hello <strong>${safeName}</strong>,</p>
-
-        <p>
-        Thank you for contacting <strong>Capital Bull Wave</strong>.
-        </p>
-
-        <p>
-        We have successfully received your enquiry.
-        </p>
-
-        <p>
-        Our support team will carefully review your message and respond as soon as possible during business hours.
-        </p>
-
-        <p>
-        For urgent enquiries, you may also contact us directly using the phone number or WhatsApp available on our website.
-        </p>
-
-        <br>
-
-        <p>
-        Kind Regards,
-        </p>
-
-        <p>
-        <strong>Capital Bull Wave Team</strong>
-        </p>
-
-        <hr style="margin-top:40px;">
-
-        <p style="font-size:13px;color:#777;line-height:22px;">
-        Capital Bull Wave<br>
-        SEBI Registered Research Analyst<br>
-        Registration No. INH000013253
-        </p>
-
-        </td>
-        </tr>
-
-        </table>
-
-        </body>
-        </html>
-        `,
+Regards,
+Capital Bull Wave
+      `.trim(),
+      html: `
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Thank You</title>
+</head>
+<body style="margin:0;padding:40px;background:#f5f7fb;font-family:Arial,sans-serif;">
+<table width="700" align="center" cellpadding="0" cellspacing="0"
+style="background:#ffffff;border-radius:10px;overflow:hidden;max-width:100%;">
+<tr>
+<td style="background:#0F172A;padding:25px;color:#ffffff;">
+<h2 style="margin:0;">Thank You</h2>
+</td>
+</tr>
+<tr>
+<td style="padding:35px;">
+<p>Hello <strong>${safeName}</strong>,</p>
+<p>Thank you for contacting <strong>Capital Bull Wave</strong>.</p>
+<p>We have successfully received your enquiry.</p>
+<p>Our support team will carefully review your message and respond as soon as possible during business hours.</p>
+<p>For urgent enquiries, you may also contact us directly using the phone number or WhatsApp available on our website.</p>
+<br>
+<p>Kind Regards,</p>
+<p><strong>Capital Bull Wave Team</strong></p>
+<hr style="margin-top:40px;">
+<p style="font-size:13px;color:#777;line-height:22px;">
+Capital Bull Wave<br>
+Research &amp; Investment Advisory
+</p>
+</td>
+</tr>
+</table>
+</body>
+</html>
+      `,
     });
 
     return true;
   } catch (error) {
-    console.error(
-      "SendGrid Auto Reply Error:",
-      error.response?.body || error.message
-    );
-
+    console.error("Brevo Auto Reply Error:", error.message || error);
     throw new Error("Unable to send auto reply.");
   }
 };
