@@ -1,33 +1,63 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import TradingAtmosphere from "./TradingAtmosphere";
-import { DUNS_PROFILE_PAGE } from "./DunsRegisteredSeal";
 
 const slides = [
   {
+    id: "duns",
+    title: "D-U-N-S Registered",
+    desc: "Verified business identity with Dun & Bradstreet — credibility you can trust.",
+    badge: "Verified",
     image:
-      "https://images.unsplash.com/photo-1559526324-593bc073d938?q=80&w=1800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1800&auto=format&fit=crop",
+    chipDot: "emerald",
+    highlight: true,
+  },
+  {
+    id: "research",
+    title: "Trusted Research",
+    desc: "Disciplined equity research with sector insights, technical setups, and clear market context.",
+    badge: "Research",
+    image:
+      "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1800&auto=format&fit=crop",
+    chipDot: "sky",
+  },
+  {
+    id: "risk",
+    title: "Risk Managed",
+    desc: "Structured allocation and position sizing to protect capital through market volatility.",
+    badge: "Risk Control",
+    image:
+      "https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1800&auto=format&fit=crop",
+    chipDot: "sky",
+  },
+  {
+    id: "institutional",
     title: "Institutional Trading",
     desc: "Professional investment strategies for sustainable long-term growth.",
+    badge: "Our Market",
+    image:
+      "https://images.unsplash.com/photo-1559526324-593bc073d938?q=80&w=1800&auto=format&fit=crop",
+    chipDot: "sky",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?q=80&w=1800&auto=format&fit=crop",
+    id: "portfolio",
     title: "Portfolio Management",
     desc: "Diversified wealth solutions designed around your financial goals.",
+    badge: "Our Market",
+    image:
+      "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?q=80&w=1800&auto=format&fit=crop",
+    chipDot: "sky",
   },
   {
-    image:
-      "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1800&auto=format&fit=crop",
+    id: "intelligence",
     title: "Market Intelligence",
     desc: "Real-time insights backed by disciplined research and analytics.",
+    badge: "Our Market",
+    image:
+      "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1800&auto=format&fit=crop",
+    chipDot: "sky",
   },
-];
-
-const trustItems = [
-  { label: "D-U-N-S Registered", href: DUNS_PROFILE_PAGE, highlight: true },
-  { label: "Trusted Research", href: null, highlight: false },
-  { label: "Risk Managed", href: null, highlight: false },
 ];
 
 function CountUp({ end, duration = 2000, decimals = 0, suffix = "" }) {
@@ -67,12 +97,18 @@ function CountUp({ end, duration = 2000, decimals = 0, suffix = "" }) {
 }
 
 export default function Hero({ theme = "light" }) {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(3);
   const [paused, setPaused] = useState(false);
   const [ready, setReady] = useState(false);
   const sectionRef = useRef(null);
   const touchStartX = useRef(null);
   const isDark = theme === "dark";
+  const count = slides.length;
+  const current = slides[active] ?? slides[0];
+
+  const goTo = (index) => {
+    setActive(((index % count) + count) % count);
+  };
 
   useEffect(() => {
     const id = window.requestAnimationFrame(() => setReady(true));
@@ -85,10 +121,10 @@ export default function Hero({ theme = "light" }) {
       return undefined;
     }
     const timer = window.setInterval(() => {
-      setActive((prev) => (prev + 1) % slides.length);
+      setActive((prev) => (prev + 1) % count);
     }, 5200);
     return () => window.clearInterval(timer);
-  }, [paused]);
+  }, [paused, count]);
 
   useEffect(() => {
     const onKey = (e) => {
@@ -99,15 +135,12 @@ export default function Hero({ theme = "light" }) {
       const inHero = node === focused || node.contains(focused);
       if (!inHero) return;
       e.preventDefault();
-      if (e.key === "ArrowRight") {
-        setActive((prev) => (prev + 1) % slides.length);
-      } else {
-        setActive((prev) => (prev - 1 + slides.length) % slides.length);
-      }
+      if (e.key === "ArrowRight") goTo(active + 1);
+      else goTo(active - 1);
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  }, [active, count]);
 
   const onTouchStart = (e) => {
     touchStartX.current = e.changedTouches[0]?.clientX ?? null;
@@ -122,11 +155,12 @@ export default function Hero({ theme = "light" }) {
     if (start == null || end == null) return;
     const delta = end - start;
     if (Math.abs(delta) < 40) return;
-    setActive((prev) =>
-      delta < 0
-        ? (prev + 1) % slides.length
-        : (prev - 1 + slides.length) % slides.length
-    );
+    if (delta < 0) goTo(active + 1);
+    else goTo(active - 1);
+  };
+
+  const onChipClick = (index) => {
+    goTo(index);
   };
 
   return (
@@ -146,10 +180,9 @@ export default function Hero({ theme = "light" }) {
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
-      {/* Cinematic background */}
       {slides.map((slide, index) => (
         <img
-          key={slide.image}
+          key={`bg-${slide.id}`}
           src={slide.image}
           alt=""
           className={`hero-bg-slide absolute inset-0 h-full w-full object-cover
@@ -256,7 +289,7 @@ export default function Hero({ theme = "light" }) {
               <div className="hero-panel-media relative overflow-hidden">
                 {slides.map((slide, index) => (
                   <img
-                    key={`panel-${slide.title}`}
+                    key={`panel-${slide.id}`}
                     src={slide.image}
                     alt={slide.title}
                     className={`hero-panel__img absolute inset-0 h-full w-full object-cover
@@ -267,18 +300,18 @@ export default function Hero({ theme = "light" }) {
 
                 <div className="olymp-chip absolute left-3 top-3 sm:left-4 sm:top-4">
                   <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-                  Our Market
+                  {current.badge}
                 </div>
 
                 <div
                   className="absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-5 sm:right-5"
-                  key={active}
+                  key={current.id}
                 >
                   <h2 className="hero-slide-text text-lg font-bold text-white sm:text-xl md:text-2xl">
-                    {slides[active].title}
+                    {current.title}
                   </h2>
                   <p className="hero-slide-text hero-slide-text--delay mt-1.5 text-xs leading-5 text-slate-200 sm:mt-2 sm:text-sm sm:leading-6">
-                    {slides[active].desc}
+                    {current.desc}
                   </p>
                 </div>
               </div>
@@ -314,14 +347,14 @@ export default function Hero({ theme = "light" }) {
 
         <div className="hero-fade hero-fade--5 hero-footer-chips mt-6 sm:mt-10">
           <div className="mb-3 flex justify-center gap-2 sm:mb-4">
-            {slides.map((_, index) => (
+            {slides.map((slide, index) => (
               <button
-                key={index}
+                key={`dot-${slide.id}`}
                 type="button"
-                aria-label={`Go to slide ${index + 1}`}
+                aria-label={`Show ${slide.title}`}
                 aria-current={active === index ? "true" : undefined}
-                onClick={() => setActive(index)}
-                className={`rounded-full transition-all duration-500 ${
+                onClick={() => goTo(index)}
+                className={`cursor-pointer rounded-full transition-all duration-500 ${
                   active === index
                     ? "h-2 w-8 bg-sky-400"
                     : "h-2 w-2 bg-white/30 hover:bg-white/60"
@@ -331,46 +364,25 @@ export default function Hero({ theme = "light" }) {
           </div>
 
           <div className="olymp-chip-row hero-trust-row -mx-1 flex gap-2 overflow-x-auto px-1 pb-1 sm:mx-0 sm:flex-wrap sm:justify-center sm:overflow-visible sm:pb-0">
-            {trustItems.map((item, i) => {
-              const ChipTag = item.href ? "a" : "div";
-              const chipProps = item.href
-                ? {
-                    href: item.href,
-                    target: "_blank",
-                    rel: "noopener noreferrer",
-                    "aria-label": "View D-U-N-S Registered profile",
-                  }
-                : {};
-
-              return (
-                <ChipTag
-                  key={item.label}
-                  {...chipProps}
-                  className={`olymp-chip olymp-chip--row shrink-0 ${
-                    item.highlight ? "olymp-chip--duns cursor-pointer" : ""
-                  }`}
-                  style={{ animationDelay: `${480 + i * 90}ms` }}
-                >
-                  <span
-                    className={`h-1.5 w-1.5 rounded-full ${
-                      item.highlight
-                        ? "bg-emerald-400 animate-pulse"
-                        : "bg-sky-400"
-                    }`}
-                  />
-                  {item.label}
-                </ChipTag>
-              );
-            })}
             {slides.map((slide, i) => (
               <button
-                key={slide.title}
+                key={slide.id}
                 type="button"
-                onClick={() => setActive(i)}
-                className={`olymp-chip olymp-chip--row hero-slide-chip shrink-0 transition ${
+                onClick={() => onChipClick(i)}
+                aria-pressed={active === i}
+                aria-label={`Show ${slide.title}`}
+                className={`olymp-chip olymp-chip--row shrink-0 cursor-pointer transition ${
                   active === i ? "is-active" : ""
-                }`}
+                } ${slide.highlight ? "olymp-chip--duns" : ""}`}
+                style={{ animationDelay: `${480 + i * 70}ms` }}
               >
+                <span
+                  className={`h-1.5 w-1.5 rounded-full ${
+                    slide.chipDot === "emerald"
+                      ? "bg-emerald-400 animate-pulse"
+                      : "bg-sky-400"
+                  }`}
+                />
                 {slide.title}
               </button>
             ))}
