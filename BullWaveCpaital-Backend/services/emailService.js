@@ -52,7 +52,18 @@ const COMPANY_EMAIL = cleanEnv(
 
 const BREVO_SMTP_HOST =
   cleanEnv(process.env.BREVO_SMTP_HOST) || "smtp-relay.brevo.com";
-const BREVO_SMTP_PORT = Number(process.env.BREVO_SMTP_PORT || 587);
+
+/** Render / cloud hosts often block or stall SMTP 587 — prefer 2525 there. */
+const isCloudHost = Boolean(
+  process.env.RENDER ||
+    process.env.RENDER_EXTERNAL_URL ||
+    process.env.RAILWAY_ENVIRONMENT ||
+    process.env.FLY_APP_NAME
+);
+const BREVO_SMTP_PORT = Number(
+  process.env.BREVO_SMTP_PORT || (isCloudHost ? 2525 : 587)
+);
+
 /** Must be Brevo SMTP login (e.g. xxx@smtp-brevo.com) — never default to Gmail sender */
 const BREVO_SMTP_USER = cleanEnv(process.env.BREVO_SMTP_USER);
 
@@ -75,6 +86,8 @@ export const getEmailConfigStatus = () => {
     hasSmtpUser: Boolean(BREVO_SMTP_USER),
     hasSmtpKey: Boolean(BREVO_SMTP_KEY),
     hasApiKey: Boolean(BREVO_API_KEY),
+    smtpPort: BREVO_SMTP_PORT,
+    cloudHost: isCloudHost,
     smtpUserLooksValid: /@smtp-brevo\.com$/i.test(BREVO_SMTP_USER),
     ready: Boolean(
       BREVO_SENDER_EMAIL &&
@@ -144,11 +157,23 @@ const getSmtpTransporter = () => {
     host: BREVO_SMTP_HOST,
     port: BREVO_SMTP_PORT,
     secure: BREVO_SMTP_PORT === 465,
+    requireTLS: BREVO_SMTP_PORT === 587 || BREVO_SMTP_PORT === 2525,
     auth: {
       user: BREVO_SMTP_USER,
       pass: BREVO_SMTP_KEY,
     },
+    connectionTimeout: 20000,
+    greetingTimeout: 15000,
+    socketTimeout: 30000,
+    tls: {
+      // Brevo relay
+      minVersion: "TLSv1.2",
+    },
   });
+
+  console.log(
+    `[email] SMTP transport ready → ${BREVO_SMTP_HOST}:${BREVO_SMTP_PORT}`
+  );
 
   return smtpTransporter;
 };

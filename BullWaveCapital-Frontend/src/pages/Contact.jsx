@@ -107,10 +107,28 @@ export default function Contact({ theme }) {
       if (import.meta.env.DEV) {
         console.error(error);
       }
+
       const serverMessage = error?.response?.data?.message;
-      toast.error(
-        serverMessage || "An error occurred while sending your message."
-      );
+      if (serverMessage) {
+        toast.error(serverMessage);
+        return;
+      }
+
+      if (error?.code === "ECONNABORTED") {
+        toast.error(
+          "The server is taking too long to respond. Please try again in a moment."
+        );
+        return;
+      }
+
+      if (!error?.response) {
+        toast.error(
+          "Cannot reach the server. Please check your connection and try again."
+        );
+        return;
+      }
+
+      toast.error("An error occurred while sending your message.");
     }
   };
 
