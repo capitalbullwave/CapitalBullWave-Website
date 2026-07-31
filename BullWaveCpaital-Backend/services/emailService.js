@@ -195,11 +195,163 @@ const escapeHtml = (text = "") =>
 ========================================== */
 
 export const validateEmail = (email) => {
-  if (!email || !validator.isEmail(String(email).trim())) {
-    return {
-      success: false,
-      message: "Please enter a valid email address.",
-    };
+  const AUTH_MSG = "Please provide an authenticated email address.";
+  const value = String(email || "").trim().toLowerCase();
+
+  if (!value || !validator.isEmail(value, { allow_utf8_local_part: false })) {
+    return { success: false, message: AUTH_MSG };
+  }
+
+  const [local, domain] = value.split("@");
+  if (!local || !domain || local.length < 2) {
+    return { success: false, message: AUTH_MSG };
+  }
+
+  if (
+    local.includes("..") ||
+    domain.includes("..") ||
+    local.startsWith(".") ||
+    local.endsWith(".")
+  ) {
+    return { success: false, message: AUTH_MSG };
+  }
+
+  const domainParts = domain.split(".");
+  const tld = domainParts[domainParts.length - 1];
+  if (
+    domainParts.length < 2 ||
+    !tld ||
+    tld.length < 2 ||
+    !validator.isFQDN(domain)
+  ) {
+    return { success: false, message: AUTH_MSG };
+  }
+
+  const disposable = new Set([
+    "mailinator.com",
+    "guerrillamail.com",
+    "guerrillamail.net",
+    "sharklasers.com",
+    "grr.la",
+    "10minutemail.com",
+    "10minmail.com",
+    "tempmail.com",
+    "temp-mail.org",
+    "temp-mail.io",
+    "throwawaymail.com",
+    "yopmail.com",
+    "yopmail.fr",
+    "trashmail.com",
+    "trashmail.me",
+    "getnada.com",
+    "moakt.com",
+    "fakeinbox.com",
+    "mailnesia.com",
+    "dispostable.com",
+    "maildrop.cc",
+    "mintemail.com",
+    "mytemp.email",
+    "tmpmail.org",
+    "tmpmail.net",
+    "emailondeck.com",
+    "spam4.me",
+    "mailcatch.com",
+    "discard.email",
+    "mailnull.com",
+    "spamgourmet.com",
+    "inboxkitten.com",
+    "tempail.com",
+    "burnermail.io",
+    "mailsac.com",
+  ]);
+
+  const dummyDomains = new Set([
+    "example.com",
+    "example.org",
+    "example.net",
+    "test.com",
+    "test.in",
+    "testing.com",
+    "fake.com",
+    "fake.in",
+    "dummy.com",
+    "dummy.in",
+    "sample.com",
+    "asdf.com",
+    "abc.com",
+    "xyz.com",
+    "xxx.com",
+    "localhost",
+    "localdomain",
+    "invalid",
+    "domain.com",
+    "emailprovider.com",
+  ]);
+
+  const dummyLocals = new Set([
+    "test",
+    "testing",
+    "tester",
+    "dummy",
+    "fake",
+    "sample",
+    "example",
+    "demo",
+    "asdf",
+    "asdfgh",
+    "qwerty",
+    "abc",
+    "abcd",
+    "abcdef",
+    "xyz",
+    "xxx",
+    "aaa",
+    "abc123",
+    "user",
+    "username",
+    "email",
+    "mail",
+    "none",
+    "null",
+    "undefined",
+    "admin",
+    "noreply",
+    "no-reply",
+    "donotreply",
+    "do-not-reply",
+  ]);
+
+  if (disposable.has(domain) || dummyDomains.has(domain)) {
+    return { success: false, message: AUTH_MSG };
+  }
+
+  const localBase = local.split("+")[0].replace(/[._-]/g, "");
+  if (dummyLocals.has(local) || dummyLocals.has(localBase)) {
+    return { success: false, message: AUTH_MSG };
+  }
+
+  if (/^(.)\1{4,}$/.test(localBase)) {
+    return { success: false, message: AUTH_MSG };
+  }
+
+  const sequences = ["qwertyuiop", "asdfghjkl", "zxcvbnm", "1234567890"];
+  if (
+    localBase.length >= 5 &&
+    sequences.some(
+      (seq) => seq.includes(localBase) || localBase.includes(seq.slice(0, 5))
+    )
+  ) {
+    return { success: false, message: AUTH_MSG };
+  }
+
+  const domainName = domainParts[0];
+  if (
+    localBase === domainName &&
+    ["test", "demo", "fake", "dummy", "sample", "mail", "email", "user"].includes(
+      domainName
+    )
+  ) {
+    return { success: false, message: AUTH_MSG };
   }
 
   return { success: true };

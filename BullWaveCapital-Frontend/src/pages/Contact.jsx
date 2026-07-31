@@ -16,6 +16,7 @@ import AppStoreBadge from "../assets/appstore-icon.png";
 import PlayStoreBadge from "../assets/playstore-icon.png";
 import { Helmet } from "react-helmet-async";
 import RevealOnScroll from "../components/RevealOnScroll";
+import { validateAuthenticatedEmail } from "../utils/emailValidation.js";
 
 const contactDetails = [
   {
@@ -75,6 +76,14 @@ export default function Contact({ theme }) {
       message: form.message.trim(),
     };
 
+    const emailCheck = validateAuthenticatedEmail(payload.email);
+    if (!emailCheck.success) {
+      toast.error(
+        emailCheck.message || "Please provide an authenticated email address."
+      );
+      return;
+    }
+
     if (payload.message.length < 10) {
       toast.error("Message should contain at least 10 characters.");
       return;
@@ -129,6 +138,17 @@ export default function Contact({ theme }) {
       }
 
       toast.error("An error occurred while sending your message.");
+    }
+  };
+
+  const handleEmailBlur = () => {
+    const value = form.email.trim();
+    if (!value) return;
+    const emailCheck = validateAuthenticatedEmail(value);
+    if (!emailCheck.success) {
+      toast.error(
+        emailCheck.message || "Please provide an authenticated email address."
+      );
     }
   };
 
@@ -447,7 +467,10 @@ export default function Contact({ theme }) {
                     name="email"
                     value={form.email}
                     onChange={handleChange}
-                    placeholder="Enter your email"
+                    onBlur={handleEmailBlur}
+                    placeholder="Enter your authenticated email"
+                    autoComplete="email"
+                    inputMode="email"
                     className={input}
                     required
                   />
