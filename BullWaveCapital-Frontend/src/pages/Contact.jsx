@@ -584,10 +584,16 @@ export default function Contact({ theme }) {
               >
                 <div className="flex flex-col gap-4 sm:gap-6 lg:flex-row lg:items-center lg:justify-between">
                   {/* Left Side */}
-                  <div className="flex items-center gap-3 sm:gap-4">
+                  <a
+                    href="https://bullwaverides.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-3 sm:gap-4 rounded-xl transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+                    aria-label="Visit BullWave Rides"
+                  >
                     <img
                       src={RideLogo}
-                      alt="BullWave Rides"
+                      alt=""
                       className="h-12 w-12 sm:h-16 sm:w-16 shrink-0 rounded-xl sm:rounded-2xl object-cover shadow-lg"
                     />
 
@@ -600,28 +606,28 @@ export default function Contact({ theme }) {
 
                       <p className={`${text} mt-1.5 sm:mt-2 max-w-lg text-xs sm:text-sm leading-5 sm:leading-6`}>
                         Experience fast, safe and affordable rides with the BullWave
-                        Rides mobile app. Download it today from your favorite app store.
+                        Rides platform. Visit the site to learn more.
                       </p>
                     </div>
-                  </div>
+                  </a>
 
                   {/* Right Side */}
                   <div className="flex flex-wrap items-center gap-2 sm:gap-3">
                     <a
-                      href="https://www.apple.com/app-store/"
+                      href="https://bullwaverides.com/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="transition-transform duration-300 hover:scale-105"
                     >
                       <img
                         src={AppStoreBadge}
-                        alt="Download on the App Store"
+                        alt="BullWave Rides on the App Store"
                         className="h-9 sm:h-12 w-auto"
                       />
                     </a>
 
                     <a
-                      href="https://play.google.com/store"
+                      href="https://bullwaverides.com/"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="transition-transform duration-300 hover:scale-105"

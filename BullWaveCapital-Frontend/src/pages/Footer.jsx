@@ -33,11 +33,13 @@ const apps = [
     name: "BullWave Rides",
     tagline: "Book rides instantly",
     logo: RideLogo,
+    href: "https://bullwaverides.com/",
   },
   {
     name: "BullWave Club",
     tagline: "Enjoy and have fun",
     logo: ClubLogo,
+    href: "https://www.bullwaveclub.com/",
   },
 ];
 
@@ -259,15 +261,19 @@ const Footer = ({ theme = "light" }) => {
 
               <div className="mt-4 space-y-3">
                 {apps.map((app, i) => (
-                  <div
+                  <a
                     key={app.name}
+                    href={app.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{ "--i": i }}
-                    className="bw-footer__app-card"
+                    className="bw-footer__app-card block transition hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+                    aria-label={`Visit ${app.name}`}
                   >
                     <div className="flex items-center gap-3">
                       <img
                         src={app.logo}
-                        alt={app.name}
+                        alt=""
                         className="bw-footer__app-logo h-11 w-11 shrink-0 rounded-xl object-cover shadow-md ring-1 ring-sky-300/40"
                       />
                       <div className="min-w-0 flex-1">
@@ -277,7 +283,7 @@ const Footer = ({ theme = "light" }) => {
                         <p className="bw-f-muted mt-0.5 text-xs">{app.tagline}</p>
                       </div>
                     </div>
-                  </div>
+                  </a>
                 ))}
 
                 <div
