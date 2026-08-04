@@ -170,7 +170,7 @@ export default function Hero({ theme = "light" }) {
       aria-roledescription="carousel"
       aria-label="Featured investment highlights"
       className={`hero-section olymp-hero relative overflow-hidden rounded-none sm:rounded-[1.5rem] lg:rounded-[2rem] transition-colors duration-500
-        -mx-2 sm:-mx-3 md:mx-0
+        mx-0
         bg-slate-950 outline-none
         ${ready ? "hero-section--ready" : ""}`}
       onMouseEnter={() => setPaused(true)}

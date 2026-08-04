@@ -38,12 +38,12 @@ export default function DunsRegisteredSeal({
       onClick={openProfile}
       aria-label="Open D-U-N-S Registered VIP profile"
       title="View D-U-N-S Registered Profile"
-      className={`footer-duns-seal group relative z-30 inline-flex cursor-pointer flex-col items-center justify-center overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:scale-[1.03] ${
+      className={`footer-duns-seal group relative z-30 inline-flex max-w-full cursor-pointer flex-col items-center justify-center overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:scale-[1.03] ${
         variant === "bar" ? "footer-duns-seal--bar" : ""
       } ${
         dark
-          ? "rounded-2xl bg-gradient-to-br from-white via-sky-50 to-white p-2.5 shadow-[0_12px_28px_rgba(0,0,0,0.35)] ring-1 ring-sky-300/40"
-          : "rounded-2xl bg-gradient-to-br from-white via-sky-50 to-white p-2.5 shadow-[0_12px_28px_rgba(14,165,233,0.18)] ring-1 ring-sky-200"
+          ? "rounded-xl bg-gradient-to-br from-white via-sky-50 to-white p-1.5 shadow-[0_10px_24px_rgba(0,0,0,0.3)] ring-1 ring-sky-300/40 sm:rounded-2xl sm:p-2.5 sm:shadow-[0_12px_28px_rgba(0,0,0,0.35)]"
+          : "rounded-xl bg-gradient-to-br from-white via-sky-50 to-white p-1.5 shadow-[0_10px_24px_rgba(14,165,233,0.14)] ring-1 ring-sky-200 sm:rounded-2xl sm:p-2.5 sm:shadow-[0_12px_28px_rgba(14,165,233,0.18)]"
       }`}
       style={{ pointerEvents: "auto" }}
     >
@@ -52,11 +52,11 @@ export default function DunsRegisteredSeal({
         alt="D-U-N-S Registered"
         width={114}
         height={97}
-        className="footer-duns-mark pointer-events-none relative z-10 h-[97px] w-[114px] object-contain transition-transform duration-300 group-hover:rotate-[-1deg]"
+        className="footer-duns-mark pointer-events-none relative z-10 h-[72px] w-[84px] object-contain transition-transform duration-300 group-hover:rotate-[-1deg] sm:h-[97px] sm:w-[114px]"
         draggable={false}
       />
 
-      <span className="pointer-events-none relative z-10 mt-1 text-[9px] font-bold tracking-[0.12em] text-[#0E6E8C] opacity-90 transition-opacity group-hover:opacity-100">
+      <span className="pointer-events-none relative z-10 mt-0.5 hidden text-[9px] font-bold tracking-[0.12em] text-[#0E6E8C] opacity-90 transition-opacity group-hover:opacity-100 sm:mt-1 sm:inline">
         CLICK TO VIEW PROFILE
       </span>
 

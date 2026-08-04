@@ -42,7 +42,7 @@ const organizationSchema = {
 
 const Home = ({ theme }) => {
   return (
-    <div className="page-enter space-y-10 sm:space-y-12 lg:space-y-14">
+    <div className="page-enter space-y-8 sm:space-y-12 lg:space-y-14">
       <Helmet>
         <title>
           Capital BullWave | Stock Market Research & Investment Advisory in Delhi

@@ -4399,11 +4399,75 @@ body.bw-chat-open .bw-whatsapp-fab {
 }
 
 @media (max-width: 639px) {
+  .home-director__orb--1 {
+    width: 11rem;
+    height: 11rem;
+    top: -6%;
+    left: -10%;
+  }
+
+  .home-director__orb--2 {
+    width: 13rem;
+    height: 13rem;
+    right: -14%;
+    bottom: -8%;
+  }
+
   .home-director__orb--3 {
     display: none;
   }
 
+  .home-director__panel {
+    padding: 0.75rem !important;
+    border-radius: 1.1rem !important;
+    gap: 1.15rem;
+  }
+
   .home-director__photo-frame > .home-director__photo {
-    max-height: min(420px, 58vh);
+    max-height: min(360px, 52vh);
+    aspect-ratio: 4 / 5;
+  }
+
+  .home-director__photo-caption {
+    padding: 0.85rem 0.9rem 0.95rem;
+  }
+
+  .home-director__quote {
+    padding-left: 0.8rem;
+    font-size: 0.875rem;
+    line-height: 1.65;
+  }
+
+  .home-director__grid {
+    opacity: 0.2;
+    background-size: 36px 36px;
+  }
+
+  .footer-duns-seal {
+    max-width: 100%;
+  }
+
+  .bw-footer__bottom .bw-f-copy {
+    padding-inline: 0.25rem;
+  }
+
+  .hero-trust-row {
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    padding-bottom: 0.35rem;
+  }
+
+  .hero-trust-row .olymp-chip--row {
+    scroll-snap-align: start;
+  }
+}
+
+@media (max-width: 380px) {
+  .home-director__panel {
+    padding: 0.65rem !important;
+  }
+
+  .home-director__photo-frame > .home-director__photo {
+    max-height: min(320px, 48vh);
   }
 }

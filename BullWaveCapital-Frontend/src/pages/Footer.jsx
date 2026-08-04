@@ -278,18 +278,18 @@ const Footer = ({ theme = "light" }) => {
       <div className="bw-footer__bottom relative border-t">
         <div className="bw-footer__rule absolute inset-x-0 top-0" aria-hidden="true" />
         <RevealOnScroll delay={30} eager>
-          <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-5 px-4 py-5 sm:flex-row sm:justify-between sm:gap-6 sm:px-6 lg:px-8">
-            <div className="bw-footer__duns-slot relative z-30 flex shrink-0 justify-center sm:justify-start">
+          <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-4 px-3 py-4 sm:flex-row sm:justify-between sm:gap-6 sm:px-6 sm:py-5 lg:px-8">
+            <div className="bw-footer__duns-slot relative z-30 flex w-full shrink-0 justify-center sm:w-auto sm:justify-start">
               <DunsRegisteredSeal theme={theme} variant="bar" />
             </div>
 
-            <p className="bw-f-copy max-w-xl flex-1 text-center text-[12px] leading-5 sm:text-[13px] sm:leading-6">
+            <p className="bw-f-copy max-w-xl flex-1 text-center text-[11px] leading-5 sm:text-[13px] sm:leading-6">
               © {new Date().getFullYear()} Capital BullWave Private Limited. All
               rights reserved. Research &amp; education only — investments subject
               to market risks.
             </p>
 
-            <div className="flex shrink-0 items-center gap-2.5 sm:gap-3">
+            <div className="flex shrink-0 items-center justify-center gap-2.5 sm:gap-3">
               {social.map(({ icon: Icon, link: href, label: socialLabel }, i) => (
                 <a
                   key={socialLabel}

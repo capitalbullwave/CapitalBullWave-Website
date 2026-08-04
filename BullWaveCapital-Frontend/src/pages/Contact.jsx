@@ -350,7 +350,7 @@ export default function Contact({ theme }) {
                               {item.value}
                             </a>
                           ) : (
-                            <p className={`${text} mt-2 sm:mt-3 text-sm sm:text-base leading-6 sm:leading-7`}>
+                            <p className={`${text} mt-2 sm:mt-3 break-words text-sm sm:text-base leading-6 sm:leading-7`}>
                               {item.value}
                             </p>
                           )}
