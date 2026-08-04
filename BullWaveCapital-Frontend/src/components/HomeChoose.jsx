@@ -100,7 +100,7 @@ const HomeChoose = ({ theme }) => {
       {/* Header */}
       <div className="home-choose-reveal mx-auto max-w-3xl px-1 text-center">
         <p
-          className={`inline-flex rounded-full px-4 py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.28em]
+          className={`inline-flex rounded-full px-3.5 py-1.5 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.14em] sm:tracking-[0.22em]
           ${
             isDark
               ? "bg-sky-500/15 text-sky-300 ring-1 ring-sky-400/20"

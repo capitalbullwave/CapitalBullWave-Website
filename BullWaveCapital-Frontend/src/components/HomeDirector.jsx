@@ -40,7 +40,7 @@ export default function HomeDirector({ theme = "light" }) {
         <div className="home-director__grid" />
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-3 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-0 sm:px-2 lg:px-4">
         <div className="mb-6 text-center sm:mb-10 lg:mb-12">
           <span
             className={`home-director__badge inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-[11px] font-semibold tracking-wide sm:px-4 sm:text-sm ${

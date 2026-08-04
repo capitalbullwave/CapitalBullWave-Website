@@ -278,8 +278,8 @@ const Footer = ({ theme = "light" }) => {
       <div className="bw-footer__bottom relative border-t">
         <div className="bw-footer__rule absolute inset-x-0 top-0" aria-hidden="true" />
         <RevealOnScroll delay={30} eager>
-          <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-4 px-3 py-4 sm:flex-row sm:justify-between sm:gap-6 sm:px-6 sm:py-5 lg:px-8">
-            <div className="bw-footer__duns-slot relative z-30 flex w-full shrink-0 justify-center sm:w-auto sm:justify-start">
+          <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-4 px-3 py-4 md:flex-row md:justify-between md:gap-6 md:px-6 md:py-5 lg:px-8">
+            <div className="bw-footer__duns-slot relative z-30 flex w-full shrink-0 justify-center md:w-auto md:justify-start">
               <DunsRegisteredSeal theme={theme} variant="bar" />
             </div>
 

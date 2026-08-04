@@ -214,7 +214,7 @@ export default function Contact({ theme }) {
         <div className="relative mx-auto px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
           <RevealOnScroll className="text-center">
             <span
-              className={`inline-flex rounded-full px-3 py-1.5 sm:px-5 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.25em] sm:tracking-[0.4em] ${
+              className={`inline-flex rounded-full px-3 py-1.5 sm:px-5 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.14em] sm:tracking-[0.22em] ${
                 isDark
                   ? "bg-sky-500/15 text-sky-300"
                   : "bg-white text-sky-700 ring-1 ring-sky-100"
@@ -283,7 +283,7 @@ export default function Contact({ theme }) {
               {/* Badge */}
 
               <span
-                className={`inline-flex rounded-full px-3 py-1.5 sm:px-5 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.35em] ${
+                className={`inline-flex rounded-full px-3 py-1.5 sm:px-5 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.12em] sm:tracking-[0.2em] ${
                   isDark
                     ? "bg-sky-500/15 text-sky-300"
                     : "bg-sky-50 text-sky-700 ring-1 ring-sky-100"
@@ -410,7 +410,7 @@ export default function Contact({ theme }) {
               {/* ================= RIGHT PANEL ================= */}
 
             <span
-              className={`inline-flex rounded-full px-3 py-1.5 sm:px-5 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.35em] ${
+              className={`inline-flex rounded-full px-3 py-1.5 sm:px-5 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.12em] sm:tracking-[0.2em] ${
                 isDark
                   ? "bg-sky-500/15 text-sky-300"
                   : "bg-sky-50 text-sky-700 ring-1 ring-sky-100"
@@ -435,7 +435,7 @@ export default function Contact({ theme }) {
             >
               {/* Name & Email */}
 
-              <div className="grid gap-5 sm:gap-6 md:grid-cols-2">
+              <div className="grid gap-5 sm:gap-6 xl:grid-cols-2">
 
                 <div>
 
@@ -480,7 +480,7 @@ export default function Contact({ theme }) {
 
               {/* Phone & Subject */}
 
-              <div className="grid gap-5 sm:gap-6 md:grid-cols-2">
+              <div className="grid gap-5 sm:gap-6 xl:grid-cols-2">
 
                 <div>
 
@@ -654,7 +654,7 @@ export default function Contact({ theme }) {
             <div className="text-center">
 
               <span
-                className={`inline-flex rounded-full px-3 py-1.5 sm:px-5 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.35em] ${
+                className={`inline-flex rounded-full px-3 py-1.5 sm:px-5 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.12em] sm:tracking-[0.2em] ${
                   isDark
                     ? "bg-sky-500/15 text-sky-300"
                     : "bg-sky-50 text-sky-700 ring-1 ring-sky-100"
@@ -746,7 +746,7 @@ export default function Contact({ theme }) {
             <div className="text-center">
 
               <span
-                className={`inline-flex rounded-full px-3 py-1.5 sm:px-5 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.2em] sm:tracking-[0.35em] ${
+                className={`inline-flex rounded-full px-3 py-1.5 sm:px-5 sm:py-2 text-[10px] sm:text-xs font-bold uppercase tracking-[0.12em] sm:tracking-[0.2em] ${
                   isDark
                     ? "bg-sky-500/15 text-sky-300"
                     : "bg-sky-50 text-sky-700 ring-1 ring-sky-100"
@@ -761,7 +761,7 @@ export default function Contact({ theme }) {
 
             </div>
 
-            <div className="mt-8 sm:mt-12 grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="mt-8 sm:mt-12 grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
 
               {[
                 {

@@ -304,7 +304,7 @@ export default function Hero({ theme = "light" }) {
                 </div>
 
                 <div
-                  className="absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-5 sm:right-5"
+                  className="hero-panel-copy absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-5 sm:right-5"
                   key={current.id}
                 >
                   <h2 className="hero-slide-text text-lg font-bold text-white sm:text-xl md:text-2xl">

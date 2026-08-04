@@ -102,7 +102,7 @@ export default function Navbar({ theme, toggleTheme }) {
             {/* Brand */}
             <Link
               to="/"
-              className="group flex min-w-0 max-w-[58%] items-center gap-2 sm:max-w-none sm:gap-3"
+              className="group flex min-w-0 max-w-[52%] items-center gap-2 sm:max-w-[48%] lg:max-w-none sm:gap-3"
               onClick={() => setMenuOpen(false)}
             >
               <div
@@ -168,7 +168,7 @@ export default function Navbar({ theme, toggleTheme }) {
                           ? "is-active bg-sky-500 text-white shadow-lg shadow-sky-500/30"
                           : "is-active bg-white text-sky-700 shadow-sm ring-1 ring-sky-100"
                         : isDark
-                          ? "text-slate-200 hover:text-white hover:bg-white/6"
+                          ? "text-slate-200 hover:text-white hover:bg-white/10"
                           : "text-neutral-800 hover:text-sky-700 hover:bg-white/90"
                     }`
                   }
@@ -195,7 +195,7 @@ export default function Navbar({ theme, toggleTheme }) {
 
               <Link
                 to="/contact"
-                className="bw-gradient-btn trade-nav__cta hidden sm:inline-flex items-center justify-center rounded-full px-5 sm:px-6 py-2.5 text-[15px] font-bold tracking-wide !text-white transition hover:-translate-y-0.5"
+                className="bw-gradient-btn trade-nav__cta hidden md:inline-flex items-center justify-center rounded-full px-5 sm:px-6 py-2.5 text-[15px] font-bold tracking-wide !text-white transition hover:-translate-y-0.5"
               >
                 Contact
               </Link>

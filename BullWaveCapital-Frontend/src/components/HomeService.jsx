@@ -65,9 +65,9 @@ const HomeService = ({ theme = "light" }) => {
   return (
     <section className="relative w-full overflow-hidden py-12 sm:py-16 lg:py-20">
       <TradingAtmosphere theme={theme} />
-      <div className="relative z-10 mx-auto max-w-4xl px-0 text-center">
+      <div className="relative z-10 mx-auto max-w-4xl px-1 text-center sm:px-2">
         <p
-          className={`inline-flex rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] sm:text-sm sm:tracking-[0.28em]
+          className={`inline-flex rounded-full px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] sm:px-4 sm:text-sm sm:tracking-[0.22em]
           ${
             isDark
               ? "bg-sky-500/15 text-sky-300"
@@ -77,14 +77,14 @@ const HomeService = ({ theme = "light" }) => {
           Our Services
         </p>
         <h2
-          className={`section-title mt-5 text-2xl font-bold tracking-tight sm:text-3xl lg:text-4xl ${
+          className={`section-title mt-4 text-[1.55rem] font-bold tracking-tight sm:mt-5 sm:text-3xl lg:text-4xl ${
             isDark ? "text-white" : "text-black"
           }`}
         >
           Professional stock market research and investment advisory from Delhi.
         </h2>
         <p
-          className={`mt-4 text-base leading-7 sm:text-lg ${
+          className={`mt-3 text-sm leading-7 sm:mt-4 sm:text-lg ${
             isDark ? "text-slate-400" : "text-neutral-800"
           }`}
         >
@@ -94,7 +94,7 @@ const HomeService = ({ theme = "light" }) => {
         </p>
       </div>
 
-      <div className="relative z-10 mx-auto mt-10 grid max-w-6xl grid-cols-1 gap-4 px-0 sm:mt-14 sm:grid-cols-2 sm:gap-5 sm:px-2 lg:grid-cols-3 lg:gap-6">
+      <div className="relative z-10 mx-auto mt-8 grid max-w-6xl grid-cols-1 gap-4 px-0 sm:mt-12 sm:gap-5 md:grid-cols-2 lg:mt-14 lg:grid-cols-3 lg:gap-6">
         {services.map(({ title, subtitle, description, icon: Icon }) => (
           <article
             key={title}

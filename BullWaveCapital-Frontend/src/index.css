@@ -80,7 +80,6 @@ body,
 
 body {
   overflow-x: hidden;
-  overflow-x: clip;
   overscroll-behavior-y: contain;
   -webkit-overflow-scrolling: touch;
 }
@@ -1753,11 +1752,40 @@ html.theme-dark * {
   }
 
   .hero-panel-media {
-    height: 11.5rem;
+    height: 15.5rem;
+  }
+
+  .hero-panel-copy {
+    padding: 0.65rem 0.75rem 0.85rem;
+  }
+
+  .hero-panel-copy h2 {
+    font-size: 1rem;
+    line-height: 1.25;
+  }
+
+  .hero-panel-copy p {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 0.7rem;
+    line-height: 1.4;
+    margin-top: 0.35rem;
   }
 
   .hero-footer-chips {
     margin-top: 1.25rem;
+  }
+
+  .hero-trust-row {
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+    mask-image: linear-gradient(90deg, transparent, #000 3%, #000 94%, transparent);
+  }
+
+  .hero-trust-row .olymp-chip--row {
+    scroll-snap-align: start;
   }
 }
 
@@ -1775,7 +1803,7 @@ html.theme-dark * {
   }
 
   .hero-panel-media {
-    height: 11rem;
+    height: 14.25rem;
   }
 }
 
@@ -1785,7 +1813,7 @@ html.theme-dark * {
   }
 
   .hero-panel-media {
-    height: 10.5rem;
+    height: 13.5rem;
   }
 
   .hero-footer-chips {
@@ -1796,7 +1824,6 @@ html.theme-dark * {
 /* Sitewide responsive polish */
 .site-main {
   overflow-x: hidden;
-  overflow-x: clip;
 }
 
 img,
@@ -2384,8 +2411,8 @@ body.bw-chat-open .bw-whatsapp-fab {
   }
 
   .feature-stack {
-    padding-left: 0.75rem !important;
-    padding-right: 0.75rem !important;
+    padding-left: 1.35rem !important;
+    padding-right: 0.85rem !important;
   }
 }
 

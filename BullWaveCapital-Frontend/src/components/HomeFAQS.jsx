@@ -147,7 +147,7 @@ export default function HomeFAQS({ theme }) {
                     aria-expanded={open}
                     aria-controls={panelId}
                     id={btnId}
-                    className={`group w-full rounded-xl px-2 py-4 text-left transition-colors sm:px-3
+                    className={`group w-full rounded-xl px-3 py-3.5 text-left transition-colors sm:px-3 sm:py-4
                     ${
                       open
                         ? dark

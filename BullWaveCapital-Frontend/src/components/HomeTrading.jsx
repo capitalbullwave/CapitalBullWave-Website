@@ -128,12 +128,12 @@ const HomeTrading = ({ theme }) => {
         </RevealOnScroll>
 
         <RevealOnScroll className="mt-12 sm:mt-16">
-          <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-3 md:gap-5 lg:gap-8">
             {steps.map(({ id, icon: Icon, title, desc }, idx) => (
               <div
                 key={id}
                 style={{ transitionDelay: `${idx * 80}ms` }}
-                className={`olymp-section-card relative flex flex-col items-center text-center rounded-2xl sm:rounded-[1.35rem] p-5 sm:p-7
+                className={`olymp-section-card relative flex flex-col items-center text-center rounded-2xl sm:rounded-[1.35rem] p-5 sm:p-6 lg:p-7
                 ${
                   isDark
                     ? "bg-slate-900/90 ring-1 ring-white/10"
@@ -144,7 +144,7 @@ const HomeTrading = ({ theme }) => {
                   <div
                     aria-hidden="true"
                     className={`
-                      hidden md:block absolute top-[3.25rem] left-[calc(50%+2.75rem)]
+                      hidden lg:block absolute top-[3.25rem] left-[calc(50%+2.75rem)]
                       h-px w-[calc(100%-3.5rem)] z-0
                       ${isDark ? "bg-slate-700" : "bg-sky-100"}
                     `}

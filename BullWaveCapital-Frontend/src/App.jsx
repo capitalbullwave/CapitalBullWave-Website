@@ -93,7 +93,7 @@ function App() {
 
         <ScrollToTop />
 
-        <main className="site-main mx-auto min-h-screen w-full max-w-[1680px] overflow-x-hidden overflow-x-clip px-3 sm:px-4 md:px-5 lg:px-6 pt-[calc(4.75rem+env(safe-area-inset-top,0px))] pb-[calc(7.25rem+env(safe-area-inset-bottom,0px))] sm:pt-[calc(5.75rem+env(safe-area-inset-top,0px))] sm:pb-[calc(8.5rem+env(safe-area-inset-bottom,0px))]">
+        <main className="site-main mx-auto min-h-screen w-full max-w-[1680px] overflow-x-hidden px-3 sm:px-4 md:px-5 lg:px-6 pt-[calc(4.75rem+env(safe-area-inset-top,0px))] pb-[calc(5.5rem+env(safe-area-inset-bottom,0px))] sm:pt-[calc(5.75rem+env(safe-area-inset-top,0px))] sm:pb-[calc(6rem+env(safe-area-inset-bottom,0px))]">
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home theme={theme} />} />
             <Route path="/about" element={<About theme={theme} />} />
