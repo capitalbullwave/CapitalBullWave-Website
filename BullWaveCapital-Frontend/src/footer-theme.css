@@ -264,14 +264,17 @@
 }
 
 .bw-footer__app-card {
-  opacity: 0;
-  transform: translateY(8px);
+  opacity: 1;
+  transform: none;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
   border-radius: 0.9rem;
-  padding: 0.75rem 0.8rem;
+  padding: 0.85rem 0.9rem;
   background: linear-gradient(145deg, rgba(255, 255, 255, 0.85), rgba(224, 242, 254, 0.95));
   border: 1px solid rgba(125, 211, 252, 0.55);
   box-shadow: 0 8px 22px rgba(14, 165, 233, 0.08);
-  animation: bwFootLiIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: bwFootLiIn 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
   animation-delay: calc(0.1s * var(--i, 0) + 0.2s);
   transition:
     transform 0.3s ease,
@@ -286,18 +289,24 @@
   box-shadow: 0 10px 24px rgba(2, 6, 23, 0.3);
 }
 
-.bw-footer__app-card:hover {
-  transform: translateY(-3px);
-  border-color: rgba(14, 165, 233, 0.55);
-  box-shadow: 0 14px 30px rgba(14, 165, 233, 0.14);
+@media (hover: hover) and (pointer: fine) {
+  .bw-footer__app-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(14, 165, 233, 0.55);
+    box-shadow: 0 14px 30px rgba(14, 165, 233, 0.14);
+  }
+
+  .bw-footer__app-card:hover .bw-footer__app-logo {
+    transform: scale(1.08);
+  }
+}
+
+.bw-footer__app-card:active {
+  transform: scale(0.99);
 }
 
 .bw-footer__app-logo {
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.bw-footer__app-card:hover .bw-footer__app-logo {
-  transform: scale(1.08);
 }
 
 .bw-footer__stores {

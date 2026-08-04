@@ -12,8 +12,7 @@ import {
 import { sendContact } from "../api/contactApi.js";
 import toast from "react-hot-toast";
 import RideLogo from "../assets/bullwaverides-logo.jpeg";
-import AppStoreBadge from "../assets/appstore-icon.png";
-import PlayStoreBadge from "../assets/playstore-icon.png";
+import ClubLogo from "../assets/bullwaveClub.jpeg";
 import { Helmet } from "react-helmet-async";
 import RevealOnScroll from "../components/RevealOnScroll";
 import { validateAuthenticatedEmail } from "../utils/emailValidation.js";
@@ -573,7 +572,9 @@ export default function Contact({ theme }) {
                 Send Message
               </button>
 
-              {/* ================= BULLWAVE RIDES APP ================= */}
+            </form>
+
+              {/* ================= BULLWAVE RIDES ================= */}
 
               <div
                 className={`mt-6 sm:mt-8 rounded-xl sm:rounded-2xl border p-4 sm:p-6 ${
@@ -583,12 +584,11 @@ export default function Contact({ theme }) {
                 }`}
               >
                 <div className="flex flex-col gap-4 sm:gap-6 lg:flex-row lg:items-center lg:justify-between">
-                  {/* Left Side */}
                   <a
                     href="https://bullwaverides.com/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-3 sm:gap-4 rounded-xl transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+                    className="flex min-w-0 flex-1 items-center gap-3 sm:gap-4 rounded-xl transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
                     aria-label="Visit BullWave Rides"
                   >
                     <img
@@ -597,53 +597,44 @@ export default function Contact({ theme }) {
                       className="h-12 w-12 sm:h-16 sm:w-16 shrink-0 rounded-xl sm:rounded-2xl object-cover shadow-lg"
                     />
 
-                    <div>
+                    <div className="min-w-0">
                       <p className={label}>Our Ride Booking Platform</p>
 
                       <h3 className={`${heading} mt-1 text-base sm:text-xl font-bold`}>
                         BullWave Rides
                       </h3>
 
-                      <p className={`${text} mt-1.5 sm:mt-2 max-w-lg text-xs sm:text-sm leading-5 sm:leading-6`}>
-                        Experience fast, safe and affordable rides with the BullWave
-                        Rides platform. Visit the site to learn more.
+                      <p className={`${text} mt-1.5 sm:mt-2 max-w-lg break-words text-xs sm:text-sm leading-5 sm:leading-6`}>
+                        Experience fast, safe and affordable rides with BullWave
+                        Rides. Tap to visit the website.
                       </p>
                     </div>
                   </a>
 
-                  {/* Right Side */}
-                  <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-                    <a
-                      href="https://bullwaverides.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="transition-transform duration-300 hover:scale-105"
-                    >
-                      <img
-                        src={AppStoreBadge}
-                        alt="BullWave Rides on the App Store"
-                        className="h-9 sm:h-12 w-auto"
-                      />
-                    </a>
-
-                    <a
-                      href="https://bullwaverides.com/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="transition-transform duration-300 hover:scale-105"
-                    >
-                      <img
-                        src={PlayStoreBadge}
-                        alt="Get it on Google Play"
-                        className="h-9 sm:h-12 w-auto"
-                      />
-                    </a>
-                  </div>
+                  <a
+                    href="https://www.bullwaveclub.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex min-w-0 flex-1 items-center gap-3 sm:gap-4 rounded-xl transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+                    aria-label="Visit BullWave Club"
+                  >
+                    <img
+                      src={ClubLogo}
+                      alt=""
+                      className="h-12 w-12 sm:h-16 sm:w-16 shrink-0 rounded-xl sm:rounded-2xl object-cover shadow-lg"
+                    />
+                    <div className="min-w-0">
+                      <p className={label}>Community &amp; Club</p>
+                      <h3 className={`${heading} mt-1 text-base sm:text-xl font-bold`}>
+                        BullWave Club
+                      </h3>
+                      <p className={`${text} mt-1.5 sm:mt-2 max-w-lg break-words text-xs sm:text-sm leading-5 sm:leading-6`}>
+                        Explore BullWave Club for community experiences and updates.
+                      </p>
+                    </div>
+                  </a>
                 </div>
               </div>
-
-
-            </form>
 
             </div>
 

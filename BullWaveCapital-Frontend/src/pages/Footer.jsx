@@ -11,8 +11,6 @@ import {
 
 import logo from "../assets/capitalbullwave.png";
 import RideLogo from "../assets/bullwaverides-logo.jpeg";
-import PlayStore from "../assets/playstore-icon.png";
-import AppStore from "../assets/appstore-icon.png";
 import ClubLogo from "../assets/bullwaveClub.jpeg";
 import DunsRegisteredSeal from "../components/DunsRegisteredSeal";
 import RevealOnScroll from "../components/RevealOnScroll";
@@ -61,29 +59,6 @@ const social = [
   },
 ];
 
-const storeBadges = (
-  <div className="bw-footer__stores mt-1 flex flex-wrap items-center gap-2">
-    <a
-      href="https://play.google.com/store"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="bw-footer__store"
-      aria-label="Get it on Google Play"
-    >
-      <img src={PlayStore} alt="Google Play" className="h-9 w-auto rounded-md sm:h-10" />
-    </a>
-    <a
-      href="https://www.apple.com/app-store/"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="bw-footer__store"
-      aria-label="Download on the App Store"
-    >
-      <img src={AppStore} alt="App Store" className="h-9 w-auto rounded-md sm:h-10" />
-    </a>
-  </div>
-);
-
 const Footer = ({ theme = "light" }) => {
   const dark = theme === "dark";
   const navigate = useNavigate();
@@ -127,8 +102,8 @@ const Footer = ({ theme = "light" }) => {
               </h3>
               <p className="bw-f-text mt-4 text-sm leading-7 sm:text-[15px]">
                 Capital BullWave Private Limited provides professional stock market
-                research, investment guidance, and investor education from Netaji
-                Subhash Place, Delhi.
+                research, investment guidance, and investor education from offices
+                in New Delhi and Dubai.
               </p>
 
               <div className="mt-5 flex items-center gap-3">
@@ -256,7 +231,7 @@ const Footer = ({ theme = "light" }) => {
             {/* Apps & Downloads */}
             <div className="bw-footer__col">
               <h3 className="bw-footer__heading bw-f-title text-lg font-bold sm:text-xl">
-                Apps &amp; Downloads
+                Our Platforms
               </h3>
 
               <div className="mt-4 space-y-3">
@@ -267,10 +242,10 @@ const Footer = ({ theme = "light" }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ "--i": i }}
-                    className="bw-footer__app-card block transition hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
-                    aria-label={`Visit ${app.name}`}
+                    className="bw-footer__app-card group flex min-h-[3.5rem] items-center transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2"
+                    aria-label={`Open ${app.name} website`}
                   >
-                    <div className="flex items-center gap-3">
+                    <div className="flex w-full min-w-0 items-center gap-3">
                       <img
                         src={app.logo}
                         alt=""
@@ -280,21 +255,19 @@ const Footer = ({ theme = "light" }) => {
                         <p className="bw-f-app-name truncate text-sm font-bold sm:text-[15px]">
                           {app.name}
                         </p>
-                        <p className="bw-f-muted mt-0.5 text-xs">{app.tagline}</p>
+                        <p className="bw-f-muted mt-0.5 truncate text-xs">
+                          {app.tagline}
+                        </p>
                       </div>
+                      <span
+                        aria-hidden="true"
+                        className="shrink-0 text-sky-500 transition group-hover:translate-x-0.5"
+                      >
+                        →
+                      </span>
                     </div>
                   </a>
                 ))}
-
-                <div
-                  style={{ "--i": apps.length }}
-                  className="bw-footer__app-card bw-footer__app-card--stores"
-                >
-                  <p className="bw-f-available mb-2 text-[11px] font-semibold uppercase tracking-[0.16em]">
-                    Available on
-                  </p>
-                  {storeBadges}
-                </div>
               </div>
             </div>
           </div>
@@ -322,7 +295,7 @@ const Footer = ({ theme = "light" }) => {
                   key={socialLabel}
                   href={href}
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
                   aria-label={socialLabel}
                   style={{ "--i": i }}
                   className={`bw-footer__social ${

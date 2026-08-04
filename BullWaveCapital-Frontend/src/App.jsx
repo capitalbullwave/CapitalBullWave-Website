@@ -56,6 +56,8 @@ function App() {
         position="top-center"
         containerStyle={{
           top: "calc(5.25rem + env(safe-area-inset-top, 0px))",
+          left: 12,
+          right: 12,
         }}
         gutter={10}
         toastOptions={{
@@ -64,8 +66,9 @@ function App() {
             background: isDark ? "#0f172a" : "#ffffff",
             color: isDark ? "#fff" : "#000",
             borderRadius: "14px",
-            padding: "16px",
-            fontSize: "15px",
+            padding: "14px 16px",
+            fontSize: "14px",
+            maxWidth: "min(92vw, 420px)",
             border: isDark ? "1px solid #0ea5e9" : "1px solid #7dd3fc",
             boxShadow: "0 12px 30px rgba(14,165,233,0.18)",
           },
@@ -90,7 +93,7 @@ function App() {
 
         <ScrollToTop />
 
-        <main className="site-main mx-auto min-h-screen w-full max-w-[1680px] overflow-x-clip px-2 sm:px-3 md:px-4 lg:px-5 pt-[calc(4.75rem+env(safe-area-inset-top,0px))] pb-[calc(7.5rem+env(safe-area-inset-bottom,0px))] sm:pt-[calc(5.75rem+env(safe-area-inset-top,0px))] sm:pb-[calc(8.5rem+env(safe-area-inset-bottom,0px))]">
+        <main className="site-main mx-auto min-h-screen w-full max-w-[1680px] overflow-x-hidden overflow-x-clip px-3 sm:px-4 md:px-5 lg:px-6 pt-[calc(4.75rem+env(safe-area-inset-top,0px))] pb-[calc(7.5rem+env(safe-area-inset-bottom,0px))] sm:pt-[calc(5.75rem+env(safe-area-inset-top,0px))] sm:pb-[calc(8.5rem+env(safe-area-inset-bottom,0px))]">
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home theme={theme} />} />
             <Route path="/about" element={<About theme={theme} />} />
