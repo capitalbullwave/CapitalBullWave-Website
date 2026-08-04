@@ -321,7 +321,7 @@ const PrivacyPolicy = ({ theme }) => {
             <strong className={isDark ? "text-white" : "text-black"}>
               Dubai Office:
             </strong>{" "}
-            World Trade Centre (Rashid Tower), Sheikh Zayed Road, P.O. Box: 9700,
+            World Trade Centre (Sheikh Rashid Tower), Sheikh Zayed Road, P.O. Box: 9700,
             Dubai, United Arab Emirates
           </p>
           <p className="mt-2">

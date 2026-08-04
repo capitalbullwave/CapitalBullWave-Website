@@ -17,7 +17,7 @@ export const companyData = {
         },
         {
           location: "Sheikh Zayed Road",
-          building: "World Trade Centre (Rashid Tower)",
+          building: "World Trade Centre (Sheikh Rashid Tower)",
           city: "Dubai",
           country: "United Arab Emirates",
           offices: ["P.O. Box: 9700"],
@@ -206,7 +206,7 @@ export const companyData = {
     phone: "+91 8796565234",
     whatsapp: "+91 9616212526",
     office:
-      "India: Aggarwal Millennium Tower 2, Office No. 1275 (12th Floor), Netaji Subhash Place, Pitampura, New Delhi - 110034 | Dubai: World Trade Centre (Rashid Tower), Sheikh Zayed Road, P.O. Box: 9700, Dubai, United Arab Emirates",
+      "India: Aggarwal Millennium Tower 2, Office No. 1275 (12th Floor), Netaji Subhash Place, Pitampura, New Delhi - 110034 | Dubai: World Trade Centre (Sheikh Rashid Tower), Sheikh Zayed Road, P.O. Box: 9700, Dubai, United Arab Emirates",
     businessHours: "Monday to Friday | 9:00 AM – 6:30 PM",
     country: "India & United Arab Emirates",
     support:
@@ -288,7 +288,7 @@ export const companyData = {
     contact: {
       email: "admin@capitalbullwave.com",
       office:
-        "India: Aggarwal Millennium Tower 2, Netaji Subhash Place, Pitampura, New Delhi - 110034 | Dubai: World Trade Centre (Rashid Tower), Sheikh Zayed Road, P.O. Box: 9700, Dubai, UAE",
+        "India: Aggarwal Millennium Tower 2, Netaji Subhash Place, Pitampura, New Delhi - 110034 | Dubai: World Trade Centre (Sheikh Rashid Tower), Sheikh Zayed Road, P.O. Box: 9700, Dubai, UAE",
     },
   },
 

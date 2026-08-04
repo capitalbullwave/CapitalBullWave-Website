@@ -104,7 +104,7 @@ const TermsCondition = ({ theme }) => {
               <strong className={isDark ? "text-white" : "text-black"}>
                 Dubai Office:
               </strong>{" "}
-              World Trade Centre (Rashid Tower), Sheikh Zayed Road, P.O. Box:
+              World Trade Centre (Sheikh Rashid Tower), Sheikh Zayed Road, P.O. Box:
               9700, Dubai, United Arab Emirates
             </li>
           </ul>

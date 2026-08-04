@@ -29,7 +29,7 @@ const contactDetails = [
     title: "Dubai Office",
     subtitle: "United Arab Emirates",
     value:
-      "World Trade Centre (Rashid Tower), Sheikh Zayed Road, P.O. Box: 9700, Dubai, United Arab Emirates",
+      "World Trade Centre (Sheikh Rashid Tower), Sheikh Zayed Road, P.O. Box: 9700, Dubai, United Arab Emirates",
     icon: FaMapMarkerAlt,
   },
   {
@@ -722,7 +722,7 @@ export default function Contact({ theme }) {
                 </div>
                 <iframe
                   title="Capital BullWave Dubai Office"
-                  src="https://www.google.com/maps?q=World+Trade+Centre+Rashid+Tower+Sheikh+Zayed+Road+Dubai&output=embed"
+                  src="https://www.google.com/maps?q=World+Trade+Centre+Sheikh+Rashid+Tower+Sheikh+Zayed+Road+Dubai&output=embed"
                   loading="lazy"
                   allowFullScreen
                   referrerPolicy="no-referrer-when-downgrade"

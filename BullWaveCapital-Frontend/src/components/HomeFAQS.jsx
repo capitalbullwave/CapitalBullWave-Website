@@ -53,7 +53,7 @@ const faqSections = [
       {
         question: "Where is Capital BullWave located?",
         answer:
-          "We have offices in New Delhi and Dubai. India: Aggarwal Millennium Tower 2, Office No. 1275 (12th Floor), Netaji Subhash Place, Pitampura, New Delhi - 110034. Dubai: World Trade Centre (Rashid Tower), Sheikh Zayed Road, P.O. Box: 9700, Dubai, United Arab Emirates.",
+          "We have offices in New Delhi and Dubai. India: Aggarwal Millennium Tower 2, Office No. 1275 (12th Floor), Netaji Subhash Place, Pitampura, New Delhi - 110034. Dubai: World Trade Centre (Sheikh Rashid Tower), Sheikh Zayed Road, P.O. Box: 9700, Dubai, United Arab Emirates.",
       },
       {
         question: "How can I reach support?",

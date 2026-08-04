@@ -184,7 +184,7 @@ const Footer = ({ theme = "light" }) => {
                   <div className="min-w-0">
                     <p className="bw-f-label text-sm font-semibold">Dubai Office</p>
                     <p className="bw-f-detail mt-1 break-words text-sm leading-6">
-                      World Trade Centre (Rashid Tower), Sheikh Zayed Road,
+                      World Trade Centre (Sheikh Rashid Tower), Sheikh Zayed Road,
                       P.O. Box: 9700, Dubai, United Arab Emirates
                     </p>
                   </div>

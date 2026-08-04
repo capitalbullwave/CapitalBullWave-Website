@@ -252,7 +252,7 @@ const About = ({ theme }) => {
                         Dubai, United Arab Emirates
                       </h3>
                       <p className={`mt-2 text-sm sm:text-base leading-7 wrap-break-word ${muted}`}>
-                        <strong>World Trade Centre (Rashid Tower)</strong>, Sheikh
+                        <strong>World Trade Centre (Sheikh Rashid Tower)</strong>, Sheikh
                         Zayed Road, P.O. Box: 9700, Dubai, UAE.
                       </p>
                     </div>

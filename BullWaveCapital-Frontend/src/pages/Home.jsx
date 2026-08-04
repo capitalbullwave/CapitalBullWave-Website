@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import Hero from "../components/Hero";
+import HomeDirector from "../components/HomeDirector";
 import HomeService from "../components/HomeService";
 import HomeFeatureProduct from "../components/HomeFeatureProduct";
 import HomeChoose from "../components/HomeChoose";
@@ -27,7 +28,7 @@ const organizationSchema = {
     },
     {
       "@type": "PostalAddress",
-      streetAddress: "World Trade Centre (Rashid Tower), Sheikh Zayed Road",
+      streetAddress: "World Trade Centre (Sheikh Rashid Tower), Sheikh Zayed Road",
       addressLocality: "Dubai",
       postOfficeBoxNumber: "9700",
       addressCountry: "AE",
@@ -80,6 +81,10 @@ const Home = ({ theme }) => {
       <Hero theme={theme} />
 
       <RevealOnScroll>
+        <HomeDirector theme={theme} />
+      </RevealOnScroll>
+
+      <RevealOnScroll delay={40}>
         <HomeTrading theme={theme} />
       </RevealOnScroll>
 
