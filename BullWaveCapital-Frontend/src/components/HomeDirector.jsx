@@ -141,7 +141,7 @@ export default function HomeDirector({ theme = "light" }) {
             >
               “At Capital BullWave, we believe disciplined research and clear
               risk frameworks help every trader and investor move with
-              confidence. Our focus is simple — transparent market insight,
+              confidence. Our focus is simple, transparent market insight,
               structured plans, and education that builds lasting skill.”
             </blockquote>
 
