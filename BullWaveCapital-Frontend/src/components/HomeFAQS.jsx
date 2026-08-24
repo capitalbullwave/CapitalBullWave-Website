@@ -196,7 +196,7 @@ export default function HomeFAQS({ theme }) {
                       <div className="overflow-hidden">
                         {open && (
                           <p
-                            className={`faq-answer-enter text-sm leading-7 sm:text-base ${
+                            className={`faq-answer-enter break-words text-sm leading-7 sm:text-base ${
                               dark ? "text-slate-400" : "text-slate-600"
                             }`}
                           >

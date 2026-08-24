@@ -26,7 +26,7 @@ const About = ({ theme }) => {
   const title = dark ? "text-white" : "text-black";
 
   return (
-    <div className="page-shell page-enter">
+    <div className="page-shell page-enter py-4 sm:py-6 lg:py-8">
       <Helmet>
         <title>About Us | Capital BullWave - Market Research Delhi & Dubai</title>
         <meta

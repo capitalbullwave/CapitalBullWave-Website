@@ -105,7 +105,7 @@ export default function SiteMap({ theme }) {
                 <Link
                   key={item.path}
                   to={item.path}
-                  className={`premium-card group flex items-center gap-3 rounded-xl p-4 transition hover:-translate-y-0.5
+                  className={`premium-card group flex min-w-0 items-center gap-3 rounded-xl p-4 transition hover:-translate-y-0.5
                   ${
                     isDark
                       ? "bg-slate-950/50 ring-1 ring-white/10 hover:ring-sky-400/30"
@@ -114,7 +114,7 @@ export default function SiteMap({ theme }) {
                   style={{ animationDelay: `${index * 40}ms` }}
                 >
                   <span
-                    className={`flex h-10 w-10 items-center justify-center rounded-xl
+                    className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl
                     ${
                       isDark
                         ? "bg-sky-500/15 text-sky-300"
@@ -124,7 +124,7 @@ export default function SiteMap({ theme }) {
                     <Icon className="text-sm" />
                   </span>
                   <span
-                    className={`text-sm sm:text-base font-semibold ${
+                    className={`min-w-0 break-words text-sm sm:text-base font-semibold ${
                       isDark
                         ? "text-white group-hover:text-sky-300"
                         : "text-black group-hover:text-sky-700"

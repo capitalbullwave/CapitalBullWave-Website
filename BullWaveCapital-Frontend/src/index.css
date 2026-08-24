@@ -3199,9 +3199,11 @@ body.bw-chat-open .bw-whatsapp-fab {
 .plan-cta {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
+  min-height: 2.75rem;
   border-radius: 0.75rem;
-  padding: 0.625rem 1.25rem;
+  padding: 0.75rem 1.25rem;
   font-size: 0.875rem;
   font-weight: 600;
   transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
@@ -4497,7 +4499,7 @@ body.bw-chat-open .bw-whatsapp-fab {
   }
 
   .home-director__panel {
-    padding: 0.75rem !important;
+    padding: 1rem !important;
     border-radius: 1.1rem !important;
     gap: 1.15rem;
   }
@@ -4543,7 +4545,7 @@ body.bw-chat-open .bw-whatsapp-fab {
 
 @media (max-width: 380px) {
   .home-director__panel {
-    padding: 0.65rem !important;
+    padding: 0.85rem !important;
   }
 
   .home-director__photo-frame > .home-director__photo {

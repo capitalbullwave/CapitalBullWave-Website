@@ -640,7 +640,7 @@ const HomeFeatureProduct = ({ theme }) => {
             <div className="mt-8">
               <Link
                 to="/contact"
-                className={`plan-cta ${
+                className={`plan-cta w-full justify-center sm:w-auto ${
                   plan.featured
                     ? isDark
                       ? "plan-cta--featured-dark"

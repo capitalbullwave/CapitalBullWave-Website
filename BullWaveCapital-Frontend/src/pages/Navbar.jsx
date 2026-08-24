@@ -184,7 +184,7 @@ export default function Navbar({ theme, toggleTheme }) {
                 type="button"
                 onClick={toggleTheme}
                 aria-label="Toggle Theme"
-                className={`flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 ${
+                className={`flex h-11 w-11 items-center justify-center rounded-full transition-all duration-300 ${
                   isDark
                     ? "bg-white/5 text-white ring-1 ring-white/10 hover:bg-white/10 hover:ring-sky-400/30"
                     : "bg-sky-50 text-slate-700 ring-1 ring-sky-100 hover:bg-sky-100"
@@ -205,7 +205,7 @@ export default function Navbar({ theme, toggleTheme }) {
                 onClick={() => setMenuOpen((v) => !v)}
                 aria-label="Toggle menu"
                 aria-expanded={menuOpen}
-                className={`lg:hidden flex h-10 w-10 items-center justify-center rounded-full transition-all duration-300 ${
+                className={`lg:hidden flex h-11 w-11 items-center justify-center rounded-full transition-all duration-300 ${
                   menuOpen
                     ? "bg-sky-500 text-white shadow-lg shadow-sky-500/30"
                     : isDark

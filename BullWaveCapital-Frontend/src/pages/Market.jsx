@@ -18,7 +18,7 @@ const Market = ({ theme }) => {
   const title = dark ? "text-white" : "text-black";
 
   return (
-    <div className="page-shell page-enter">
+    <div className="page-shell page-enter py-4 sm:py-6 lg:py-8">
       <Helmet>
         <title>Markets | Capital BullWave - NSE, BSE, F&O & MCX Research Delhi</title>
         <meta

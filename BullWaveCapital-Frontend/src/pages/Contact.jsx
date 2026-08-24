@@ -176,7 +176,7 @@ export default function Contact({ theme }) {
     : "flex h-11 w-11 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl bg-sky-100 text-sky-700";
 
   return (
-    <div className="page-shell page-enter relative overflow-hidden">
+    <div className="page-shell page-enter relative overflow-hidden py-4 sm:py-6 lg:py-8">
 
       <Helmet>
         <title>Contact Us | Capital BullWave - Delhi & Dubai Offices</title>
@@ -374,7 +374,7 @@ export default function Contact({ theme }) {
                     <FaClock className="text-base sm:text-xl" />
                   </div>
 
-                  <div>
+                  <div className="min-w-0">
 
                     <p className={label}>
                       Office Hours
@@ -649,7 +649,7 @@ export default function Contact({ theme }) {
             isDark ? "border-slate-800" : "border-slate-200"
           }`}
         >
-          <div className="py-8 sm:py-12">
+          <div className="px-4 py-8 sm:px-8 sm:py-12 lg:px-10">
 
             <div className="text-center">
 
@@ -741,7 +741,7 @@ export default function Contact({ theme }) {
             isDark ? "border-slate-800" : "border-slate-200"
           }`}
         >
-          <div className="py-8 sm:py-12">
+          <div className="px-4 py-8 sm:px-8 sm:py-12 lg:px-10">
 
             <div className="text-center">
 
@@ -806,7 +806,7 @@ export default function Contact({ theme }) {
 
   {/* ================= CALL TO ACTION ================= */}
 
-        <div className="pb-8 sm:pb-12">
+        <div className="px-4 pb-8 sm:px-8 sm:pb-12 lg:px-10">
 
           <div
             className={`overflow-hidden rounded-2xl sm:rounded-[32px] px-5 py-8 sm:px-8 sm:py-12 text-center ${
@@ -830,14 +830,14 @@ export default function Contact({ theme }) {
 
               <a
                 href="tel:+918796565234"
-                className="rounded-full bg-white px-5 py-2.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-sky-700 transition hover:scale-105"
+                className="inline-flex min-h-11 items-center justify-center rounded-full bg-white px-5 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-sky-700 transition hover:scale-105"
               >
                 Call Now
               </a>
 
               <a
                 href="mailto:admin@capitalbullwave.com"
-                className="rounded-full border border-white px-5 py-2.5 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-white transition hover:scale-105"
+                className="inline-flex min-h-11 items-center justify-center rounded-full border border-white px-5 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-semibold text-white transition hover:scale-105"
               >
                 Email Us
               </a>
