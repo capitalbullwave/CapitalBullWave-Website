@@ -13,7 +13,7 @@ const WhatsAppButton = () => {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
-      className="bw-whatsapp-fab fixed z-[9998] group right-4 sm:right-6 bottom-[calc(4.75rem+env(safe-area-inset-bottom,0px))] sm:bottom-[calc(5.75rem+env(safe-area-inset-bottom,0px))]"
+      className="bw-whatsapp-fab fixed z-[9998] group right-4 sm:right-6 bottom-[calc(8.5rem+env(safe-area-inset-bottom,0px))] sm:bottom-[calc(5.75rem+env(safe-area-inset-bottom,0px))]"
     >
       <span className="absolute right-14 sm:right-16 top-1/2 -translate-y-1/2 whitespace-nowrap rounded-lg bg-slate-900 px-3 py-2 text-sm text-white opacity-0 transition-all duration-300 group-hover:opacity-100 max-sm:hidden">
         Chat on WhatsApp

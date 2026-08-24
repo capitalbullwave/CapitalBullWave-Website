@@ -554,11 +554,13 @@ img {
 }
 
 .coverflow__dot {
-  height: 0.35rem;
-  width: 1.35rem;
+  height: 0.5rem;
+  width: 1.5rem;
   border-radius: 999px;
   border: 0;
-  padding: 0;
+  padding: 1rem 0.65rem;
+  box-sizing: content-box;
+  background-clip: content-box;
   cursor: pointer;
   background: rgba(125, 211, 252, 0.55);
   transition:
@@ -590,7 +592,7 @@ img {
   cursor: grab;
   outline: none;
   overflow: hidden;
-  touch-action: pan-y;
+  touch-action: none;
 }
 
 .coverflow__stage.is-dragging {
@@ -781,7 +783,7 @@ img {
   .coverflow--compact .coverflow__stage {
     height: auto;
     perspective: none;
-    overflow: visible;
+    overflow: hidden;
   }
 
   .coverflow__simple {
@@ -1883,6 +1885,13 @@ body.bw-chat-open .bw-whatsapp-fab {
   pointer-events: none !important;
 }
 
+/* Keep WhatsApp clear of the assist prompt on mobile */
+@media (max-width: 640px) {
+  body.bw-chat-prompt-open .bw-whatsapp-fab {
+    bottom: calc(11.25rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-bg-slide,
   .hero-panel__img,
@@ -2384,6 +2393,8 @@ body.bw-chat-open .bw-whatsapp-fab {
   font-weight: 600;
   letter-spacing: 0.01em;
   line-height: 1.25;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
@@ -2392,11 +2403,11 @@ body.bw-chat-open .bw-whatsapp-fab {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 1.55rem;
-  height: 1.55rem;
+  width: 2.75rem;
+  height: 2.75rem;
   border: 0;
   border-radius: 999px;
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   cursor: pointer;
   transition:
     background 0.2s ease,
@@ -2447,8 +2458,8 @@ body.bw-chat-open .bw-whatsapp-fab {
   }
 
   .feature-stack {
-    padding-left: 1.35rem !important;
-    padding-right: 0.85rem !important;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
   }
 }
 

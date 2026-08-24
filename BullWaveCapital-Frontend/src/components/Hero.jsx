@@ -354,7 +354,7 @@ export default function Hero({ theme = "light" }) {
                 aria-label={`Show ${slide.title}`}
                 aria-current={active === index ? "true" : undefined}
                 onClick={() => goTo(index)}
-                className={`cursor-pointer rounded-full transition-all duration-500 ${
+                className={`relative cursor-pointer rounded-full transition-all duration-500 before:absolute before:inset-[-12px] before:content-[''] ${
                   active === index
                     ? "h-2 w-8 bg-sky-400"
                     : "h-2 w-2 bg-white/30 hover:bg-white/60"

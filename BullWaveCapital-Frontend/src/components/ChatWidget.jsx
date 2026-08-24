@@ -249,6 +249,12 @@ export default function ChatWidget({ theme }) {
     return () => window.clearTimeout(show);
   }, [isOpen, promptDismissed]);
 
+  useEffect(() => {
+    const showPrompt = promptVisible && !promptDismissed && !isOpen;
+    document.body.classList.toggle("bw-chat-prompt-open", showPrompt);
+    return () => document.body.classList.remove("bw-chat-prompt-open");
+  }, [promptVisible, promptDismissed, isOpen]);
+
   const dismissPrompt = (e) => {
     e?.preventDefault?.();
     e?.stopPropagation?.();
@@ -443,7 +449,7 @@ export default function ChatWidget({ theme }) {
               }`}
             >
               <div
-                className={`flex max-w-[92%] sm:max-w-[88%] items-end gap-2 ${
+                className={`flex min-w-0 max-w-[92%] sm:max-w-[88%] items-end gap-2 ${
                   msg.sender === "user" ? "flex-row-reverse" : "flex-row"
                 }`}
               >
@@ -464,7 +470,7 @@ export default function ChatWidget({ theme }) {
                 </div>
 
                 <div
-                  className={`rounded-2xl px-3.5 py-2.5 shadow-sm ${
+                  className={`min-w-0 break-words rounded-2xl px-3.5 py-2.5 shadow-sm ${
                     msg.sender === "user"
                       ? "rounded-br-md bg-gradient-to-br from-sky-500 to-cyan-600 text-white"
                       : isDark
@@ -543,7 +549,7 @@ export default function ChatWidget({ theme }) {
                     key={item}
                     type="button"
                     onClick={() => sendMessage(item)}
-                    className={`rounded-full px-3 py-1.5 text-xs sm:text-[13px] font-semibold transition
+                    className={`min-h-11 rounded-full px-3.5 py-2.5 text-sm font-semibold transition
                     ${
                       isDark
                         ? "bg-slate-900 text-sky-300 ring-1 ring-sky-400/25 hover:bg-sky-500 hover:text-white"
@@ -577,7 +583,7 @@ export default function ChatWidget({ theme }) {
               onChange={(e) => setMessage(e.target.value)}
               onKeyDown={handleKeyDown}
               disabled={typing}
-              className={`min-w-0 flex-1 rounded-xl border px-3.5 py-3 text-sm outline-none transition
+              className={`min-w-0 flex-1 rounded-xl border px-3.5 py-3 text-base outline-none transition
                 focus:ring-2 focus:ring-sky-400/50 disabled:opacity-60
                 ${
                   isDark

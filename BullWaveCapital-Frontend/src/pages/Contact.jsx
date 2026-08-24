@@ -160,8 +160,8 @@ export default function Contact({ theme }) {
     : "premium-card rounded-2xl sm:rounded-3xl border border-sky-100 bg-white p-4 sm:p-6 transition-all duration-300 hover:border-sky-300 hover:-translate-y-1 shadow-lg shadow-sky-100/70";
 
   const input = isDark
-    ? "w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-2.5 sm:px-5 sm:py-3 text-sm sm:text-base text-white placeholder:text-slate-500 outline-none transition focus:border-sky-500"
-    : "w-full rounded-xl border border-sky-200 bg-white px-4 py-2.5 sm:px-5 sm:py-3 text-sm sm:text-base text-black placeholder:text-slate-400 outline-none transition focus:border-sky-500";
+    ? "w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-2.5 sm:px-5 sm:py-3 text-base text-white placeholder:text-slate-500 outline-none transition focus:border-sky-500"
+    : "w-full rounded-xl border border-sky-200 bg-white px-4 py-2.5 sm:px-5 sm:py-3 text-base text-black placeholder:text-slate-400 outline-none transition focus:border-sky-500";
 
   const heading = isDark ? "text-sky-300" : "text-sky-700";
 
