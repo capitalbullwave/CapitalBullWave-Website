@@ -1745,6 +1745,11 @@ html.theme-dark * {
 @media (max-width: 639px) {
   .hero-section {
     min-height: auto;
+    padding-bottom: 0.5rem;
+  }
+
+  .hero-inner {
+    padding-bottom: 5.5rem;
   }
 
   .olymp-chip--row {

@@ -246,7 +246,11 @@ export default function ChatWidget({ theme }) {
     if (promptDismissed) return undefined;
 
     const show = window.setTimeout(() => setPromptVisible(true), 400);
-    return () => window.clearTimeout(show);
+    const hide = window.setTimeout(() => setPromptVisible(false), 9000);
+    return () => {
+      window.clearTimeout(show);
+      window.clearTimeout(hide);
+    };
   }, [isOpen, promptDismissed]);
 
   useEffect(() => {
