@@ -1520,10 +1520,13 @@ html.theme-dark * {
 
 .hero-panel {
   max-width: 28rem;
+  min-width: 0;
+  width: 100%;
 }
 
 .hero-panel-card {
   will-change: transform;
+  max-width: 100%;
 }
 
 .hero-section--ready .hero-panel-card {
@@ -2239,6 +2242,39 @@ body.bw-chat-open .bw-whatsapp-fab {
 
 .chat-dock > * {
   pointer-events: auto;
+}
+
+/* Stack assist prompt above FAB on small screens so it does not cover hero/stats */
+@media (max-width: 640px) {
+  .chat-dock {
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    gap: 0.5rem;
+  }
+
+  .chat-prompt {
+    max-width: min(72vw, 13.5rem);
+  }
+
+  .chat-prompt__bubble {
+    padding: 0.55rem 0.8rem;
+  }
+
+  .chat-prompt__bubble::after {
+    right: 1.1rem;
+    top: auto;
+    bottom: -4px;
+    transform: rotate(45deg);
+  }
+
+  .hero-panel {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-panel-card {
+    width: 100%;
+  }
 }
 
 .chat-fab {

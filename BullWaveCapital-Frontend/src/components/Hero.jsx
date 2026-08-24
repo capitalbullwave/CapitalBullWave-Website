@@ -316,27 +316,27 @@ export default function Hero({ theme = "light" }) {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-2.5 border-t border-white/10 bg-slate-950/80 p-3 backdrop-blur-xl sm:gap-4 sm:p-5">
-                <div className="hero-stat olymp-stat rounded-xl p-3 ring-1 ring-white/10 sm:rounded-2xl sm:p-4">
-                  <p className="hero-stat__label text-[10px] font-semibold uppercase tracking-[0.16em] sm:text-xs">
+              <div className="grid min-w-0 grid-cols-2 gap-2 border-t border-white/10 bg-slate-950/80 p-2.5 backdrop-blur-xl sm:gap-4 sm:p-5">
+                <div className="hero-stat olymp-stat min-w-0 rounded-xl p-2.5 ring-1 ring-white/10 sm:rounded-2xl sm:p-4">
+                  <p className="hero-stat__label text-[9px] font-semibold uppercase tracking-[0.08em] sm:text-xs sm:tracking-[0.16em]">
                     Annual Return
                   </p>
-                  <h3 className="hero-stat__value mt-1 text-xl font-bold sm:mt-1.5 sm:text-3xl">
+                  <h3 className="hero-stat__value mt-1 truncate text-lg font-bold sm:mt-1.5 sm:text-3xl">
                     +
                     <CountUp end={18.6} decimals={1} duration={2200} suffix="%" />
                   </h3>
-                  <p className="hero-stat__sub mt-1 text-[11px] sm:text-sm">
+                  <p className="hero-stat__sub mt-1 text-[10px] leading-snug sm:text-sm">
                     Average Growth
                   </p>
                 </div>
-                <div className="hero-stat hero-stat--delay olymp-stat rounded-xl p-3 ring-1 ring-white/10 sm:rounded-2xl sm:p-4">
-                  <p className="hero-stat__label text-[10px] font-semibold uppercase tracking-[0.16em] sm:text-xs">
+                <div className="hero-stat hero-stat--delay olymp-stat min-w-0 rounded-xl p-2.5 ring-1 ring-white/10 sm:rounded-2xl sm:p-4">
+                  <p className="hero-stat__label text-[9px] font-semibold uppercase tracking-[0.08em] sm:text-xs sm:tracking-[0.16em]">
                     Investors
                   </p>
-                  <h3 className="hero-stat__value mt-1 text-xl font-bold sm:mt-1.5 sm:text-3xl">
+                  <h3 className="hero-stat__value mt-1 truncate text-lg font-bold sm:mt-1.5 sm:text-3xl">
                     <CountUp end={12} duration={2200} suffix="K+" />
                   </h3>
-                  <p className="hero-stat__sub mt-1 text-[11px] sm:text-sm">
+                  <p className="hero-stat__sub mt-1 text-[10px] leading-snug sm:text-sm">
                     Worldwide Clients
                   </p>
                 </div>
