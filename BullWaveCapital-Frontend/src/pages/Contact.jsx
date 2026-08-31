@@ -11,11 +11,12 @@ import {
 
 import { sendContact } from "../api/contactApi.js";
 import toast from "react-hot-toast";
-import RideLogo from "../assets/bullwaverides-logo.jpeg";
 import ClubLogo from "../assets/bullwaveClub.jpeg";
 import { Helmet } from "react-helmet-async";
 import RevealOnScroll from "../components/RevealOnScroll";
 import { validateAuthenticatedEmail } from "../utils/emailValidation.js";
+
+const RideLogo = "/images/bwride.png";
 
 const contactDetails = [
   {
@@ -585,20 +586,24 @@ export default function Contact({ theme }) {
               >
                 <div className="flex flex-col gap-4 sm:gap-6 lg:flex-row lg:items-center lg:justify-between">
                   <a
-                    href="https://bullwaverides.com/"
+                    href="https://play.google.com/store/apps/details?id=com.bullwave.rides.user&hl=en_IN"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex min-w-0 flex-1 items-center gap-3 sm:gap-4 rounded-xl transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
-                    aria-label="Visit BullWave Rides"
+                    aria-label="Download BullWave Rides on Google Play"
                   >
                     <img
                       src={RideLogo}
                       alt=""
-                      className="h-12 w-12 sm:h-16 sm:w-16 shrink-0 rounded-xl sm:rounded-2xl object-cover shadow-lg"
+                      width={64}
+                      height={64}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-12 w-12 sm:h-16 sm:w-16 shrink-0 rounded-xl sm:rounded-2xl bg-black object-contain p-0.5 shadow-lg ring-1 ring-black/10"
                     />
 
                     <div className="min-w-0">
-                      <p className={label}>Our Ride Booking Platform</p>
+                      <p className={label}>Our Ride Booking App</p>
 
                       <h3 className={`${heading} mt-1 text-base sm:text-xl font-bold`}>
                         BullWave Rides
@@ -606,7 +611,7 @@ export default function Contact({ theme }) {
 
                       <p className={`${text} mt-1.5 sm:mt-2 max-w-lg break-words text-xs sm:text-sm leading-5 sm:leading-6`}>
                         Experience fast, safe and affordable rides with BullWave
-                        Rides. Tap to visit the website.
+                        Rides. Tap to get it on Google Play.
                       </p>
                     </div>
                   </a>

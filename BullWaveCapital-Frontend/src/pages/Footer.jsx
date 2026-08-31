@@ -10,10 +10,12 @@ import {
 } from "react-icons/fa";
 
 import logo from "../assets/capitalbullwave.png";
-import RideLogo from "../assets/bullwaverides-logo.jpeg";
 import ClubLogo from "../assets/bullwaveClub.jpeg";
 import DunsRegisteredSeal from "../components/DunsRegisteredSeal";
 import RevealOnScroll from "../components/RevealOnScroll";
+
+const RideLogo = "/images/bwride.png";
+const LearnLogo = "/images/cbw.png";
 
 const siteLinks = [
   { name: "Home", path: "/" },
@@ -29,15 +31,27 @@ const siteLinks = [
 const apps = [
   {
     name: "BullWave Rides",
-    tagline: "Book rides instantly",
+    tagline: "Get it on Google Play",
     logo: RideLogo,
-    href: "https://bullwaverides.com/",
+    href: "https://play.google.com/store/apps/details?id=com.bullwave.rides.user&hl=en_IN",
+    label: "Download BullWave Rides on Google Play",
+    contain: true,
+    darkLogo: true,
   },
   {
     name: "BullWave Club",
     tagline: "Enjoy and have fun",
     logo: ClubLogo,
     href: "https://www.bullwaveclub.com/",
+    label: "Open BullWave Club website",
+  },
+  {
+    name: "CBW Learn",
+    tagline: "Get it on Google Play",
+    logo: LearnLogo,
+    href: "https://play.google.com/store/apps/details?id=com.bullwave.bullwave_learn&hl=en_IN",
+    label: "Download CBW Learn on Google Play",
+    contain: true,
   },
 ];
 
@@ -242,14 +256,28 @@ const Footer = ({ theme = "light" }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ "--i": i }}
-                    className="bw-footer__app-card group flex min-h-[3.5rem] items-center transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2"
-                    aria-label={`Open ${app.name} website`}
+                    className={`bw-footer__app-card group flex min-h-[3.5rem] items-center transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 ${
+                      dark
+                        ? "focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+                        : "focus-visible:ring-offset-2 focus-visible:ring-offset-white"
+                    }`}
+                    aria-label={app.label || `Open ${app.name}`}
                   >
                     <div className="flex w-full min-w-0 items-center gap-3">
                       <img
                         src={app.logo}
                         alt=""
-                        className="bw-footer__app-logo h-11 w-11 shrink-0 rounded-xl object-cover shadow-md ring-1 ring-sky-300/40"
+                        width={44}
+                        height={44}
+                        loading="lazy"
+                        decoding="async"
+                        className={
+                          app.contain
+                            ? `bw-footer__app-logo h-10 w-10 shrink-0 rounded-xl object-contain p-0.5 shadow-md ring-1 ring-sky-300/40 sm:h-11 sm:w-11 ${
+                                app.darkLogo ? "bg-black" : "bg-white"
+                              }`
+                            : "bw-footer__app-logo h-10 w-10 shrink-0 rounded-xl object-cover shadow-md ring-1 ring-sky-300/40 sm:h-11 sm:w-11"
+                        }
                       />
                       <div className="min-w-0 flex-1">
                         <p className="bw-f-app-name truncate text-sm font-bold sm:text-[15px]">
