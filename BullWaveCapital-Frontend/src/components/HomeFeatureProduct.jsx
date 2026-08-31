@@ -7,6 +7,7 @@ import {
   FaArrowRight,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { images } from "../assets/images";
 
 const plans = [
   {
@@ -51,8 +52,7 @@ const features = [
     description:
       "Price-action insights with support, resistance and trend analysis for smarter market decisions.",
     icon: FaChartLine,
-    image:
-      "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1200&auto=format&fit=crop",
+    image: images.heroResearch,
     imageAlt: "Trading chart analysis on screen",
     tags: ["Price action", "Trend analysis", "Support & resistance"],
   },
@@ -61,8 +61,7 @@ const features = [
     description:
       "Structured allocation and position sizing strategies to protect capital during market volatility.",
     icon: FaShieldAlt,
-    image:
-      "https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1200&auto=format&fit=crop",
+    image: images.heroRisk,
     imageAlt: "Financial planning and capital protection",
     tags: ["Capital protection", "Position sizing", "Volatility control"],
   },
@@ -71,8 +70,7 @@ const features = [
     description:
       "Build disciplined investing habits through practical portfolio learning and continuous market education.",
     icon: FaClipboardList,
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
+    image: images.featureAnalytics,
     imageAlt: "Portfolio analytics dashboard",
     tags: ["Education", "Discipline", "Portfolio habits"],
   },
@@ -81,8 +79,7 @@ const features = [
     description:
       "Timely trading updates during market hours to help capture short-term opportunities confidently.",
     icon: FaRocket,
-    image:
-      "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=1200&auto=format&fit=crop",
+    image: images.featureMarkets,
     imageAlt: "Live market trading workspace",
     tags: ["Intraday", "Swing setups", "Live updates"],
   },
@@ -90,15 +87,15 @@ const features = [
 
 const featureGallery = [
   {
-    src: "https://images.unsplash.com/photo-1535320903710-d993d3d77d29?q=80&w=900&auto=format&fit=crop",
+    src: images.featureTrading,
     alt: "Market data screens",
   },
   {
-    src: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=900&auto=format&fit=crop",
+    src: images.featureSkyline,
     alt: "Financial district skyline",
   },
   {
-    src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=900&auto=format&fit=crop",
+    src: images.featureDashboard,
     alt: "Investment analytics workspace",
   },
 ];

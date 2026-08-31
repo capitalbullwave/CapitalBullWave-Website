@@ -6,10 +6,10 @@ import {
   FaGraduationCap,
 } from "react-icons/fa";
 import workspaceFallback from "../assets/why-choose-workspace.svg";
+import { images } from "../assets/images";
 
-/** Premium trading-desk visual (matches hero/services imagery pattern) */
-const WORKSPACE_IMAGE =
-  "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1400&auto=format&fit=crop";
+/** Local workspace visual (self-hosted for performance & reliability) */
+const WORKSPACE_IMAGE = images.workspace;
 
 const choiceIcons = [FaLayerGroup, FaShieldAlt, FaGraduationCap];
 
@@ -143,7 +143,7 @@ const HomeChoose = ({ theme }) => {
             alt="Capital BullWave market research workspace"
             width={1400}
             height={900}
-            loading="eager"
+            loading="lazy"
             decoding="async"
             onError={() => setImgSrc(workspaceFallback)}
             className="home-choose-visual__img h-56 w-full object-cover object-center sm:h-64 lg:absolute lg:inset-0 lg:h-full lg:min-h-[380px]"

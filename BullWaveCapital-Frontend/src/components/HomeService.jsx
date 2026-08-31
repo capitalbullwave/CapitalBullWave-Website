@@ -1,6 +1,7 @@
 import { FaChartLine, FaHandshake, FaShieldAlt } from "react-icons/fa";
 import CoverflowGallery from "./CoverflowGallery";
 import TradingAtmosphere from "./TradingAtmosphere";
+import { images } from "../assets/images";
 
 const services = [
   {
@@ -30,32 +31,27 @@ const showcase = [
   {
     title: "Stock Market Research",
     caption: "Actionable equity insights.",
-    image:
-      "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1400&auto=format&fit=crop",
+    image: images.heroResearch,
   },
   {
     title: "Investment Guidance",
     caption: "Structured advice for every horizon.",
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop",
+    image: images.featureAnalytics,
   },
   {
     title: "Financial Advisory",
     caption: "Practical wealth-building support.",
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop",
+    image: images.featureDashboard,
   },
   {
     title: "Market Analytics",
     caption: "Live charts. Clear decisions.",
-    image:
-      "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?q=80&w=1200&auto=format&fit=crop",
+    image: images.featureMarkets,
   },
   {
     title: "Portfolio Strategy",
     caption: "Disciplined wealth building.",
-    image:
-      "https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?q=80&w=1200&auto=format&fit=crop",
+    image: images.featureGrowth,
   },
 ];
 

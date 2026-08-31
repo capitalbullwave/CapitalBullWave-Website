@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import TradingAtmosphere from "./TradingAtmosphere";
+import { images } from "../assets/images";
 
 const slides = [
   {
@@ -8,8 +9,7 @@ const slides = [
     title: "D-U-N-S Registered",
     desc: "Verified business identity with Dun & Bradstreet — credibility you can trust.",
     badge: "Verified",
-    image:
-      "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1800&auto=format&fit=crop",
+    image: images.heroDuns,
     chipDot: "emerald",
     highlight: true,
   },
@@ -18,8 +18,7 @@ const slides = [
     title: "Trusted Research",
     desc: "Disciplined equity research with sector insights, technical setups, and clear market context.",
     badge: "Research",
-    image:
-      "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?q=80&w=1800&auto=format&fit=crop",
+    image: images.heroResearch,
     chipDot: "sky",
   },
   {
@@ -27,8 +26,7 @@ const slides = [
     title: "Risk Managed",
     desc: "Structured allocation and position sizing to protect capital through market volatility.",
     badge: "Risk Control",
-    image:
-      "https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1800&auto=format&fit=crop",
+    image: images.heroRisk,
     chipDot: "sky",
   },
   {
@@ -36,8 +34,7 @@ const slides = [
     title: "Institutional Trading",
     desc: "Professional investment strategies for sustainable long-term growth.",
     badge: "Our Market",
-    image:
-      "https://images.unsplash.com/photo-1559526324-593bc073d938?q=80&w=1800&auto=format&fit=crop",
+    image: images.heroInstitutional,
     chipDot: "sky",
   },
   {
@@ -45,8 +42,7 @@ const slides = [
     title: "Portfolio Management",
     desc: "Diversified wealth solutions designed around your financial goals.",
     badge: "Our Market",
-    image:
-      "https://images.unsplash.com/photo-1518546305927-5a555bb7020d?q=80&w=1800&auto=format&fit=crop",
+    image: images.heroPortfolio,
     chipDot: "sky",
   },
   {
@@ -54,8 +50,7 @@ const slides = [
     title: "Market Intelligence",
     desc: "Real-time insights backed by disciplined research and analytics.",
     badge: "Our Market",
-    image:
-      "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1800&auto=format&fit=crop",
+    image: images.heroIntelligence,
     chipDot: "sky",
   },
 ];
@@ -96,10 +91,18 @@ function CountUp({ end, duration = 2000, decimals = 0, suffix = "" }) {
   );
 }
 
+function shouldLoadSlide(active, index, total) {
+  if (index === active) return true;
+  const prev = (active - 1 + total) % total;
+  const next = (active + 1) % total;
+  return index === prev || index === next;
+}
+
 export default function Hero({ theme = "light" }) {
   const [active, setActive] = useState(3);
   const [paused, setPaused] = useState(false);
   const [ready, setReady] = useState(false);
+  const [loadedSlides, setLoadedSlides] = useState(() => new Set([3, 2, 4]));
   const sectionRef = useRef(null);
   const touchStartX = useRef(null);
   const isDark = theme === "dark";
@@ -114,6 +117,16 @@ export default function Hero({ theme = "light" }) {
     const id = window.requestAnimationFrame(() => setReady(true));
     return () => window.cancelAnimationFrame(id);
   }, []);
+
+  useEffect(() => {
+    setLoadedSlides((prev) => {
+      const next = new Set(prev);
+      for (let i = 0; i < count; i += 1) {
+        if (shouldLoadSlide(active, i, count)) next.add(i);
+      }
+      return next;
+    });
+  }, [active, count]);
 
   useEffect(() => {
     if (paused) return undefined;
@@ -180,15 +193,19 @@ export default function Hero({ theme = "light" }) {
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
     >
-      {slides.map((slide, index) => (
-        <img
-          key={`bg-${slide.id}`}
-          src={slide.image}
-          alt=""
-          className={`hero-bg-slide absolute inset-0 h-full w-full object-cover
-          ${active === index ? "is-active" : ""}`}
-        />
-      ))}
+      {slides.map((slide, index) =>
+        loadedSlides.has(index) ? (
+          <img
+            key={`bg-${slide.id}`}
+            src={slide.image}
+            alt=""
+            decoding="async"
+            loading={index === active ? "eager" : "lazy"}
+            className={`hero-bg-slide absolute inset-0 h-full w-full object-cover
+            ${active === index ? "is-active" : ""}`}
+          />
+        ) : null
+      )}
 
       <div className="absolute inset-0 bg-slate-950/50" />
       <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/45 to-sky-950/35" />
@@ -200,22 +217,25 @@ export default function Hero({ theme = "light" }) {
 
       <span
         aria-hidden="true"
-        className="hero-orb pointer-events-none absolute -left-16 top-16 z-[1] h-44 w-44 rounded-full bg-sky-400/25 blur-3xl sm:h-64 sm:w-64 lg:h-72 lg:w-72"
+        className="hero-orb pointer-events-none absolute -left-16 top-16 z-[1] hidden h-44 w-44 rounded-full bg-sky-400/25 blur-3xl sm:block sm:h-64 sm:w-64 lg:h-72 lg:w-72"
       />
       <span
         aria-hidden="true"
-        className="hero-orb hero-orb--delay pointer-events-none absolute -right-10 bottom-20 z-[1] h-40 w-40 rounded-full bg-cyan-400/20 blur-3xl sm:h-56 sm:w-56 lg:h-64 lg:w-64"
+        className="hero-orb hero-orb--delay pointer-events-none absolute -right-10 bottom-20 z-[1] hidden h-40 w-40 rounded-full bg-cyan-400/20 blur-3xl sm:block sm:h-56 sm:w-56 lg:h-64 lg:w-64"
       />
       <span
         aria-hidden="true"
-        className="hero-orb hero-orb--slow pointer-events-none absolute left-1/2 top-1/3 z-[1] h-32 w-32 -translate-x-1/2 rounded-full bg-sky-300/10 blur-3xl sm:h-48 sm:w-48"
+        className="hero-orb hero-orb--slow pointer-events-none absolute left-1/2 top-1/3 z-[1] hidden h-32 w-32 -translate-x-1/2 rounded-full bg-sky-300/10 blur-3xl sm:block sm:h-48 sm:w-48"
       />
       <span
         aria-hidden="true"
-        className="hero-sheen pointer-events-none absolute inset-0 z-[1]"
+        className="hero-sheen pointer-events-none absolute inset-0 z-[1] hidden sm:block"
       />
 
-      <div className="olymp-bars pointer-events-none absolute inset-0 z-[2]" aria-hidden="true">
+      <div
+        className="olymp-bars pointer-events-none absolute inset-0 z-[2] hidden md:block"
+        aria-hidden="true"
+      >
         {[42, 68, 55, 88, 50, 75, 60, 92, 48, 70].map((h, i) => (
           <span
             key={i}
@@ -229,7 +249,7 @@ export default function Hero({ theme = "light" }) {
         ))}
       </div>
 
-      <div className="absolute inset-0 z-[3] opacity-70">
+      <div className="absolute inset-0 z-[3] hidden opacity-70 sm:block">
         <TradingAtmosphere theme="dark" variant="dense" />
       </div>
 
@@ -252,7 +272,7 @@ export default function Hero({ theme = "light" }) {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-50" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-sky-400" />
               </span>
-              Trusted Investment Partner
+              Market Research &amp; Education
             </span>
 
             <h1 className="hero-fade hero-fade--2 hero-title mt-4 font-extrabold tracking-tight text-white sm:mt-5">
@@ -263,9 +283,9 @@ export default function Hero({ theme = "light" }) {
             </h1>
 
             <p className="hero-fade hero-fade--3 hero-desc mx-auto mt-4 max-w-xl text-slate-200 sm:mt-5 lg:mx-0">
-              BullWave Capital helps investors grow with disciplined trading,
-              portfolio management, wealth advisory, and data-driven market
-              intelligence designed for long-term financial success.
+              Capital BullWave provides disciplined market research, portfolio
+              guidance, and investor education from New Delhi and Dubai —
+              designed for informed, long-term decision making.
             </p>
 
             <div className="hero-fade hero-fade--4 hero-cta mt-6 flex w-full flex-col gap-3 sm:mt-8 sm:flex-row sm:justify-center lg:justify-start">
@@ -287,15 +307,19 @@ export default function Hero({ theme = "light" }) {
           <div className="hero-panel relative mx-auto w-full">
             <div className="olymp-glass hero-panel-card overflow-hidden rounded-[1.25rem] shadow-[0_30px_80px_rgba(0,0,0,0.45)] sm:rounded-[1.85rem]">
               <div className="hero-panel-media relative overflow-hidden">
-                {slides.map((slide, index) => (
-                  <img
-                    key={`panel-${slide.id}`}
-                    src={slide.image}
-                    alt={slide.title}
-                    className={`hero-panel__img absolute inset-0 h-full w-full object-cover
-                    ${active === index ? "is-active" : ""}`}
-                  />
-                ))}
+                {slides.map((slide, index) =>
+                  loadedSlides.has(index) ? (
+                    <img
+                      key={`panel-${slide.id}`}
+                      src={slide.image}
+                      alt={slide.title}
+                      decoding="async"
+                      loading={index === active ? "eager" : "lazy"}
+                      className={`hero-panel__img absolute inset-0 h-full w-full object-cover
+                      ${active === index ? "is-active" : ""}`}
+                    />
+                  ) : null
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/35 to-transparent" />
 
                 <div className="olymp-chip absolute left-3 top-3 sm:left-4 sm:top-4">
@@ -319,25 +343,24 @@ export default function Hero({ theme = "light" }) {
               <div className="grid min-w-0 grid-cols-2 gap-2 border-t border-white/10 bg-slate-950/80 p-2.5 backdrop-blur-xl sm:gap-4 sm:p-5">
                 <div className="hero-stat olymp-stat min-w-0 rounded-xl p-2.5 ring-1 ring-white/10 sm:rounded-2xl sm:p-4">
                   <p className="hero-stat__label text-[9px] font-semibold uppercase tracking-[0.08em] sm:text-xs sm:tracking-[0.16em]">
-                    Annual Return
+                    Credential
                   </p>
-                  <h3 className="hero-stat__value mt-1 truncate text-lg font-bold sm:mt-1.5 sm:text-3xl">
-                    +
-                    <CountUp end={18.6} decimals={1} duration={2200} suffix="%" />
+                  <h3 className="hero-stat__value mt-1 text-lg font-bold leading-tight sm:mt-1.5 sm:text-2xl">
+                    NISM
                   </h3>
                   <p className="hero-stat__sub mt-1 text-[10px] leading-snug sm:text-sm">
-                    Average Growth
+                    Certified Analysts
                   </p>
                 </div>
                 <div className="hero-stat hero-stat--delay olymp-stat min-w-0 rounded-xl p-2.5 ring-1 ring-white/10 sm:rounded-2xl sm:p-4">
                   <p className="hero-stat__label text-[9px] font-semibold uppercase tracking-[0.08em] sm:text-xs sm:tracking-[0.16em]">
-                    Investors
+                    Presence
                   </p>
                   <h3 className="hero-stat__value mt-1 truncate text-lg font-bold sm:mt-1.5 sm:text-3xl">
-                    <CountUp end={12} duration={2200} suffix="K+" />
+                    <CountUp end={2} duration={1600} />
                   </h3>
                   <p className="hero-stat__sub mt-1 text-[10px] leading-snug sm:text-sm">
-                    Worldwide Clients
+                    Offices · Delhi &amp; Dubai
                   </p>
                 </div>
               </div>

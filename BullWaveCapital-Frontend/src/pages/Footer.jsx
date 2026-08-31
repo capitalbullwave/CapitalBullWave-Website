@@ -286,7 +286,8 @@ const Footer = ({ theme = "light" }) => {
             <p className="bw-f-copy max-w-xl flex-1 text-center text-[11px] leading-5 sm:text-[13px] sm:leading-6">
               © {new Date().getFullYear()} Capital BullWave Private Limited. All
               rights reserved. Research &amp; education only — investments subject
-              to market risks.
+              to market risks. Guidance supported by NISM-certified research
+              analysts. D-U-N-S® Registered business.
             </p>
 
             <div className="flex shrink-0 items-center justify-center gap-2.5 sm:gap-3">

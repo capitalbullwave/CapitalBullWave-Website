@@ -756,7 +756,7 @@ export default function Contact({ theme }) {
               </span>
 
               <h2 className={`${heading} mt-4 sm:mt-5 text-xl sm:text-2xl lg:text-3xl font-bold`}>
-                Trusted By Investors Across India
+                Trusted Research Support Across India
               </h2>
 
             </div>

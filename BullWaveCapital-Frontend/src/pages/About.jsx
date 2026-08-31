@@ -147,6 +147,12 @@ const About = ({ theme }) => {
                 <h2 className={`text-xl sm:text-2xl font-bold ${heading}`}>Quick Facts</h2>
                 <div className={`mt-5 sm:mt-6 space-y-4 sm:space-y-5 text-sm leading-7 ${muted}`}>
                   <div className="min-w-0">
+                    <p className={`font-semibold ${title}`}>Credentials</p>
+                    <p className="wrap-break-word">
+                      NISM-certified research analysts · D-U-N-S® Registered business
+                    </p>
+                  </div>
+                  <div className="min-w-0">
                     <p className={`font-semibold ${title}`}>Offices</p>
                     <p className="wrap-break-word">
                       New Delhi (Netaji Subhash Place) · Dubai (World Trade Centre)
@@ -273,7 +279,9 @@ const About = ({ theme }) => {
                         </h3>
                         <p className={`mt-3 text-sm sm:text-base leading-7 wrap-break-word ${dark ? "text-slate-300" : "text-slate-700"}`}>
                           <strong>Capital BullWave</strong> is a market research and
-                          trading advisory platform with offices in New Delhi and Dubai.
+                          investor-education platform with offices in New Delhi and Dubai.
+                          Content is for research and educational purposes only and does
+                          not guarantee returns.
                         </p>
                       </div>
                     </div>
