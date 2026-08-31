@@ -6,30 +6,33 @@
 
 :root {
   font-family:
-    Inter,
+    "Plus Jakarta Sans",
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
 
-  line-height: 1.6;
+  line-height: 1.65;
   font-weight: 400;
 
-  --bw-bg: #ffffff;
-  --bw-bg-soft: #f0f9ff;
+  --bw-font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --bw-font-display: "Fraunces", "Times New Roman", Georgia, serif;
+
+  --bw-bg: #f8fbff;
+  --bw-bg-soft: #eef7ff;
   --bw-surface: #ffffff;
-  --bw-text: #000000;
-  --bw-text-muted: #1f2937;
+  --bw-text: #0b1220;
+  --bw-text-muted: #334155;
   --bw-accent: #0284c7;
   --bw-accent-soft: #e0f2fe;
-  --bw-ring: rgba(14, 165, 233, 0.22);
+  --bw-ring: rgba(2, 132, 199, 0.18);
   --bw-gradient-page:
-    radial-gradient(ellipse 100% 70% at 100% -20%, rgba(56, 189, 248, 0.55), transparent 58%),
-    radial-gradient(ellipse 80% 55% at 0% 0%, rgba(125, 211, 252, 0.5), transparent 52%),
-    linear-gradient(180deg, #ffffff 0%, #e0f2fe 38%, #bae6fd 100%);
-  --bw-gradient-cta: linear-gradient(135deg, #0ea5e9 0%, #0284c7 55%, #0369a1 100%);
-  --bw-gradient-card: linear-gradient(160deg, #ffffff 0%, #e0f2fe 100%);
+    radial-gradient(ellipse 90% 60% at 100% -10%, rgba(14, 165, 233, 0.28), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 0% 0%, rgba(125, 211, 252, 0.22), transparent 50%),
+    linear-gradient(180deg, #ffffff 0%, #f0f9ff 42%, #e0f2fe 100%);
+  --bw-gradient-cta: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 48%, #0369a1 100%);
+  --bw-gradient-card: linear-gradient(165deg, #ffffff 0%, #f0f9ff 100%);
 
   color: var(--bw-text);
   background: transparent;
@@ -39,6 +42,19 @@
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2 {
+  font-family: var(--bw-font-display);
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+h3,
+h4 {
+  font-family: var(--bw-font-sans);
+  letter-spacing: -0.01em;
 }
 
 /* ==========================================
@@ -184,11 +200,16 @@ img {
 .bw-gradient-btn {
   background: var(--bw-gradient-cta);
   color: #ffffff !important;
-  box-shadow: 0 10px 24px rgba(14, 165, 233, 0.28);
+  box-shadow: 0 12px 28px rgba(2, 132, 199, 0.28);
+  transition:
+    transform 0.25s ease,
+    filter 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .bw-gradient-btn:hover {
-  filter: brightness(1.05);
+  filter: brightness(1.06);
+  box-shadow: 0 16px 32px rgba(2, 132, 199, 0.34);
 }
 
 .bw-surface {
@@ -376,12 +397,15 @@ img {
 }
 
 .premium-card {
-  border-radius: 1.25rem;
+  border-radius: 1.35rem;
   transition:
     transform 0.35s ease,
     box-shadow 0.35s ease,
     border-color 0.35s ease,
     background-color 0.35s ease;
+  background: var(--bw-gradient-card);
+  border: 1px solid var(--bw-ring);
+  box-shadow: 0 10px 28px rgba(2, 132, 199, 0.06);
 }
 
 .premium-card:hover {
@@ -980,23 +1004,23 @@ button {
 ========================================== */
 
 .theme-light {
-  --bw-bg: #ffffff;
-  --bw-bg-soft: #e0f2fe;
+  --bw-bg: #f8fbff;
+  --bw-bg-soft: #eef7ff;
   --bw-surface: #ffffff;
-  --bw-text: #000000;
-  --bw-text-muted: #1f2937;
+  --bw-text: #0b1220;
+  --bw-text-muted: #334155;
   --bw-accent: #0284c7;
   --bw-accent-soft: #e0f2fe;
-  --bw-ring: rgba(14, 165, 233, 0.28);
+  --bw-ring: rgba(2, 132, 199, 0.2);
   --bw-gradient-page:
-    radial-gradient(ellipse 100% 70% at 100% -20%, rgba(56, 189, 248, 0.55), transparent 58%),
-    radial-gradient(ellipse 80% 55% at 0% 0%, rgba(125, 211, 252, 0.5), transparent 52%),
-    linear-gradient(180deg, #ffffff 0%, #e0f2fe 38%, #bae6fd 100%);
-  --bw-gradient-cta: linear-gradient(135deg, #0ea5e9 0%, #0284c7 55%, #0369a1 100%);
-  --bw-gradient-card: linear-gradient(160deg, #ffffff 0%, #e0f2fe 100%);
+    radial-gradient(ellipse 90% 60% at 100% -10%, rgba(14, 165, 233, 0.28), transparent 55%),
+    radial-gradient(ellipse 70% 50% at 0% 0%, rgba(125, 211, 252, 0.22), transparent 50%),
+    linear-gradient(180deg, #ffffff 0%, #f0f9ff 42%, #e0f2fe 100%);
+  --bw-gradient-cta: linear-gradient(135deg, #38bdf8 0%, #0ea5e9 48%, #0369a1 100%);
+  --bw-gradient-card: linear-gradient(165deg, #ffffff 0%, #f0f9ff 100%);
 
   background: var(--bw-gradient-page) !important;
-  color: #000000 !important;
+  color: #0b1220 !important;
 }
 
 .theme-dark {
@@ -1485,24 +1509,47 @@ html.theme-dark * {
 }
 
 .hero-title {
-  font-size: clamp(1.85rem, 6.2vw, 2.15rem);
-  line-height: 1.08;
+  font-family: var(--bw-font-display);
+  font-size: clamp(2.1rem, 7vw, 3.35rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.hero-brand {
+  margin: 0;
+  font-family: var(--bw-font-display);
+  font-size: clamp(1.55rem, 4.8vw, 2.15rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #f8fafc;
+}
+
+.hero-brand span {
+  color: #7dd3fc;
+}
+
+.hero-kicker {
+  margin: 0.65rem 0 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(186, 230, 253, 0.88);
 }
 
 .hero-title-accent {
   background: linear-gradient(
-    100deg,
-    #7dd3fc 0%,
-    #67e8f9 35%,
-    #e0f2fe 50%,
-    #67e8f9 65%,
-    #bae6fd 100%
+    105deg,
+    #bae6fd 0%,
+    #7dd3fc 40%,
+    #e0f2fe 55%,
+    #38bdf8 100%
   );
-  background-size: 220% auto;
+  background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  animation: heroTitleShine 5.5s ease-in-out infinite;
+  animation: heroTitleShine 6s ease-in-out infinite;
 }
 
 @keyframes heroTitleShine {
@@ -1516,8 +1563,9 @@ html.theme-dark * {
 }
 
 .hero-desc {
-  font-size: 0.875rem;
+  font-size: 0.95rem;
   line-height: 1.7;
+  font-weight: 450;
 }
 
 .hero-panel {
@@ -1548,7 +1596,7 @@ html.theme-dark * {
 }
 
 .hero-panel-media {
-  height: 12.5rem;
+  height: 14rem;
 }
 
 .hero-cta-btn {
@@ -1593,15 +1641,18 @@ html.theme-dark * {
   animation-delay: 0.05s;
 }
 .hero-fade--2 {
-  animation-delay: 0.14s;
+  animation-delay: 0.12s;
 }
 .hero-fade--3 {
-  animation-delay: 0.24s;
+  animation-delay: 0.2s;
 }
 .hero-fade--4 {
-  animation-delay: 0.34s;
+  animation-delay: 0.28s;
 }
 .hero-fade--5 {
+  animation-delay: 0.36s;
+}
+.hero-fade--6 {
   animation-delay: 0.48s;
 }
 
@@ -1716,7 +1767,7 @@ html.theme-dark * {
   }
 
   .hero-title {
-    font-size: 3.5rem;
+    font-size: 3.65rem;
   }
 
   .hero-desc {
@@ -1854,6 +1905,9 @@ svg {
 .section-title {
   overflow-wrap: anywhere;
   hyphens: auto;
+  font-family: var(--bw-font-display);
+  letter-spacing: -0.02em;
+  font-weight: 600;
 }
 
 @media (max-width: 640px) {
@@ -2164,6 +2218,8 @@ body.bw-chat-open .bw-whatsapp-fab {
     background-color 0.35s ease,
     border-color 0.35s ease,
     box-shadow 0.35s ease;
+  backdrop-filter: blur(18px) saturate(1.15);
+  -webkit-backdrop-filter: blur(18px) saturate(1.15);
 }
 
 /* Trading navbar */
@@ -2567,10 +2623,13 @@ body.bw-chat-open .bw-whatsapp-fab {
 }
 
 .olymp-glass {
-  background: rgba(15, 23, 42, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  background: rgba(2, 6, 23, 0.42);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  box-shadow:
+    0 24px 60px rgba(2, 6, 23, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .olymp-stat {

@@ -267,39 +267,38 @@ export default function Hero({ theme = "light" }) {
       <div className="hero-inner relative z-20 flex flex-col justify-between">
         <div className="hero-grid grid flex-1 items-center">
           <div className="hero-copy mx-auto max-w-2xl text-center lg:mx-0 lg:text-left">
-            <span className="hero-fade hero-fade--1 olymp-chip inline-flex items-center gap-2">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-50" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-sky-400" />
-              </span>
-              Market Research &amp; Education
-            </span>
+            <p className="hero-fade hero-fade--1 hero-brand">
+              Capital <span>BullWave</span>
+            </p>
 
-            <h1 className="hero-fade hero-fade--2 hero-title mt-4 font-extrabold tracking-tight text-white sm:mt-5">
-              Invest Smarter
+            <p className="hero-fade hero-fade--2 hero-kicker">
+              Market research &amp; investor education · Delhi &amp; Dubai
+            </p>
+
+            <h1 className="hero-fade hero-fade--3 hero-title mt-3 font-semibold tracking-tight text-white sm:mt-4">
+              Invest with clarity.
               <span className="hero-title-accent mt-1 block sm:mt-2">
-                Build Wealth.
+                Research that guides.
               </span>
             </h1>
 
-            <p className="hero-fade hero-fade--3 hero-desc mx-auto mt-4 max-w-xl text-slate-200 sm:mt-5 lg:mx-0">
-              Capital BullWave provides disciplined market research, portfolio
-              guidance, and investor education from New Delhi and Dubai —
-              designed for informed, long-term decision making.
+            <p className="hero-fade hero-fade--4 hero-desc mx-auto mt-4 max-w-xl text-slate-200/95 sm:mt-5 lg:mx-0">
+              Disciplined equity research, risk-aware guidance, and practical
+              education — built for informed long-term decisions.
             </p>
 
-            <div className="hero-fade hero-fade--4 hero-cta mt-6 flex w-full flex-col gap-3 sm:mt-8 sm:flex-row sm:justify-center lg:justify-start">
+            <div className="hero-fade hero-fade--5 hero-cta mt-6 flex w-full flex-col gap-3 sm:mt-8 sm:flex-row sm:justify-center lg:justify-start">
               <Link
                 to="/services"
-                className="bw-gradient-btn hero-cta-btn inline-flex items-center justify-center rounded-full px-7 py-3 text-[14px] font-semibold !text-white sm:px-8 sm:py-3.5 sm:text-[15px]"
+                className="bw-gradient-btn hero-cta-btn inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-[14px] font-semibold !text-white sm:px-8 sm:text-[15px]"
               >
                 Explore Services
               </Link>
               <Link
                 to="/contact"
-                className="olymp-ghost-btn hero-cta-btn inline-flex items-center justify-center rounded-full px-7 py-3 text-[14px] font-semibold text-white sm:px-8 sm:py-3.5 sm:text-[15px]"
+                className="olymp-ghost-btn hero-cta-btn inline-flex items-center justify-center rounded-xl px-7 py-3.5 text-[14px] font-semibold text-white sm:px-8 sm:text-[15px]"
               >
-                Contact Us
+                Talk to Us
               </Link>
             </div>
           </div>
@@ -368,7 +367,7 @@ export default function Hero({ theme = "light" }) {
           </div>
         </div>
 
-        <div className="hero-fade hero-fade--5 hero-footer-chips mt-6 sm:mt-10">
+        <div className="hero-fade hero-fade--6 hero-footer-chips mt-6 sm:mt-10">
           <div className="mb-3 flex justify-center gap-2 sm:mb-4">
             {slides.map((slide, index) => (
               <button

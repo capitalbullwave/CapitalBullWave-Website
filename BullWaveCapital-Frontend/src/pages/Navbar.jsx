@@ -121,24 +121,26 @@ export default function Navbar({ theme, toggleTheme }) {
               </div>
 
               <div className="flex min-w-0 flex-col justify-center leading-tight">
-                <div className="flex min-w-0 items-baseline gap-1">
+                <div className="flex min-w-0 items-baseline gap-1.5">
                   <span
-                    className={`truncate text-sm font-bold tracking-tight sm:text-base lg:text-lg ${
-                      isDark ? "text-white" : "text-black"
+                    className={`truncate text-sm font-semibold tracking-tight sm:text-base lg:text-[1.05rem] ${
+                      isDark ? "text-white" : "text-slate-950"
                     }`}
+                    style={{ fontFamily: "var(--bw-font-display)" }}
                   >
                     Capital
                   </span>
                   <span
-                    className={`truncate text-sm font-extrabold tracking-tight sm:text-base lg:text-lg ${
-                      isDark ? "text-sky-400" : "text-sky-600"
+                    className={`truncate text-sm font-bold tracking-tight sm:text-base lg:text-[1.05rem] ${
+                      isDark ? "text-sky-300" : "text-sky-600"
                     }`}
+                    style={{ fontFamily: "var(--bw-font-display)" }}
                   >
                     BullWave
                   </span>
                 </div>
                 <span
-                  className={`mt-0.5 hidden text-[10px] font-bold uppercase tracking-[0.24em] sm:block ${
+                  className={`mt-0.5 hidden text-[10px] font-semibold uppercase tracking-[0.2em] sm:block ${
                     isDark ? "text-slate-400" : "text-slate-500"
                   }`}
                 >
