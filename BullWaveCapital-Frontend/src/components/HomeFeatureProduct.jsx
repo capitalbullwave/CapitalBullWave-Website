@@ -7,7 +7,6 @@ import {
   FaArrowRight,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { images } from "../assets/images";
 
 const plans = [
   {
@@ -52,8 +51,6 @@ const features = [
     description:
       "Price-action insights with support, resistance and trend analysis for smarter market decisions.",
     icon: FaChartLine,
-    image: images.heroResearch,
-    imageAlt: "Trading chart analysis on screen",
     tags: ["Price action", "Trend analysis", "Support & resistance"],
   },
   {
@@ -61,8 +58,6 @@ const features = [
     description:
       "Structured allocation and position sizing strategies to protect capital during market volatility.",
     icon: FaShieldAlt,
-    image: images.heroRisk,
-    imageAlt: "Financial planning and capital protection",
     tags: ["Capital protection", "Position sizing", "Volatility control"],
   },
   {
@@ -70,8 +65,6 @@ const features = [
     description:
       "Build disciplined investing habits through practical portfolio learning and continuous market education.",
     icon: FaClipboardList,
-    image: images.featureAnalytics,
-    imageAlt: "Portfolio analytics dashboard",
     tags: ["Education", "Discipline", "Portfolio habits"],
   },
   {
@@ -79,67 +72,14 @@ const features = [
     description:
       "Timely trading updates during market hours to help capture short-term opportunities confidently.",
     icon: FaRocket,
-    image: images.featureMarkets,
-    imageAlt: "Live market trading workspace",
     tags: ["Intraday", "Swing setups", "Live updates"],
   },
 ];
 
-const featureGallery = [
-  {
-    src: images.featureTrading,
-    alt: "Market data screens",
-  },
-  {
-    src: images.featureSkyline,
-    alt: "Financial district skyline",
-  },
-  {
-    src: images.featureDashboard,
-    alt: "Investment analytics workspace",
-  },
-];
-
-function FeatureImage({ src, alt, imgClassName = "" }) {
-  const [loaded, setLoaded] = useState(false);
-  const [failed, setFailed] = useState(false);
-
-  return (
-    <div className="feature-image relative h-full w-full overflow-hidden">
-      {!loaded && !failed && (
-        <div className="absolute inset-0 z-[1] flex items-center justify-center bg-sky-100/90">
-          <span className="feature-circle-loader" aria-label="Loading" />
-        </div>
-      )}
-      {!failed ? (
-        <img
-          src={src}
-          alt={alt}
-          loading="lazy"
-          decoding="async"
-          onLoad={() => setLoaded(true)}
-          onError={() => {
-            setFailed(true);
-            setLoaded(true);
-          }}
-          className={`w-full object-cover transition-opacity duration-500 ${
-            loaded ? "opacity-100" : "opacity-0"
-          } ${imgClassName || "h-full"}`}
-        />
-      ) : (
-        <div className="flex h-full min-h-[5rem] w-full items-center justify-center bg-gradient-to-br from-sky-200 via-sky-100 to-cyan-50 px-2 text-center text-[11px] font-semibold text-sky-800">
-          {alt}
-        </div>
-      )}
-    </div>
-  );
-}
-
 const FeatureSection = ({ theme = "light" }) => {
   const isDark = theme === "dark";
   const sectionRef = useRef(null);
-  const [progress, setProgress] = useState(0);
-  const [active, setActive] = useState(-1);
+  const [active, setActive] = useState(0);
   const [inView, setInView] = useState(false);
 
   useEffect(() => {
@@ -155,7 +95,7 @@ const FeatureSection = ({ theme = "light" }) => {
       ([entry]) => {
         if (entry.isIntersecting) setInView(true);
       },
-      { threshold: 0.08, rootMargin: "0px 0px -4% 0px" }
+      { threshold: 0.12, rootMargin: "0px 0px -4% 0px" }
     );
     observer.observe(node);
     const failsafe = window.setTimeout(() => setInView(true), 1800);
@@ -165,291 +105,179 @@ const FeatureSection = ({ theme = "light" }) => {
     };
   }, []);
 
-  useEffect(() => {
-    let ticking = false;
-
-    const update = () => {
-      ticking = false;
-      if (!sectionRef.current) return;
-
-      const rect = sectionRef.current.getBoundingClientRect();
-      const viewportHeight = window.innerHeight;
-      const usable = Math.max(rect.height - viewportHeight * 0.25, 1);
-      const traveled = Math.min(Math.max(viewportHeight * 0.55 - rect.top, 0), usable);
-      const percentage = Math.min(Math.max((traveled / usable) * 100, 0), 100);
-      setProgress(percentage);
-
-      const cards = sectionRef.current.querySelectorAll("[data-index]");
-      let nextActive = -1;
-      cards.forEach((card, index) => {
-        const cardRect = card.getBoundingClientRect();
-        if (cardRect.top < viewportHeight * 0.72) {
-          nextActive = index;
-        }
-      });
-      setActive(nextActive);
-    };
-
-    const handleScroll = () => {
-      if (ticking) return;
-      ticking = true;
-      window.requestAnimationFrame(update);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", handleScroll);
-    update();
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", handleScroll);
-    };
-  }, []);
-
   return (
     <div
       ref={sectionRef}
-      className={`feature-stack relative mt-12 sm:mt-16 overflow-hidden rounded-2xl sm:rounded-[1.75rem] p-4 sm:p-6 lg:p-10
+      className={`impl-plan relative mt-12 overflow-hidden rounded-2xl sm:mt-16 sm:rounded-[1.75rem]
       ${
         isDark
-          ? "bg-gradient-to-b from-slate-900/80 via-slate-950/70 to-slate-900/80 ring-1 ring-white/10"
-          : "bg-gradient-to-b from-sky-50 via-white to-sky-50/90 ring-1 ring-sky-100 shadow-[0_18px_50px_rgba(14,165,233,0.08)]"
+          ? "impl-plan--dark bg-slate-950 ring-1 ring-white/10"
+          : "impl-plan--light bg-white ring-1 ring-sky-100 shadow-[0_20px_55px_rgba(14,165,233,0.1)]"
       }
-      ${inView ? "feature-stack--inview" : ""}`}
+      ${inView ? "impl-plan--inview" : ""}`}
     >
-      {/* Animated background */}
-      <div className="feature-stack__bg pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
-        <span className="feature-orb feature-orb--1" />
-        <span className="feature-orb feature-orb--2" />
-        <span className="feature-orb feature-orb--3" />
-        <span className="feature-ring feature-ring--1" />
-        <span className="feature-ring feature-ring--2" />
-        {[0, 1, 2, 3, 4, 5].map((i) => (
+      <div className="impl-plan__wave impl-plan__wave--tl" aria-hidden="true" />
+      <div className="impl-plan__wave impl-plan__wave--tr" aria-hidden="true" />
+
+      <div className="relative px-4 pb-6 pt-8 sm:px-8 sm:pb-8 sm:pt-10 lg:px-10 lg:pt-12">
+        <div className="text-center">
           <span
-            key={i}
-            className="feature-float-dot"
-            style={{
-              left: `${12 + i * 14}%`,
-              top: `${18 + ((i * 17) % 60)}%`,
-              animationDelay: `${i * 0.55}s`,
-            }}
-          />
-        ))}
-      </div>
-
-      <div
-        aria-hidden="true"
-        className={`pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full blur-3xl
-        ${isDark ? "bg-sky-500/10" : "bg-sky-200/50"}`}
-      />
-      <div
-        aria-hidden="true"
-        className={`pointer-events-none absolute -bottom-20 -left-10 h-56 w-56 rounded-full blur-3xl
-        ${isDark ? "bg-cyan-500/10" : "bg-sky-100/70"}`}
-      />
-
-      <div className="relative mb-8 sm:mb-10 text-center">
-        <span
-          className={`inline-flex rounded-full px-3.5 py-1.5 text-[10px] sm:text-xs font-bold uppercase tracking-[0.22em]
-          ${
-            isDark
-              ? "bg-sky-500/15 text-sky-300 ring-1 ring-sky-400/20"
-              : "bg-white text-sky-700 ring-1 ring-sky-100 shadow-sm"
-          }`}
-        >
-          How We Support You
-        </span>
-        <h3
-          className={`mt-3 text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight ${
-            isDark ? "text-white" : "text-black"
-          }`}
-        >
-          Research-led guidance, step by step
-        </h3>
-        <p
-          className={`mx-auto mt-3 max-w-2xl text-sm sm:text-base leading-relaxed ${
-            isDark ? "text-slate-400" : "text-slate-600"
-          }`}
-        >
-          Scroll through each capability — from trading ideas to risk control —
-          designed to keep decisions clear, disciplined, and actionable.
-        </p>
-      </div>
-
-      {/* Image gallery strip */}
-      <div className="feature-gallery relative z-[1] mx-auto mb-8 hidden max-w-4xl grid-cols-3 gap-2 sm:mb-10 sm:grid sm:gap-3">
-        {featureGallery.map((shot, i) => (
-          <div
-            key={shot.src}
-            className={`feature-gallery__frame overflow-hidden rounded-xl sm:rounded-2xl
-            ${i === 1 ? "mt-3 sm:mt-5" : ""}
-            ${i === 2 ? "mt-1.5 sm:mt-2" : ""}`}
-            style={{ animationDelay: `${120 + i * 110}ms` }}
+            className={`inline-flex rounded-full px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] sm:text-xs
+            ${
+              isDark
+                ? "bg-sky-500/15 text-sky-300 ring-1 ring-sky-400/20"
+                : "bg-sky-50 text-sky-700 ring-1 ring-sky-100"
+            }`}
           >
-            <FeatureImage
-              src={shot.src}
-              alt={shot.alt}
-              imgClassName="feature-gallery__img h-20 sm:h-28 md:h-36"
-            />
+            How We Support You
+          </span>
+          <h3
+            className={`impl-plan__heading mt-3 text-xl font-bold tracking-tight sm:text-2xl lg:text-3xl ${
+              isDark ? "text-white" : "text-[#0b3a66]"
+            }`}
+          >
+            Research-led guidance, step by step
+          </h3>
+          <p
+            className={`mx-auto mt-3 max-w-2xl text-sm leading-relaxed sm:text-base ${
+              isDark ? "text-slate-400" : "text-slate-600"
+            }`}
+          >
+            Four connected capabilities — from trading ideas to risk control —
+            designed to keep decisions clear, disciplined, and actionable.
+          </p>
+        </div>
+
+        <div className="mt-8 grid items-center gap-8 lg:mt-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.15fr)] lg:gap-10 xl:gap-14">
+          {/* Circular capability orb */}
+          <div className="impl-plan__orb-wrap mx-auto w-full max-w-[19rem] sm:max-w-[22rem] lg:max-w-[24rem]">
             <div
-              className={`pointer-events-none absolute inset-0 ${
-                isDark
-                  ? "bg-gradient-to-t from-slate-950/50 to-transparent"
-                  : "bg-gradient-to-t from-sky-950/25 to-transparent"
-              }`}
-            />
+              className="impl-plan__orb"
+              role="tablist"
+              aria-label="Support capabilities"
+            >
+              {features.map((feature, index) => {
+                const Icon = feature.icon;
+                const isActive = active === index;
+                return (
+                  <button
+                    key={feature.title}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    aria-controls={`impl-panel-${index}`}
+                    id={`impl-tab-${index}`}
+                    className={`impl-plan__seg impl-plan__seg--${index} ${
+                      isActive ? "is-active" : ""
+                    }`}
+                    style={{ "--i": index }}
+                    onMouseEnter={() => setActive(index)}
+                    onFocus={() => setActive(index)}
+                    onClick={() => setActive(index)}
+                  >
+                    <span className="impl-plan__seg-icon" aria-hidden="true">
+                      <Icon />
+                    </span>
+                    <span className="absolute -left-[9999px] h-px w-px overflow-hidden">
+                      {feature.title}
+                    </span>
+                  </button>
+                );
+              })}
+              <div className="impl-plan__core" aria-hidden="true">
+                <span className="impl-plan__core-ring" />
+              </div>
+            </div>
           </div>
-        ))}
-      </div>
 
-      <div className="relative z-[1] mx-auto max-w-3xl lg:max-w-4xl">
-        {/* Track */}
-        <div
-          className={`feature-stack__track absolute left-[1.15rem] sm:left-5 top-2 bottom-2 w-[2px] rounded-full
-          ${isDark ? "bg-white/10" : "bg-sky-200"}`}
-        />
-        <div
-          className="feature-stack__progress absolute left-[1.15rem] sm:left-5 top-2 w-[2px] origin-top rounded-full"
-          style={{ height: `${Math.max(progress, 4)}%` }}
-        />
-
-        <div className="space-y-4 sm:space-y-5 pl-10 sm:pl-14">
-          {features.map((feature, index) => {
-            const Icon = feature.icon;
-            const activeCard = active >= index;
-            const isCurrent = active === index;
-
-            return (
-              <article
-                key={feature.title}
-                data-index={index}
-                style={{ "--feature-delay": `${index * 90}ms` }}
-                onClick={() => setActive(index)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    setActive(index);
-                  }
-                }}
-                tabIndex={0}
-                role="button"
-                aria-pressed={isCurrent}
-                aria-label={`${feature.title}. Step ${index + 1} of ${features.length}`}
-                className={`feature-stack__card group relative cursor-pointer overflow-hidden rounded-2xl sm:rounded-[1.35rem] outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2
-                ${activeCard ? "is-active" : "is-idle"}
-                ${isCurrent ? "is-current" : ""}
-                ${
-                  isDark
-                    ? "feature-stack__card--dark focus-visible:ring-offset-slate-950"
-                    : "feature-stack__card--light focus-visible:ring-offset-white"
-                }`}
-              >
-                <span className="feature-stack__sheen" aria-hidden="true" />
-
-                <div
-                  className={`feature-stack__dot absolute -left-[2.35rem] sm:-left-[3.05rem] top-8 z-10 flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full
-                  ${
-                    activeCard
-                      ? "is-lit bg-sky-500 text-white shadow-lg shadow-sky-500/35"
-                      : isDark
-                        ? "bg-slate-800 text-slate-500 ring-1 ring-white/10"
-                        : "bg-sky-100 text-sky-400 ring-1 ring-sky-200"
+          {/* 2x2 content grid */}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:gap-6">
+            {features.map((feature, index) => {
+              const Icon = feature.icon;
+              const isActive = active === index;
+              return (
+                <article
+                  key={feature.title}
+                  id={`impl-panel-${index}`}
+                  role="tabpanel"
+                  aria-labelledby={`impl-tab-${index}`}
+                  style={{ "--i": index }}
+                  onMouseEnter={() => setActive(index)}
+                  onFocus={() => setActive(index)}
+                  tabIndex={0}
+                  className={`impl-plan__card outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 ${
+                    isActive ? "is-active" : ""
+                  } ${
+                    isDark
+                      ? "focus-visible:ring-offset-slate-950"
+                      : "focus-visible:ring-offset-white"
                   }`}
                 >
-                  <span className="feature-stack__dot-ring" aria-hidden="true" />
-                  {isCurrent && (
-                    <span className="feature-stack__dot-pulse" aria-hidden="true" />
-                  )}
-                  <span className="relative z-[1] text-[10px] font-bold tabular-nums">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                </div>
-
-                <div className="grid sm:grid-cols-[minmax(0,0.95fr)_minmax(0,1.15fr)]">
-                  <div className="feature-stack__media relative h-40 overflow-hidden sm:h-full sm:min-h-[180px] lg:min-h-[200px]">
-                    <FeatureImage
-                      src={feature.image}
-                      alt={feature.imageAlt}
-                      imgClassName="feature-stack__img absolute inset-0 h-full"
-                    />
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/60 via-slate-950/15 to-transparent sm:bg-gradient-to-r sm:from-transparent sm:via-transparent sm:to-slate-950/30" />
-                    <div
-                      className={`feature-stack__icon absolute left-3 top-3 flex h-10 w-10 items-center justify-center rounded-xl text-white shadow-lg backdrop-blur-md sm:h-11 sm:w-11
-                      ${activeCard ? "bg-sky-500/95" : "bg-slate-950/55"}`}
+                  <div className="flex items-start gap-3">
+                    <span
+                      className={`impl-plan__card-icon mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl text-white sm:h-10 sm:w-10 ${
+                        index % 2 === 0 ? "bg-sky-500" : "bg-[#0b3a66]"
+                      }`}
+                      aria-hidden="true"
                     >
                       <Icon className="text-sm sm:text-base" />
-                    </div>
-                    {isCurrent && (
-                      <span className="feature-stack__live absolute bottom-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-slate-950/70 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-emerald-300 ring-1 ring-white/10 backdrop-blur-md">
-                        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" />
-                        In focus
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="relative flex flex-col justify-center p-5 sm:p-6 lg:p-7">
-                    <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
-                      <span
-                        className={`text-[10px] font-bold uppercase tracking-[0.18em]
-                        ${isDark ? "text-sky-400" : "text-sky-600"}`}
-                      >
-                        0{index + 1}
-                      </span>
-                      <h3
-                        className={`text-base sm:text-lg lg:text-xl font-bold tracking-tight ${
-                          isDark ? "text-white" : "text-slate-950"
+                    </span>
+                    <div className="min-w-0">
+                      <h4
+                        className={`text-base font-bold tracking-tight sm:text-lg ${
+                          isDark ? "text-white" : "text-[#0b3a66]"
                         }`}
                       >
                         {feature.title}
-                      </h3>
-                    </div>
-                    <p
-                      className={`mt-2 text-sm leading-6 sm:leading-7 ${
-                        isDark ? "text-slate-300" : "text-neutral-700"
-                      }`}
-                    >
-                      {feature.description}
-                    </p>
-
-                    {feature.tags?.length ? (
-                      <div className="mt-3.5 flex flex-wrap gap-1.5 sm:mt-4">
-                        {feature.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className={`rounded-full px-2.5 py-1 text-[10px] font-semibold tracking-wide sm:text-[11px]
-                            ${
-                              isDark
-                                ? "bg-sky-500/10 text-sky-300 ring-1 ring-sky-400/20"
-                                : "bg-sky-50 text-sky-700 ring-1 ring-sky-100"
-                            }`}
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    ) : null}
-
-                    <div className="mt-4 sm:mt-5">
-                      <Link
-                        to="/services"
-                        onClick={(e) => e.stopPropagation()}
-                        className={`feature-stack__cta inline-flex items-center gap-2 text-sm font-semibold transition
-                        ${
-                          isDark
-                            ? "text-sky-300 hover:text-sky-200"
-                            : "text-sky-700 hover:text-sky-900"
+                      </h4>
+                      <p
+                        className={`mt-1.5 text-sm leading-6 sm:leading-7 ${
+                          isDark ? "text-slate-400" : "text-slate-600"
                         }`}
                       >
-                        Explore services
-                        <FaArrowRight className="text-[11px] transition-transform duration-300 group-hover:translate-x-1" />
-                      </Link>
+                        {feature.description}
+                      </p>
+                      {feature.tags?.length ? (
+                        <div className="mt-2.5 flex flex-wrap gap-1.5">
+                          {feature.tags.slice(0, 2).map((tag) => (
+                            <span
+                              key={tag}
+                              className={`rounded-full px-2 py-0.5 text-[10px] font-semibold ${
+                                isDark
+                                  ? "bg-sky-500/10 text-sky-300 ring-1 ring-sky-400/20"
+                                  : "bg-sky-50 text-sky-700 ring-1 ring-sky-100"
+                              }`}
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      ) : null}
                     </div>
                   </div>
-                </div>
-              </article>
-            );
-          })}
+                </article>
+              );
+            })}
+          </div>
         </div>
+
+        <div className="mt-8 flex justify-center sm:mt-10">
+          <Link
+            to="/services"
+            className={`inline-flex min-h-11 items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition sm:px-6 ${
+              isDark
+                ? "bg-sky-500 text-white hover:bg-sky-400"
+                : "bg-[#0b3a66] text-white hover:bg-sky-700"
+            }`}
+          >
+            Explore services
+            <FaArrowRight className="text-[11px]" aria-hidden="true" />
+          </Link>
+        </div>
+      </div>
+
+      <div className="impl-plan__footer" aria-hidden="true">
+        <span className="impl-plan__footer-accent" />
       </div>
     </div>
   );
@@ -656,38 +484,53 @@ const HomeFeatureProduct = ({ theme }) => {
 
       <FeatureSection theme={theme} />
 
-      <div
-        className={`mt-12 sm:mt-16 rounded-2xl sm:rounded-3xl px-5 py-10 sm:px-8 sm:py-12 text-center
-        ${
-          isDark
-            ? "bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 ring-1 ring-slate-700"
-            : "bg-gradient-to-r from-sky-500 via-sky-600 to-sky-500 shadow-lg shadow-sky-500/20"
-        }`}
-      >
-        <h3 className="text-xl sm:text-3xl font-bold text-white px-2">
-          Ready to Trade with Confidence?
-        </h3>
+      <div className="bw-cta relative mt-12 overflow-hidden rounded-2xl sm:mt-16 sm:rounded-[1.75rem]">
+        <div
+          className={`bw-cta__panel relative px-5 py-10 text-center sm:px-8 sm:py-12 lg:px-12 lg:py-14 ${
+            isDark ? "bw-cta__panel--dark" : "bw-cta__panel--light"
+          }`}
+        >
+          <span className="bw-cta__orb bw-cta__orb--1" aria-hidden="true" />
+          <span className="bw-cta__orb bw-cta__orb--2" aria-hidden="true" />
+          <span className="bw-cta__sheen" aria-hidden="true" />
 
-        <p className="mx-auto mt-4 max-w-2xl text-sm sm:text-base text-sky-50 leading-7 px-2">
-          Join Bull Wave Capital and receive research-driven market insights,
-          professional trading guidance, and portfolio strategies designed to
-          help you make informed investment decisions.
-        </p>
+          <div className="relative z-10 mx-auto max-w-3xl">
+            <p
+              className={`inline-flex rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] sm:text-xs ${
+                isDark
+                  ? "bg-white/10 text-sky-200 ring-1 ring-white/15"
+                  : "bg-white/25 text-white ring-1 ring-white/35"
+              }`}
+            >
+              Next step
+            </p>
 
-        <div className="mt-8 flex w-full flex-col gap-3 sm:flex-row sm:justify-center sm:gap-4">
-          <Link
-            to="/markets"
-            className="w-full rounded-xl bg-white px-8 py-3 text-center font-semibold !text-sky-700 transition hover:bg-sky-50 sm:w-auto"
-          >
-            Explore Market
-          </Link>
+            <h3 className="mt-4 text-xl font-bold tracking-tight text-white sm:mt-5 sm:text-3xl lg:text-[2.1rem]">
+              Ready to Trade with Confidence?
+            </h3>
 
-          <Link
-            to="/contact"
-            className="w-full rounded-xl bg-white/15 px-8 py-3 text-center font-semibold !text-white ring-1 ring-white/30 transition hover:bg-white/25 sm:w-auto"
-          >
-            Contact Us
-          </Link>
+            <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-sky-50/95 sm:mt-4 sm:text-base sm:leading-7">
+              Join Bull Wave Capital and receive research-driven market insights,
+              professional trading guidance, and portfolio strategies designed to
+              help you make informed investment decisions.
+            </p>
+
+            <div className="mt-7 flex w-full flex-col items-stretch gap-3 sm:mt-8 sm:flex-row sm:items-center sm:justify-center sm:gap-4">
+              <Link
+                to="/markets"
+                className="bw-cta__btn bw-cta__btn--primary inline-flex min-h-11 items-center justify-center rounded-xl px-7 py-3 text-center text-sm font-semibold sm:min-w-[10.5rem] sm:px-8 sm:text-[15px]"
+              >
+                Explore Market
+              </Link>
+
+              <Link
+                to="/contact"
+                className="bw-cta__btn bw-cta__btn--ghost inline-flex min-h-11 items-center justify-center rounded-xl px-7 py-3 text-center text-sm font-semibold sm:min-w-[10.5rem] sm:px-8 sm:text-[15px]"
+              >
+                Contact Us
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </section>

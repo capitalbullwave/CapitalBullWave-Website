@@ -99,6 +99,8 @@ const Footer = ({ theme = "light" }) => {
       }`}
     >
       <div className="bw-footer__mesh" aria-hidden="true">
+        <span className="bw-footer__scape" />
+        <span className="bw-footer__veil" />
         <span className="bw-footer__orb bw-footer__orb--1" />
         <span className="bw-footer__orb bw-footer__orb--2" />
         <span className="bw-footer__orb bw-footer__orb--3" />
@@ -106,11 +108,11 @@ const Footer = ({ theme = "light" }) => {
         <span className="bw-footer__sheen" />
       </div>
 
-      <div className="relative mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-12">
+      <div className="relative mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14">
         <RevealOnScroll>
-          <div className="grid grid-cols-1 gap-9 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
+          <div className="bw-footer__grid grid grid-cols-1 gap-10 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-10 lg:grid-cols-12 lg:gap-x-8 lg:gap-y-0">
             {/* About Company */}
-            <div className="bw-footer__col">
+            <div className="bw-footer__col lg:col-span-3">
               <h3 className="bw-footer__heading bw-f-title text-lg font-bold sm:text-xl">
                 About Company
               </h3>
@@ -120,13 +122,15 @@ const Footer = ({ theme = "light" }) => {
                 in New Delhi and Dubai.
               </p>
 
-              <div className="mt-5 flex items-center gap-3">
+              <div className="bw-footer__brand mt-5 flex items-center gap-3">
                 <img
                   src={logo}
                   alt="Capital BullWave"
-                  className="bw-footer__brand-logo h-14 w-14 rounded-full object-cover ring-2 ring-sky-400/50 shadow-lg"
+                  width={56}
+                  height={56}
+                  className="bw-footer__brand-logo h-12 w-12 rounded-full object-cover shadow-lg ring-2 ring-sky-400/45 sm:h-14 sm:w-14"
                 />
-                <div>
+                <div className="min-w-0">
                   <p className="bw-f-brand text-base font-bold">
                     Capital <span className="bw-f-accent">BullWave</span>
                   </p>
@@ -138,11 +142,11 @@ const Footer = ({ theme = "light" }) => {
             </div>
 
             {/* Site Links */}
-            <div className="bw-footer__col">
+            <div className="bw-footer__col lg:col-span-2">
               <h3 className="bw-footer__heading bw-f-title text-lg font-bold sm:text-xl">
                 Site Links
               </h3>
-              <ul className="mt-4 space-y-2.5">
+              <ul className="bw-footer__links mt-4 grid grid-cols-2 gap-x-3 gap-y-2.5 sm:grid-cols-1">
                 {siteLinks.map((item, i) => (
                   <li key={item.name} style={{ "--i": i }} className="bw-footer__li">
                     <Link
@@ -174,11 +178,11 @@ const Footer = ({ theme = "light" }) => {
             </div>
 
             {/* Contact Us */}
-            <div className="bw-footer__col">
+            <div className="bw-footer__col sm:col-span-2 lg:col-span-4">
               <h3 className="bw-footer__heading bw-f-title text-lg font-bold sm:text-xl">
                 Contact Us
               </h3>
-              <ul className="mt-4 space-y-4">
+              <ul className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-1 lg:gap-4">
                 <li className="bw-footer__contact flex gap-3" style={{ "--i": 0 }}>
                   <span className="bw-footer__icon mt-0.5 shrink-0">
                     <FaMapMarkerAlt />
@@ -243,12 +247,12 @@ const Footer = ({ theme = "light" }) => {
             </div>
 
             {/* Apps & Downloads */}
-            <div className="bw-footer__col">
+            <div className="bw-footer__col sm:col-span-2 lg:col-span-3">
               <h3 className="bw-footer__heading bw-f-title text-lg font-bold sm:text-xl">
                 Our Platforms
               </h3>
 
-              <div className="mt-4 space-y-3">
+              <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
                 {apps.map((app, i) => (
                   <a
                     key={app.name}
@@ -256,11 +260,7 @@ const Footer = ({ theme = "light" }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{ "--i": i }}
-                    className={`bw-footer__app-card group flex min-h-[3.5rem] items-center transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 ${
-                      dark
-                        ? "focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
-                        : "focus-visible:ring-offset-2 focus-visible:ring-offset-white"
-                    }`}
+                    className={`bw-footer__app-card group flex min-h-[3.5rem] items-center transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900`}
                     aria-label={app.label || `Open ${app.name}`}
                   >
                     <div className="flex w-full min-w-0 items-center gap-3">
@@ -289,7 +289,7 @@ const Footer = ({ theme = "light" }) => {
                       </div>
                       <span
                         aria-hidden="true"
-                        className="shrink-0 text-sky-500 transition group-hover:translate-x-0.5"
+                        className="bw-footer__arrow shrink-0 transition group-hover:translate-x-0.5"
                       >
                         →
                       </span>
@@ -306,12 +306,12 @@ const Footer = ({ theme = "light" }) => {
       <div className="bw-footer__bottom relative border-t">
         <div className="bw-footer__rule absolute inset-x-0 top-0" aria-hidden="true" />
         <RevealOnScroll delay={30} eager>
-          <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-4 px-3 py-4 md:flex-row md:justify-between md:gap-6 md:px-6 md:py-5 lg:px-8">
+          <div className="bw-footer__bottom-inner relative mx-auto flex max-w-6xl flex-col items-center gap-4 px-4 py-5 sm:px-6 md:flex-row md:justify-between md:gap-6 md:py-5 lg:px-8">
             <div className="bw-footer__duns-slot relative z-30 flex w-full shrink-0 justify-center md:w-auto md:justify-start">
-              <DunsRegisteredSeal theme={theme} variant="bar" />
+              <DunsRegisteredSeal theme="dark" variant="bar" />
             </div>
 
-            <p className="bw-f-copy max-w-xl flex-1 text-center text-[11px] leading-5 sm:text-[13px] sm:leading-6">
+            <p className="bw-f-copy max-w-xl flex-1 px-1 text-center text-[11px] leading-5 sm:text-[13px] sm:leading-6">
               © {new Date().getFullYear()} Capital BullWave Private Limited. All
               rights reserved. Research &amp; education only — investments subject
               to market risks. Guidance supported by NISM-certified research
@@ -327,9 +327,7 @@ const Footer = ({ theme = "light" }) => {
                   rel="noopener noreferrer"
                   aria-label={socialLabel}
                   style={{ "--i": i }}
-                  className={`bw-footer__social ${
-                    dark ? "text-slate-200 hover:text-sky-300" : "text-sky-800 hover:text-sky-600"
-                  }`}
+                  className="bw-footer__social"
                 >
                   <Icon className="text-base sm:text-lg" />
                 </a>

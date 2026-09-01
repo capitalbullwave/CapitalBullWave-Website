@@ -1,151 +1,176 @@
-import { FaChartLine, FaHandshake, FaShieldAlt } from "react-icons/fa";
-import CoverflowGallery from "./CoverflowGallery";
-import TradingAtmosphere from "./TradingAtmosphere";
+import { useEffect, useRef, useState } from "react";
+import {
+  FaChartLine,
+  FaLightbulb,
+  FaClock,
+  FaUsers,
+  FaCogs,
+} from "react-icons/fa";
 import { images } from "../assets/images";
 
-const services = [
+const panels = [
   {
+    eyebrow: "Research",
     title: "Stock Market Research",
-    subtitle: "Actionable equity insights.",
     description:
-      "Analysis of market trends, sector performance, and individual stock behavior to help clients identify investment opportunities.",
-    icon: FaChartLine,
+      "Trend, sector, and stock analysis to surface clear equity opportunities.",
+    icon: FaLightbulb,
   },
   {
+    eyebrow: "Guidance",
     title: "Investment Guidance",
-    subtitle: "Structured advice for every horizon.",
     description:
-      "Support for short-term trading decisions and long-term portfolio planning, tailored to your goals and risk tolerance.",
-    icon: FaHandshake,
+      "Short-term and long-term planning aligned to goals and risk appetite.",
+    icon: FaClock,
   },
   {
+    eyebrow: "Advisory",
     title: "Financial Advisory",
-    subtitle: "Practical wealth-building support.",
     description:
-      "Professional advisory services covering asset allocation, risk control, and portfolio review for disciplined investing.",
-    icon: FaShieldAlt,
-  },
-];
-
-const showcase = [
-  {
-    title: "Stock Market Research",
-    caption: "Actionable equity insights.",
-    image: images.heroResearch,
+      "Asset allocation, portfolio review, and practical wealth-building support.",
+    icon: FaUsers,
   },
   {
-    title: "Investment Guidance",
-    caption: "Structured advice for every horizon.",
-    image: images.featureAnalytics,
-  },
-  {
-    title: "Financial Advisory",
-    caption: "Practical wealth-building support.",
-    image: images.featureDashboard,
-  },
-  {
+    eyebrow: "Analytics",
     title: "Market Analytics",
-    caption: "Live charts. Clear decisions.",
-    image: images.featureMarkets,
-  },
-  {
-    title: "Portfolio Strategy",
-    caption: "Disciplined wealth building.",
-    image: images.featureGrowth,
+    description:
+      "Live charts and disciplined signals for clearer, faster decisions.",
+    icon: FaCogs,
   },
 ];
 
 const HomeService = ({ theme = "light" }) => {
   const isDark = theme === "dark";
+  const sectionRef = useRef(null);
+  const [inView, setInView] = useState(false);
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const node = sectionRef.current;
+    if (!node) return undefined;
+
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setInView(true);
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setInView(true);
+      },
+      { threshold: 0.18 }
+    );
+    observer.observe(node);
+    const failsafe = window.setTimeout(() => setInView(true), 1600);
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(failsafe);
+    };
+  }, []);
 
   return (
-    <section className="relative w-full overflow-hidden py-12 sm:py-16 lg:py-20">
-      <TradingAtmosphere theme={theme} />
-      <div className="relative z-10 mx-auto max-w-4xl px-1 text-center sm:px-2">
-        <p
-          className={`inline-flex rounded-full px-3.5 py-1.5 text-[11px] font-semibold uppercase tracking-[0.14em] sm:px-4 sm:text-sm sm:tracking-[0.22em]
-          ${
-            isDark
-              ? "bg-sky-500/15 text-sky-300"
-              : "bg-sky-50 text-sky-700 ring-1 ring-sky-100"
-          }`}
-        >
-          Our Services
-        </p>
-        <h2
-          className={`section-title mt-4 text-[1.55rem] font-bold tracking-tight sm:mt-5 sm:text-3xl lg:text-4xl ${
-            isDark ? "text-white" : "text-black"
-          }`}
-        >
-          Professional stock market research and investment advisory from Delhi.
-        </h2>
-        <p
-          className={`mt-3 text-sm leading-7 sm:mt-4 sm:text-lg ${
-            isDark ? "text-slate-400" : "text-neutral-800"
-          }`}
-        >
-          Bull Wave Capital provides market research, investment guidance, and
-          financial advisory services from New Delhi and Dubai, helping clients
-          pursue disciplined wealth growth in equities and financial assets.
-        </p>
-      </div>
+    <section
+      ref={sectionRef}
+      className={`svc-info relative w-full overflow-hidden ${
+        isDark ? "svc-info--dark" : "svc-info--light"
+      } ${inView ? "svc-info--inview" : ""}`}
+      aria-label="Our services overview"
+    >
+      <img
+        src={images.featureSkyline}
+        alt=""
+        aria-hidden="true"
+        className="svc-info__bg absolute inset-0 h-full w-full object-cover"
+        loading="lazy"
+        decoding="async"
+      />
+      <div className="svc-info__veil absolute inset-0" aria-hidden="true" />
+      <div className="svc-info__curve absolute inset-0" aria-hidden="true" />
 
-      <div className="relative z-10 mx-auto mt-8 grid max-w-6xl grid-cols-1 gap-4 px-0 sm:mt-12 sm:gap-5 md:grid-cols-2 lg:mt-14 lg:grid-cols-3 lg:gap-6">
-        {services.map(({ title, subtitle, description, icon: Icon }) => (
-          <article
-            key={title}
-            className={`olymp-section-card flex h-full flex-col items-center rounded-2xl px-5 py-7 text-center sm:rounded-[1.35rem] sm:px-6 sm:py-8
-            ${
-              isDark
-                ? "bg-slate-900/90 ring-1 ring-white/10"
-                : "bg-white ring-1 ring-sky-100 shadow-[0_14px_36px_rgba(14,165,233,0.1)]"
-            }`}
-          >
-            <div
-              className={`relative mb-5 flex h-20 w-20 items-center justify-center rounded-[1.35rem] sm:h-24 sm:w-24
-              ${
-                isDark
-                  ? "bg-sky-500/10 ring-1 ring-sky-400/20"
-                  : "bg-sky-50 ring-1 ring-sky-100"
-              }`}
-            >
-              <div
-                className={`relative flex h-11 w-11 items-center justify-center rounded-2xl text-white shadow-lg sm:h-14 sm:w-14
-                ${
-                  isDark
-                    ? "bg-sky-500 shadow-sky-500/30"
-                    : "bg-sky-500 shadow-sky-500/25"
-                }`}
-              >
-                <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
+      <div className="svc-info__shell relative z-10 mx-auto flex h-full max-w-6xl flex-col justify-center px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-12">
+        <div className="grid items-center gap-6 lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)] lg:gap-8 xl:gap-10">
+          {/* Left hub */}
+          <div className="svc-info__hub-wrap mx-auto w-full max-w-[17.5rem] sm:max-w-[19.5rem] lg:mx-0 lg:max-w-[22rem]">
+            <div className="svc-info__hub" aria-hidden="false">
+              <div className="svc-info__hub-core">
+                <FaChartLine className="svc-info__hub-icon" aria-hidden="true" />
+                <p className="svc-info__hub-kicker">Our Services</p>
+                <h2 className="svc-info__hub-title">
+                  Research &amp; Advisory
+                </h2>
               </div>
+              <span className="svc-info__arc svc-info__arc--thick" />
+              <span className="svc-info__arc svc-info__arc--thin" />
+              {[0, 1, 2, 3].map((i) => (
+                <span
+                  key={i}
+                  className={`svc-info__node svc-info__node--${i} ${
+                    active === i ? "is-active" : ""
+                  }`}
+                />
+              ))}
             </div>
+          </div>
 
-            <h3
-              className={`text-base font-bold leading-snug sm:text-lg ${
-                isDark ? "text-white" : "text-slate-950"
-              }`}
+          {/* Right panels */}
+          <div className="svc-info__panels relative">
+            <svg
+              className="svc-info__links pointer-events-none absolute inset-y-0 -left-8 hidden w-10 lg:block xl:-left-10 xl:w-12"
+              viewBox="0 0 48 400"
+              preserveAspectRatio="none"
+              aria-hidden="true"
             >
-              {title}
-            </h3>
-            <p
-              className={`mt-2 text-[10px] font-semibold uppercase tracking-[0.16em] sm:text-xs
-              ${isDark ? "text-sky-400" : "text-sky-600"}`}
-            >
-              {subtitle}
-            </p>
-            <p
-              className={`mt-3 text-sm leading-6 sm:mt-4 sm:leading-7
-              ${isDark ? "text-slate-400" : "text-slate-500"}`}
-            >
-              {description}
-            </p>
-          </article>
-        ))}
-      </div>
+              {[48, 148, 248, 348].map((y, i) => (
+                <path
+                  key={y}
+                  className={`svc-info__link-path ${active === i ? "is-active" : ""}`}
+                  d={
+                    i === 0
+                      ? "M48 200 C 24 200, 24 48, 0 48"
+                      : i === 1
+                        ? "M48 200 L 0 148"
+                        : i === 2
+                          ? "M48 200 L 0 248"
+                          : "M48 200 C 24 200, 24 348, 0 348"
+                  }
+                  fill="none"
+                  strokeWidth="1.5"
+                />
+              ))}
+            </svg>
 
-      <div className="home-service-showcase relative z-10 mt-12 sm:mt-16">
-        <CoverflowGallery items={showcase} theme={theme} />
+            <ul className="flex flex-col gap-2.5 sm:gap-3 lg:gap-3.5">
+              {panels.map((panel, index) => {
+                const Icon = panel.icon;
+                const isActive = active === index;
+                return (
+                  <li key={panel.title}>
+                    <article
+                      style={{ "--i": index }}
+                      className={`svc-info__panel ${isActive ? "is-active" : ""}`}
+                      onMouseEnter={() => setActive(index)}
+                      onFocus={() => setActive(index)}
+                      tabIndex={0}
+                      aria-label={panel.title}
+                    >
+                      <div className="svc-info__badge" aria-hidden="true">
+                        <span className="svc-info__badge-ring" />
+                        <span className="svc-info__badge-core">
+                          <Icon />
+                        </span>
+                      </div>
+                      <div className="svc-info__copy min-w-0">
+                        <p className="svc-info__eyebrow">{panel.eyebrow}</p>
+                        <h3 className="svc-info__panel-title">{panel.title}</h3>
+                        <p className="svc-info__desc">{panel.description}</p>
+                      </div>
+                    </article>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
   );

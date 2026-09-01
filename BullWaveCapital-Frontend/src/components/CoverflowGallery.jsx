@@ -2,7 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
 /**
- * Desktop: 3D coverflow. Mobile: single opaque slide (no transparent overlaps).
+ * Desktop: 3D coverflow. Mobile: single opaque slide with soft motion.
  */
 export default function CoverflowGallery({
   items = [],
@@ -16,6 +16,8 @@ export default function CoverflowGallery({
   const [dragging, setDragging] = useState(false);
   const [dragX, setDragX] = useState(0);
   const [compact, setCompact] = useState(false);
+  const [ready, setReady] = useState(false);
+  const [loaded, setLoaded] = useState(() => new Set([0, 1, count - 1]));
   const stageRef = useRef(null);
   const pointerIdRef = useRef(null);
   const startXRef = useRef(0);
@@ -35,6 +37,11 @@ export default function CoverflowGallery({
   const prev = useCallback(() => goTo(active - 1), [active, goTo]);
 
   useEffect(() => {
+    const id = window.requestAnimationFrame(() => setReady(true));
+    return () => window.cancelAnimationFrame(id);
+  }, []);
+
+  useEffect(() => {
     const mq = window.matchMedia("(max-width: 900px)");
     const sync = () => setCompact(mq.matches);
     sync();
@@ -43,15 +50,45 @@ export default function CoverflowGallery({
   }, []);
 
   useEffect(() => {
+    setLoaded((prev) => {
+      const nextSet = new Set(prev);
+      for (let i = 0; i < count; i += 1) {
+        const diff = Math.min(
+          Math.abs(i - active),
+          count - Math.abs(i - active)
+        );
+        if (diff <= 2) nextSet.add(i);
+      }
+      return nextSet;
+    });
+  }, [active, count]);
+
+  useEffect(() => {
     if (count < 2 || paused || dragging) return undefined;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return undefined;
     }
     const timer = window.setInterval(() => {
-      setActive((prev) => (prev + 1) % count);
+      setActive((prevActive) => (prevActive + 1) % count);
     }, autoplayMs);
     return () => window.clearInterval(timer);
   }, [count, paused, dragging, autoplayMs]);
+
+  useEffect(() => {
+    const node = stageRef.current;
+    if (!node) return undefined;
+    const onKey = (e) => {
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        next();
+      } else if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        prev();
+      }
+    };
+    node.addEventListener("keydown", onKey);
+    return () => node.removeEventListener("keydown", onKey);
+  }, [next, prev]);
 
   const relativeOffset = (index) => {
     let diff = index - active;
@@ -113,12 +150,20 @@ export default function CoverflowGallery({
     <div
       className={`coverflow ${isDark ? "coverflow--dark" : "coverflow--light"} ${
         compact ? "coverflow--compact" : ""
-      }`}
+      } ${ready ? "coverflow--ready" : ""}`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => {
         if (!dragging) setPaused(false);
       }}
     >
+      <div className="coverflow__progress" aria-hidden="true">
+        <span
+          key={active}
+          className={`coverflow__progress-bar ${paused || dragging ? "is-paused" : ""}`}
+          style={{ animationDuration: `${autoplayMs}ms` }}
+        />
+      </div>
+
       <div className="coverflow__dots" role="tablist" aria-label="Showcase slides">
         {items.map((item, index) => (
           <button
@@ -143,28 +188,36 @@ export default function CoverflowGallery({
         role="region"
         aria-roledescription="carousel"
         aria-label="Trading services gallery"
+        tabIndex={0}
       >
+        <div className="coverflow__glow" aria-hidden="true" />
+        <div className="coverflow__floor" aria-hidden="true" />
+
         {compact ? (
-          /* Mobile: one full opaque slide — no side-card overlap */
           <div className="coverflow__simple">
-            {items.map((item, index) => (
-              <article
-                key={item.title}
-                className={`coverflow__simple-card ${
-                  active === index ? "is-active" : ""
-                }`}
-                aria-hidden={active !== index}
-              >
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  loading="lazy"
-                  decoding="async"
-                  draggable={false}
-                  className="coverflow__img"
-                />
-              </article>
-            ))}
+            {items.map((item, index) =>
+              loaded.has(index) ? (
+                <article
+                  key={item.title}
+                  className={`coverflow__simple-card ${
+                    active === index ? "is-active" : ""
+                  }`}
+                  aria-hidden={active !== index}
+                >
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    width={960}
+                    height={600}
+                    loading={index === active ? "eager" : "lazy"}
+                    decoding="async"
+                    draggable={false}
+                    className="coverflow__img"
+                  />
+                  <div className="coverflow__shade" aria-hidden="true" />
+                </article>
+              ) : null
+            )}
             {dragging && Math.abs(dragX) > 4 && (
               <div
                 className="coverflow__drag-hint"
@@ -183,10 +236,11 @@ export default function CoverflowGallery({
               const absVisual = Math.abs(visual);
 
               if (abs > 2 && !dragging) return null;
+              if (!loaded.has(index)) return null;
 
-              const rotateY = Math.max(-36, Math.min(36, visual * -32));
-              const scale = Math.max(0.68, 1 - absVisual * 0.16);
-              const opacity = Math.max(0.45, 1 - absVisual * 0.25);
+              const rotateY = Math.max(-42, Math.min(42, visual * -28));
+              const scale = Math.max(0.62, 1 - absVisual * 0.14);
+              const opacity = Math.max(0.35, 1 - absVisual * 0.28);
               const zIndex = 40 - Math.round(absVisual * 10);
               const isActive = abs === 0 && Math.abs(dragBias) < 0.12;
 
@@ -197,7 +251,9 @@ export default function CoverflowGallery({
                   style={{
                     zIndex,
                     opacity,
-                    transform: `translate(-50%, -50%) translateX(calc(${visual} * var(--coverflow-gap))) rotateY(${rotateY}deg) scale(${scale})`,
+                    transform: `translate(-50%, -50%) translateX(calc(${visual} * var(--coverflow-gap))) rotateY(${rotateY}deg) scale(${scale}) translateZ(${
+                      isActive ? "36px" : "0px"
+                    })`,
                   }}
                   onClick={() => {
                     if (didDragRef.current) return;
@@ -208,7 +264,9 @@ export default function CoverflowGallery({
                   <img
                     src={item.image}
                     alt={item.title}
-                    loading="lazy"
+                    width={960}
+                    height={600}
+                    loading={isActive ? "eager" : "lazy"}
                     decoding="async"
                     draggable={false}
                     className="coverflow__img"
