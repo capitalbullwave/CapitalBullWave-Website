@@ -464,6 +464,14 @@
     box-shadow 0.3s ease;
 }
 
+button.bw-footer__app-card {
+  font: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+  text-align: left;
+  width: 100%;
+}
+
 .bw-footer--dark .bw-footer__app-card {
   box-shadow: 0 12px 28px rgba(2, 6, 23, 0.42);
 }

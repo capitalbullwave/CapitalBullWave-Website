@@ -1,4 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useCallback, useState } from "react";
 import { scrollToId } from "../components/ScrollToTop";
 import {
   FaFacebookF,
@@ -13,6 +14,7 @@ import logo from "../assets/capitalbullwave.png";
 import ClubLogo from "../assets/bullwaveClub.jpeg";
 import DunsRegisteredSeal from "../components/DunsRegisteredSeal";
 import RevealOnScroll from "../components/RevealOnScroll";
+import RidesChoiceModal from "../components/RidesChoiceModal";
 
 const RideLogo = "/images/bwride.png";
 const LearnLogo = "/images/cbw.png";
@@ -30,15 +32,17 @@ const siteLinks = [
 
 const apps = [
   {
+    id: "rides",
     name: "BullWave Rides",
-    tagline: "Get it on Google Play",
+    tagline: "Website & Google Play",
     logo: RideLogo,
-    href: "https://play.google.com/store/apps/details?id=com.bullwave.rides.user&hl=en_IN",
-    label: "Download BullWave Rides on Google Play",
+    label: "Open BullWave Rides options — website or app",
     contain: true,
     darkLogo: true,
+    choice: true,
   },
   {
+    id: "club",
     name: "BullWave Club",
     tagline: "Enjoy and have fun",
     logo: ClubLogo,
@@ -46,6 +50,7 @@ const apps = [
     label: "Open BullWave Club website",
   },
   {
+    id: "learn",
     name: "CBW Learn",
     tagline: "Get it on Google Play",
     logo: LearnLogo,
@@ -77,6 +82,8 @@ const Footer = ({ theme = "light" }) => {
   const dark = theme === "dark";
   const navigate = useNavigate();
   const location = useLocation();
+  const [ridesOpen, setRidesOpen] = useState(false);
+  const closeRides = useCallback(() => setRidesOpen(false), []);
 
   const handleFaqClick = (e) => {
     e.preventDefault();
@@ -91,6 +98,38 @@ const Footer = ({ theme = "light" }) => {
     }
     navigate("/#faq");
   };
+
+  const renderAppInner = (app) => (
+    <div className="flex w-full min-w-0 items-center gap-3">
+      <img
+        src={app.logo}
+        alt=""
+        width={44}
+        height={44}
+        loading="lazy"
+        decoding="async"
+        className={
+          app.contain
+            ? `bw-footer__app-logo h-10 w-10 shrink-0 rounded-xl object-contain p-0.5 shadow-md ring-1 ring-sky-300/40 sm:h-11 sm:w-11 ${
+                app.darkLogo ? "bg-black" : "bg-white"
+              }`
+            : "bw-footer__app-logo h-10 w-10 shrink-0 rounded-xl object-cover shadow-md ring-1 ring-sky-300/40 sm:h-11 sm:w-11"
+        }
+      />
+      <div className="min-w-0 flex-1">
+        <p className="bw-f-app-name truncate text-sm font-bold sm:text-[15px]">
+          {app.name}
+        </p>
+        <p className="bw-f-muted mt-0.5 truncate text-xs">{app.tagline}</p>
+      </div>
+      <span
+        aria-hidden="true"
+        className="bw-footer__arrow shrink-0 transition group-hover:translate-x-0.5"
+      >
+        →
+      </span>
+    </div>
+  );
 
   return (
     <footer
@@ -253,49 +292,34 @@ const Footer = ({ theme = "light" }) => {
               </h3>
 
               <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
-                {apps.map((app, i) => (
-                  <a
-                    key={app.name}
-                    href={app.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ "--i": i }}
-                    className={`bw-footer__app-card group flex min-h-[3.5rem] items-center transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900`}
-                    aria-label={app.label || `Open ${app.name}`}
-                  >
-                    <div className="flex w-full min-w-0 items-center gap-3">
-                      <img
-                        src={app.logo}
-                        alt=""
-                        width={44}
-                        height={44}
-                        loading="lazy"
-                        decoding="async"
-                        className={
-                          app.contain
-                            ? `bw-footer__app-logo h-10 w-10 shrink-0 rounded-xl object-contain p-0.5 shadow-md ring-1 ring-sky-300/40 sm:h-11 sm:w-11 ${
-                                app.darkLogo ? "bg-black" : "bg-white"
-                              }`
-                            : "bw-footer__app-logo h-10 w-10 shrink-0 rounded-xl object-cover shadow-md ring-1 ring-sky-300/40 sm:h-11 sm:w-11"
-                        }
-                      />
-                      <div className="min-w-0 flex-1">
-                        <p className="bw-f-app-name truncate text-sm font-bold sm:text-[15px]">
-                          {app.name}
-                        </p>
-                        <p className="bw-f-muted mt-0.5 truncate text-xs">
-                          {app.tagline}
-                        </p>
-                      </div>
-                      <span
-                        aria-hidden="true"
-                        className="bw-footer__arrow shrink-0 transition group-hover:translate-x-0.5"
-                      >
-                        →
-                      </span>
-                    </div>
-                  </a>
-                ))}
+                {apps.map((app, i) =>
+                  app.choice ? (
+                    <button
+                      key={app.id}
+                      type="button"
+                      style={{ "--i": i }}
+                      onClick={() => setRidesOpen(true)}
+                      className="bw-footer__app-card group flex min-h-[3.5rem] w-full cursor-pointer items-center text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
+                      aria-haspopup="dialog"
+                      aria-expanded={ridesOpen}
+                      aria-label={app.label}
+                    >
+                      {renderAppInner(app)}
+                    </button>
+                  ) : (
+                    <a
+                      key={app.id}
+                      href={app.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{ "--i": i }}
+                      className="bw-footer__app-card group flex min-h-[3.5rem] items-center transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-900"
+                      aria-label={app.label || `Open ${app.name}`}
+                    >
+                      {renderAppInner(app)}
+                    </a>
+                  )
+                )}
               </div>
             </div>
           </div>
@@ -336,6 +360,8 @@ const Footer = ({ theme = "light" }) => {
           </div>
         </RevealOnScroll>
       </div>
+
+      <RidesChoiceModal open={ridesOpen} onClose={closeRides} theme="dark" />
     </footer>
   );
 };

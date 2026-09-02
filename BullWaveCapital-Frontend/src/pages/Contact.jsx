@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import {
   FaBuilding,
   FaEnvelope,
@@ -14,6 +14,7 @@ import toast from "react-hot-toast";
 import ClubLogo from "../assets/bullwaveClub.jpeg";
 import { Helmet } from "react-helmet-async";
 import RevealOnScroll from "../components/RevealOnScroll";
+import RidesChoiceModal from "../components/RidesChoiceModal";
 import { validateAuthenticatedEmail } from "../utils/emailValidation.js";
 
 const RideLogo = "/images/bwride.png";
@@ -49,6 +50,8 @@ const contactDetails = [
 
 export default function Contact({ theme }) {
   const isDark = theme === "dark";
+  const [ridesOpen, setRidesOpen] = useState(false);
+  const closeRides = useCallback(() => setRidesOpen(false), []);
 
   const [form, setForm] = useState({
     name: "",
@@ -585,12 +588,13 @@ export default function Contact({ theme }) {
                 }`}
               >
                 <div className="flex flex-col gap-4 sm:gap-6 lg:flex-row lg:items-center lg:justify-between">
-                  <a
-                    href="https://play.google.com/store/apps/details?id=com.bullwave.rides.user&hl=en_IN"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex min-w-0 flex-1 items-center gap-3 sm:gap-4 rounded-xl transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
-                    aria-label="Download BullWave Rides on Google Play"
+                  <button
+                    type="button"
+                    onClick={() => setRidesOpen(true)}
+                    className="flex min-w-0 flex-1 cursor-pointer items-center gap-3 rounded-xl text-left transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 sm:gap-4"
+                    aria-haspopup="dialog"
+                    aria-expanded={ridesOpen}
+                    aria-label="Open BullWave Rides options — website or app"
                   >
                     <img
                       src={RideLogo}
@@ -611,10 +615,10 @@ export default function Contact({ theme }) {
 
                       <p className={`${text} mt-1.5 sm:mt-2 max-w-lg break-words text-xs sm:text-sm leading-5 sm:leading-6`}>
                         Experience fast, safe and affordable rides with BullWave
-                        Rides. Tap to get it on Google Play.
+                        Rides. Tap to open the website or get the Android app.
                       </p>
                     </div>
-                  </a>
+                  </button>
 
                   <a
                     href="https://www.bullwaveclub.com/"
@@ -855,6 +859,11 @@ export default function Contact({ theme }) {
 
       </div>
 
+      <RidesChoiceModal
+        open={ridesOpen}
+        onClose={closeRides}
+        theme={isDark ? "dark" : "light"}
+      />
     </div>
 
   );
